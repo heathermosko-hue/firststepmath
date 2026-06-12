@@ -28,17 +28,64 @@
       font-family:'Fredoka One',cursive; font-size:1.6rem; color:#fff;
     }
 
-    /* ── Layout ── */
-    .store-main  { max-width:1100px; margin:0 auto; padding:32px 18px 80px; }
+    /* ── Tabs ── */
+    .store-tabs {
+      display:flex; justify-content:center; gap:12px;
+      padding:28px 20px 0; flex-wrap:wrap;
+      max-width:900px; margin:0 auto;
+    }
+    .store-tab {
+      font-family:'Fredoka One',cursive; font-size:1.1rem;
+      padding:12px 28px; border-radius:50px; border:3px solid #e0d7ff;
+      background:#fff; color:#7c3aed; cursor:pointer;
+      transition:all 0.15s; white-space:nowrap;
+    }
+    .store-tab:hover  { border-color:#a855f7; background:#faf5ff; }
+    .store-tab.active { background:#7c3aed; color:#fff; border-color:#7c3aed; box-shadow:0 4px 16px rgba(124,58,237,0.35); }
+
+    /* ── Main layout ── */
+    .store-main  { max-width:1100px; margin:0 auto; padding:28px 18px 80px; }
     .store-banner {
       background:#fffbeb; border:3px dashed #f59e0b; border-radius:18px;
       padding:14px 24px; text-align:center; margin-bottom:28px;
       font-family:'Fredoka One',cursive; font-size:1rem; color:#92400e;
     }
-    .store-section-title {
-      font-family:'Fredoka One',cursive; font-size:2rem; color:#3b0764;
-      text-align:center; margin-bottom:24px;
+
+    /* ── Section ── */
+    .store-section { display:none; }
+    .store-section.active { display:block; }
+    .section-title {
+      font-family:'Fredoka One',cursive; font-size:1.8rem; color:#3b0764;
+      margin:0 0 20px; display:flex; align-items:center; gap:10px;
     }
+
+    /* ── Pet care subsections ── */
+    .pet-care-tabs {
+      display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;
+    }
+    .pet-care-tab {
+      font-family:'Fredoka One',cursive; font-size:0.95rem;
+      padding:8px 20px; border-radius:50px; border:2px solid #e0d7ff;
+      background:#faf5ff; color:#7c3aed; cursor:pointer; transition:all 0.15s;
+    }
+    .pet-care-tab.active { background:#7c3aed; color:#fff; border-color:#7c3aed; }
+    .pet-care-section { display:none; }
+    .pet-care-section.active { display:block; }
+
+    /* ── Owned pets row ── */
+    .owned-pets-row {
+      background:#f5f3ff; border-radius:18px; padding:16px 20px; margin-bottom:24px;
+      border:2px solid #ddd6fe;
+    }
+    .owned-pets-row h3 { font-family:'Fredoka One',cursive; font-size:1rem; color:#7c3aed; margin-bottom:10px; }
+    .owned-pets-chips { display:flex; flex-wrap:wrap; gap:10px; }
+    .owned-pet-chip {
+      display:flex; align-items:center; gap:6px;
+      background:#fff; border:2px solid #ddd6fe; border-radius:50px;
+      padding:6px 14px; font-family:'Fredoka One',cursive; font-size:0.85rem; color:#5b21b6;
+    }
+    .owned-pet-chip img { width:28px; height:28px; object-fit:contain; border-radius:50%; }
+    .no-pets-msg { color:#aaa; font-size:0.9rem; font-style:italic; }
 
     /* ── Grid ── */
     .store-grid {
@@ -50,7 +97,7 @@
     @media(max-width:760px) { .store-grid{ grid-template-columns:repeat(3,1fr); gap:12px; } }
     @media(max-width:520px) { .store-grid{ grid-template-columns:repeat(2,1fr); gap:10px; } }
 
-    /* ── Card ── */
+    /* ── Cards ── */
     .store-card {
       border-radius:22px; overflow:hidden; border:3px solid transparent;
       box-shadow:0 6px 20px rgba(0,0,0,0.10);
@@ -59,77 +106,70 @@
       position:relative;
     }
     .store-card:hover { transform:translateY(-6px); box-shadow:0 14px 32px rgba(0,0,0,0.18); }
-    .store-card.owned { opacity:0.75; }
     .store-card.owned::after {
-      content:'✓ OWNED'; position:absolute; top:12px; right:-26px;
-      background:#16a34a; color:#fff; font-family:'Fredoka One',cursive;
-      font-size:0.6rem; padding:4px 34px; transform:rotate(45deg);
-      letter-spacing:1px; z-index:5;
+      content:'✓'; position:absolute; top:8px; right:10px;
+      background:#16a34a; color:#fff; font-size:0.75rem; font-weight:900;
+      width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      z-index:5; line-height:22px; text-align:center;
     }
 
-    /* Image area */
     .card-img-area {
       width:100%; aspect-ratio:1/1;
       display:flex; align-items:center; justify-content:center;
-      font-size:4.5rem; line-height:1;
-      position:relative;
+      position:relative; overflow:hidden;
     }
     .card-img-area img {
-      width:100%; height:100%; object-fit:contain;
-      padding:8px;
+      width:100%; height:100%; object-fit:contain; padding:6px;
+    }
+    .card-img-area .emoji-fallback {
+      font-size:4.5rem; filter:drop-shadow(2px 6px 8px rgba(0,0,0,0.15));
     }
 
-    /* Bottom label */
     .card-label {
-      background:#5b21b6; padding:10px 10px 12px;
-      display:flex; align-items:center; gap:8px;
+      background:#5b21b6; padding:8px 10px 10px;
+      display:flex; align-items:center; gap:7px;
     }
     .card-num-badge {
-      width:28px; height:28px; border-radius:50%; flex-shrink:0;
+      width:26px; height:26px; border-radius:50%; flex-shrink:0;
       background:#fff; color:#5b21b6; font-family:'Fredoka One',cursive;
-      font-size:0.8rem; display:flex; align-items:center; justify-content:center;
-      box-shadow:0 2px 6px rgba(0,0,0,0.2);
+      font-size:0.75rem; display:flex; align-items:center; justify-content:center;
     }
     .card-name-price { flex:1; min-width:0; }
     .card-name {
-      font-family:'Fredoka One',cursive; font-size:0.9rem; color:#fff;
+      font-family:'Fredoka One',cursive; font-size:0.85rem; color:#fff;
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.2;
     }
     .card-price {
-      display:flex; align-items:center; gap:4px; margin-top:3px;
+      display:flex; align-items:center; gap:3px; margin-top:2px;
     }
-    .coin-icon { font-size:0.9rem; }
-    .price-text { font-family:'Fredoka One',cursive; font-size:0.85rem; color:#fde68a; }
+    .price-text { font-family:'Fredoka One',cursive; font-size:0.8rem; color:#fde68a; }
 
-    /* Buy button */
-    .card-buy-row { background:#4c1d95; padding:0 10px 12px; }
+    .card-buy-row { background:#4c1d95; padding:0 8px 10px; }
     .buy-btn {
-      width:100%; padding:9px; border-radius:12px; border:none;
+      width:100%; padding:8px; border-radius:10px; border:none;
       background:#f59e0b; color:#fff; font-family:'Fredoka One',cursive;
-      font-size:0.95rem; cursor:pointer; transition:background 0.15s, transform 0.1s;
+      font-size:0.9rem; cursor:pointer; transition:background 0.15s, transform 0.1s;
       -webkit-tap-highlight-color:transparent;
     }
     .buy-btn:hover:not(:disabled) { background:#d97706; }
     .buy-btn:active:not(:disabled){ transform:scale(0.95); }
-    .buy-btn:disabled { background:#9ca3af; cursor:default; color:#e5e7eb; font-size:0.8rem; }
+    .buy-btn:disabled { background:#9ca3af; cursor:default; color:#e5e7eb; font-size:0.75rem; }
     .buy-btn.owned-btn { background:#16a34a; }
 
     /* ── Collection ── */
-    .my-collection { margin-top:52px; }
-    .collection-grid { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
+    .my-collection { margin-top:48px; }
+    .collection-grid { display:flex; flex-wrap:wrap; gap:12px; }
     .collection-chip {
-      background:#f5f3ff; border-radius:16px; padding:14px 16px;
-      font-size:2rem; border:2px solid #ddd6fe;
-      box-shadow:0 3px 10px rgba(0,0,0,0.07);
-      transition:transform 0.1s; cursor:default; text-align:center; min-width:60px;
+      background:#f5f3ff; border-radius:14px; padding:10px 14px;
+      border:2px solid #ddd6fe; box-shadow:0 3px 10px rgba(0,0,0,0.07);
+      transition:transform 0.1s; cursor:default; text-align:center; min-width:56px;
+      display:flex; flex-direction:column; align-items:center; gap:4px;
     }
-    .collection-chip:hover { transform:scale(1.12) rotate(-3deg); }
-    .collection-chip .chip-name { font-size:0.62rem; font-weight:800; color:#7c3aed; margin-top:4px; display:block; }
-    .no-items { color:#aaa; font-size:0.95rem; padding:20px 0; text-align:center; width:100%; }
-
-    /* ── Real image support ── */
-    .card-img-area img { width:90%; height:90%; object-fit:contain; }
-    .card-img-area .emoji-fallback { font-size:5rem; filter:drop-shadow(2px 6px 8px rgba(0,0,0,0.15)); }
+    .collection-chip img { width:36px; height:36px; object-fit:contain; }
+    .collection-chip .chip-emoji { font-size:1.8rem; }
+    .collection-chip:hover { transform:scale(1.1) rotate(-2deg); }
+    .collection-chip .chip-name { font-size:0.6rem; font-weight:800; color:#7c3aed; display:block; }
+    .no-items { color:#aaa; font-size:0.9rem; padding:16px 0; text-align:center; width:100%; }
 
     /* ── Toast ── */
     .toast {
@@ -143,7 +183,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <a href="index.html" class="logo">
@@ -160,7 +199,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <div class="store-hero">
     <h1>🧸 Toys &amp; Prizes</h1>
     <p>Answer questions correctly to earn pretend money — then spend it here!</p>
@@ -169,67 +207,162 @@
     </div>
   </div>
 
-  <!-- MAIN -->
+  <!-- TABS -->
+  <div class="store-tabs">
+    <button class="store-tab active" data-tab="pets">🐾 Pets</button>
+    <button class="store-tab" data-tab="pet-care">🍖 Pet Food &amp; Accessories</button>
+    <button class="store-tab" data-tab="toys">🚀 Toys</button>
+    <button class="store-tab" data-tab="collection">🎒 My Collection</button>
+  </div>
+
   <div class="store-main">
     <div class="store-banner">
       💡 Each correct answer earns you <strong>$0.10</strong> — save up and buy something fun!
     </div>
-    <div class="store-section-title">🎁 Pick Your Prize!</div>
-    <div class="store-grid" id="storeGrid"></div>
 
-    <div class="my-collection">
-      <div class="store-section-title">🎒 My Collection</div>
+    <!-- ══════════ PETS ══════════ -->
+    <div class="store-section active" id="tab-pets">
+      <div class="section-title">🐾 Adopt a Pet!</div>
+      <div class="store-grid" id="petsGrid"></div>
+    </div>
+
+    <!-- ══════════ PET CARE ══════════ -->
+    <div class="store-section" id="tab-pet-care">
+      <div class="owned-pets-row">
+        <h3>🐾 Your Pets</h3>
+        <div class="owned-pets-chips" id="ownedPetsRow">
+          <span class="no-pets-msg">Adopt a pet first to buy food and accessories!</span>
+        </div>
+      </div>
+
+      <div class="pet-care-tabs">
+        <button class="pet-care-tab active" data-care="food">🍖 Food</button>
+        <button class="pet-care-tab" data-care="accessories">🎀 Accessories</button>
+        <button class="pet-care-tab" data-care="beds">🛏️ Beds &amp; Homes</button>
+      </div>
+
+      <div class="pet-care-section active" id="care-food">
+        <div class="section-title" style="font-size:1.3rem">🍖 Pet Food</div>
+        <div class="store-grid" id="foodGrid"></div>
+      </div>
+      <div class="pet-care-section" id="care-accessories">
+        <div class="section-title" style="font-size:1.3rem">🎀 Accessories</div>
+        <div class="store-grid" id="accessGrid"></div>
+      </div>
+      <div class="pet-care-section" id="care-beds">
+        <div class="section-title" style="font-size:1.3rem">🛏️ Beds &amp; Homes</div>
+        <div class="store-grid" id="bedsGrid"></div>
+      </div>
+    </div>
+
+    <!-- ══════════ TOYS ══════════ -->
+    <div class="store-section" id="tab-toys">
+      <div class="section-title">🚀 Toys &amp; Games</div>
+      <div class="store-grid" id="toysGrid"></div>
+    </div>
+
+    <!-- ══════════ COLLECTION ══════════ -->
+    <div class="store-section" id="tab-collection">
+      <div class="section-title">🎒 My Collection</div>
       <div class="collection-grid" id="collectionGrid">
-        <div class="no-items">Nothing yet — earn money and buy your first prize!</div>
+        <div class="no-items">Nothing yet — earn money and start shopping!</div>
       </div>
     </div>
   </div>
 
   <div class="toast" id="toast"></div>
-
   <script src="js/tts.js"></script>
   <script>
   (() => {
-    const MONEY_KEY     = 'fsm_dollars';
-    const PURCHASES_KEY = 'fsm_purchases';
+    const MONEY_KEY = 'fsm_dollars';
+    const PURCH_KEY = 'fsm_purchases';
 
-    // Background colors cycling like the poster
-    const BG_COLORS = [
-      '#fef9c3','#ede9fe','#dbeafe','#dcfce7',
-      '#fce7f3','#ffedd5','#e0f2fe','#f0fdf4',
-      '#fef3c7','#ede9fe',
+    const BG = [
+      '#fef9c3','#ede9fe','#dbeafe','#dcfce7','#fce7f3',
+      '#ffedd5','#e0f2fe','#f0fdf4','#fef3c7','#fdf4ff',
+      '#d1fae5','#fef2f2','#ecfdf5','#fff7ed','#eff6ff',
     ];
 
-    const ITEMS = [
-      { id:'puppy-plush', num:1,  name:'Puppy Plush',    emoji:'🐶', img:'img/store/puppy-plush.png', price:0.50, desc:'Soft • Cuddly • Fun!'       },
-      { id:'kitty-plush', num:2,  name:'Kitty Plush',    emoji:'🐱', img:'img/store/kitty-plush.png', price:0.50, desc:'Soft • Sweet • Fun!'        },
-      { id:'racecar',     num:3,  name:'Race Car',       emoji:'🏎️', img:'img/store/racecar.png',     price:0.60, desc:'Zoom • Play • Go!'          },
-      { id:'playground',  num:4,  name:'Mini Playground',emoji:'🛝', img:'img/store/playground.png',  price:0.80, desc:'Slide • Climb • Play!'      },
-      { id:'puzzle',      num:5,  name:'Puzzle Box',     emoji:'🧩', img:'img/store/puzzle.png',      price:0.65, desc:'Match • Solve • Play!'      },
-      { id:'yoyo',        num:6,  name:'Light-Up Yo-Yo', emoji:'🪀', img:'img/store/yoyo.png',        price:0.45, desc:'Spin • Swing • Fun!'        },
-      { id:'bubbles',     num:7,  name:'Bubble Wand',    emoji:'🫧', img:'img/store/bubbles.png',     price:0.40, desc:'Blow • Pop • Play!'         },
-      { id:'bnet',        num:8,  name:'Butterfly Net',  emoji:'🦋', img:'img/store/bnet.png',        price:0.50, desc:'Swish • Catch • Play!'      },
-      { id:'fishbowl',    num:9,  name:'Fish Bowl',      emoji:'🐠', img:'img/store/fishbowl.png',    price:0.70, desc:'Splash • Swim • Smile!'     },
-      { id:'train',       num:10, name:'Toy Train',      emoji:'🚂', img:'img/store/train.png',       price:0.90, desc:'Choo • Choo • Play!'        },
-      { id:'puppy-pet',   num:11, name:'Puppy Pet',      emoji:'🐶', img:'img/store/puppy-pet.png',   price:0.55, desc:'Play • Love • Snuggle!'     },
-      { id:'kitty-pet',   num:12, name:'Kitty Pet',      emoji:'🐱', img:'img/store/kitty-pet.png',   price:0.55, desc:'Purr • Play • Love!'        },
-      { id:'robo-dog',    num:13, name:'Robo Dog',       emoji:'🤖', img:'img/store/robo-dog.png',    price:0.70, desc:'Beep • Fetch • Play!'       },
-      { id:'robo-cat',    num:14, name:'Robo Cat',       emoji:'🐱', img:'img/store/robo-cat.png',    price:0.70, desc:'Purr • Beep • Play!'        },
-      { id:'alien',       num:15, name:'Alien Friend',   emoji:'👽', img:'img/store/alien.png',       price:0.80, desc:'Space • Fun • Friend!'      },
-      { id:'dino',        num:16, name:'Real Dinosaur',  emoji:'🦕', img:'img/store/dino.png',        price:0.90, desc:'Roar • Stomp • Explore!'    },
-      { id:'hamster',     num:17, name:'Hamster Pet',    emoji:'🐹', img:'img/store/hamster.png',     price:0.55, desc:'Tiny • Fun • Sweet!'        },
-      { id:'bunny',       num:18, name:'Bunny Pet',      emoji:'🐰', img:'img/store/bunny.png',       price:0.60, desc:'Hop • Cuddle • Play!'       },
-      { id:'robot',       num:19, name:'Robot',          emoji:'🤖', img:'img/store/robot.png',       price:0.75, desc:'Beep • Help • Play!'        },
-      { id:'fishpet',     num:20, name:'Goldfish Pet',   emoji:'🐟', img:'img/store/fishpet.png',     price:0.65, desc:'Swim • Splash • Shine!'     },
+    // ── PETS ──────────────────────────────────────────
+    const PETS = [
+      { id:'puppy-plush', num:1,  name:'Puppy Plush',   emoji:'🐶', img:'img/store/puppy-plush.png', price:0.50, desc:'Soft • Cuddly • Fun!'    },
+      { id:'kitty-plush', num:2,  name:'Kitty Plush',   emoji:'🐱', img:'img/store/kitty-plush.png', price:0.50, desc:'Soft • Sweet • Fun!'     },
+      { id:'puppy-pet',   num:3,  name:'Puppy Pet',     emoji:'🐶', img:'img/store/puppy-pet.png',   price:0.55, desc:'Play • Love • Snuggle!'  },
+      { id:'kitty-pet',   num:4,  name:'Kitty Pet',     emoji:'🐱', img:'img/store/kitty-pet.png',   price:0.55, desc:'Purr • Play • Love!'     },
+      { id:'robo-dog',    num:5,  name:'Robo Dog',      emoji:'🤖', img:'img/store/robo-dog.png',    price:0.70, desc:'Beep • Fetch • Play!'    },
+      { id:'robo-cat',    num:6,  name:'Robo Cat',      emoji:'🐱', img:'img/store/robo-cat.png',    price:0.70, desc:'Purr • Beep • Play!'     },
+      { id:'hamster',     num:7,  name:'Hamster Pet',   emoji:'🐹', img:'img/store/hamster.png',     price:0.55, desc:'Tiny • Fun • Sweet!'     },
+      { id:'bunny',       num:8,  name:'Bunny Pet',     emoji:'🐰', img:'img/store/bunny.png',       price:0.60, desc:'Hop • Cuddle • Play!'    },
+      { id:'fishpet',     num:9,  name:'Goldfish Pet',  emoji:'🐟', img:'img/store/fishpet.png',     price:0.65, desc:'Swim • Splash • Shine!'  },
+      { id:'alien',       num:10, name:'Alien Friend',  emoji:'👽', img:'img/store/alien.png',       price:0.80, desc:'Space • Fun • Friend!'   },
+      { id:'dino',        num:11, name:'Real Dinosaur', emoji:'🦕', img:'img/store/dino.png',        price:0.90, desc:'Roar • Stomp • Explore!' },
     ];
 
+    // ── FOOD ──────────────────────────────────────────
+    const FOOD = [
+      { id:'dog-food',      num:1,  name:'Dog Treats',     emoji:'🦴', price:0.20, desc:'Yummy bones for your pup!',   bg:'#fef9c3', repeatable:true },
+      { id:'cat-food',      num:2,  name:'Cat Kibble',     emoji:'🐟', price:0.20, desc:'Fishy bites for your kitty!', bg:'#dbeafe', repeatable:true },
+      { id:'fish-food',     num:3,  name:'Fish Flakes',    emoji:'🫙', price:0.15, desc:'Sprinkle some for your fish!', bg:'#e0f2fe', repeatable:true },
+      { id:'hamster-food',  num:4,  name:'Hamster Mix',    emoji:'🌾', price:0.15, desc:'Seeds and grains!',            bg:'#fef3c7', repeatable:true },
+      { id:'bunny-food',    num:5,  name:'Bunny Carrots',  emoji:'🥕', price:0.15, desc:'Fresh carrots for your bunny!',bg:'#ffedd5', repeatable:true },
+      { id:'alien-food',    num:6,  name:'Star Dust Snack',emoji:'✨', price:0.25, desc:'Out-of-this-world food!',      bg:'#ede9fe', repeatable:true },
+      { id:'dino-food',     num:7,  name:'Dino Berries',   emoji:'🫐', price:0.25, desc:'Big berries for big dinos!',   bg:'#dcfce7', repeatable:true },
+      { id:'robot-fuel',    num:8,  name:'Robot Fuel',     emoji:'⚡', price:0.20, desc:'Power up your robo pet!',      bg:'#fce7f3', repeatable:true },
+    ];
+
+    // ── ACCESSORIES ───────────────────────────────────
+    const ACCESSORIES = [
+      { id:'red-collar',    num:1,  name:'Red Collar',     emoji:'🔴', price:0.30, desc:'A cute red collar!',          bg:'#fef2f2'  },
+      { id:'blue-bow',      num:2,  name:'Blue Bow',       emoji:'🎀', price:0.25, desc:'Tie a pretty bow!',           bg:'#dbeafe'  },
+      { id:'party-hat',     num:3,  name:'Party Hat',      emoji:'🎉', price:0.30, desc:'Party time every day!',       bg:'#fef9c3'  },
+      { id:'sunglasses',    num:4,  name:'Sunglasses',     emoji:'🕶️', price:0.35, desc:'Cool shades for your pet!',   bg:'#ede9fe'  },
+      { id:'pet-ball',      num:5,  name:'Bouncy Ball',    emoji:'⚽', price:0.25, desc:'Play fetch all day!',         bg:'#dcfce7'  },
+      { id:'squeaky-toy',   num:6,  name:'Squeaky Toy',    emoji:'🦆', price:0.25, desc:'Squeak squeak!',             bg:'#fff7ed'  },
+      { id:'star-tag',      num:7,  name:'Star ID Tag',    emoji:'⭐', price:0.20, desc:'A shiny name tag!',           bg:'#fef3c7'  },
+      { id:'rainbow-leash', num:8,  name:'Rainbow Leash',  emoji:'🌈', price:0.35, desc:'Walk in style!',             bg:'#fce7f3'  },
+    ];
+
+    // ── BEDS & HOMES ──────────────────────────────────
+    const BEDS = [
+      { id:'cozy-bed',     num:1, name:'Cozy Pet Bed',    emoji:'🛏️', price:0.45, desc:'Soft fluffy pet bed!',        bg:'#fef9c3'  },
+      { id:'doghouse',     num:2, name:'Dog House',       emoji:'🏠', price:0.60, desc:'A home for your pup!',        bg:'#ffedd5'  },
+      { id:'cat-tree',     num:3, name:'Cat Tree',        emoji:'🌳', price:0.55, desc:'Climb and scratch!',          bg:'#dcfce7'  },
+      { id:'fish-tank',    num:4, name:'Fish Tank',       emoji:'🐠', price:0.50, desc:'A beautiful aquarium!',       bg:'#dbeafe'  },
+      { id:'hamster-cage', num:5, name:'Hamster Cage',    emoji:'🏡', price:0.45, desc:'A cozy hamster home!',        bg:'#fef3c7'  },
+      { id:'space-pod',    num:6, name:'Space Pod',       emoji:'🚀', price:0.70, desc:'For your alien friend!',      bg:'#ede9fe'  },
+    ];
+
+    // ── TOYS ──────────────────────────────────────────
+    const TOYS = [
+      { id:'racecar',     num:1,  name:'Race Car',        emoji:'🏎️', img:'img/store/racecar.png',    price:0.60, desc:'Zoom • Play • Go!'        },
+      { id:'playground',  num:2,  name:'Mini Playground', emoji:'🛝', img:'img/store/playground.png', price:0.80, desc:'Slide • Climb • Play!'     },
+      { id:'puzzle',      num:3,  name:'Puzzle Box',      emoji:'🧩', img:'img/store/puzzle.png',     price:0.65, desc:'Match • Solve • Play!'     },
+      { id:'yoyo',        num:4,  name:'Light-Up Yo-Yo',  emoji:'🪀', img:'img/store/yoyo.png',       price:0.45, desc:'Spin • Swing • Fun!'       },
+      { id:'bubbles',     num:5,  name:'Bubble Wand',     emoji:'🫧', img:'img/store/bubbles.png',    price:0.40, desc:'Blow • Pop • Play!'        },
+      { id:'bnet',        num:6,  name:'Butterfly Net',   emoji:'🦋', img:'img/store/bnet.png',       price:0.50, desc:'Swish • Catch • Play!'     },
+      { id:'fishbowl',    num:7,  name:'Fish Bowl',       emoji:'🐠', img:'img/store/fishbowl.png',   price:0.70, desc:'Splash • Swim • Smile!'    },
+      { id:'train',       num:8,  name:'Toy Train',       emoji:'🚂', img:'img/store/train.png',      price:0.90, desc:'Choo • Choo • Play!'       },
+      { id:'robot',       num:9,  name:'Robot',           emoji:'🤖', img:'img/store/robot.png',      price:0.75, desc:'Beep • Help • Play!'       },
+    ];
+
+    // ── STATE ──────────────────────────────────────────
     let balance   = parseFloat(localStorage.getItem(MONEY_KEY) || '0');
-    let purchases = JSON.parse(localStorage.getItem(PURCHASES_KEY) || '[]');
+    // purchases is now {id: count} — repeatable items can be bought multiple times
+    let rawPurch  = localStorage.getItem(PURCH_KEY);
+    let purchases = {};
+    try {
+      const parsed = JSON.parse(rawPurch || '{}');
+      // Handle old array format
+      if (Array.isArray(parsed)) { parsed.forEach(id => { purchases[id] = 1; }); }
+      else { purchases = parsed; }
+    } catch(e) { purchases = {}; }
 
     function saveState() {
-      localStorage.setItem(MONEY_KEY,     balance.toFixed(2));
-      localStorage.setItem(PURCHASES_KEY, JSON.stringify(purchases));
+      localStorage.setItem(MONEY_KEY, balance.toFixed(2));
+      localStorage.setItem(PURCH_KEY, JSON.stringify(purchases));
     }
+    function owns(id)  { return (purchases[id] || 0) > 0; }
+    function count(id) { return purchases[id] || 0; }
 
     function updateBalance() {
       document.getElementById('balanceAmt').textContent = balance.toFixed(2);
@@ -242,87 +375,142 @@
       setTimeout(() => t.classList.remove('show'), 2400);
     }
 
+    // ── CARD BUILDER ─────────────────────────────────
+    function makeCard(item, repeatable) {
+      const owned  = owns(item.id);
+      const canBuy = balance >= item.price;
+      const bg     = item.bg || BG[item.num % BG.length];
+
+      const card = document.createElement('div');
+      card.className = 'store-card' + (owned && !repeatable ? ' owned' : '');
+      card.style.border = '3px solid ' + bg;
+
+      const imgHtml = item.img
+        ? `<img src="${item.img}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+           <span class="emoji-fallback" style="display:none">${item.emoji}</span>`
+        : `<span class="emoji-fallback">${item.emoji}</span>`;
+
+      let btnText, btnCls = 'buy-btn', btnDis = '';
+      if (owned && !repeatable) { btnCls += ' owned-btn'; btnText = '✓ Owned'; btnDis = 'disabled'; }
+      else if (!canBuy)         { btnText = 'Need $' + item.price.toFixed(2); btnDis = 'disabled'; }
+      else                      { btnText = (repeatable && owned) ? 'Buy Again 🛒' : 'Buy Now! 🛒'; }
+
+      const countBadge = repeatable && count(item.id) > 0
+        ? `<span style="position:absolute;top:7px;left:9px;background:#f59e0b;color:#fff;font-family:'Fredoka One',cursive;font-size:0.7rem;padding:2px 7px;border-radius:50px;z-index:3">x${count(item.id)}</span>`
+        : '';
+
+      card.innerHTML = `
+        <div class="card-img-area" style="background:${bg}">
+          ${imgHtml}${countBadge}
+        </div>
+        <div class="card-label">
+          <div class="card-num-badge">${item.num}</div>
+          <div class="card-name-price">
+            <div class="card-name">${item.name}</div>
+            <div class="card-price"><span style="font-size:0.8rem">🪙</span><span class="price-text">$${item.price.toFixed(2)}</span></div>
+          </div>
+        </div>
+        <div class="card-buy-row">
+          <button class="${btnCls}" ${btnDis}>${btnText}</button>
+        </div>`;
+
+      const btn = card.querySelector('.buy-btn');
+      if (!btnDis) {
+        btn.addEventListener('click', () => {
+          if (balance < item.price) return;
+          balance = parseFloat((balance - item.price).toFixed(2));
+          purchases[item.id] = (purchases[item.id] || 0) + 1;
+          saveState(); updateBalance();
+          showToast('🎉 You got ' + item.name + '!');
+          speakText('You got ' + item.name + '! Amazing job!');
+          renderAll();
+        });
+      }
+      return card;
+    }
+
+    function fillGrid(gridId, items, repeatable) {
+      const g = document.getElementById(gridId);
+      g.innerHTML = '';
+      items.forEach(item => g.appendChild(makeCard(item, repeatable || false)));
+    }
+
+    // ── OWNED PETS ROW ────────────────────────────────
+    function renderOwnedPets() {
+      const row = document.getElementById('ownedPetsRow');
+      const myPets = PETS.filter(p => owns(p.id));
+      if (!myPets.length) {
+        row.innerHTML = '<span class="no-pets-msg">Adopt a pet first to buy food and accessories!</span>';
+        return;
+      }
+      row.innerHTML = '';
+      myPets.forEach(p => {
+        const chip = document.createElement('div');
+        chip.className = 'owned-pet-chip';
+        chip.innerHTML = p.img
+          ? `<img src="${p.img}" alt="${p.name}">${p.name}`
+          : `<span style="font-size:1.2rem">${p.emoji}</span>${p.name}`;
+        row.appendChild(chip);
+      });
+    }
+
+    // ── COLLECTION ────────────────────────────────────
     function renderCollection() {
       const grid = document.getElementById('collectionGrid');
-      if (!purchases.length) {
-        grid.innerHTML = '<div class="no-items">Nothing yet — earn money and buy your first prize!</div>';
+      const allItems = [...PETS, ...TOYS, ...FOOD, ...ACCESSORIES, ...BEDS];
+      const owned = allItems.filter(i => owns(i.id));
+      if (!owned.length) {
+        grid.innerHTML = '<div class="no-items">Nothing yet — earn money and start shopping!</div>';
         return;
       }
       grid.innerHTML = '';
-      purchases.forEach(id => {
-        const item = ITEMS.find(i => i.id === id);
-        if (!item) return;
+      owned.forEach(item => {
         const chip = document.createElement('div');
         chip.className = 'collection-chip';
         chip.title = item.name;
-        chip.innerHTML = item.emoji + '<span class="chip-name">' + item.name + '</span>';
+        const cnt = count(item.id);
+        chip.innerHTML = item.img
+          ? `<img src="${item.img}" alt="${item.name}"><span class="chip-name">${item.name}${cnt > 1 ? ' x'+cnt : ''}</span>`
+          : `<span class="chip-emoji">${item.emoji}</span><span class="chip-name">${item.name}${cnt > 1 ? ' x'+cnt : ''}</span>`;
         grid.appendChild(chip);
       });
     }
 
-    function renderStore() {
-      const grid = document.getElementById('storeGrid');
-      grid.innerHTML = '';
-
-      ITEMS.forEach((item, idx) => {
-        const owned  = purchases.includes(item.id);
-        const canBuy = !owned && balance >= item.price;
-        const bg     = BG_COLORS[idx % BG_COLORS.length];
-
-        const card = document.createElement('div');
-        card.className = 'store-card' + (owned ? ' owned' : '');
-
-        let btnText = owned ? '✓ Owned' : canBuy ? 'Buy Now! 🛒' : 'Need $' + item.price.toFixed(2);
-        let btnCls  = 'buy-btn' + (owned ? ' owned-btn' : '');
-        let btnDis  = (owned || !canBuy) ? 'disabled' : '';
-
-        const imgHtml = item.img
-          ? `<img src="${item.img}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">\
-             <span class="emoji-fallback" style="display:none">${item.emoji}</span>`
-          : `<span class="emoji-fallback">${item.emoji}</span>`;
-
-        card.innerHTML = `
-          <div class="card-img-area" style="background:${bg}">${imgHtml}</div>
-          <div class="card-label">
-            <div class="card-num-badge">${item.num}</div>
-            <div class="card-name-price">
-              <div class="card-name">${item.name}</div>
-              <div class="card-price">
-                <span class="coin-icon">🪙</span>
-                <span class="price-text">$${item.price.toFixed(2)}</span>
-              </div>
-            </div>
-          </div>
-          <div class="card-buy-row">
-            <button class="${btnCls}" ${btnDis}>${btnText}</button>
-          </div>
-        `;
-
-        if (!owned) {
-          card.querySelector('.buy-btn').addEventListener('click', () => {
-            if (balance < item.price) return;
-            balance = parseFloat((balance - item.price).toFixed(2));
-            purchases.push(item.id);
-            saveState();
-            updateBalance();
-            showToast('🎉 You got ' + item.name + '!');
-            speakText('You got ' + item.name + '! Amazing job!');
-            renderStore();
-            renderCollection();
-          });
-        }
-
-        grid.appendChild(card);
-      });
+    function renderAll() {
+      fillGrid('petsGrid',  PETS,        false);
+      fillGrid('toysGrid',  TOYS,        false);
+      fillGrid('foodGrid',  FOOD,        true);
+      fillGrid('accessGrid',ACCESSORIES, false);
+      fillGrid('bedsGrid',  BEDS,        false);
+      renderOwnedPets();
+      renderCollection();
     }
 
+    // ── MAIN TABS ─────────────────────────────────────
+    document.querySelectorAll('.store-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.store-tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.store-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ── PET CARE TABS ─────────────────────────────────
+    document.querySelectorAll('.pet-care-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.pet-care-tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.pet-care-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('care-' + btn.dataset.care).classList.add('active');
+      });
+    });
+
     updateBalance();
-    renderStore();
-    renderCollection();
+    renderAll();
   })();
   </script>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -350,6 +538,5 @@
       <div class="footer-bottom"><p>© 2024 FirstStepMath. All rights reserved.</p></div>
     </div>
   </footer>
-
 </body>
 </html>
