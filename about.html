@@ -3,21 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About – FirstStepMath</title>
+  <title>Our Program – FirstStepMath</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* ── About page styles ── */
     .about-hero {
-      background: linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%);
+      background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 28%, #FFD93D 55%, #6C63FF 100%);
       color: #fff; padding: 80px 24px 60px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .about-hero::before {
+      content: '⭐ 🔢 ➕ 🌟 🔵 ➕ ⭐ 🔢 🌈 ⭐';
+      position: absolute; top: 10px; left: 0; right: 0;
+      font-size: 1.4rem; letter-spacing: 18px; opacity: 0.25;
+      white-space: nowrap; overflow: hidden;
+    }
+    .about-hero::after {
+      content: '🌟 ➕ 🔢 ⭐ 🔵 🌟 ➕ 🔢 ⭐ 🌈';
+      position: absolute; bottom: 10px; left: 0; right: 0;
+      font-size: 1.4rem; letter-spacing: 18px; opacity: 0.25;
+      white-space: nowrap; overflow: hidden;
     }
     .about-hero h1 {
       font-family: 'Fredoka One', cursive; font-size: 3rem; margin-bottom: 16px;
-      text-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+      text-shadow: 2px 3px 0 rgba(0,0,0,0.18);
+      position: relative;
     }
-    .about-hero p { font-size: 1.2rem; opacity: 0.92; max-width: 600px; margin: 0 auto; font-weight: 600; }
+    .about-hero p { font-size: 1.2rem; opacity: 0.95; max-width: 600px; margin: 0 auto; font-weight: 600; position: relative; }
 
     .about-section { padding: 64px 24px; }
     .about-section:nth-child(even) { background: #f8f8ff; }
@@ -266,7 +280,7 @@
       <div class="faq-item">
         <button class="faq-question">Does my child need an account? <span class="faq-arrow">▼</span></button>
         <div class="faq-answer"><div class="faq-answer-inner">
-          No account is needed to start. Children can jump right in and answer questions immediately. Creating a free account lets them save their progress and pretend money balance across devices.
+          Yes — a <strong>FREE account</strong> is needed. Children can then jump right in and answer questions immediately. Creating a free account lets them save their progress and pretend money balance across devices.
         </div></div>
       </div>
 
