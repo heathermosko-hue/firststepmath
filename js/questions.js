@@ -123,6 +123,21 @@ const QUESTIONS = {
         { q: "Put these in order from shortest to tallest: pencil, crayon, ruler — which is tallest?", visual:null, answers:["Pencil","Crayon","Ruler","They're equal"], correct: "Ruler", standard:"PK.M.2" },
         { q: "Which word means NOT heavy?", visual: null, answers: ["tall","short","light","long"],                  correct: "light",         standard:"PK.M.3" },
       ]
+    },
+
+    numberpath: {
+      title: "Number Path", icon: "📏", difficulty: 1,
+      standard: "PK.NS.1–4",
+      questions: [
+        { q: "What number comes AFTER 3?",         visual: { type:"numberline", min:1, max:10, mark:4 }, answers: ["2","3","4","5"],   correct: "4",  standard:"PK.NS.2" },
+        { q: "What number comes AFTER 6?",         visual: { type:"numberline", min:1, max:10, mark:7 }, answers: ["5","6","7","8"],   correct: "7",  standard:"PK.NS.2" },
+        { q: "What number comes BEFORE 5?",        visual: { type:"numberline", min:1, max:10, mark:4 }, answers: ["3","4","6","7"],   correct: "4",  standard:"PK.NS.2" },
+        { q: "What number comes BEFORE 9?",        visual: { type:"numberline", min:1, max:10, mark:8 }, answers: ["6","7","8","10"],  correct: "8",  standard:"PK.NS.2" },
+        { q: "Hop forward 2 from 3. Where do you land?", visual: { type:"numberline_add", min:1, max:10, start:3, jump:2 }, answers: ["3","4","5","6"], correct: "5", standard:"PK.NS.1" },
+        { q: "Hop forward 3 from 2. Where do you land?", visual: { type:"numberline_add", min:1, max:10, start:2, jump:3 }, answers: ["4","5","6","7"], correct: "5", standard:"PK.NS.1" },
+        { q: "Which number is GREATER — 4 or 7?",  visual: { type:"numberline", min:1, max:10, mark:7 }, answers: ["4","5","6","7"],   correct: "7",  standard:"PK.NS.4" },
+        { q: "Which number is LESS — 8 or 5?",     visual: { type:"numberline", min:1, max:10, mark:5 }, answers: ["5","6","7","8"],   correct: "5",  standard:"PK.NS.4" },
+      ]
     }
   },
 
@@ -141,6 +156,8 @@ const QUESTIONS = {
         { q: "Count by 10s. What comes after 10?",   visual: null, answers: ["11","15","20","30"], correct: "20", standard:"K.CC.1" },
         { q: "How many dots?",                       visual: { type:"tenframe_add", a:10, b:5 }, answers: ["13","14","15","16"], correct: "15", standard:"K.CC.5" },
         { q: "What number is MISSING? 17, 18, ?, 20", visual: { type:"equation", text:"17, 18, ?, 20" }, answers: ["16","17","19","21"], correct: "19", standard:"K.CC.2" },
+        { q: "What number comes AFTER 15?",  visual: { type:"numberline", min:10, max:20, mark:16 }, answers: ["14","15","16","17"], correct: "16", standard:"K.CC.2" },
+        { q: "What number is MISSING? 11, ?, 13", visual: { type:"numberline", min:10, max:20, mark:12 }, answers: ["10","11","12","14"], correct: "12", standard:"K.CC.2" },
       ]
     },
 
@@ -156,6 +173,8 @@ const QUESTIONS = {
         { q: "5 ○ 5 — which symbol goes in the circle?", visual: { type:"equation", text:"5 ○ 5" }, answers: [">","<","=","≠"],          correct: "=",  standard:"K.CC.7" },
         { q: "8 ○ 6 — which symbol goes in the circle?", visual: { type:"equation", text:"8 ○ 6" }, answers: [">","<","=","≠"],          correct: ">",  standard:"K.CC.7" },
         { q: "Which group has FEWER?",               visual: null, answers: ["🔴🔴🔴🔴🔴 (5)","🔴🔴🔴 (3)","🔴🔴🔴🔴 (4)","🔴🔴🔴🔴🔴🔴 (6)"], correct: "🔴🔴🔴 (3)", standard:"K.CC.6" },
+        { q: "Which is GREATER — 3 or 8?",  visual: { type:"numberline", min:0, max:10, mark:8 }, answers: ["3","5","7","8"], correct: "8", standard:"K.CC.7" },
+        { q: "Hop forward 3 from 5. Where do you land?", visual: { type:"numberline_add", min:0, max:10, start:5, jump:3 }, answers: ["6","7","8","9"], correct: "8", standard:"K.CC.2" },
       ]
     },
 
@@ -467,7 +486,7 @@ const GRADE_INFO = {
   prek: {
     label: "Pre-K / TK", icon: "🌱", color: "#FF6B9D", ages: "Ages 3–5",
     desc: "Building early number sense and foundational math concepts.",
-    topics: ["counting5","counting10","compare","patterns","shapes2d","shapes3d","measurement"]
+    topics: ["counting5","counting10","compare","patterns","shapes2d","shapes3d","measurement","numberpath"]
   },
   kindergarten: {
     label: "Kindergarten", icon: "⭐", color: "#4A90E2", ages: "Ages 5–6",
