@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Printable Worksheets â€“ FirstStepMath</title>
+  <title>Free Printable Worksheets – FirstStepMath</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* â”€â”€ Page styles â”€â”€ */
+    /* ── Page styles ── */
     .ws-hero {
       background: linear-gradient(135deg, #FF6B35 0%, #FFE66D 100%);
       padding: 64px 24px 48px; text-align: center; color: #fff;
@@ -45,7 +45,7 @@
     .ws-btn.teal   { background:var(--teal); }
     .ws-btn.teal:hover { background:var(--teal-dk); }
 
-    /* â”€â”€ Worksheet print modal â”€â”€ */
+    /* ── Worksheet print modal ── */
     .ws-modal-bg {
       display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
       z-index:9000; align-items:center; justify-content:center; padding:16px;
@@ -68,7 +68,7 @@
     }
     .ws-print-btn:hover { background:var(--orange-dk); }
 
-    /* â”€â”€ Worksheet (redesigned) â”€â”€ */
+    /* ── Worksheet (redesigned) ── */
     .worksheet { font-family:'Nunito',sans-serif; background:#fff; }
 
     .ws-top-banner {
@@ -141,7 +141,7 @@
       text-align:center; font-size:0.7rem; color:#bbb;
     }
 
-    /* â”€â”€ Print CSS â”€â”€ */
+    /* ── Print CSS ── */
     @media print {
       body > *:not(#printArea) { display:none !important; }
       #printArea { display:block !important; }
@@ -161,8 +161,8 @@
       </a>
       <nav class="main-nav" id="mainNav">
         <a href="about.html" class="nav-link">About</a>
-        <a href="worksheets.html" class="nav-link" style="color:var(--orange);font-weight:800">ðŸ“„ Worksheets</a>
-        <a href="store.html" class="nav-link nav-link-store">ðŸª™ Store</a>
+        <a href="worksheets.html" class="nav-link" style="color:var(--orange);font-weight:800">📄 Worksheets</a>
+        <a href="store.html" class="nav-link nav-link-store">🪙 Store</a>
         <a href="login.html" class="btn btn-outline">Sign In</a>
         <a href="index.html#grades" class="btn btn-primary">Play Now</a>
       </nav>
@@ -172,67 +172,67 @@
 
   <!-- HERO -->
   <div class="ws-hero">
-    <h1>ðŸ“„ Free Printable Worksheets</h1>
-    <p>Download and print homework-ready worksheets for every topic â€” Common Core aligned, Pre-K through 2nd Grade.</p>
+    <h1>📄 Free Printable Worksheets</h1>
+    <p>Download and print homework-ready worksheets for every topic — Common Core aligned, Pre-K through 2nd Grade.</p>
   </div>
 
   <!-- MAIN -->
   <div class="ws-main">
 
     <!-- PRE-K -->
-    <div class="ws-grade-title">ðŸŒ± Pre-K Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 3â€“4</small></div>
+    <div class="ws-grade-title">🌱 Pre-K Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 3–4</small></div>
     <div class="ws-grid">
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”¢</div><div class="ws-card-title">Counting to 5</div><div class="ws-card-desc">Count objects, trace numbers 1â€“5, match groups to numerals.</div><div class="ws-card-meta">PK.NS.1â€“3 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-counting5')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”Ÿ</div><div class="ws-card-title">Counting to 10</div><div class="ws-card-desc">Count ten-frame dots, fill in missing numbers, circle groups.</div><div class="ws-card-meta">PK.NS.1â€“2 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-counting10')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">âš–ï¸</div><div class="ws-card-title">More &amp; Fewer</div><div class="ws-card-desc">Circle the group with more, cross out the group with fewer.</div><div class="ws-card-meta">PK.NS.4 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-compare')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸŽ¨</div><div class="ws-card-title">Patterns</div><div class="ws-card-desc">Extend AB and ABB patterns with shapes and pictures.</div><div class="ws-card-meta">PK.AF.1â€“2 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-patterns')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”·</div><div class="ws-card-title">2D Shapes</div><div class="ws-card-desc">Name shapes, count sides and corners, match real-world objects.</div><div class="ws-card-meta">PK.G.1 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-shapes2d')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸŽ±</div><div class="ws-card-title">3D Shapes</div><div class="ws-card-desc">Identify cubes, spheres, cylinders, and cones in real objects.</div><div class="ws-card-meta">PK.G.2 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-shapes3d')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“</div><div class="ws-card-title">Number Path</div><div class="ws-card-desc">What comes before/after, hop forward on a 1â€“10 number path.</div><div class="ws-card-meta">PK.NS.2 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-numberpath')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“¦</div><div class="ws-card-title">Position Words</div><div class="ws-card-desc">Above, below, beside, inside, outside â€” where is the object?</div><div class="ws-card-meta">PK.G.3 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-position')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ—‚ï¸</div><div class="ws-card-title">Sorting</div><div class="ws-card-desc">Sort by color, shape, and type. Find the one that doesn't belong.</div><div class="ws-card-meta">PK.G.1 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-sorting')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“</div><div class="ws-card-title">Measurement</div><div class="ws-card-desc">Longer, shorter, taller, heavier â€” compare sizes and weights.</div><div class="ws-card-meta">PK.M.1â€“3 Â· 8 problems</div><button class="ws-btn" onclick="openWS('prek-measurement')">ðŸ“„ Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔢</div><div class="ws-card-title">Counting to 5</div><div class="ws-card-desc">Count objects, trace numbers 1–5, match groups to numerals.</div><div class="ws-card-meta">PK.NS.1–3 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-counting5')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔟</div><div class="ws-card-title">Counting to 10</div><div class="ws-card-desc">Count ten-frame dots, fill in missing numbers, circle groups.</div><div class="ws-card-meta">PK.NS.1–2 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-counting10')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">⚖️</div><div class="ws-card-title">More &amp; Fewer</div><div class="ws-card-desc">Circle the group with more, cross out the group with fewer.</div><div class="ws-card-meta">PK.NS.4 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-compare')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🎨</div><div class="ws-card-title">Patterns</div><div class="ws-card-desc">Extend AB and ABB patterns with shapes and pictures.</div><div class="ws-card-meta">PK.AF.1–2 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-patterns')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔷</div><div class="ws-card-title">2D Shapes</div><div class="ws-card-desc">Name shapes, count sides and corners, match real-world objects.</div><div class="ws-card-meta">PK.G.1 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-shapes2d')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🎱</div><div class="ws-card-title">3D Shapes</div><div class="ws-card-desc">Identify cubes, spheres, cylinders, and cones in real objects.</div><div class="ws-card-meta">PK.G.2 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-shapes3d')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📏</div><div class="ws-card-title">Number Path</div><div class="ws-card-desc">What comes before/after, hop forward on a 1–10 number path.</div><div class="ws-card-meta">PK.NS.2 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-numberpath')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📦</div><div class="ws-card-title">Position Words</div><div class="ws-card-desc">Above, below, beside, inside, outside — where is the object?</div><div class="ws-card-meta">PK.G.3 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-position')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🗂️</div><div class="ws-card-title">Sorting</div><div class="ws-card-desc">Sort by color, shape, and type. Find the one that doesn't belong.</div><div class="ws-card-meta">PK.G.1 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-sorting')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📐</div><div class="ws-card-title">Measurement</div><div class="ws-card-desc">Longer, shorter, taller, heavier — compare sizes and weights.</div><div class="ws-card-meta">PK.M.1–3 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-measurement')">📄 Preview &amp; Print</button></div>
     </div>
 
     <!-- KINDERGARTEN -->
-    <div class="ws-grade-title">â­ Kindergarten Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 5â€“6</small></div>
+    <div class="ws-grade-title">⭐ Kindergarten Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 5–6</small></div>
     <div class="ws-grid">
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”¢</div><div class="ws-card-title">Counting to 20</div><div class="ws-card-desc">Fill in missing numbers, count ten-frame dots, number lines.</div><div class="ws-card-meta">K.CC.1â€“5 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-counting20')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">âš–ï¸</div><div class="ws-card-title">Compare Numbers</div><div class="ws-card-desc">Greater than, less than, equal â€” use &gt;, &lt;, = symbols.</div><div class="ws-card-meta">K.CC.6â€“7 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-compare')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">âž•</div><div class="ws-card-title">Add within 5</div><div class="ws-card-desc">Picture addition, draw circles to add, complete number sentences.</div><div class="ws-card-meta">K.OA.5 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-addition5')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”¢</div><div class="ws-card-title">Add &amp; Subtract within 10</div><div class="ws-card-desc">Complete equations, cross off to subtract, use ten frames.</div><div class="ws-card-meta">K.OA.1â€“2 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-addition10')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”Ÿ</div><div class="ws-card-title">Make 10</div><div class="ws-card-desc">Fill in ten frames, complete ___ + ___ = 10 equations.</div><div class="ws-card-meta">K.OA.4 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-maketen')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”¢</div><div class="ws-card-title">Teen Numbers</div><div class="ws-card-desc">11â€“19 as ten and some ones, double ten-frame models.</div><div class="ws-card-meta">K.NBT.1 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-teennumbers')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”¶</div><div class="ws-card-title">2D &amp; 3D Shapes</div><div class="ws-card-desc">Count sides, name shapes, sort flat vs solid shapes.</div><div class="ws-card-meta">K.G.1â€“4 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-shapes')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“–</div><div class="ws-card-title">Word Problems</div><div class="ws-card-desc">Put-together and take-away story problems within 10.</div><div class="ws-card-meta">K.OA.2 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-wordproblems')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“</div><div class="ws-card-title">Measurement</div><div class="ws-card-desc">Compare length, height, and weight of everyday objects.</div><div class="ws-card-meta">K.MD.1â€“2 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-measurement')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“Š</div><div class="ws-card-title">Sorting &amp; Data</div><div class="ws-card-desc">Sort objects, count groups, answer most/fewest questions.</div><div class="ws-card-meta">K.MD.3 Â· 8 problems</div><button class="ws-btn purple" onclick="openWS('k-data')">ðŸ“„ Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔢</div><div class="ws-card-title">Counting to 20</div><div class="ws-card-desc">Fill in missing numbers, count ten-frame dots, number lines.</div><div class="ws-card-meta">K.CC.1–5 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-counting20')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">⚖️</div><div class="ws-card-title">Compare Numbers</div><div class="ws-card-desc">Greater than, less than, equal — use &gt;, &lt;, = symbols.</div><div class="ws-card-meta">K.CC.6–7 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-compare')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">➕</div><div class="ws-card-title">Add within 5</div><div class="ws-card-desc">Picture addition, draw circles to add, complete number sentences.</div><div class="ws-card-meta">K.OA.5 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-addition5')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔢</div><div class="ws-card-title">Add &amp; Subtract within 10</div><div class="ws-card-desc">Complete equations, cross off to subtract, use ten frames.</div><div class="ws-card-meta">K.OA.1–2 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-addition10')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔟</div><div class="ws-card-title">Make 10</div><div class="ws-card-desc">Fill in ten frames, complete ___ + ___ = 10 equations.</div><div class="ws-card-meta">K.OA.4 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-maketen')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔢</div><div class="ws-card-title">Teen Numbers</div><div class="ws-card-desc">11–19 as ten and some ones, double ten-frame models.</div><div class="ws-card-meta">K.NBT.1 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-teennumbers')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔶</div><div class="ws-card-title">2D &amp; 3D Shapes</div><div class="ws-card-desc">Count sides, name shapes, sort flat vs solid shapes.</div><div class="ws-card-meta">K.G.1–4 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-shapes')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📖</div><div class="ws-card-title">Word Problems</div><div class="ws-card-desc">Put-together and take-away story problems within 10.</div><div class="ws-card-meta">K.OA.2 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-wordproblems')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📏</div><div class="ws-card-title">Measurement</div><div class="ws-card-desc">Compare length, height, and weight of everyday objects.</div><div class="ws-card-meta">K.MD.1–2 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-measurement')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📊</div><div class="ws-card-title">Sorting &amp; Data</div><div class="ws-card-desc">Sort objects, count groups, answer most/fewest questions.</div><div class="ws-card-meta">K.MD.3 · 8 problems</div><button class="ws-btn purple" onclick="openWS('k-data')">📄 Preview &amp; Print</button></div>
     </div>
 
     <!-- GRADE 1 -->
-    <div class="ws-grade-title">ðŸš€ 1st Grade Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 6â€“7</small></div>
+    <div class="ws-grade-title">🚀 1st Grade Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 6–7</small></div>
     <div class="ws-grid">
-      <div class="ws-card"><div class="ws-card-icon">âž•</div><div class="ws-card-title">Add &amp; Subtract within 20</div><div class="ws-card-desc">Solve equations using ten frames and number lines.</div><div class="ws-card-meta">1.OA.6 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-addition20')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">â“</div><div class="ws-card-title">Missing Number</div><div class="ws-card-desc">Find the missing number in addition and subtraction equations.</div><div class="ws-card-meta">1.OA.8 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-missingnum')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“–</div><div class="ws-card-title">Word Problems</div><div class="ws-card-desc">Solve and compare story problems within 20.</div><div class="ws-card-meta">1.OA.1 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-wordproblems')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”—</div><div class="ws-card-title">Fact Families</div><div class="ws-card-desc">Related addition and subtraction equations, fact family triangles.</div><div class="ws-card-meta">1.OA.3â€“4 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-factfamilies')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ—ï¸</div><div class="ws-card-title">Tens &amp; Ones</div><div class="ws-card-desc">Base-10 blocks, write tens and ones, expand numbers to 99.</div><div class="ws-card-meta">1.NBT.2 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-placevalue')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ”¢</div><div class="ws-card-title">Compare Numbers</div><div class="ws-card-desc">Use &gt;, &lt;, = with two-digit numbers, order from least to greatest.</div><div class="ws-card-meta">1.NBT.3 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-compare')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">âž•ðŸ”Ÿ</div><div class="ws-card-title">10 More &amp; 10 Less</div><div class="ws-card-desc">Add and subtract 10 mentally, use number lines to 100.</div><div class="ws-card-meta">1.NBT.5 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-tenmore')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ¦˜</div><div class="ws-card-title">Number Line Jumps</div><div class="ws-card-desc">Hop forward and back on a number line, solve jump problems.</div><div class="ws-card-meta">1.OA.5 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-numberlinejumps')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ’°</div><div class="ws-card-title">Money</div><div class="ws-card-desc">Identify penny, nickel, dime, quarter and count simple amounts.</div><div class="ws-card-meta">1.MD.4 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-money')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ•</div><div class="ws-card-title">Telling Time</div><div class="ws-card-desc">Read clocks to the hour and half-hour, match times to clocks.</div><div class="ws-card-meta">1.MD.3 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-time')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“</div><div class="ws-card-title">Measurement</div><div class="ws-card-desc">Measure with cubes, compare lengths, order objects by size.</div><div class="ws-card-meta">1.MD.1â€“2 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-measurement')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ“Š</div><div class="ws-card-title">Graphs &amp; Data</div><div class="ws-card-desc">Read picture graphs and tally charts, answer most/fewest/how many.</div><div class="ws-card-meta">1.MD.4 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-graphs')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">ðŸ•</div><div class="ws-card-title">Halves &amp; Fourths</div><div class="ws-card-desc">Identify equal parts, halves and quarters of shapes.</div><div class="ws-card-meta">1.G.3 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-fractions')">ðŸ“„ Preview &amp; Print</button></div>
-      <div class="ws-card"><div class="ws-card-icon">âš–ï¸</div><div class="ws-card-title">True or False?</div><div class="ws-card-desc">Decide if equations are true or false, understand the equal sign.</div><div class="ws-card-meta">1.OA.7 Â· 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-equalsign')">ðŸ“„ Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">➕</div><div class="ws-card-title">Add &amp; Subtract within 20</div><div class="ws-card-desc">Solve equations using ten frames and number lines.</div><div class="ws-card-meta">1.OA.6 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-addition20')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">❓</div><div class="ws-card-title">Missing Number</div><div class="ws-card-desc">Find the missing number in addition and subtraction equations.</div><div class="ws-card-meta">1.OA.8 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-missingnum')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📖</div><div class="ws-card-title">Word Problems</div><div class="ws-card-desc">Solve and compare story problems within 20.</div><div class="ws-card-meta">1.OA.1 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-wordproblems')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔗</div><div class="ws-card-title">Fact Families</div><div class="ws-card-desc">Related addition and subtraction equations, fact family triangles.</div><div class="ws-card-meta">1.OA.3–4 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-factfamilies')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🏗️</div><div class="ws-card-title">Tens &amp; Ones</div><div class="ws-card-desc">Base-10 blocks, write tens and ones, expand numbers to 99.</div><div class="ws-card-meta">1.NBT.2 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-placevalue')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🔢</div><div class="ws-card-title">Compare Numbers</div><div class="ws-card-desc">Use &gt;, &lt;, = with two-digit numbers, order from least to greatest.</div><div class="ws-card-meta">1.NBT.3 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-compare')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">➕🔟</div><div class="ws-card-title">10 More &amp; 10 Less</div><div class="ws-card-desc">Add and subtract 10 mentally, use number lines to 100.</div><div class="ws-card-meta">1.NBT.5 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-tenmore')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🦘</div><div class="ws-card-title">Number Line Jumps</div><div class="ws-card-desc">Hop forward and back on a number line, solve jump problems.</div><div class="ws-card-meta">1.OA.5 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-numberlinejumps')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">💰</div><div class="ws-card-title">Money</div><div class="ws-card-desc">Identify penny, nickel, dime, quarter and count simple amounts.</div><div class="ws-card-meta">1.MD.4 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-money')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🕐</div><div class="ws-card-title">Telling Time</div><div class="ws-card-desc">Read clocks to the hour and half-hour, match times to clocks.</div><div class="ws-card-meta">1.MD.3 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-time')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📐</div><div class="ws-card-title">Measurement</div><div class="ws-card-desc">Measure with cubes, compare lengths, order objects by size.</div><div class="ws-card-meta">1.MD.1–2 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-measurement')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📊</div><div class="ws-card-title">Graphs &amp; Data</div><div class="ws-card-desc">Read picture graphs and tally charts, answer most/fewest/how many.</div><div class="ws-card-meta">1.MD.4 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-graphs')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">🍕</div><div class="ws-card-title">Halves &amp; Fourths</div><div class="ws-card-desc">Identify equal parts, halves and quarters of shapes.</div><div class="ws-card-meta">1.G.3 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-fractions')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">⚖️</div><div class="ws-card-title">True or False?</div><div class="ws-card-desc">Decide if equations are true or false, understand the equal sign.</div><div class="ws-card-meta">1.OA.7 · 8 problems</div><button class="ws-btn teal" onclick="openWS('g1-equalsign')">📄 Preview &amp; Print</button></div>
     </div>
 
     <div style="background:#f0f2ff;border-radius:18px;padding:24px;text-align:center;margin-top:40px">
-      <div style="font-size:2rem;margin-bottom:8px">âœ‰ï¸</div>
+      <div style="font-size:2rem;margin-bottom:8px">✉️</div>
       <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--dark);margin-bottom:6px">Want more worksheets?</div>
       <p style="color:#666;font-size:0.95rem;margin-bottom:16px">New worksheets added every week! Create a free account to get them by email.</p>
-      <a href="login.html" class="btn btn-primary">Get Free Worksheets â†’</a>
+      <a href="login.html" class="btn btn-primary">Get Free Worksheets →</a>
     </div>
   </div>
 
@@ -242,8 +242,8 @@
       <div class="ws-modal-head">
         <h2 id="wsModalTitle">Worksheet</h2>
         <div class="ws-modal-head-btns">
-          <button class="ws-print-btn" onclick="window.print()">ðŸ–¨ï¸ Print / Save PDF</button>
-          <button class="ws-close-btn" id="wsCloseBtn">âœ•</button>
+          <button class="ws-print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+          <button class="ws-close-btn" id="wsCloseBtn">✕</button>
         </div>
       </div>
       <div id="wsContent"></div>
@@ -255,21 +255,21 @@
   <script>
   const WS_DATA = {
     'prek-counting5': {
-      title:'Counting to 5', grade:'Pre-K', standard:'PK.NS.1â€“3',
+      title:'Counting to 5', grade:'Pre-K', standard:'PK.NS.1–3',
       instructions:'Count the pictures. Write the number on the line.',
       problems:[
-        { type:'count', emojis:'ðŸŽðŸŽðŸŽ', label:'How many apples?' },
-        { type:'count', emojis:'â­â­â­â­', label:'How many stars?' },
-        { type:'count', emojis:'ðŸ¸ðŸ¸', label:'How many frogs?' },
-        { type:'count', emojis:'ðŸ¶ðŸ¶ðŸ¶ðŸ¶ðŸ¶', label:'How many dogs?' },
+        { type:'count', emojis:'🍎🍎🍎', label:'How many apples?' },
+        { type:'count', emojis:'⭐⭐⭐⭐', label:'How many stars?' },
+        { type:'count', emojis:'🐸🐸', label:'How many frogs?' },
+        { type:'count', emojis:'🐶🐶🐶🐶🐶', label:'How many dogs?' },
         { type:'fill',  eq:'1, 2, 3, ___, 5', label:'Fill in the missing number.' },
         { type:'fill',  eq:'___, 2, 3, 4, 5', label:'Fill in the missing number.' },
-        { type:'circle-more', a:'ðŸŽðŸŽ', b:'ðŸŽðŸŽðŸŽðŸŽ', label:'Circle the group with MORE.' },
+        { type:'circle-more', a:'🍎🍎', b:'🍎🍎🍎🍎', label:'Circle the group with MORE.' },
         { type:'trace',  nums:'1  2  3  4  5', label:'Trace these numbers:' },
       ]
     },
     'prek-counting10': {
-      title:'Counting to 10', grade:'Pre-K', standard:'PK.NS.1â€“2',
+      title:'Counting to 10', grade:'Pre-K', standard:'PK.NS.1–2',
       instructions:'Count the dots. Write the number.',
       problems:[
         { type:'tenframe', filled:6, label:'How many dots?' },
@@ -286,8 +286,8 @@
       title:'More & Fewer', grade:'Pre-K', standard:'PK.NS.4',
       instructions:'Circle the correct answer.',
       problems:[
-        { type:'compare', a:'ðŸŽðŸŽ (2)', b:'ðŸŽðŸŽðŸŽðŸŽ (4)', q:'Which is MORE?' },
-        { type:'compare', a:'â­â­â­ (3)', b:'â­â­ (2)', q:'Which is FEWER?' },
+        { type:'compare', a:'🍎🍎 (2)', b:'🍎🍎🍎🍎 (4)', q:'Which is MORE?' },
+        { type:'compare', a:'⭐⭐⭐ (3)', b:'⭐⭐ (2)', q:'Which is FEWER?' },
         { type:'fill', eq:'5 is ___ than 3.  (more / less)', label:'Circle: more or less.' },
         { type:'fill', eq:'2 is ___ than 7.  (more / less)', label:'Circle: more or less.' },
         { type:'fill', eq:'4 = 4. They are _____.', label:'Write: equal.' },
@@ -295,13 +295,13 @@
       ]
     },
     'prek-patterns': {
-      title:'Patterns', grade:'Pre-K', standard:'PK.AF.1â€“2',
+      title:'Patterns', grade:'Pre-K', standard:'PK.AF.1–2',
       instructions:'Look at the pattern. Draw or write what comes next.',
       problems:[
-        { type:'pattern', seq:'ðŸ”´ ðŸ”µ ðŸ”´ ðŸ”µ ðŸ”´ ___', label:'What comes next?' },
-        { type:'pattern', seq:'â­ ðŸŒ™ â­ ðŸŒ™ â­ ___', label:'What comes next?' },
-        { type:'pattern', seq:'ðŸ± ðŸ¶ ðŸ± ðŸ¶ ðŸ± ___', label:'What comes next?' },
-        { type:'pattern', seq:'ðŸ”º ðŸŸ¦ ðŸ”º ðŸŸ¦ ðŸ”º ___', label:'What comes next?' },
+        { type:'pattern', seq:'🔴 🔵 🔴 🔵 🔴 ___', label:'What comes next?' },
+        { type:'pattern', seq:'⭐ 🌙 ⭐ 🌙 ⭐ ___', label:'What comes next?' },
+        { type:'pattern', seq:'🐱 🐶 🐱 🐶 🐱 ___', label:'What comes next?' },
+        { type:'pattern', seq:'🔺 🟦 🔺 🟦 🔺 ___', label:'What comes next?' },
         { type:'fill', eq:'A B A B A ___', label:'Write the letter that comes next.' },
         { type:'fill', eq:'1 2 1 2 1 ___', label:'Write the number that comes next.' },
       ]
@@ -314,13 +314,13 @@
         { type:'fill', eq:'A square has ___ sides.', label:'Count the sides.' },
         { type:'fill', eq:'A circle has ___ corners.', label:'How many corners?' },
         { type:'fill', eq:'A rectangle has ___ sides.', label:'Count the sides.' },
-        { type:'fill', eq:'A door ðŸšª is shaped like a ___________.',label:'Name the shape.' },
-        { type:'fill', eq:'The sun â˜€ï¸ is shaped like a ___________.', label:'Name the shape.' },
-        { type:'fill', eq:'A pizza slice ðŸ• is shaped like a _________.', label:'Name the shape.' },
+        { type:'fill', eq:'A door 🚪 is shaped like a ___________.',label:'Name the shape.' },
+        { type:'fill', eq:'The sun ☀️ is shaped like a ___________.', label:'Name the shape.' },
+        { type:'fill', eq:'A pizza slice 🍕 is shaped like a _________.', label:'Name the shape.' },
       ]
     },
     'k-counting20': {
-      title:'Counting to 20', grade:'Kindergarten', standard:'K.CC.1â€“5',
+      title:'Counting to 20', grade:'Kindergarten', standard:'K.CC.1–5',
       instructions:'Fill in the missing numbers.',
       problems:[
         { type:'fill', eq:'11, 12, ___, 14', label:'What is missing?' },
@@ -330,7 +330,7 @@
         { type:'fill', eq:'Count by 10s: 10, ___, 30', label:'Count by 10s.' },
         { type:'fill', eq:'Count by 2s: 2, 4, ___, 8', label:'Count by 2s.' },
         { type:'tenframe', filled:14, label:'How many dots? (two frames)' },
-        { type:'fill', eq:'Write the numbers 11â€“20 in order:', label:'___  ___  ___  ___  ___  ___  ___  ___  ___  ___' },
+        { type:'fill', eq:'Write the numbers 11–20 in order:', label:'___  ___  ___  ___  ___  ___  ___  ___  ___  ___' },
       ]
     },
     'k-addition5': {
@@ -342,23 +342,23 @@
         { type:'fill', eq:'1 + 1 = ___', label:'Solve.' },
         { type:'fill', eq:'4 + 1 = ___', label:'Solve.' },
         { type:'fill', eq:'0 + 5 = ___', label:'Solve.' },
-        { type:'count-add', a:'ðŸŽðŸŽ', b:'ðŸŽ', label:'2 + 1 = ___', eq:'2 + 1 = ___' },
-        { type:'count-add', a:'â­â­â­', b:'â­â­', label:'3 + 2 = ___', eq:'3 + 2 = ___' },
+        { type:'count-add', a:'🍎🍎', b:'🍎', label:'2 + 1 = ___', eq:'2 + 1 = ___' },
+        { type:'count-add', a:'⭐⭐⭐', b:'⭐⭐', label:'3 + 2 = ___', eq:'3 + 2 = ___' },
         { type:'fill', eq:'Sam has 3 apples. He picks 1 more. How many now? ___', label:'Word problem.' },
       ]
     },
     'k-addition10': {
-      title:'Add & Subtract within 10', grade:'Kindergarten', standard:'K.OA.1â€“2',
+      title:'Add & Subtract within 10', grade:'Kindergarten', standard:'K.OA.1–2',
       instructions:'Solve each problem.',
       problems:[
         { type:'fill', eq:'6 + 2 = ___', label:'Add.' },
         { type:'fill', eq:'5 + 4 = ___', label:'Add.' },
-        { type:'fill', eq:'10 âˆ’ 3 = ___', label:'Subtract.' },
-        { type:'fill', eq:'8 âˆ’ 5 = ___', label:'Subtract.' },
+        { type:'fill', eq:'10 − 3 = ___', label:'Subtract.' },
+        { type:'fill', eq:'8 − 5 = ___', label:'Subtract.' },
         { type:'fill', eq:'7 + 3 = ___', label:'Add.' },
-        { type:'fill', eq:'9 âˆ’ 4 = ___', label:'Subtract.' },
+        { type:'fill', eq:'9 − 4 = ___', label:'Subtract.' },
         { type:'fill', eq:'3 + ___ = 7', label:'What is missing?' },
-        { type:'fill', eq:'There are 8 ðŸ¦. 3 fly away. How many are left? ___', label:'Word problem.' },
+        { type:'fill', eq:'There are 8 🐦. 3 fly away. How many are left? ___', label:'Word problem.' },
       ]
     },
     'k-maketen': {
@@ -372,17 +372,17 @@
         { type:'fill', eq:'9 + ___ = 10', label:'Fill in the blank.' },
         { type:'fill', eq:'3 + ___ = 10', label:'Fill in the blank.' },
         { type:'tenframe', filled:4, label:'How many more to make 10? ___' },
-        { type:'fill', eq:'10 âˆ’ 7 = ___', label:'Subtract to find the missing part.' },
+        { type:'fill', eq:'10 − 7 = ___', label:'Subtract to find the missing part.' },
       ]
     },
     'k-shapes': {
-      title:'2D & 3D Shapes', grade:'Kindergarten', standard:'K.G.1â€“4',
+      title:'2D & 3D Shapes', grade:'Kindergarten', standard:'K.G.1–4',
       instructions:'Answer the shape questions.',
       problems:[
         { type:'fill', eq:'A hexagon has ___ sides.', label:'Count the sides.' },
         { type:'fill', eq:'A rectangle has ___ corners.', label:'Count the corners.' },
         { type:'fill', eq:'A sphere has ___ flat faces.', label:'Zero or more?' },
-        { type:'fill', eq:'A stop sign ðŸ›‘ is an _______________ shape.', label:'Name it.' },
+        { type:'fill', eq:'A stop sign 🛑 is an _______________ shape.', label:'Name it.' },
         { type:'fill', eq:'A cube looks like a ___. (box / ball / cone)', label:'Circle one.' },
         { type:'fill', eq:'A circle has ___ straight sides.', label:'Count the straight sides.' },
         { type:'fill', eq:'Name one flat (2D) shape: _______________', label:'Write it.' },
@@ -395,11 +395,11 @@
       problems:[
         { type:'fill', eq:'8 + 5 = ___', label:'Add.' },
         { type:'fill', eq:'9 + 6 = ___', label:'Add.' },
-        { type:'fill', eq:'15 âˆ’ 7 = ___', label:'Subtract.' },
-        { type:'fill', eq:'13 âˆ’ 6 = ___', label:'Subtract.' },
+        { type:'fill', eq:'15 − 7 = ___', label:'Subtract.' },
+        { type:'fill', eq:'13 − 6 = ___', label:'Subtract.' },
         { type:'fill', eq:'7 + ___ = 14', label:'What is missing?' },
         { type:'fill', eq:'___ + 9 = 17', label:'What is missing?' },
-        { type:'fill', eq:'12 âˆ’ ___ = 5', label:'What is missing?' },
+        { type:'fill', eq:'12 − ___ = 5', label:'What is missing?' },
         { type:'fill', eq:'There are 14 birds on a wire. 8 fly away. How many are left? ___', label:'Word problem.' },
       ]
     },
@@ -430,15 +430,15 @@
       ]
     },
 
-    /* â”€â”€ NEW PRE-K â”€â”€ */
+    /* ── NEW PRE-K ── */
     'prek-shapes3d': {
       title:'3D Shapes', grade:'Pre-K', standard:'PK.G.2',
       instructions:'Circle the correct answer.',
       problems:[
-        { type:'fill', eq:'A ball âš½ is shaped like a ___________.', label:'Name the 3D shape.' },
-        { type:'fill', eq:'A box ðŸ“¦ is shaped like a ___________.', label:'Name the 3D shape.' },
-        { type:'fill', eq:'A can ðŸ¥« is shaped like a ___________.', label:'Name the 3D shape.' },
-        { type:'fill', eq:'An ice cream cone ðŸ¦ is shaped like a ___________.', label:'Name the 3D shape.' },
+        { type:'fill', eq:'A ball ⚽ is shaped like a ___________.', label:'Name the 3D shape.' },
+        { type:'fill', eq:'A box 📦 is shaped like a ___________.', label:'Name the 3D shape.' },
+        { type:'fill', eq:'A can 🥫 is shaped like a ___________.', label:'Name the 3D shape.' },
+        { type:'fill', eq:'An ice cream cone 🍦 is shaped like a ___________.', label:'Name the 3D shape.' },
         { type:'fill', eq:'A cube has ___ flat faces.', label:'Count the faces.' },
         { type:'fill', eq:'A sphere has ___ flat faces.', label:'Count the faces.' },
         { type:'compare', a:'Cube (box shape)', b:'Sphere (ball shape)', q:'Which shape can ROLL?' },
@@ -446,7 +446,7 @@
       ]
     },
     'prek-numberpath': {
-      title:'Number Path', grade:'Pre-K', standard:'PK.NS.1â€“4',
+      title:'Number Path', grade:'Pre-K', standard:'PK.NS.1–4',
       instructions:'Use the number path to answer each question.',
       problems:[
         { type:'fill', eq:'Number path: 1  2  3  4  5  6  7  8  9  10\nWhat number comes AFTER 3? ___', label:'' },
@@ -463,12 +463,12 @@
       title:'Position Words', grade:'Pre-K', standard:'PK.G.3',
       instructions:'Circle the correct position word.',
       problems:[
-        { type:'fill', eq:'The cat is ___ the box. ðŸ±ðŸ“¦\n(above / inside / beside)', label:'Circle one.' },
-        { type:'fill', eq:'The bird is ___ the tree. ðŸ¦ðŸŒ³\n(below / above / inside)', label:'Circle one.' },
-        { type:'fill', eq:'The ball is ___ the table. âš½\n(above / below / inside)', label:'Circle one.' },
-        { type:'fill', eq:'The dog is ___ the fence. ðŸ¶\n(above / beside / below)', label:'Circle one.' },
+        { type:'fill', eq:'The cat is ___ the box. 🐱📦\n(above / inside / beside)', label:'Circle one.' },
+        { type:'fill', eq:'The bird is ___ the tree. 🐦🌳\n(below / above / inside)', label:'Circle one.' },
+        { type:'fill', eq:'The ball is ___ the table. ⚽\n(above / below / inside)', label:'Circle one.' },
+        { type:'fill', eq:'The dog is ___ the fence. 🐶\n(above / beside / below)', label:'Circle one.' },
         { type:'fill', eq:'The hat is ON TOP of the head. The hat is ___.\n(under / on top / beside)', label:'Circle one.' },
-        { type:'fill', eq:'The fish swims ___ the water. ðŸŸ\n(above / outside / inside)', label:'Circle one.' },
+        { type:'fill', eq:'The fish swims ___ the water. 🐟\n(above / outside / inside)', label:'Circle one.' },
         { type:'fill', eq:'The toy is NOT outside the box. It is ___.\n(above / inside / beside)', label:'Circle one.' },
         { type:'fill', eq:'The opposite of ABOVE is ___.\n(inside / below / beside)', label:'Circle one.' },
       ]
@@ -477,34 +477,34 @@
       title:'Sorting', grade:'Pre-K', standard:'PK.G.1',
       instructions:'Sort, match, and find the one that does not belong.',
       problems:[
-        { type:'fill', eq:'ðŸ¶ ðŸ¶ ðŸ¶ ðŸ±\nWhich animal is DIFFERENT? ___', label:'' },
-        { type:'fill', eq:'ðŸŽ ðŸŠ ðŸŽ ðŸŽ\nWhich fruit appears MOST? ___', label:'' },
-        { type:'fill', eq:'Circle the one that does NOT belong:\nðŸ¶  ðŸ±  ðŸ¦  ðŸš—', label:'' },
-        { type:'fill', eq:'Which group shows ALL circles?\n(â—‹â—‹â—‹â—‹)  or  (â—‹â—‹â–¡â—‹)', label:'Circle the group.' },
-        { type:'fill', eq:'ðŸŽ ðŸŽ ðŸŠ ðŸŠ ðŸŠ\nAre there more ðŸŽ or more ðŸŠ? ___', label:'' },
-        { type:'fill', eq:'Sort these into 2 groups: ðŸ”´ðŸ”µðŸ”´ðŸ”µðŸ”´\nHow many red? ___   How many blue? ___', label:'' },
-        { type:'compare', a:'ðŸ”º and ðŸ”º', b:'ðŸ”º and ðŸŸ¦', q:'Which pair shows the SAME shape?' },
-        { type:'fill', eq:'ðŸ¶ ðŸ± ðŸ¶ ðŸ± ðŸ¶\nHow many dogs? ___   How many cats? ___', label:'' },
+        { type:'fill', eq:'🐶 🐶 🐶 🐱\nWhich animal is DIFFERENT? ___', label:'' },
+        { type:'fill', eq:'🍎 🍊 🍎 🍎\nWhich fruit appears MOST? ___', label:'' },
+        { type:'fill', eq:'Circle the one that does NOT belong:\n🐶  🐱  🐦  🚗', label:'' },
+        { type:'fill', eq:'Which group shows ALL circles?\n(○○○○)  or  (○○□○)', label:'Circle the group.' },
+        { type:'fill', eq:'🍎 🍎 🍊 🍊 🍊\nAre there more 🍎 or more 🍊? ___', label:'' },
+        { type:'fill', eq:'Sort these into 2 groups: 🔴🔵🔴🔵🔴\nHow many red? ___   How many blue? ___', label:'' },
+        { type:'compare', a:'🔺 and 🔺', b:'🔺 and 🟦', q:'Which pair shows the SAME shape?' },
+        { type:'fill', eq:'🐶 🐱 🐶 🐱 🐶\nHow many dogs? ___   How many cats? ___', label:'' },
       ]
     },
     'prek-measurement': {
-      title:'Compare Sizes', grade:'Pre-K', standard:'PK.M.1â€“3',
+      title:'Compare Sizes', grade:'Pre-K', standard:'PK.M.1–3',
       instructions:'Circle the correct answer.',
       problems:[
-        { type:'compare', a:'Mouse ðŸ­', b:'Elephant ðŸ˜', q:'Which animal is TALLER?' },
-        { type:'compare', a:'Tree ðŸŒ³', b:'Flower ðŸŒ¸', q:'Which is SHORTER?' },
+        { type:'compare', a:'Mouse 🐭', b:'Elephant 🐘', q:'Which animal is TALLER?' },
+        { type:'compare', a:'Tree 🌳', b:'Flower 🌸', q:'Which is SHORTER?' },
         { type:'fill', eq:'A whale is ___ than a fish.\n(smaller / bigger / same)', label:'Circle one.' },
         { type:'fill', eq:'A feather is ___ than a rock.\n(heavier / lighter / same)', label:'Circle one.' },
-        { type:'fill', eq:'Pencil, Crayon, Ruler â€” which is TALLEST? ___', label:'' },
+        { type:'fill', eq:'Pencil, Crayon, Ruler — which is TALLEST? ___', label:'' },
         { type:'fill', eq:'Which word means NOT heavy? ___\n(tall / short / light / long)', label:'Circle one.' },
-        { type:'compare', a:'Kitten ðŸ±', b:'Horse ðŸ´', q:'Which is HEAVIER?' },
+        { type:'compare', a:'Kitten 🐱', b:'Horse 🐴', q:'Which is HEAVIER?' },
         { type:'fill', eq:'The longest object wins a race. Pencil=5, Crayon=3, Ruler=7\nWhich is longest? ___', label:'' },
       ]
     },
 
-    /* â”€â”€ NEW KINDERGARTEN â”€â”€ */
+    /* ── NEW KINDERGARTEN ── */
     'k-compare': {
-      title:'Compare Numbers', grade:'Kindergarten', standard:'K.CC.6â€“7',
+      title:'Compare Numbers', grade:'Kindergarten', standard:'K.CC.6–7',
       instructions:'Use >, <, or = to compare. Circle the answer.',
       problems:[
         { type:'fill', eq:'7 ___ 9   (> / < / =)', label:'Write the symbol.' },
@@ -546,14 +546,14 @@
       ]
     },
     'k-measurement': {
-      title:'Measurement', grade:'Kindergarten', standard:'K.MD.1â€“2',
+      title:'Measurement', grade:'Kindergarten', standard:'K.MD.1–2',
       instructions:'Circle the correct answer.',
       problems:[
-        { type:'compare', a:'Pencil âœï¸', b:'Crayon ðŸ–ï¸', q:'Which is LONGER?' },
-        { type:'compare', a:'Bus ðŸšŒ', b:'Bicycle ðŸš²', q:'Which is SHORTER?' },
-        { type:'compare', a:'Giraffe ðŸ¦’', b:'Cat ðŸ±', q:'Which is TALLER?' },
-        { type:'compare', a:'Rock ðŸª¨', b:'Feather ðŸª¶', q:'Which is HEAVIER?' },
-        { type:'compare', a:'Truck ðŸš›', b:'Sock ðŸ§¦', q:'Which is LIGHTER?' },
+        { type:'compare', a:'Pencil ✏️', b:'Crayon 🖍️', q:'Which is LONGER?' },
+        { type:'compare', a:'Bus 🚌', b:'Bicycle 🚲', q:'Which is SHORTER?' },
+        { type:'compare', a:'Giraffe 🦒', b:'Cat 🐱', q:'Which is TALLER?' },
+        { type:'compare', a:'Rock 🪨', b:'Feather 🪶', q:'Which is HEAVIER?' },
+        { type:'compare', a:'Truck 🚛', b:'Sock 🧦', q:'Which is LIGHTER?' },
         { type:'fill', eq:'A dog is shorter than a horse.\nA mouse is shorter than a dog.\nWhich is TALLEST? ___', label:'' },
         { type:'fill', eq:'Which word means NOT long?\n(tall / heavy / short / wide)', label:'Circle one.' },
         { type:'fill', eq:'If a book weighs MORE than a pencil,\nthe pencil is ___ than the book.\n(heavier / lighter)', label:'Circle one.' },
@@ -563,30 +563,30 @@
       title:'Sorting & Data', grade:'Kindergarten', standard:'K.MD.3',
       instructions:'Count and answer the questions.',
       problems:[
-        { type:'fill', eq:'ðŸŽðŸŽðŸŽðŸŠðŸŠðŸ‹\nHow many apples? ___', label:'' },
-        { type:'fill', eq:'ðŸŽðŸŽðŸŽðŸŠðŸŠðŸ‹\nWhich fruit has the MOST? ___', label:'' },
-        { type:'fill', eq:'ðŸŽðŸŽðŸŽðŸŠðŸŠðŸ‹\nWhich fruit has the FEWEST? ___', label:'' },
-        { type:'fill', eq:'ðŸ”´ðŸ”´ðŸ”µðŸ”´ðŸ”µðŸ”µðŸ”µ\nHow many blue circles? ___', label:'' },
-        { type:'fill', eq:'ðŸ±ðŸ¶ðŸ±ðŸ¶ðŸ±\nHow many cats? ___   How many dogs? ___', label:'' },
-        { type:'fill', eq:'ðŸ±ðŸ¶ðŸ±ðŸ¶ðŸ±\nAre there more cats or more dogs? ___', label:'' },
-        { type:'fill', eq:'ðŸ¦ðŸ¦ðŸ­ðŸ¦ðŸ­ðŸ­ðŸ­\nHow many ice creams? ___   How many lollipops? ___', label:'' },
-        { type:'fill', eq:'ðŸ¦ðŸ¦ðŸ­ðŸ¦ðŸ­ðŸ­ðŸ­\nWhich treat has MORE? ___', label:'' },
+        { type:'fill', eq:'🍎🍎🍎🍊🍊🍋\nHow many apples? ___', label:'' },
+        { type:'fill', eq:'🍎🍎🍎🍊🍊🍋\nWhich fruit has the MOST? ___', label:'' },
+        { type:'fill', eq:'🍎🍎🍎🍊🍊🍋\nWhich fruit has the FEWEST? ___', label:'' },
+        { type:'fill', eq:'🔴🔴🔵🔴🔵🔵🔵\nHow many blue circles? ___', label:'' },
+        { type:'fill', eq:'🐱🐶🐱🐶🐱\nHow many cats? ___   How many dogs? ___', label:'' },
+        { type:'fill', eq:'🐱🐶🐱🐶🐱\nAre there more cats or more dogs? ___', label:'' },
+        { type:'fill', eq:'🍦🍦🍭🍦🍭🍭🍭\nHow many ice creams? ___   How many lollipops? ___', label:'' },
+        { type:'fill', eq:'🍦🍦🍭🍦🍭🍭🍭\nWhich treat has MORE? ___', label:'' },
       ]
     },
 
-    /* â”€â”€ NEW GRADE 1 â”€â”€ */
+    /* ── NEW GRADE 1 ── */
     'g1-missingnum': {
       title:'Missing Number', grade:'1st Grade', standard:'1.OA.8',
       instructions:'Find the missing number in each equation.',
       problems:[
         { type:'fill', eq:'8 + ___ = 11', label:'What is missing?' },
         { type:'fill', eq:'___ + 5 = 12', label:'What is missing?' },
-        { type:'fill', eq:'15 âˆ’ ___ = 9', label:'What is missing?' },
+        { type:'fill', eq:'15 − ___ = 9', label:'What is missing?' },
         { type:'fill', eq:'6 + ___ = 10', label:'What is missing?' },
         { type:'fill', eq:'___ + 7 = 15', label:'What is missing?' },
-        { type:'fill', eq:'14 âˆ’ ___ = 7', label:'What is missing?' },
+        { type:'fill', eq:'14 − ___ = 7', label:'What is missing?' },
         { type:'fill', eq:'9 + ___ = 17', label:'What is missing?' },
-        { type:'fill', eq:'___ âˆ’ 4 = 9', label:'What is missing?' },
+        { type:'fill', eq:'___ − 4 = 9', label:'What is missing?' },
       ]
     },
     'g1-compare': {
@@ -612,30 +612,30 @@
         { type:'fill', eq:'10 MORE than 56 = ___', label:'' },
         { type:'fill', eq:'10 LESS than 80 = ___', label:'' },
         { type:'fill', eq:'35 + 10 = ___', label:'' },
-        { type:'fill', eq:'72 âˆ’ 10 = ___', label:'' },
+        { type:'fill', eq:'72 − 10 = ___', label:'' },
         { type:'fill', eq:'___ + 10 = 61', label:'What is missing?' },
-        { type:'fill', eq:'___ âˆ’ 10 = 44', label:'What is missing?' },
+        { type:'fill', eq:'___ − 10 = 44', label:'What is missing?' },
       ]
     },
     'g1-factfamilies': {
-      title:'Fact Families', grade:'1st Grade', standard:'1.OA.3â€“4',
+      title:'Fact Families', grade:'1st Grade', standard:'1.OA.3–4',
       instructions:'Complete the fact family for each set of numbers.',
       problems:[
-        { type:'fill', eq:'Fact family for 4, 3, 7:\n4 + 3 = ___\n3 + 4 = ___\n7 âˆ’ 3 = ___\n7 âˆ’ 4 = ___', label:'' },
-        { type:'fill', eq:'If 5 + 6 = 11, then 11 âˆ’ 6 = ___', label:'' },
-        { type:'fill', eq:'If 9 + 7 = 16, then 16 âˆ’ 7 = ___', label:'' },
-        { type:'fill', eq:'Which belongs with 8 + 6 = 14?\n(14 âˆ’ 6 = 8)  or  (8 âˆ’ 6 = 2)', label:'Circle one.' },
-        { type:'fill', eq:'If 13 âˆ’ 5 = 8, then 8 + ___ = 13', label:'' },
-        { type:'fill', eq:'Fact family for 6, 9, 15:\n6 + 9 = ___\n9 + 6 = ___\n15 âˆ’ 9 = ___\n15 âˆ’ 6 = ___', label:'' },
-        { type:'fill', eq:'Which is NOT in the fact family for 5, 8, 13?\n(5 + 8 = 13)  (13 âˆ’ 5 = 8)  (8 âˆ’ 5 = 3)', label:'Cross it out.' },
-        { type:'fill', eq:'Write the fact family for 7, 6, 13:\n___ + ___ = ___\n___ + ___ = ___\n___ âˆ’ ___ = ___\n___ âˆ’ ___ = ___', label:'' },
+        { type:'fill', eq:'Fact family for 4, 3, 7:\n4 + 3 = ___\n3 + 4 = ___\n7 − 3 = ___\n7 − 4 = ___', label:'' },
+        { type:'fill', eq:'If 5 + 6 = 11, then 11 − 6 = ___', label:'' },
+        { type:'fill', eq:'If 9 + 7 = 16, then 16 − 7 = ___', label:'' },
+        { type:'fill', eq:'Which belongs with 8 + 6 = 14?\n(14 − 6 = 8)  or  (8 − 6 = 2)', label:'Circle one.' },
+        { type:'fill', eq:'If 13 − 5 = 8, then 8 + ___ = 13', label:'' },
+        { type:'fill', eq:'Fact family for 6, 9, 15:\n6 + 9 = ___\n9 + 6 = ___\n15 − 9 = ___\n15 − 6 = ___', label:'' },
+        { type:'fill', eq:'Which is NOT in the fact family for 5, 8, 13?\n(5 + 8 = 13)  (13 − 5 = 8)  (8 − 5 = 3)', label:'Cross it out.' },
+        { type:'fill', eq:'Write the fact family for 7, 6, 13:\n___ + ___ = ___\n___ + ___ = ___\n___ − ___ = ___\n___ − ___ = ___', label:'' },
       ]
     },
     'g1-numberlinejumps': {
       title:'Number Line Jumps', grade:'1st Grade', standard:'1.OA.5',
       instructions:'Use the number line to hop forward and backward.',
       problems:[
-        { type:'fill', eq:'Number line: 0â€”1â€”2â€”3â€”4â€”5â€”6â€”7â€”8â€”9â€”10â€”11â€”12â€”13â€”14â€”15â€”16â€”17â€”18â€”19â€”20\nStart at 6. Jump forward 4. Land on ___.', label:'' },
+        { type:'fill', eq:'Number line: 0—1—2—3—4—5—6—7—8—9—10—11—12—13—14—15—16—17—18—19—20\nStart at 6. Jump forward 4. Land on ___.', label:'' },
         { type:'fill', eq:'Start at 8. Jump forward 5. Land on ___.', label:'' },
         { type:'fill', eq:'Start at 15. Jump back 6. Land on ___.', label:'' },
         { type:'fill', eq:'Start at 12. Jump back 4. Land on ___.', label:'' },
@@ -649,13 +649,13 @@
       title:'Money', grade:'1st Grade', standard:'1.MD.4',
       instructions:'Identify coins and count amounts.',
       problems:[
-        { type:'fill', eq:'A penny is worth ___Â¢.', label:'' },
-        { type:'fill', eq:'A nickel is worth ___Â¢.', label:'' },
-        { type:'fill', eq:'A dime is worth ___Â¢.', label:'' },
-        { type:'fill', eq:'A quarter is worth ___Â¢.', label:'' },
-        { type:'fill', eq:'1 dime + 2 pennies = ___Â¢', label:'' },
-        { type:'fill', eq:'2 nickels = ___Â¢', label:'' },
-        { type:'fill', eq:'1 quarter + 1 penny = ___Â¢', label:'' },
+        { type:'fill', eq:'A penny is worth ___¢.', label:'' },
+        { type:'fill', eq:'A nickel is worth ___¢.', label:'' },
+        { type:'fill', eq:'A dime is worth ___¢.', label:'' },
+        { type:'fill', eq:'A quarter is worth ___¢.', label:'' },
+        { type:'fill', eq:'1 dime + 2 pennies = ___¢', label:'' },
+        { type:'fill', eq:'2 nickels = ___¢', label:'' },
+        { type:'fill', eq:'1 quarter + 1 penny = ___¢', label:'' },
         { type:'fill', eq:'How many pennies equal 1 nickel? ___', label:'' },
       ]
     },
@@ -663,18 +663,18 @@
       title:'Telling Time', grade:'1st Grade', standard:'1.MD.3',
       instructions:'Write the time shown on each clock.',
       problems:[
-        { type:'fill', eq:'ðŸ• The hour hand points to 1.\nThe minute hand points to 12.\nTime: ___:___', label:'' },
-        { type:'fill', eq:'ðŸ•’ This clock shows ___:___', label:'' },
-        { type:'fill', eq:'ðŸ•– This clock shows ___:___', label:'' },
-        { type:'fill', eq:'ðŸ•§ This clock shows ___:___', label:'(30 minutes past)' },
-        { type:'fill', eq:'ðŸ•  This clock shows ___:___', label:'(30 minutes past)' },
+        { type:'fill', eq:'🕐 The hour hand points to 1.\nThe minute hand points to 12.\nTime: ___:___', label:'' },
+        { type:'fill', eq:'🕒 This clock shows ___:___', label:'' },
+        { type:'fill', eq:'🕖 This clock shows ___:___', label:'' },
+        { type:'fill', eq:'🕧 This clock shows ___:___', label:'(30 minutes past)' },
+        { type:'fill', eq:'🕠 This clock shows ___:___', label:'(30 minutes past)' },
         { type:'fill', eq:'It is 3:00. What time will it be in 1 hour? ___:___', label:'' },
         { type:'fill', eq:'The minute hand pointing to 6 means ___ minutes past.\n(15 / 30 / 45 / 60)', label:'Circle one.' },
         { type:'fill', eq:'Draw hands on the clock to show 2:30.\n\n     12\n   9   3\n     6', label:'(draw on the clock face)' },
       ]
     },
     'g1-measurement': {
-      title:'Measurement', grade:'1st Grade', standard:'1.MD.1â€“2',
+      title:'Measurement', grade:'1st Grade', standard:'1.MD.1–2',
       instructions:'Measure and compare lengths.',
       problems:[
         { type:'fill', eq:'A pencil is 6 cubes long. A pen is 9 cubes long.\nHow much LONGER is the pen? ___ cubes', label:'' },
@@ -705,12 +705,12 @@
       title:'Halves & Fourths', grade:'1st Grade', standard:'1.G.3',
       instructions:'Answer the questions about equal parts.',
       problems:[
-        { type:'fill', eq:'A shape split into 2 EQUAL parts â€”\neach part is called a ___________.', label:'' },
-        { type:'fill', eq:'A shape split into 4 EQUAL parts â€”\neach part is called a ___________.', label:'' },
+        { type:'fill', eq:'A shape split into 2 EQUAL parts —\neach part is called a ___________.', label:'' },
+        { type:'fill', eq:'A shape split into 4 EQUAL parts —\neach part is called a ___________.', label:'' },
         { type:'fill', eq:'Another word for one-fourth is ___________.', label:'' },
-        { type:'fill', eq:'A pizza ðŸ• is cut into 4 equal slices.\nYou eat 1 slice. You ate ___ of the pizza.\n(1/2 / 1/3 / 1/4)', label:'Circle one.' },
+        { type:'fill', eq:'A pizza 🍕 is cut into 4 equal slices.\nYou eat 1 slice. You ate ___ of the pizza.\n(1/2 / 1/3 / 1/4)', label:'Circle one.' },
         { type:'fill', eq:'Splitting a circle into MORE equal parts\nmakes each part _________.\n(bigger / smaller / same)', label:'Circle one.' },
-        { type:'fill', eq:'A rectangle split into 2 equal parts â€”\neach part is ___.\n(1/4 / 1/2 / 2/3)', label:'Circle one.' },
+        { type:'fill', eq:'A rectangle split into 2 equal parts —\neach part is ___.\n(1/4 / 1/2 / 2/3)', label:'Circle one.' },
         { type:'fill', eq:'How many fourths make 1 whole? ___', label:'' },
         { type:'fill', eq:'How many halves make 1 whole? ___', label:'' },
       ]
@@ -720,20 +720,20 @@
       instructions:'Write TRUE or FALSE for each equation.',
       problems:[
         { type:'fill', eq:'6 = 6\nTrue or False? ___', label:'' },
-        { type:'fill', eq:'7 = 8 âˆ’ 1\nTrue or False? ___', label:'' },
+        { type:'fill', eq:'7 = 8 − 1\nTrue or False? ___', label:'' },
         { type:'fill', eq:'5 + 2 = 2 + 5\nTrue or False? ___', label:'' },
         { type:'fill', eq:'4 + 3 = 6\nTrue or False? ___', label:'' },
-        { type:'fill', eq:'9 âˆ’ 3 = 7\nTrue or False? ___', label:'' },
+        { type:'fill', eq:'9 − 3 = 7\nTrue or False? ___', label:'' },
         { type:'fill', eq:'10 = 5 + 5\nTrue or False? ___', label:'' },
         { type:'fill', eq:'8 = 4 + 5\nTrue or False? ___', label:'' },
-        { type:'fill', eq:'12 âˆ’ 4 = 8\nTrue or False? ___', label:'' },
+        { type:'fill', eq:'12 − 4 = 8\nTrue or False? ___', label:'' },
       ]
     },
   };
 
   const GRADE_CLASS = { 'Pre-K':'prek', 'Kindergarten':'kinder', '1st Grade':'grade1' };
   const NUM_CLASS   = { 'Pre-K':'prek-num', 'Kindergarten':'kinder-num', '1st Grade':'grade1-num' };
-  const GRADE_LABEL = { 'Pre-K':'ðŸŒ± Pre-K', 'Kindergarten':'â­ Kindergarten', '1st Grade':'ðŸš€ 1st Grade' };
+  const GRADE_LABEL = { 'Pre-K':'🌱 Pre-K', 'Kindergarten':'⭐ Kindergarten', '1st Grade':'🚀 1st Grade' };
 
   function buildTenFrame(filled) {
     let dots = '';
@@ -775,7 +775,7 @@
         inner += `<div class="ws-eq2">${p.eq.replace(/___/g,'<span class="ws-blank-ans"></span>')}</div>`;
       } else if (p.type === 'circle-more') {
         inner += `<div class="ws-compare-row"><span class="ws-compare-pill">${p.a}</span><span style="color:#aaa">vs</span><span class="ws-compare-pill">${p.b}</span></div>`;
-        inner += `<div class="ws-eq2" style="font-size:0.9rem;margin-top:4px">Circle the group with MORE â­•</div>`;
+        inner += `<div class="ws-eq2" style="font-size:0.9rem;margin-top:4px">Circle the group with MORE ⭕</div>`;
       } else if (p.type === 'trace') {
         inner += `<div class="ws-eq2" style="font-size:1.5rem;letter-spacing:8px;color:#ccc;border-bottom:2px dashed #ddd;padding-bottom:4px">${p.nums}</div>`;
       }
@@ -788,7 +788,7 @@
 
     return `<div class="worksheet">
       <div class="ws-top-banner ${gc}">
-        <div class="ws-brand"><span>FirstStep</span><span>Math</span><div style="font-size:0.7rem;color:#888;font-family:Nunito,sans-serif;font-weight:700">firststepmmath.com Â· Free Printable</div></div>
+        <div class="ws-brand"><span>FirstStep</span><span>Math</span><div style="font-size:0.7rem;color:#888;font-family:Nunito,sans-serif;font-weight:700">firststepmmath.com · Free Printable</div></div>
         <div class="ws-title-area">
           <div class="ws-grade-badge">${gl}</div>
           <h2>${ws.title}</h2>
@@ -800,16 +800,16 @@
           Score: ___&nbsp;/&nbsp;${ws.problems.length}
         </div>
       </div>
-      <div class="ws-instructions-bar">ðŸ“ ${ws.instructions}</div>
+      <div class="ws-instructions-bar">📝 ${ws.instructions}</div>
       <div class="ws-problems-grid">${probs}</div>
-      <div class="ws-footer2">ðŸŒŸ FirstStepMath.com &nbsp;Â·&nbsp; Free Common Core Worksheets &nbsp;Â·&nbsp; Print as many copies as you need!</div>
+      <div class="ws-footer2">🌟 FirstStepMath.com &nbsp;·&nbsp; Free Common Core Worksheets &nbsp;·&nbsp; Print as many copies as you need!</div>
     </div>`;
   }
 
   function openWS(key) {
     const ws = WS_DATA[key];
     if (!ws) return;
-    document.getElementById('wsModalTitle').textContent = ws.title + ' â€” ' + ws.grade;
+    document.getElementById('wsModalTitle').textContent = ws.title + ' — ' + ws.grade;
     document.getElementById('wsContent').innerHTML = buildWS(key);
     document.getElementById('wsModalBg').classList.add('open');
     // Also set printArea for print
@@ -829,8 +829,8 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <div class="logo footer-logo"><img src="img/fsm-logo.png" alt="FirstStepMath" class="logo-img"></div>
-          <p>Making math fun, one step at a time! ðŸŽ‰</p>
+          <div class="logo footer-logo"><span class="logo-first">FirstStep</span><span class="logo-math">Math</span></div>
+          <p>Making math fun, one step at a time! 🎉</p>
         </div>
         <div class="footer-links-group">
           <h4>Learn</h4>
@@ -842,7 +842,7 @@
           <h4>Resources</h4>
           <a href="worksheets.html">Free Worksheets</a>
           <a href="about.html">About Us</a>
-          <a href="store.html">ðŸª™ Store</a>
+          <a href="store.html">🪙 Store</a>
         </div>
         <div class="footer-links-group">
           <h4>Legal</h4>
@@ -850,7 +850,7 @@
           <a href="#">Terms of Use</a>
         </div>
       </div>
-      <div class="footer-bottom"><p>Â© 2024 FirstStepMath. All rights reserved.</p></div>
+      <div class="footer-bottom"><p>© 2024 FirstStepMath. All rights reserved.</p></div>
     </div>
   </footer>
 
