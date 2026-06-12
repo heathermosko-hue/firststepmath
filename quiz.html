@@ -19,6 +19,7 @@
     }
     .speak-btn:hover  { background: #e0e8ff; }
     .speak-btn:active { transform: scale(0.9); background: #c8d5ff; }
+    .answer-btn.selected { outline: 4px solid #7c3aed; background: #ede9fe; transform: scale(1.03); }
   </style>
 </head>
 <body class="quiz-page">
@@ -59,6 +60,9 @@
       <!-- MC visuals + answers (shown for multiple-choice questions) -->
       <div class="visual-box" id="visualDisplay" data-empty="true"></div>
       <div class="answers-grid" id="answersGrid"></div>
+      <div id="submitRow" style="display:none;text-align:center;margin-top:18px">
+        <button id="submitBtn" class="btn btn-primary" style="font-size:1.2rem;padding:14px 48px;border-radius:50px;opacity:0.4;pointer-events:none">Check Answer ✓</button>
+      </div>
       <!-- Interactive activity area (shown for cross_off / tap_add / pattern types) -->
       <div class="activity-container" id="activityContainer" style="display:none"></div>
     </div>

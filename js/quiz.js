@@ -520,6 +520,10 @@ function showQuestion() {
   const stdBadge = document.getElementById('standardBadge');
   if (stdBadge) stdBadge.textContent = q.standard || '';
 
+  // Hide submit row (shown only for MC questions)
+  const submitRowEl = document.getElementById('submitRow');
+  if (submitRowEl) submitRowEl.style.display = 'none';
+
   // Reset activity container
   const actEl = document.getElementById('activityContainer');
   actEl.style.display = 'none';
@@ -553,9 +557,17 @@ function showQuestion() {
   } else if (qType === 'count_tap') {
     renderCountTap(q);
   } else {
-    // Default: multiple choice
+    // Default: multiple choice with submit button
     const isWide = q.answers && q.answers.length === 2;
     grid.className = isWide ? 'answers-grid wide' : 'answers-grid';
+    const submitRow = document.getElementById('submitRow');
+    const submitBtn = document.getElementById('submitBtn');
+    submitRow.style.display = 'block';
+    submitBtn.style.opacity = '0.4';
+    submitBtn.style.pointerEvents = 'none';
+    let selectedBtn = null, selectedVal = null;
+    submitBtn.onclick = null;
+
     shuffle(q.answers).forEach(answer => {
       const btn = document.createElement('button');
       btn.className   = 'answer-btn';
@@ -565,9 +577,22 @@ function showQuestion() {
         e.stopPropagation();
         speakText(answer);
       });
-      btn.addEventListener('click', () => onAnswer(btn, answer, q.correct));
+      btn.addEventListener('click', () => {
+        if (answered) return;
+        document.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedBtn = btn; selectedVal = answer;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.pointerEvents = 'auto';
+      });
       grid.appendChild(btn);
     });
+
+    submitBtn.onclick = () => {
+      if (!selectedBtn || answered) return;
+      submitRow.style.display = 'none';
+      onAnswer(selectedBtn, selectedVal, q.correct);
+    };
   }
 
 }
