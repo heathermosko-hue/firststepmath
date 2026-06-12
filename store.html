@@ -127,6 +127,10 @@
     .collection-chip .chip-name { font-size:0.62rem; font-weight:800; color:#7c3aed; margin-top:4px; display:block; }
     .no-items { color:#aaa; font-size:0.95rem; padding:20px 0; text-align:center; width:100%; }
 
+    /* ── Real image support ── */
+    .card-img-area img { width:90%; height:90%; object-fit:contain; }
+    .card-img-area .emoji-fallback { font-size:5rem; filter:drop-shadow(2px 6px 8px rgba(0,0,0,0.15)); }
+
     /* ── Toast ── */
     .toast {
       position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(80px);
@@ -197,16 +201,20 @@
     ];
 
     const ITEMS = [
-      { id:'puppy',      num:1,  name:'Puppy Plush',    emoji:'🐶', price:0.55, desc:'Soft cuddly puppy!'        },
-      { id:'kitty',      num:2,  name:'Kitty Plush',    emoji:'🐱', price:0.55, desc:'Adorable fluffy kitty!'    },
-      { id:'racecar',    num:3,  name:'Race Car',       emoji:'🏎️', price:0.65, desc:'Zoom zoom!'                },
-      { id:'playground', num:4,  name:'Mini Playground',emoji:'🛝', price:0.85, desc:'Slide and climb!'          },
-      { id:'puzzle',     num:5,  name:'Puzzle Box',     emoji:'🧩', price:0.70, desc:'Wild adventure puzzle!'    },
-      { id:'yoyo',       num:6,  name:'Light-Up Yo-Yo', emoji:'🪀', price:0.45, desc:'Lights up as it spins!'    },
-      { id:'bubbles',    num:7,  name:'Bubble Wand',    emoji:'🫧', price:0.40, desc:'Blow giant bubbles!'       },
-      { id:'bnet',       num:8,  name:'Butterfly Net',  emoji:'🦋', price:0.50, desc:'Catch butterflies!'        },
-      { id:'fishbowl',   num:9,  name:'Fish Bowl',      emoji:'🐠', price:0.75, desc:'Your own little fish!'     },
-      { id:'train',      num:10, name:'Toy Train',      emoji:'🚂', price:0.95, desc:'Choo choo all day!'        },
+      { id:'puppy-pet',  num:1,  name:'Puppy Pet',      emoji:'🐶', img:'img/store/puppy-pet.jpg',  price:0.55, desc:'Play • Love • Snuggle!'     },
+      { id:'robo-cat',   num:2,  name:'Robo Cat',       emoji:'🐱', img:'img/store/robo-cat.jpg',   price:0.65, desc:'Purr • Beep • Play!'        },
+      { id:'robo-dog',   num:3,  name:'Robo Dog',       emoji:'🤖', img:'img/store/robo-dog.jpg',   price:0.70, desc:'Beep • Fetch • Play!'       },
+      { id:'alien',      num:4,  name:'Alien Friend',   emoji:'👽', img:'img/store/alien.jpg',      price:0.80, desc:'Space • Fun • Friend!'      },
+      { id:'dino',       num:5,  name:'Real Dinosaur',  emoji:'🦕', img:'img/store/dino.jpg',       price:0.90, desc:'Roar • Stomp • Explore!'    },
+      { id:'racecar',    num:6,  name:'Race Car',       emoji:'🏎️', price:0.65, desc:'Zoom zoom!'                },
+      { id:'playground', num:7,  name:'Mini Playground',emoji:'🛝', price:0.85, desc:'Slide and climb!'          },
+      { id:'puzzle',     num:8,  name:'Puzzle Box',     emoji:'🧩', price:0.70, desc:'Wild adventure puzzle!'    },
+      { id:'yoyo',       num:9,  name:'Light-Up Yo-Yo', emoji:'🪀', price:0.45, desc:'Lights up as it spins!'    },
+      { id:'bubbles',    num:10, name:'Bubble Wand',    emoji:'🫧', price:0.40, desc:'Blow giant bubbles!'       },
+      { id:'bnet',       num:11, name:'Butterfly Net',  emoji:'🦋', price:0.50, desc:'Catch butterflies!'        },
+      { id:'fishbowl',   num:12, name:'Fish Bowl',      emoji:'🐠', price:0.75, desc:'Your own little fish!'     },
+      { id:'train',      num:13, name:'Toy Train',      emoji:'🚂', price:0.95, desc:'Choo choo all day!'        },
+      { id:'kitty',      num:14, name:'Kitty Plush',    emoji:'🐱', price:0.55, desc:'Adorable fluffy kitty!'    },
     ];
 
     let balance   = parseFloat(localStorage.getItem(MONEY_KEY) || '0');
@@ -262,10 +270,13 @@
         let btnCls  = 'buy-btn' + (owned ? ' owned-btn' : '');
         let btnDis  = (owned || !canBuy) ? 'disabled' : '';
 
+        const imgHtml = item.img
+          ? `<img src="${item.img}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">\
+             <span class="emoji-fallback" style="display:none">${item.emoji}</span>`
+          : `<span class="emoji-fallback">${item.emoji}</span>`;
+
         card.innerHTML = `
-          <div class="card-img-area" style="background:${bg}">
-            <span style="filter:drop-shadow(2px 6px 8px rgba(0,0,0,0.15));font-size:5rem">${item.emoji}</span>
-          </div>
+          <div class="card-img-area" style="background:${bg}">${imgHtml}</div>
           <div class="card-label">
             <div class="card-num-badge">${item.num}</div>
             <div class="card-name-price">
