@@ -52,7 +52,8 @@ button, a { touch-action: manipulation; }
 /* ============================================ HEADER */
 .header { position: sticky; top: 0; z-index: 100; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
 .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; gap: 24px; }
-.logo { text-decoration: none; font-family: 'Fredoka One', cursive; font-size: 1.75rem; line-height: 1; }
+.logo { text-decoration: none; font-family: 'Fredoka One', cursive; font-size: 1.75rem; line-height: 1; display:flex; align-items:center; }
+.logo-img { height: 52px; width: auto; display: block; }
 .logo-first { color: var(--orange); }
 .logo-math  { color: var(--teal); }
 .main-nav { display: flex; align-items: center; gap: 6px; margin-left: auto; }
