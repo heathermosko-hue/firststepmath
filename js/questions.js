@@ -138,6 +138,36 @@ const QUESTIONS = {
         { q: "Which number is GREATER — 4 or 7?",  visual: { type:"numberline", min:1, max:10, mark:7 }, answers: ["4","5","6","7"],   correct: "7",  standard:"PK.NS.4" },
         { q: "Which number is LESS — 8 or 5?",     visual: { type:"numberline", min:1, max:10, mark:5 }, answers: ["5","6","7","8"],   correct: "5",  standard:"PK.NS.4" },
       ]
+    },
+
+    sorting: {
+      title: "Sorting", icon: "🗂️", difficulty: 1,
+      standard: "PK.G.1",
+      questions: [
+        { q: "Which animal is DIFFERENT from the others?", visual: null, answers: ["🐶🐶🐶🐱 — the cat","🐶🐶🐶🐶 — a dog","🐱🐱🐱🐱 — a cat","🐶🐶🐶🐶 — all dogs"], correct: "🐶🐶🐶🐱 — the cat", standard:"PK.G.1" },
+        { q: "Which shape is different from the others?",  visual: null, answers: ["○○○□ — the square","○○○○ — circle","□□□□ — square","△△△△ — triangle"], correct: "○○○□ — the square", standard:"PK.G.1" },
+        { q: "Which group shows ALL circles?",             visual: null, answers: ["○○△○","○○○○","□○□○","△△○△"], correct: "○○○○", standard:"PK.G.1" },
+        { q: "Which belongs with 🍎🍊🍋? (a fruit)",      visual: null, answers: ["🚗","🍇","🐶","🌳"],  correct: "🍇",  standard:"PK.AF.1" },
+        { q: "Which does NOT belong: 🐶🐱🐦🚗?",          visual: null, answers: ["🐶","🐱","🐦","🚗"],  correct: "🚗",  standard:"PK.AF.1" },
+        { q: "Which group shows ALL big shapes: 🔴🔵🟡?",  visual: null, answers: ["Sort by color","Sort by size","Sort by shape","Sort by number"], correct: "Sort by color", standard:"PK.G.1" },
+        { q: "🍎🍎🍊🍎 — which fruit appears MOST?",      visual: null, answers: ["🍊","🍎","Same","Neither"], correct: "🍎", standard:"PK.NS.4" },
+        { q: "Which two are the SAME shape?",             visual: null, answers: ["🔺 and 🟦","🔺 and 🔺","🟦 and ○","🔺 and ○"], correct: "🔺 and 🔺", standard:"PK.G.1" },
+      ]
+    },
+
+    position: {
+      title: "Position Words", icon: "📦", difficulty: 1,
+      standard: "PK.G.3",
+      questions: [
+        { q: "The cat is ___ the box. 🐱📦 (inside)", visual: null, answers: ["above","below","inside","beside"], correct: "inside", standard:"PK.G.3" },
+        { q: "The bird is ___ the tree. 🐦🌳 (on top)", visual: null, answers: ["under","inside","above","behind"], correct: "above", standard:"PK.G.3" },
+        { q: "The ball is ___ the table. ⚽🪑 (under)", visual: null, answers: ["above","below","beside","inside"], correct: "below", standard:"PK.G.3" },
+        { q: "The dog is ___ the fence. 🐶🏡 (next to)", visual: null, answers: ["inside","above","below","beside"], correct: "beside", standard:"PK.G.3" },
+        { q: "Which word means NOT inside?",              visual: null, answers: ["inside","outside","under","over"], correct: "outside", standard:"PK.G.3" },
+        { q: "The hat is ON the head. Where is the hat?", visual: { type:"emoji", content:"🎩" }, answers: ["under","beside","on top","behind"], correct: "on top", standard:"PK.G.3" },
+        { q: "Which word means the OPPOSITE of above?",   visual: null, answers: ["above","inside","below","beside"], correct: "below", standard:"PK.G.3" },
+        { q: "A fish swims ___ the water. 🐟💧",          visual: { type:"emoji", content:"🐟" }, answers: ["above","outside","inside","on top of"], correct: "inside", standard:"PK.G.3" },
+      ]
     }
   },
 
@@ -252,6 +282,51 @@ const QUESTIONS = {
         { q: "Which two shapes make a rectangle when joined?", visual: null, answers: ["Two circles","Two triangles","Two squares","Two hexagons"], correct: "Two triangles", standard:"K.G.6" },
         { q: "A sphere has ? flat faces.",           visual: null, answers: ["0","1","2","6"], correct: "0",         standard:"K.G.4" },
         { q: "Which shape has NO straight sides?",     visual: null, answers: ["Square","Triangle","Circle","Rectangle"], correct: "Circle", standard:"K.G.4" },
+      ]
+    },
+
+    wordproblems: {
+      title: "Word Problems", icon: "📖", difficulty: 2,
+      standard: "K.OA.2",
+      questions: [
+        { q: "3 frogs sit on a log. 2 more jump on. How many frogs in all?", visual: { type:"tenframe_add", a:3, b:2 }, answers: ["3","4","5","6"], correct: "5", standard:"K.OA.2" },
+        { q: "Kate has 5 stickers. She gives 2 away. How many are left?", visual: null, answers: ["2","3","4","5"], correct: "3", standard:"K.OA.2" },
+        { q: "There are 4 dogs and 3 cats. How many animals in all?", visual: { type:"tenframe_add", a:4, b:3 }, answers: ["5","6","7","8"], correct: "7", standard:"K.OA.2" },
+        { q: "Mom has 8 balloons. 3 pop. How many are left?", visual: null, answers: ["4","5","6","7"], correct: "5", standard:"K.OA.2" },
+        { q: "There are 6 birds. 4 fly away. How many stay?", visual: null, answers: ["1","2","3","4"], correct: "2", standard:"K.OA.2" },
+        { q: "Tom has 2 apples. He picks 4 more. How many now?", visual: { type:"tenframe_add", a:2, b:4 }, answers: ["4","5","6","7"], correct: "6", standard:"K.OA.2" },
+        { q: "9 ducks are in a pond. 5 swim away. How many stay?", visual: null, answers: ["3","4","5","6"], correct: "4", standard:"K.OA.2" },
+        { q: "Lily has 3 red crayons and 3 blue crayons. How many crayons in all?", visual: { type:"tenframe_add", a:3, b:3 }, answers: ["4","5","6","7"], correct: "6", standard:"K.OA.2" },
+      ]
+    },
+
+    measurement: {
+      title: "Measurement", icon: "📏", difficulty: 1,
+      standard: "K.MD.1–2",
+      questions: [
+        { q: "Which is LONGER — a pencil or a crayon?",   visual: null, answers: ["Crayon","Pencil","Same","Neither"], correct: "Pencil",   standard:"K.MD.1" },
+        { q: "Which is SHORTER — a bus or a bicycle?",    visual: null, answers: ["Bus 🚌","Bicycle 🚲","Same","Neither"], correct: "Bicycle 🚲", standard:"K.MD.1" },
+        { q: "Which is TALLER — a giraffe or a cat?",     visual: null, answers: ["Cat 🐱","Giraffe 🦒","Same","Neither"], correct: "Giraffe 🦒", standard:"K.MD.1" },
+        { q: "Which is HEAVIER — a rock or a feather?",   visual: null, answers: ["Feather 🪶","Rock 🪨","Same","Neither"], correct: "Rock 🪨",    standard:"K.MD.1" },
+        { q: "Which is LIGHTER — a truck or a sock?",     visual: null, answers: ["Truck 🚛","Sock 🧦","Same","Neither"], correct: "Sock 🧦",    standard:"K.MD.1" },
+        { q: "Which word means NOT long?",                visual: null, answers: ["tall","heavy","short","wide"],          correct: "short",    standard:"K.MD.1" },
+        { q: "A dog is shorter than a horse. A mouse is shorter than a dog. Which is TALLEST?", visual: null, answers: ["Mouse","Dog","Horse","Same"], correct: "Horse", standard:"K.MD.2" },
+        { q: "If a book weighs MORE than a pencil, the pencil is ?", visual: null, answers: ["heavier","lighter","taller","longer"], correct: "lighter", standard:"K.MD.1" },
+      ]
+    },
+
+    data: {
+      title: "Sorting & Data", icon: "📊", difficulty: 1,
+      standard: "K.MD.3",
+      questions: [
+        { q: "🍎🍎🍎🍊🍊🍋 — How many apples?",          visual: null, answers: ["2","3","4","5"],   correct: "3", standard:"K.MD.3" },
+        { q: "🍎🍎🍎🍊🍊🍋 — Which fruit has the MOST?", visual: null, answers: ["🍊","🍋","🍎","Same"], correct: "🍎", standard:"K.MD.3" },
+        { q: "🍎🍎🍎🍊🍊🍋 — Which fruit has the FEWEST?", visual: null, answers: ["🍎","🍊","🍋","Same"], correct: "🍋", standard:"K.MD.3" },
+        { q: "🔴🔴🔵🔴🔵🔵🔵 — How many blue circles?",  visual: null, answers: ["2","3","4","5"],   correct: "4", standard:"K.MD.3" },
+        { q: "Sort these: 🐱🐶🐱🐶🐱 — how many cats?",  visual: null, answers: ["1","2","3","4"],   correct: "3", standard:"K.MD.3" },
+        { q: "🐱🐶🐱🐶🐱 — are there more cats or dogs?", visual: null, answers: ["More dogs","More cats","Same","Neither"], correct: "More cats", standard:"K.MD.3" },
+        { q: "Which group has 2 items: 🌟🌟🌟 or ⭐⭐?",  visual: null, answers: ["🌟🌟🌟 (3)","⭐⭐ (2)","Same","Neither"], correct: "⭐⭐ (2)", standard:"K.MD.3" },
+        { q: "🍦🍦🍭🍦🍭🍭🍭 — how many lollipops?",    visual: null, answers: ["2","3","4","5"],   correct: "4", standard:"K.MD.3" },
       ]
     }
   },
@@ -379,6 +454,96 @@ const QUESTIONS = {
         { q: "How many fourths make 1 whole?",                               visual: null, answers: ["2","3","4","8"],                       correct: "4",       standard:"1.G.3" },
         { q: "How many halves make 1 whole?",                                visual: null, answers: ["1","2","3","4"],                       correct: "2",       standard:"1.G.3" },
       ]
+    },
+
+    wordproblems: {
+      title: "Word Problems", icon: "📖", difficulty: 2,
+      standard: "1.OA.1",
+      questions: [
+        { q: "Mia has 6 stickers. She gets 5 more. How many does she have now?",               visual: null, answers: ["9","10","11","12"], correct: "11", standard:"1.OA.1" },
+        { q: "There are 13 apples. 7 are eaten. How many are left?",                           visual: null, answers: ["4","5","6","7"],   correct: "6",  standard:"1.OA.1" },
+        { q: "Ben has 12 marbles. Ava has 8. How many MORE does Ben have?",                    visual: { type:"numberline", min:0, max:20, mark:12 }, answers: ["3","4","5","6"], correct: "4", standard:"1.OA.1" },
+        { q: "Jake has 8 stickers. Emma has 9. How many do they have together?",               visual: null, answers: ["15","16","17","18"], correct: "17", standard:"1.OA.1" },
+        { q: "There are 15 fish. 6 swim away. How many are left?",                             visual: null, answers: ["7","8","9","10"],   correct: "9",  standard:"1.OA.1" },
+        { q: "Sam read 14 pages. He needs to read 20 total. How many more pages does he need?",visual: { type:"numberline", min:10, max:25, mark:20 }, answers: ["4","5","6","7"], correct: "6", standard:"1.OA.1" },
+        { q: "A bag has 7 red and 8 blue marbles. How many marbles in all?",                   visual: null, answers: ["13","14","15","16"], correct: "15", standard:"1.OA.1" },
+        { q: "Lily has 16 crayons. She gives 7 to her friend. How many does she have left?",   visual: null, answers: ["7","8","9","10"],   correct: "9",  standard:"1.OA.1" },
+      ]
+    },
+
+    money: {
+      title: "Money", icon: "💰", difficulty: 2,
+      standard: "1.MD.4",
+      questions: [
+        { q: "Which coin is worth 1¢?",                           visual: null, answers: ["Nickel","Dime","Penny","Quarter"],   correct: "Penny",   standard:"1.MD.4" },
+        { q: "Which coin is worth 5¢?",                           visual: null, answers: ["Penny","Dime","Quarter","Nickel"],   correct: "Nickel",  standard:"1.MD.4" },
+        { q: "Which coin is worth 10¢?",                          visual: null, answers: ["Penny","Nickel","Dime","Quarter"],   correct: "Dime",    standard:"1.MD.4" },
+        { q: "Which coin is worth 25¢?",                          visual: null, answers: ["Penny","Nickel","Dime","Quarter"],   correct: "Quarter", standard:"1.MD.4" },
+        { q: "1 dime + 2 pennies = ?¢",                           visual: null, answers: ["10","11","12","13"],                 correct: "12",      standard:"1.MD.4" },
+        { q: "2 nickels = ?¢",                                    visual: null, answers: ["5","8","10","15"],                   correct: "10",      standard:"1.MD.4" },
+        { q: "1 quarter + 1 penny = ?¢",                          visual: null, answers: ["24","25","26","30"],                 correct: "26",      standard:"1.MD.4" },
+        { q: "How many pennies equal 1 nickel?",                  visual: null, answers: ["1","3","5","10"],                    correct: "5",       standard:"1.MD.4" },
+      ]
+    },
+
+    measurement: {
+      title: "Measurement", icon: "📐", difficulty: 2,
+      standard: "1.MD.1–2",
+      questions: [
+        { q: "A pencil is 6 cubes long. A pen is 9 cubes long. How much longer is the pen?",   visual: { type:"numberline", min:0, max:15, mark:3 }, answers: ["2","3","4","5"], correct: "3", standard:"1.MD.4" },
+        { q: "Which is the correct way to measure an object?",    visual: null, answers: ["Skip spaces between cubes","Line cubes end to end","Use different sized cubes","Measure from the middle"], correct: "Line cubes end to end", standard:"1.MD.2" },
+        { q: "A book is 8 cubes long. A pencil is 5 cubes long. Which is shorter?",           visual: null, answers: ["Book","Pencil","Same","Neither"],   correct: "Pencil", standard:"1.MD.1" },
+        { q: "You measure a desk with paper clips. It takes 12 paper clips. About how many cubes long is it?", visual: null, answers: ["About 5","About 8","About 12","About 20"], correct: "About 12", standard:"1.MD.2" },
+        { q: "Order from shortest to longest: 3 cubes, 7 cubes, 5 cubes — which is longest?", visual: null, answers: ["3 cubes","5 cubes","7 cubes","Same"],  correct: "7 cubes", standard:"1.MD.1" },
+        { q: "Which unit would you use to measure a classroom?",  visual: null, answers: ["Paper clips","Cubes","Steps (feet)","Thumbs"],  correct: "Steps (feet)", standard:"1.MD.2" },
+        { q: "The crayon is 4 cubes. The marker is 2 cubes longer. How long is the marker?",  visual: null, answers: ["4","5","6","7"],   correct: "6", standard:"1.MD.4" },
+        { q: "If two objects are the same length, they are ?",    visual: null, answers: ["taller","shorter","equal","different"],         correct: "equal", standard:"1.MD.1" },
+      ]
+    },
+
+    factfamilies: {
+      title: "Fact Families", icon: "🔗", difficulty: 2,
+      standard: "1.OA.3–4",
+      questions: [
+        { q: "4 + 3 = 7. Which is in the same fact family?",     visual: null, answers: ["4 + 4 = 8","7 − 3 = 4","3 + 5 = 8","7 + 3 = 10"], correct: "7 − 3 = 4", standard:"1.OA.4" },
+        { q: "If 5 + 6 = 11, then 11 − 6 = ?",                  visual: { type:"equation", text:"11 − 6 = ?" }, answers: ["4","5","6","7"], correct: "5", standard:"1.OA.4" },
+        { q: "If 9 + 7 = 16, then 16 − 7 = ?",                  visual: { type:"equation", text:"16 − 7 = ?" }, answers: ["7","8","9","10"], correct: "9", standard:"1.OA.4" },
+        { q: "Which equation belongs with 8 + 6 = 14?",          visual: null, answers: ["8 − 6 = 2","14 + 6 = 20","14 − 6 = 8","6 − 8 = 2"], correct: "14 − 6 = 8", standard:"1.OA.3" },
+        { q: "3 + ? = 12. Which subtraction checks this?",       visual: null, answers: ["12 + 3","12 − 3","3 − 12","3 + 12"], correct: "12 − 3", standard:"1.OA.4" },
+        { q: "Which pair of facts goes together?",                visual: null, answers: ["6+4=10 and 10−5=5","7+8=15 and 15−8=7","4+3=7 and 8−4=4","9+2=11 and 11+2=13"], correct: "7+8=15 and 15−8=7", standard:"1.OA.3" },
+        { q: "If 13 − 5 = 8, then 8 + ? = 13",                  visual: { type:"equation", text:"8 + ? = 13" }, answers: ["4","5","6","7"], correct: "5", standard:"1.OA.4" },
+        { q: "Which is NOT in the fact family for 6, 9, 15?",    visual: null, answers: ["6 + 9 = 15","15 − 6 = 9","9 − 6 = 3","15 − 9 = 6"], correct: "9 − 6 = 3", standard:"1.OA.3" },
+      ]
+    },
+
+    numberlinejumps: {
+      title: "Number Line Jumps", icon: "🦘", difficulty: 2,
+      standard: "1.OA.5",
+      questions: [
+        { q: "Start at 6. Jump forward 4. Where do you land?",   visual: { type:"numberline_add", min:0, max:20, start:6, jump:4 },  answers: ["8","9","10","11"], correct: "10", standard:"1.OA.5" },
+        { q: "Start at 8. Jump forward 5. Where do you land?",   visual: { type:"numberline_add", min:0, max:20, start:8, jump:5 },  answers: ["11","12","13","14"], correct: "13", standard:"1.OA.5" },
+        { q: "Start at 15. Jump back 6. Where do you land?",     visual: { type:"numberline", min:0, max:20, mark:9 },               answers: ["7","8","9","10"],  correct: "9",  standard:"1.OA.5" },
+        { q: "Start at 12. Jump back 4. Where do you land?",     visual: { type:"numberline", min:0, max:20, mark:8 },               answers: ["6","7","8","9"],   correct: "8",  standard:"1.OA.5" },
+        { q: "Start at 7. Jump forward 7. Where do you land?",   visual: { type:"numberline_add", min:0, max:20, start:7, jump:7 },  answers: ["12","13","14","15"], correct: "14", standard:"1.OA.5" },
+        { q: "Start at 18. Jump back 9. Where do you land?",     visual: { type:"numberline", min:0, max:20, mark:9 },               answers: ["7","8","9","10"],  correct: "9",  standard:"1.OA.5" },
+        { q: "Start at 3. Jump forward 8. Where do you land?",   visual: { type:"numberline_add", min:0, max:20, start:3, jump:8 },  answers: ["9","10","11","12"], correct: "11", standard:"1.OA.5" },
+        { q: "Start at 20. Jump back 7. Where do you land?",     visual: { type:"numberline", min:0, max:20, mark:13 },              answers: ["11","12","13","14"], correct: "13", standard:"1.OA.5" },
+      ]
+    },
+
+    graphs: {
+      title: "Graphs & Data", icon: "📊", difficulty: 2,
+      standard: "1.MD.4",
+      questions: [
+        { q: "A graph shows: Dogs=8, Cats=5, Fish=3. Which pet got the MOST votes?",  visual: null, answers: ["Cats","Fish","Dogs","Same"],      correct: "Dogs",  standard:"1.MD.4" },
+        { q: "A graph shows: Dogs=8, Cats=5, Fish=3. Which got the FEWEST votes?",    visual: null, answers: ["Dogs","Cats","Fish","Same"],      correct: "Fish",  standard:"1.MD.4" },
+        { q: "A graph shows: Dogs=8, Cats=5. How many MORE dogs than cats?",           visual: { type:"numberline", min:0, max:15, mark:3 }, answers: ["2","3","4","5"], correct: "3", standard:"1.MD.4" },
+        { q: "A graph shows: Red=4, Blue=6, Green=2. How many children voted in all?", visual: null, answers: ["10","11","12","13"],              correct: "12",    standard:"1.MD.4" },
+        { q: "A tally chart shows: ||||  for apples. How many apples?",                visual: null, answers: ["3","4","5","6"],                  correct: "4",     standard:"1.MD.4" },
+        { q: "A graph shows: Sun=6, Rain=4, Snow=2. How many fewer snow days than sun days?", visual: null, answers: ["2","3","4","5"],           correct: "4",     standard:"1.MD.4" },
+        { q: "A bar graph's tallest bar shows 9. The shortest shows 3. What is the difference?", visual: null, answers: ["4","5","6","7"],       correct: "6",     standard:"1.MD.4" },
+        { q: "5 kids chose pizza, 3 chose tacos, 4 chose salad. How many kids in all?",visual: null, answers: ["10","11","12","13"],              correct: "12",    standard:"1.MD.4" },
+      ]
     }
   },
 
@@ -486,17 +651,17 @@ const GRADE_INFO = {
   prek: {
     label: "Pre-K / TK", icon: "🌱", color: "#FF6B9D", ages: "Ages 3–5",
     desc: "Building early number sense and foundational math concepts.",
-    topics: ["counting5","counting10","compare","patterns","shapes2d","shapes3d","measurement","numberpath"]
+    topics: ["counting5","counting10","compare","patterns","shapes2d","shapes3d","measurement","numberpath","sorting","position"]
   },
   kindergarten: {
     label: "Kindergarten", icon: "⭐", color: "#4A90E2", ages: "Ages 5–6",
     desc: "Numbers to 20, addition and subtraction, shapes, and patterns.",
-    topics: ["counting20","compare","addition5","addition10","maketen","teennumbers","shapes"]
+    topics: ["counting20","compare","addition5","addition10","maketen","teennumbers","shapes","wordproblems","measurement","data"]
   },
   grade1: {
     label: "1st Grade", icon: "🚀", color: "#7B5EA7", ages: "Ages 6–7",
     desc: "Addition and subtraction to 20, place value, time, and geometry.",
-    topics: ["addition20","missingnum","equalSign","placevalue","compare2d","tenmore","time","fractions"]
+    topics: ["addition20","missingnum","equalSign","placevalue","compare2d","tenmore","time","fractions","wordproblems","money","measurement","factfamilies","numberlinejumps","graphs"]
   },
   grade2: {
     label: "2nd Grade", icon: "🎯", color: "#E67E22", ages: "Ages 7–8",
