@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FirstStepMath – Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Speaker button */
+    .question-row { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; }
+    .speak-btn {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+      background: var(--bg); border: 2px solid #dde3ff; cursor: pointer;
+      font-size: 1.3rem; display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, transform 0.1s; touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .speak-btn:hover  { background: #e0e8ff; }
+    .speak-btn:active { transform: scale(0.9); background: #c8d5ff; }
+  </style>
+</head>
+<body class="quiz-page">
+
+  <!-- HEADER -->
+  <header class="quiz-header">
+    <a href="index.html" class="back-btn">← Topics</a>
+    <a href="index.html" class="logo">
+      <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+    </a>
+    <div class="quiz-score-display">
+      <span class="score-star">🪙</span>
+      <span id="currentScore">0</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="quiz-main">
+
+    <div class="quiz-meta">
+      <span class="quiz-topic-label" id="topicTitle">Loading…</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="quiz-standard" id="standardBadge"></span>
+        <span class="quiz-counter"  id="questionCounter">1 of 10</span>
+      </div>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressBar" style="width:10%"></div>
+    </div>
+
+    <!-- Question Card -->
+    <div class="question-card" id="questionCard">
+      <div class="question-row">
+        <p class="question-text" id="questionText"></p>
+        <button class="speak-btn" id="speakBtn" aria-label="Read question aloud" title="Hear question">🔊</button>
+      </div>
+      <!-- MC visuals + answers (shown for multiple-choice questions) -->
+      <div class="visual-box" id="visualDisplay" data-empty="true"></div>
+      <div class="answers-grid" id="answersGrid"></div>
+      <!-- Interactive activity area (shown for cross_off / tap_add / pattern types) -->
+      <div class="activity-container" id="activityContainer" style="display:none"></div>
+    </div>
+
+    <!-- Feedback overlay -->
+    <div class="feedback-overlay" id="feedbackOverlay">
+      <div class="feedback-card">
+        <div class="feedback-emoji" id="feedbackEmoji"></div>
+        <div class="feedback-msg"   id="feedbackMsg"></div>
+        <button class="btn btn-next" id="nextBtn">Next →</button>
+      </div>
+    </div>
+
+    <!-- End screen -->
+    <div class="end-overlay" id="endScreen" style="display:none">
+      <div class="end-card">
+        <div class="end-stars" id="endStars"></div>
+        <h2  class="end-title" id="endTitle"></h2>
+        <p   class="end-score" id="endScore"></p>
+        <div class="end-btns">
+          <button class="btn btn-retry"  id="retryBtn">🔄 Try Again</button>
+          <a href="index.html" class="btn btn-topics">📚 More Topics</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Floating Tools Button ── -->
+  <button class="tools-fab" id="toolsBtn" aria-label="Open math tools">
+    🧮 <span class="tools-fab-label">Tools</span>
+  </button>
+
+  <!-- ── Tools Panel ── -->
+  <div class="tools-panel" id="toolsPanel" aria-hidden="true">
+    <div class="tools-panel-head">
+      <span class="tools-panel-title">🧮 Math Tools</span>
+      <button class="tools-close" id="toolsClose" aria-label="Close tools">✕</button>
+    </div>
+    <div class="tools-tabs-wrap">
+    <div class="tools-tabs" role="tablist" id="toolsTabList">
+      <button class="tool-tab-btn active" data-tab="base10"   role="tab">🧱<br><small>Blocks</small></button>
+      <button class="tool-tab-btn"        data-tab="tenframe" role="tab">📋<br><small>10-Frame</small></button>
+      <button class="tool-tab-btn"        data-tab="numline"  role="tab">📏<br><small>Num Line</small></button>
+      <button class="tool-tab-btn"        data-tab="chart100" role="tab">📊<br><small>100 Chart</small></button>
+      <button class="tool-tab-btn"        data-tab="counters" role="tab">🔴<br><small>Counters</small></button>
+      <button class="tool-tab-btn"        data-tab="bonds"    role="tab">🔘<br><small>Bonds</small></button>
+      <button class="tool-tab-btn"        data-tab="money"    role="tab">💰<br><small>Money</small></button>
+      <button class="tool-tab-btn"        data-tab="clock"    role="tab">🕐<br><small>Clock</small></button>
+    </div>
+    <button class="tools-scroll-arrow" id="toolsScrollArrow" aria-label="Scroll tabs">›</button>
+    </div>
+    <div class="tools-body">
+      <div class="tool-pane active" id="tool-base10"></div>
+      <div class="tool-pane"        id="tool-tenframe"></div>
+      <div class="tool-pane"        id="tool-numline"></div>
+      <div class="tool-pane"        id="tool-chart100"></div>
+      <div class="tool-pane"        id="tool-counters"></div>
+      <div class="tool-pane"        id="tool-bonds"></div>
+      <div class="tool-pane"        id="tool-money"></div>
+      <div class="tool-pane"        id="tool-clock"></div>
+    </div>
+  </div>
+  <div class="tools-backdrop" id="toolsBackdrop"></div>
+
+  <!-- ── 30-Question Login Gate ── -->
+  <div class="login-gate" id="loginGate" style="display:none">
+    <div class="login-gate-card">
+      <div class="gate-emoji">🌟</div>
+      <h2 class="gate-title">Amazing work!</h2>
+      <p class="gate-sub">You've answered <strong>30 questions</strong>!<br>Create your free account to keep learning and save your progress.</p>
+      <a href="login.html" class="btn btn-primary gate-btn">Create Free Account →</a>
+      <p class="gate-note">100% free · No credit card · Takes 30 seconds</p>
+    </div>
+  </div>
+
+  <script src="js/tts.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/tools.js"></script>
+</body>
+</html>

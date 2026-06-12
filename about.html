@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – FirstStepMath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── About page styles ── */
+    .about-hero {
+      background: linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%);
+      color: #fff; padding: 80px 24px 60px; text-align: center;
+    }
+    .about-hero h1 {
+      font-family: 'Fredoka One', cursive; font-size: 3rem; margin-bottom: 16px;
+      text-shadow: 2px 3px 0 rgba(0,0,0,0.12);
+    }
+    .about-hero p { font-size: 1.2rem; opacity: 0.92; max-width: 600px; margin: 0 auto; font-weight: 600; }
+
+    .about-section { padding: 64px 24px; }
+    .about-section:nth-child(even) { background: #f8f8ff; }
+    .about-inner { max-width: 880px; margin: 0 auto; }
+    .about-section h2 {
+      font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--purple);
+      margin-bottom: 12px; text-align: center;
+    }
+    .about-section p { font-size: 1.05rem; color: #444; line-height: 1.7; text-align: center; max-width: 680px; margin: 0 auto 16px; }
+
+    /* ── How It Works banner ── */
+    .hiw-banner {
+      background: #fff; border-radius: 24px; padding: 48px 32px;
+      box-shadow: 0 8px 32px rgba(108,99,255,0.10);
+      max-width: 900px; margin: 0 auto;
+    }
+    .hiw-banner h2 {
+      font-family: 'Fredoka One', cursive; font-size: 2.2rem; color: var(--dark);
+      text-align: center; margin-bottom: 36px;
+    }
+    .hiw-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    @media (max-width: 640px) { .hiw-steps { grid-template-columns: 1fr; } }
+    .hiw-step {
+      text-align: center; background: #f8f8ff; border-radius: 18px; padding: 28px 20px;
+      border: 2px solid #eee;
+    }
+    .hiw-step-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .hiw-step h3 { font-family: 'Fredoka One', cursive; font-size: 1.35rem; color: var(--dark); margin-bottom: 8px; }
+    .hiw-step p { font-size: 0.95rem; color: #555; line-height: 1.6; margin: 0; }
+
+    /* ── Common Core grid ── */
+    .cc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px; }
+    .cc-card {
+      background: #fff; border-radius: 16px; padding: 20px 16px; text-align: center;
+      border: 2px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .cc-card .cc-grade { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: var(--purple); margin-bottom: 8px; }
+    .cc-card .cc-topics { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+    /* ── Tools grid ── */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 28px; }
+    .tool-card {
+      background: #fff; border-radius: 16px; padding: 20px 12px; text-align: center;
+      border: 2px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .tool-card-icon { font-size: 2rem; margin-bottom: 8px; }
+    .tool-card-name { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--dark); }
+
+    /* ── Free badge ── */
+    .free-section {
+      background: linear-gradient(135deg, var(--orange) 0%, #FF8E53 100%);
+      color: #fff; text-align: center; padding: 64px 24px;
+    }
+    .free-section h2 { font-family: 'Fredoka One', cursive; font-size: 2.4rem; margin-bottom: 16px; text-shadow: 1px 2px 0 rgba(0,0,0,0.12); }
+    .free-section p { font-size: 1.15rem; opacity: 0.95; margin-bottom: 32px; font-weight: 600; }
+    .free-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 36px; }
+    .free-badge {
+      background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 50px; padding: 10px 22px; font-size: 1rem; font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="about.html" class="nav-link" style="color:var(--purple);font-weight:800">About</a>
+        <a href="#" class="nav-link">For Teachers</a>
+        <a href="store.html" class="nav-link nav-link-store">⭐ Store</a>
+        <a href="login.html" class="btn btn-outline">Sign In</a>
+        <a href="index.html#grades" class="btn btn-primary">Get Started Free</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="about-hero">
+    <h1>About FirstStepMath</h1>
+    <p>A free, hands-on math practice site built for Pre-K through 2nd Grade — 100% aligned to Common Core standards.</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="about-section">
+    <div class="about-inner">
+      <div class="hiw-banner">
+        <h2>How It Works</h2>
+        <div class="hiw-steps">
+          <div class="hiw-step">
+            <div class="hiw-step-icon">🎯</div>
+            <h3>Pick a Topic</h3>
+            <p>Choose from counting, shapes, addition, subtraction, and more!</p>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-step-icon">✏️</div>
+            <h3>Answer Questions</h3>
+            <p>Fun, colorful multiple-choice questions designed for young learners.</p>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-step-icon">⭐</div>
+            <h3>Earn Stars</h3>
+            <p>Get instant feedback and earn stars for every correct answer — then spend them in the Star Store!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMON CORE -->
+  <section class="about-section">
+    <div class="about-inner">
+      <h2>📚 Aligned to Common Core</h2>
+      <p>Every question is mapped to a specific Common Core Math standard — so kids are always practicing exactly what they need to know for their grade level.</p>
+      <div class="cc-grid">
+        <div class="cc-card">
+          <div class="cc-grade">🌱 Pre-K</div>
+          <div class="cc-topics">Counting to 10 · Comparing · Patterns · 2D &amp; 3D Shapes · Measurement</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">⭐ Kindergarten</div>
+          <div class="cc-topics">Counting to 20 · Addition &amp; Subtraction · Make 10 · Teen Numbers · Shapes</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">🚀 1st Grade</div>
+          <div class="cc-topics">Add &amp; Subtract within 20 · Place Value · Tens &amp; Ones · Word Problems · Measurement</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">🎯 2nd Grade</div>
+          <div class="cc-topics">Add &amp; Subtract within 100 · Place Value · Skip Counting · Number Lines</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE TOOLS -->
+  <section class="about-section">
+    <div class="about-inner">
+      <h2>🧮 Hands-On Math Tools</h2>
+      <p>Every quiz includes access to a real interactive Math Toolbox — the same manipulatives used in classrooms, right on screen. Kids can explore, count, and model their thinking.</p>
+      <div class="tools-grid">
+        <div class="tool-card"><div class="tool-card-icon">🧱</div><div class="tool-card-name">Base 10 Blocks</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📋</div><div class="tool-card-name">Ten Frame</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📏</div><div class="tool-card-name">Number Line</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📊</div><div class="tool-card-name">100 Chart</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🔴</div><div class="tool-card-name">Counters</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🔘</div><div class="tool-card-name">Number Bonds</div></div>
+        <div class="tool-card"><div class="tool-card-icon">💰</div><div class="tool-card-name">Play Money</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🕐</div><div class="tool-card-name">Analog Clock</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE QUESTION TYPES -->
+  <section class="about-section">
+    <div class="about-inner">
+      <h2>🎮 Interactive Activities</h2>
+      <p>Questions aren't just multiple choice — kids tap, drag, count, and cross off objects to find their answers. Learning happens through doing.</p>
+      <div class="cc-grid">
+        <div class="cc-card">
+          <div class="cc-grade">👆 Tap to Count</div>
+          <div class="cc-topics">Tap each object one by one to count them out loud</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">➕ Tap to Add</div>
+          <div class="cc-topics">Move objects from one group to another to see addition happen</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">✕ Cross Off</div>
+          <div class="cc-topics">Cross off objects to model subtraction hands-on</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">🎨 Patterns</div>
+          <div class="cc-topics">Complete AB, AAB, and ABC patterns by picking what comes next</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE -->
+  <div class="free-section">
+    <div class="container">
+      <h2>100% Free — Always</h2>
+      <p>No credit card. No subscription. No ads. Just great math practice for every child.</p>
+      <div class="free-badges">
+        <div class="free-badge">✓ No Credit Card</div>
+        <div class="free-badge">✓ No Subscription</div>
+        <div class="free-badge">✓ No Ads</div>
+        <div class="free-badge">✓ Works on Any Device</div>
+        <div class="free-badge">✓ Common Core Aligned</div>
+      </div>
+      <a href="login.html" class="btn btn-hero" style="background:#fff;color:var(--orange)">Create Free Account →</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo footer-logo">
+            <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+          </div>
+          <p>Making math fun, one step at a time! 🎉</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Learn</h4>
+          <a href="index.html#grades">Pre-K Math</a>
+          <a href="index.html#grades">Kindergarten Math</a>
+          <a href="index.html#grades">1st Grade Math</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 FirstStepMath. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Printable Worksheets – FirstStepMath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Page styles ── */
+    .ws-hero {
+      background: linear-gradient(135deg, #FF6B35 0%, #FFE66D 100%);
+      padding: 64px 24px 48px; text-align: center; color: #fff;
+    }
+    .ws-hero h1 { font-family:'Fredoka One',cursive; font-size:2.8rem; margin-bottom:10px; text-shadow:2px 3px 0 rgba(0,0,0,0.1); }
+    .ws-hero p  { font-size:1.1rem; font-weight:600; opacity:0.95; max-width:560px; margin:0 auto; }
+
+    .ws-main { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; }
+    .ws-grade-title {
+      font-family:'Fredoka One',cursive; font-size:1.6rem; color:var(--dark);
+      margin: 36px 0 16px; display:flex; align-items:center; gap:10px;
+      border-bottom: 3px solid #f0f0f0; padding-bottom: 10px;
+    }
+    .ws-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:16px; }
+
+    .ws-card {
+      background:#fff; border-radius:18px; padding:20px 16px; border:2px solid #eee;
+      box-shadow:0 4px 14px rgba(0,0,0,0.06); display:flex; flex-direction:column; gap:10px;
+      transition:transform 0.15s, box-shadow 0.15s;
+    }
+    .ws-card:hover { transform:translateY(-3px); box-shadow:0 8px 22px rgba(0,0,0,0.1); }
+    .ws-card-icon { font-size:2rem; }
+    .ws-card-title { font-family:'Fredoka One',cursive; font-size:1.05rem; color:var(--dark); }
+    .ws-card-desc  { font-size:0.82rem; color:#666; line-height:1.5; flex:1; }
+    .ws-card-meta  { font-size:0.75rem; color:#aaa; }
+    .ws-btn {
+      display:block; text-align:center; padding:10px 14px; border-radius:12px;
+      background:var(--orange); color:#fff; font-family:'Fredoka One',cursive; font-size:1rem;
+      text-decoration:none; transition:background 0.15s; border:none; cursor:pointer; width:100%;
+    }
+    .ws-btn:hover { background:var(--orange-dk); }
+    .ws-btn.purple { background:var(--purple); }
+    .ws-btn.purple:hover { background:var(--purple-dk); }
+    .ws-btn.teal   { background:var(--teal); }
+    .ws-btn.teal:hover { background:var(--teal-dk); }
+
+    /* ── Worksheet print modal ── */
+    .ws-modal-bg {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+      z-index:9000; align-items:center; justify-content:center; padding:16px;
+    }
+    .ws-modal-bg.open { display:flex; }
+    .ws-modal {
+      background:#fff; border-radius:20px; padding:0; width:100%; max-width:720px;
+      max-height:90vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    }
+    .ws-modal-head {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 24px; border-bottom:2px solid #f0f0f0; position:sticky; top:0; background:#fff; z-index:1;
+    }
+    .ws-modal-head h2 { font-family:'Fredoka One',cursive; font-size:1.3rem; color:var(--dark); }
+    .ws-modal-head-btns { display:flex; gap:10px; }
+    .ws-close-btn { background:none; border:none; font-size:1.4rem; cursor:pointer; color:#aaa; padding:4px; }
+    .ws-print-btn {
+      background:var(--orange); color:#fff; border:none; border-radius:10px; padding:9px 18px;
+      font-family:'Fredoka One',cursive; font-size:1rem; cursor:pointer;
+    }
+    .ws-print-btn:hover { background:var(--orange-dk); }
+
+    /* ── Worksheet content (print-styled) ── */
+    .worksheet {
+      padding:32px 36px; font-family:'Nunito',sans-serif;
+    }
+    .ws-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; }
+    .ws-title-block .ws-school { font-size:0.8rem; color:#888; }
+    .ws-title-block .ws-subject { font-family:'Fredoka One',cursive; font-size:1.5rem; color:var(--dark); }
+    .ws-title-block .ws-grade  { font-size:0.9rem; color:#666; margin-top:2px; }
+    .ws-meta-block { text-align:right; font-size:0.85rem; color:#555; line-height:1.8; }
+    .ws-meta-block .ws-line { display:flex; align-items:center; gap:6px; justify-content:flex-end; }
+    .ws-meta-block .ws-blank { border-bottom:2px solid #333; width:100px; display:inline-block; }
+
+    .ws-divider { border:none; border-top:2px solid #ddd; margin:16px 0; }
+    .ws-instructions { font-size:0.9rem; color:#444; margin-bottom:18px; font-style:italic; }
+
+    .ws-problems { display:flex; flex-direction:column; gap:14px; }
+    .ws-problem { display:flex; align-items:center; gap:12px; }
+    .ws-problem-num { font-family:'Fredoka One',cursive; font-size:1rem; color:var(--orange); min-width:24px; }
+    .ws-problem-body { flex:1; }
+    .ws-eq { font-family:'Fredoka One',cursive; font-size:1.4rem; color:var(--dark); }
+    .ws-blank-ans { border-bottom:3px solid #333; width:48px; display:inline-block; min-height:24px; margin-left:4px; }
+    .ws-visual-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; font-size:1.4rem; }
+    .ws-circle { width:28px; height:28px; border-radius:50%; border:2px solid #666; display:inline-block; }
+    .ws-square { width:28px; height:28px; border:2px solid #666; display:inline-block; }
+
+    .ws-footer { margin-top:28px; text-align:center; font-size:0.75rem; color:#bbb; border-top:1px solid #eee; padding-top:12px; }
+
+    /* ── Print CSS ── */
+    @media print {
+      body > *:not(#printArea) { display:none !important; }
+      #printArea { display:block !important; }
+      .worksheet { padding: 20px 28px; }
+      .ws-modal-head { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="about.html" class="nav-link">About</a>
+        <a href="worksheets.html" class="nav-link" style="color:var(--orange);font-weight:800">📄 Worksheets</a>
+        <a href="store.html" class="nav-link nav-link-store">🪙 Store</a>
+        <a href="login.html" class="btn btn-outline">Sign In</a>
+        <a href="index.html#grades" class="btn btn-primary">Play Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="ws-hero">
+    <h1>📄 Free Printable Worksheets</h1>
+    <p>Download and print homework-ready worksheets for every topic — Common Core aligned, Pre-K through 2nd Grade.</p>
+  </div>
+
+  <!-- MAIN -->
+  <div class="ws-main">
+
+    <!-- PRE-K -->
+    <div class="ws-grade-title">🌱 Pre-K Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 3–4</small></div>
+    <div class="ws-grid">
+      <div class="ws-card">
+        <div class="ws-card-icon">🔢</div>
+        <div class="ws-card-title">Counting to 5</div>
+        <div class="ws-card-desc">Count objects, trace numbers 1–5, and match groups to numerals.</div>
+        <div class="ws-card-meta">PK.NS.1–3 · 8 problems</div>
+        <button class="ws-btn" onclick="openWS('prek-counting5')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">🔟</div>
+        <div class="ws-card-title">Counting to 10</div>
+        <div class="ws-card-desc">Count dots in ten frames, fill in missing numbers, and circle groups.</div>
+        <div class="ws-card-meta">PK.NS.1–2 · 8 problems</div>
+        <button class="ws-btn" onclick="openWS('prek-counting10')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">⚖️</div>
+        <div class="ws-card-title">More &amp; Fewer</div>
+        <div class="ws-card-desc">Circle the group with more, cross out the group with fewer.</div>
+        <div class="ws-card-meta">PK.NS.4 · 6 problems</div>
+        <button class="ws-btn" onclick="openWS('prek-compare')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">🎨</div>
+        <div class="ws-card-title">Patterns</div>
+        <div class="ws-card-desc">Color and draw to extend AB and ABB patterns.</div>
+        <div class="ws-card-meta">PK.AF.1–2 · 6 problems</div>
+        <button class="ws-btn" onclick="openWS('prek-patterns')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">🔷</div>
+        <div class="ws-card-title">2D Shapes</div>
+        <div class="ws-card-desc">Name shapes, count sides and corners, match real-world objects.</div>
+        <div class="ws-card-meta">PK.G.1 · 7 problems</div>
+        <button class="ws-btn" onclick="openWS('prek-shapes2d')">📄 Preview &amp; Print</button>
+      </div>
+    </div>
+
+    <!-- KINDERGARTEN -->
+    <div class="ws-grade-title">⭐ Kindergarten Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 5–6</small></div>
+    <div class="ws-grid">
+      <div class="ws-card">
+        <div class="ws-card-icon">🔢</div>
+        <div class="ws-card-title">Counting to 20</div>
+        <div class="ws-card-desc">Fill in missing numbers, order 1–20, count ten-frame dots.</div>
+        <div class="ws-card-meta">K.CC.1–5 · 8 problems</div>
+        <button class="ws-btn purple" onclick="openWS('k-counting20')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">➕</div>
+        <div class="ws-card-title">Add within 5</div>
+        <div class="ws-card-desc">Draw circles to add, complete number sentences, picture addition.</div>
+        <div class="ws-card-meta">K.OA.5 · 8 problems</div>
+        <button class="ws-btn purple" onclick="openWS('k-addition5')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">➕</div>
+        <div class="ws-card-title">Add &amp; Subtract within 10</div>
+        <div class="ws-card-desc">Complete equations, cross off to subtract, use ten frames.</div>
+        <div class="ws-card-meta">K.OA.1–2 · 8 problems</div>
+        <button class="ws-btn purple" onclick="openWS('k-addition10')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">🔟</div>
+        <div class="ws-card-title">Make 10</div>
+        <div class="ws-card-desc">Fill in ten frames, complete 7+?=10 equations.</div>
+        <div class="ws-card-meta">K.OA.4 · 8 problems</div>
+        <button class="ws-btn purple" onclick="openWS('k-maketen')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">🔶</div>
+        <div class="ws-card-title">2D &amp; 3D Shapes</div>
+        <div class="ws-card-desc">Count sides, name shapes, sort 2D vs 3D.</div>
+        <div class="ws-card-meta">K.G.1–4 · 8 problems</div>
+        <button class="ws-btn purple" onclick="openWS('k-shapes')">📄 Preview &amp; Print</button>
+      </div>
+    </div>
+
+    <!-- GRADE 1 -->
+    <div class="ws-grade-title">🚀 1st Grade Worksheets <small style="font-family:Nunito;font-size:0.75rem;font-weight:700;color:#aaa">Ages 6–7</small></div>
+    <div class="ws-grid">
+      <div class="ws-card">
+        <div class="ws-card-icon">➕</div>
+        <div class="ws-card-title">Add &amp; Subtract within 20</div>
+        <div class="ws-card-desc">Solve equations, use number lines, complete fact families.</div>
+        <div class="ws-card-meta">1.OA.6 · 8 problems</div>
+        <button class="ws-btn teal" onclick="openWS('g1-addition20')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">🔢</div>
+        <div class="ws-card-title">Place Value (Tens &amp; Ones)</div>
+        <div class="ws-card-desc">Draw base-10 blocks, write tens and ones, expand numbers.</div>
+        <div class="ws-card-meta">1.NBT.2 · 8 problems</div>
+        <button class="ws-btn teal" onclick="openWS('g1-placevalue')">📄 Preview &amp; Print</button>
+      </div>
+      <div class="ws-card">
+        <div class="ws-card-icon">📖</div>
+        <div class="ws-card-title">Word Problems</div>
+        <div class="ws-card-desc">Read and solve addition and subtraction word problems.</div>
+        <div class="ws-card-meta">1.OA.1 · 6 problems</div>
+        <button class="ws-btn teal" onclick="openWS('g1-wordproblems')">📄 Preview &amp; Print</button>
+      </div>
+    </div>
+
+    <div style="background:#f0f2ff;border-radius:18px;padding:24px;text-align:center;margin-top:40px">
+      <div style="font-size:2rem;margin-bottom:8px">✉️</div>
+      <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--dark);margin-bottom:6px">Want more worksheets?</div>
+      <p style="color:#666;font-size:0.95rem;margin-bottom:16px">New worksheets added every week! Create a free account to get them by email.</p>
+      <a href="login.html" class="btn btn-primary">Get Free Worksheets →</a>
+    </div>
+  </div>
+
+  <!-- WORKSHEET MODAL -->
+  <div class="ws-modal-bg" id="wsModalBg">
+    <div class="ws-modal" id="wsModal">
+      <div class="ws-modal-head">
+        <h2 id="wsModalTitle">Worksheet</h2>
+        <div class="ws-modal-head-btns">
+          <button class="ws-print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+          <button class="ws-close-btn" id="wsCloseBtn">✕</button>
+        </div>
+      </div>
+      <div id="wsContent"></div>
+    </div>
+  </div>
+
+  <div id="printArea" style="display:none"></div>
+
+  <script>
+  const WS_DATA = {
+    'prek-counting5': {
+      title:'Counting to 5', grade:'Pre-K', standard:'PK.NS.1–3',
+      instructions:'Count the pictures. Write the number on the line.',
+      problems:[
+        { type:'count', emojis:'🍎🍎🍎', label:'How many apples?' },
+        { type:'count', emojis:'⭐⭐⭐⭐', label:'How many stars?' },
+        { type:'count', emojis:'🐸🐸', label:'How many frogs?' },
+        { type:'count', emojis:'🐶🐶🐶🐶🐶', label:'How many dogs?' },
+        { type:'fill',  eq:'1, 2, 3, ___, 5', label:'Fill in the missing number.' },
+        { type:'fill',  eq:'___, 2, 3, 4, 5', label:'Fill in the missing number.' },
+        { type:'circle-more', a:'🍎🍎', b:'🍎🍎🍎🍎', label:'Circle the group with MORE.' },
+        { type:'trace',  nums:'1  2  3  4  5', label:'Trace these numbers:' },
+      ]
+    },
+    'prek-counting10': {
+      title:'Counting to 10', grade:'Pre-K', standard:'PK.NS.1–2',
+      instructions:'Count the dots. Write the number.',
+      problems:[
+        { type:'tenframe', filled:6, label:'How many dots?' },
+        { type:'tenframe', filled:8, label:'How many dots?' },
+        { type:'tenframe', filled:3, label:'How many dots?' },
+        { type:'tenframe', filled:10, label:'How many dots?' },
+        { type:'fill', eq:'6, 7, ___, 9', label:'Fill in the missing number.' },
+        { type:'fill', eq:'___, 8, 9, 10', label:'Fill in the missing number.' },
+        { type:'fill', eq:'5, ___, 7, 8', label:'Fill in the missing number.' },
+        { type:'fill', eq:'9, 10, ___', label:'What comes next?' },
+      ]
+    },
+    'prek-compare': {
+      title:'More & Fewer', grade:'Pre-K', standard:'PK.NS.4',
+      instructions:'Circle the correct answer.',
+      problems:[
+        { type:'compare', a:'🍎🍎 (2)', b:'🍎🍎🍎🍎 (4)', q:'Which is MORE?' },
+        { type:'compare', a:'⭐⭐⭐ (3)', b:'⭐⭐ (2)', q:'Which is FEWER?' },
+        { type:'fill', eq:'5 is ___ than 3.  (more / less)', label:'Circle: more or less.' },
+        { type:'fill', eq:'2 is ___ than 7.  (more / less)', label:'Circle: more or less.' },
+        { type:'fill', eq:'4 = 4. They are _____.', label:'Write: equal.' },
+        { type:'fill', eq:'9 is the ___ number.  (6, 7, 8, 9)', label:'Circle the greatest.' },
+      ]
+    },
+    'prek-patterns': {
+      title:'Patterns', grade:'Pre-K', standard:'PK.AF.1–2',
+      instructions:'Look at the pattern. Draw or write what comes next.',
+      problems:[
+        { type:'pattern', seq:'🔴 🔵 🔴 🔵 🔴 ___', label:'What comes next?' },
+        { type:'pattern', seq:'⭐ 🌙 ⭐ 🌙 ⭐ ___', label:'What comes next?' },
+        { type:'pattern', seq:'🐱 🐶 🐱 🐶 🐱 ___', label:'What comes next?' },
+        { type:'pattern', seq:'🔺 🟦 🔺 🟦 🔺 ___', label:'What comes next?' },
+        { type:'fill', eq:'A B A B A ___', label:'Write the letter that comes next.' },
+        { type:'fill', eq:'1 2 1 2 1 ___', label:'Write the number that comes next.' },
+      ]
+    },
+    'prek-shapes2d': {
+      title:'2D Shapes', grade:'Pre-K', standard:'PK.G.1',
+      instructions:'Answer the questions about shapes.',
+      problems:[
+        { type:'fill', eq:'A triangle has ___ sides.', label:'Count the sides.' },
+        { type:'fill', eq:'A square has ___ sides.', label:'Count the sides.' },
+        { type:'fill', eq:'A circle has ___ corners.', label:'How many corners?' },
+        { type:'fill', eq:'A rectangle has ___ sides.', label:'Count the sides.' },
+        { type:'fill', eq:'A door 🚪 is shaped like a ___________.',label:'Name the shape.' },
+        { type:'fill', eq:'The sun ☀️ is shaped like a ___________.', label:'Name the shape.' },
+        { type:'fill', eq:'A pizza slice 🍕 is shaped like a _________.', label:'Name the shape.' },
+      ]
+    },
+    'k-counting20': {
+      title:'Counting to 20', grade:'Kindergarten', standard:'K.CC.1–5',
+      instructions:'Fill in the missing numbers.',
+      problems:[
+        { type:'fill', eq:'11, 12, ___, 14', label:'What is missing?' },
+        { type:'fill', eq:'16, ___, 18, 19', label:'What is missing?' },
+        { type:'fill', eq:'___, 15, 16, 17', label:'What is missing?' },
+        { type:'fill', eq:'18, 19, ___, 21', label:'What is missing?' },
+        { type:'fill', eq:'Count by 10s: 10, ___, 30', label:'Count by 10s.' },
+        { type:'fill', eq:'Count by 2s: 2, 4, ___, 8', label:'Count by 2s.' },
+        { type:'tenframe', filled:14, label:'How many dots? (two frames)' },
+        { type:'fill', eq:'Write the numbers 11–20 in order:', label:'___  ___  ___  ___  ___  ___  ___  ___  ___  ___' },
+      ]
+    },
+    'k-addition5': {
+      title:'Add within 5', grade:'Kindergarten', standard:'K.OA.5',
+      instructions:'Solve each addition problem.',
+      problems:[
+        { type:'fill', eq:'2 + 1 = ___', label:'Solve.' },
+        { type:'fill', eq:'3 + 2 = ___', label:'Solve.' },
+        { type:'fill', eq:'1 + 1 = ___', label:'Solve.' },
+        { type:'fill', eq:'4 + 1 = ___', label:'Solve.' },
+        { type:'fill', eq:'0 + 5 = ___', label:'Solve.' },
+        { type:'count-add', a:'🍎🍎', b:'🍎', label:'2 + 1 = ___', eq:'2 + 1 = ___' },
+        { type:'count-add', a:'⭐⭐⭐', b:'⭐⭐', label:'3 + 2 = ___', eq:'3 + 2 = ___' },
+        { type:'fill', eq:'Sam has 3 apples. He picks 1 more. How many now? ___', label:'Word problem.' },
+      ]
+    },
+    'k-addition10': {
+      title:'Add & Subtract within 10', grade:'Kindergarten', standard:'K.OA.1–2',
+      instructions:'Solve each problem.',
+      problems:[
+        { type:'fill', eq:'6 + 2 = ___', label:'Add.' },
+        { type:'fill', eq:'5 + 4 = ___', label:'Add.' },
+        { type:'fill', eq:'10 − 3 = ___', label:'Subtract.' },
+        { type:'fill', eq:'8 − 5 = ___', label:'Subtract.' },
+        { type:'fill', eq:'7 + 3 = ___', label:'Add.' },
+        { type:'fill', eq:'9 − 4 = ___', label:'Subtract.' },
+        { type:'fill', eq:'3 + ___ = 7', label:'What is missing?' },
+        { type:'fill', eq:'There are 8 🐦. 3 fly away. How many are left? ___', label:'Word problem.' },
+      ]
+    },
+    'k-maketen': {
+      title:'Make 10', grade:'Kindergarten', standard:'K.OA.4',
+      instructions:'How many more to make 10?',
+      problems:[
+        { type:'tenframe', filled:7, label:'How many more to make 10? ___' },
+        { type:'tenframe', filled:6, label:'How many more to make 10? ___' },
+        { type:'fill', eq:'8 + ___ = 10', label:'Fill in the blank.' },
+        { type:'fill', eq:'5 + ___ = 10', label:'Fill in the blank.' },
+        { type:'fill', eq:'9 + ___ = 10', label:'Fill in the blank.' },
+        { type:'fill', eq:'3 + ___ = 10', label:'Fill in the blank.' },
+        { type:'tenframe', filled:4, label:'How many more to make 10? ___' },
+        { type:'fill', eq:'10 − 7 = ___', label:'Subtract to find the missing part.' },
+      ]
+    },
+    'k-shapes': {
+      title:'2D & 3D Shapes', grade:'Kindergarten', standard:'K.G.1–4',
+      instructions:'Answer the shape questions.',
+      problems:[
+        { type:'fill', eq:'A hexagon has ___ sides.', label:'Count the sides.' },
+        { type:'fill', eq:'A rectangle has ___ corners.', label:'Count the corners.' },
+        { type:'fill', eq:'A sphere has ___ flat faces.', label:'Zero or more?' },
+        { type:'fill', eq:'A stop sign 🛑 is an _______________ shape.', label:'Name it.' },
+        { type:'fill', eq:'A cube looks like a ___. (box / ball / cone)', label:'Circle one.' },
+        { type:'fill', eq:'A circle has ___ straight sides.', label:'Count the straight sides.' },
+        { type:'fill', eq:'Name one flat (2D) shape: _______________', label:'Write it.' },
+        { type:'fill', eq:'Name one solid (3D) shape: _______________', label:'Write it.' },
+      ]
+    },
+    'g1-addition20': {
+      title:'Add & Subtract within 20', grade:'1st Grade', standard:'1.OA.6',
+      instructions:'Solve each problem.',
+      problems:[
+        { type:'fill', eq:'8 + 5 = ___', label:'Add.' },
+        { type:'fill', eq:'9 + 6 = ___', label:'Add.' },
+        { type:'fill', eq:'15 − 7 = ___', label:'Subtract.' },
+        { type:'fill', eq:'13 − 6 = ___', label:'Subtract.' },
+        { type:'fill', eq:'7 + ___ = 14', label:'What is missing?' },
+        { type:'fill', eq:'___ + 9 = 17', label:'What is missing?' },
+        { type:'fill', eq:'12 − ___ = 5', label:'What is missing?' },
+        { type:'fill', eq:'There are 14 birds on a wire. 8 fly away. How many are left? ___', label:'Word problem.' },
+      ]
+    },
+    'g1-placevalue': {
+      title:'Place Value: Tens & Ones', grade:'1st Grade', standard:'1.NBT.2',
+      instructions:'Write the number of tens and ones.',
+      problems:[
+        { type:'fill', eq:'24 = ___ tens and ___ ones', label:'Break it apart.' },
+        { type:'fill', eq:'37 = ___ tens and ___ ones', label:'Break it apart.' },
+        { type:'fill', eq:'50 = ___ tens and ___ ones', label:'Break it apart.' },
+        { type:'fill', eq:'3 tens and 6 ones = ___', label:'Write the number.' },
+        { type:'fill', eq:'4 tens and 0 ones = ___', label:'Write the number.' },
+        { type:'fill', eq:'2 tens and 9 ones = ___', label:'Write the number.' },
+        { type:'fill', eq:'Which digit is in the tens place in 48? ___', label:'Tens digit.' },
+        { type:'fill', eq:'Which digit is in the ones place in 73? ___', label:'Ones digit.' },
+      ]
+    },
+    'g1-wordproblems': {
+      title:'Word Problems', grade:'1st Grade', standard:'1.OA.1',
+      instructions:'Read and solve each word problem. Show your work.',
+      problems:[
+        { type:'fill', eq:'Mia has 6 crayons. She gets 5 more. How many does she have now?\nAnswer: ___', label:'' },
+        { type:'fill', eq:'There are 13 apples. 7 are eaten. How many are left?\nAnswer: ___', label:'' },
+        { type:'fill', eq:'Jake has 8 stickers. Emma has 9. How many do they have together?\nAnswer: ___', label:'' },
+        { type:'fill', eq:'There are 15 fish in a tank. 6 swim away. How many are left?\nAnswer: ___', label:'' },
+        { type:'fill', eq:'A bag has 7 red and 8 blue marbles. How many marbles in all?\nAnswer: ___', label:'' },
+        { type:'fill', eq:'Lily read 14 pages. She needs to read 20. How many more does she need?\nAnswer: ___', label:'' },
+      ]
+    },
+  };
+
+  function buildTenFrame(filled) {
+    let html = '<div style="display:inline-flex;flex-direction:column;gap:2px;border:2px solid #333;padding:3px;border-radius:4px">';
+    for (let r = 0; r < 2; r++) {
+      html += '<div style="display:flex;gap:2px">';
+      for (let c = 0; c < 5; c++) {
+        const i = r * 5 + c;
+        const bg = i < filled ? '#FF6B35' : '#fff';
+        html += `<div style="width:24px;height:24px;border-radius:50%;border:2px solid #999;background:${bg}"></div>`;
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function buildWS(key) {
+    const ws = WS_DATA[key];
+    if (!ws) return '<p>Worksheet not found.</p>';
+    let probs = '';
+    ws.problems.forEach((p, i) => {
+      probs += `<div class="ws-problem"><div class="ws-problem-num">${i+1}.</div><div class="ws-problem-body">`;
+      if (p.label) probs += `<div style="font-size:0.88rem;color:#666;margin-bottom:4px">${p.label}</div>`;
+      if (p.type === 'fill') {
+        const eq = p.eq.replace(/___/g, '<span class="ws-blank-ans"></span>').replace(/\n/g,'<br>');
+        probs += `<div class="ws-eq">${eq}</div>`;
+      } else if (p.type === 'count') {
+        probs += `<div class="ws-visual-row">${p.emojis.split('').map(e=>`<span style="font-size:1.6rem">${e}</span>`).join('')}</div>`;
+        probs += `<div style="margin-top:6px;font-family:Fredoka One,cursive">= <span class="ws-blank-ans"></span></div>`;
+      } else if (p.type === 'tenframe') {
+        probs += buildTenFrame(p.filled);
+        probs += `<div style="margin-top:6px;font-family:Fredoka One,cursive">${p.label}: <span class="ws-blank-ans"></span></div>`;
+      } else if (p.type === 'pattern') {
+        probs += `<div style="font-size:1.5rem;letter-spacing:2px">${p.seq}</div>`;
+      } else if (p.type === 'compare') {
+        probs += `<div style="font-family:Fredoka One,cursive;font-size:1.1rem">${p.q}<br><span style="background:#f0f2ff;padding:4px 12px;border-radius:8px;margin-right:8px">${p.a}</span> or <span style="background:#f0f2ff;padding:4px 12px;border-radius:8px;margin-left:8px">${p.b}</span></div>`;
+      } else if (p.type === 'count-add') {
+        probs += `<div class="ws-visual-row">${p.a.split('').map(e=>`<span style="font-size:1.4rem">${e}</span>`).join('')}<span style="font-family:Fredoka One,cursive;font-size:1.4rem;margin:0 8px">+</span>${p.b.split('').map(e=>`<span style="font-size:1.4rem">${e}</span>`).join('')}</div>`;
+        probs += `<div style="font-family:Fredoka One,cursive;font-size:1.3rem;margin-top:4px">${p.eq.replace(/___/,'<span class="ws-blank-ans"></span>')}</div>`;
+      }
+      probs += '</div></div>';
+    });
+
+    return `<div class="worksheet">
+      <div class="ws-header">
+        <div class="ws-title-block">
+          <div class="ws-school">FirstStepMath.com — Free Printable</div>
+          <div class="ws-subject">${ws.title}</div>
+          <div class="ws-grade">${ws.grade} · Standard: ${ws.standard}</div>
+        </div>
+        <div class="ws-meta-block">
+          <div class="ws-line">Name: <span class="ws-blank"></span></div>
+          <div class="ws-line">Date: <span class="ws-blank"></span></div>
+          <div class="ws-line">Score: ___  / ${ws.problems.length}</div>
+        </div>
+      </div>
+      <hr class="ws-divider">
+      <div class="ws-instructions">${ws.instructions}</div>
+      <div class="ws-problems">${probs}</div>
+      <div class="ws-footer">FirstStepMath.com · Free Common Core Worksheets · Print as many copies as you need!</div>
+    </div>`;
+  }
+
+  function openWS(key) {
+    const ws = WS_DATA[key];
+    if (!ws) return;
+    document.getElementById('wsModalTitle').textContent = ws.title + ' — ' + ws.grade;
+    document.getElementById('wsContent').innerHTML = buildWS(key);
+    document.getElementById('wsModalBg').classList.add('open');
+    // Also set printArea for print
+    document.getElementById('printArea').innerHTML = buildWS(key);
+  }
+
+  document.getElementById('wsCloseBtn').addEventListener('click', () => {
+    document.getElementById('wsModalBg').classList.remove('open');
+  });
+  document.getElementById('wsModalBg').addEventListener('click', e => {
+    if (e.target === document.getElementById('wsModalBg')) document.getElementById('wsModalBg').classList.remove('open');
+  });
+  </script>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo footer-logo"><span class="logo-first">FirstStep</span><span class="logo-math">Math</span></div>
+          <p>Making math fun, one step at a time! 🎉</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Learn</h4>
+          <a href="index.html#grades">Pre-K Math</a>
+          <a href="index.html#grades">Kindergarten Math</a>
+          <a href="index.html#grades">1st Grade Math</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Resources</h4>
+          <a href="worksheets.html">Free Worksheets</a>
+          <a href="about.html">About Us</a>
+          <a href="store.html">🪙 Store</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 FirstStepMath. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+</body>
+</html>

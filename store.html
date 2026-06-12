@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Star Store – FirstStepMath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Store page styles ── */
+    .store-header-bar {
+      background: linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%);
+      padding: 60px 24px 40px; text-align: center; color: #fff;
+    }
+    .store-header-bar h1 { font-family: 'Fredoka One', cursive; font-size: 2.8rem; margin-bottom: 10px; text-shadow: 2px 3px 0 rgba(0,0,0,0.12); }
+    .store-header-bar p   { font-size: 1.05rem; opacity: 0.95; font-weight: 600; }
+
+    .stars-balance-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 50px; padding: 10px 24px; font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem; margin-top: 20px;
+    }
+
+    .store-main { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; }
+
+    .store-section-title {
+      font-family: 'Fredoka One', cursive; font-size: 1.6rem; color: var(--dark);
+      margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
+    }
+
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 480px) {
+      .store-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+
+    .store-item {
+      background: #fff; border-radius: 20px; padding: 20px 12px 16px;
+      text-align: center; border: 3px solid #eee;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+      position: relative; overflow: hidden;
+    }
+    .store-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(108,99,255,0.15); border-color: #c8c0ff; }
+    .store-item.owned { border-color: #28a745; background: #f0fff4; }
+    .store-item.owned::before {
+      content: '✓ Owned'; position: absolute; top: 8px; right: -22px;
+      background: #28a745; color: #fff; font-size: 0.65rem; font-weight: 800;
+      padding: 3px 28px; transform: rotate(45deg); letter-spacing: 0.5px;
+    }
+
+    .store-item-img { font-size: 3.2rem; line-height: 1; margin-bottom: 4px; }
+    .store-item-name { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--dark); }
+    .store-item-desc { font-size: 0.78rem; color: #777; line-height: 1.4; flex: 1; }
+    .store-item-price {
+      font-family: 'Fredoka One', cursive; font-size: 1.1rem;
+      color: var(--orange); display: flex; align-items: center; gap: 4px;
+    }
+
+    .buy-btn {
+      width: 100%; padding: 10px; border-radius: 12px; border: none;
+      background: var(--purple); color: #fff; font-family: 'Fredoka One', cursive;
+      font-size: 1rem; cursor: pointer; transition: background 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .buy-btn:hover:not(:disabled)  { background: #5a53e6; }
+    .buy-btn:active:not(:disabled) { transform: scale(0.95); }
+    .buy-btn:disabled { background: #ccc; cursor: default; }
+    .buy-btn.owned-btn { background: #28a745; }
+
+    .store-empty { text-align: center; padding: 60px 20px; color: #aaa; }
+    .store-empty .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+    .store-empty p { font-size: 1rem; }
+
+    .toast {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #28a745; color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.1rem;
+      padding: 14px 28px; border-radius: 50px; box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); z-index: 9999;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    .my-collection { margin-top: 48px; }
+    .collection-grid {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .collection-chip {
+      background: #f0f2ff; border-radius: 50px; padding: 10px 18px;
+      font-size: 1.4rem; border: 2px solid #dde3ff;
+      transition: transform 0.1s; cursor: default;
+    }
+    .collection-chip:hover { transform: scale(1.1); }
+    .no-items { color: #aaa; font-size: 0.95rem; padding: 12px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="about.html" class="nav-link">About</a>
+        <a href="#" class="nav-link">For Teachers</a>
+        <a href="store.html" class="nav-link nav-link-store" style="color:var(--orange);font-weight:800">🪙 Store</a>
+        <a href="login.html" class="btn btn-outline">Sign In</a>
+        <a href="index.html#grades" class="btn btn-primary">Play Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- STORE HERO -->
+  <div class="store-header-bar">
+    <h1>🛒 Nickel Store</h1>
+    <p>Earn nickels by answering questions correctly, then spend them here!</p>
+    <div class="stars-balance-pill">
+      🪙 <span id="starBalance">0</span> Nickels
+    </div>
+  </div>
+
+  <!-- STORE MAIN -->
+  <div class="store-main">
+    <div class="store-section-title">🧸 Toys &amp; Prizes</div>
+    <div class="store-grid" id="storeGrid"></div>
+
+    <div class="my-collection" id="myCollection">
+      <div class="store-section-title">🎒 My Collection</div>
+      <div class="collection-grid" id="collectionGrid">
+        <div class="no-items">Nothing yet — earn nickels and buy your first prize!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/tts.js"></script>
+  <script>
+  (() => {
+    const STARS_KEY     = 'fsm_nickels';
+    const PURCHASES_KEY = 'fsm_purchases';
+
+    const ITEMS = [
+      { id:'teddy',    name:'Teddy Bear',      emoji:'🧸', price: 50,  desc:'A soft cuddly teddy bear!'       },
+      { id:'unicorn',  name:'Unicorn',          emoji:'🦄', price: 75,  desc:'Magical rainbow unicorn!'        },
+      { id:'rocket',   name:'Rocket Ship',      emoji:'🚀', price: 60,  desc:'Blast off into space!'           },
+      { id:'dino',     name:'Dinosaur',         emoji:'🦕', price: 65,  desc:'A friendly long-neck dino!'      },
+      { id:'dragon',   name:'Dragon',           emoji:'🐉', price:120,  desc:'A friendly fire-breathing pal!'  },
+      { id:'dolphin',  name:'Dolphin',          emoji:'🐬', price: 70,  desc:'Splash splash!'                  },
+      { id:'kite',     name:'Rainbow Kite',     emoji:'🪁', price: 45,  desc:'Fly it high in the sky!'         },
+      { id:'wand',     name:'Magic Wand',       emoji:'🪄', price: 90,  desc:'Make math magic happen!'         },
+      { id:'trophy',   name:'Golden Trophy',    emoji:'🏆', price:150,  desc:'You are a math champion!'        },
+      { id:'crown',    name:'Star Crown',       emoji:'👑', price:130,  desc:'Wear your math crown with pride!'},
+      { id:'art',      name:'Art Set',          emoji:'🎨', price: 80,  desc:'Create colorful masterpieces!'   },
+      { id:'gamepad',  name:'Game Controller',  emoji:'🎮', price:100,  desc:'Level up your play time!'        },
+      { id:'puppet',   name:'Puppet Show',      emoji:'🎭', price:110,  desc:'Put on a show for your friends!' },
+      { id:'carousel', name:'Merry-Go-Round',   emoji:'🎠', price:175,  desc:'Round and round you go!'         },
+      { id:'robot',    name:'Robot Friend',     emoji:'🤖', price:140,  desc:'Your new robot best friend!'     },
+      { id:'treasure', name:'Treasure Chest',   emoji:'💰', price:200,  desc:'Full of gold and gems!'          },
+    ];
+
+    let stars = parseInt(localStorage.getItem(STARS_KEY) || '0');
+    let purchases = JSON.parse(localStorage.getItem(PURCHASES_KEY) || '[]');
+
+    function saveState() {
+      localStorage.setItem(STARS_KEY,     String(stars));
+      localStorage.setItem(PURCHASES_KEY, JSON.stringify(purchases));
+    }
+
+    function updateBalanceDisplay() {
+      document.getElementById('starBalance').textContent = stars;
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    function renderCollection() {
+      const grid = document.getElementById('collectionGrid');
+      if (purchases.length === 0) {
+        grid.innerHTML = '<div class="no-items">Nothing yet — earn nickels and buy your first prize!</div>';
+        return;
+      }
+      grid.innerHTML = '';
+      purchases.forEach(id => {
+        const item = ITEMS.find(i => i.id === id);
+        if (!item) return;
+        const chip = document.createElement('div');
+        chip.className = 'collection-chip';
+        chip.title = item.name;
+        chip.textContent = item.emoji;
+        grid.appendChild(chip);
+      });
+    }
+
+    function renderStore() {
+      const grid = document.getElementById('storeGrid');
+      grid.innerHTML = '';
+      ITEMS.forEach(item => {
+        const owned   = purchases.includes(item.id);
+        const canBuy  = !owned && stars >= item.price;
+
+        const card = document.createElement('div');
+        card.className = 'store-item' + (owned ? ' owned' : '');
+
+        card.innerHTML = `
+          <div class="store-item-img">${item.emoji}</div>
+          <div class="store-item-name">${item.name}</div>
+          <div class="store-item-desc">${item.desc}</div>
+          <div class="store-item-price">🪙 ${item.price} nickels</div>
+          <button class="buy-btn ${owned ? 'owned-btn' : ''}" ${owned || !canBuy ? 'disabled' : ''}>
+            ${owned ? '✓ Owned' : canBuy ? 'Buy!' : 'Need ' + item.price + ' 🪙'}
+          </button>
+        `;
+
+        if (!owned) {
+          card.querySelector('.buy-btn').addEventListener('click', () => {
+            if (stars < item.price) return;
+            stars -= item.price;
+            purchases.push(item.id);
+            saveState();
+            updateBalanceDisplay();
+            showToast('🎉 You got ' + item.name + '!');
+            if (window.speechSynthesis) {
+              const utt = new SpeechSynthesisUtterance('You got ' + item.name + '! Great job!');
+              utt.rate = 0.9;
+              window.speechSynthesis.speak(utt);
+            }
+            renderStore();
+            renderCollection();
+          });
+        }
+
+        grid.appendChild(card);
+      });
+    }
+
+    updateBalanceDisplay();
+    renderStore();
+    renderCollection();
+  })();
+  </script>
+
+</body>
+</html>

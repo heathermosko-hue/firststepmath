@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In – FirstStepMath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { min-height: 100vh; background: linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%); display: flex; flex-direction: column; }
+    .login-header { padding: 20px 24px; }
+    .login-header .logo-first { color: #fff; }
+    .login-header .logo-math  { color: rgba(255,255,255,0.85); }
+    .login-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .login-card {
+      background: #fff; border-radius: 28px; padding: 36px 32px; width: 100%;
+      max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    }
+    .login-card h1 { font-family: 'Fredoka One', cursive; font-size: 1.8rem; color: var(--dark); margin-bottom: 4px; text-align: center; }
+    .login-sub { text-align: center; color: #777; font-size: 0.9rem; margin-bottom: 24px; }
+
+    /* Tabs */
+    .login-tabs { display: flex; background: #f0f2ff; border-radius: 14px; padding: 4px; gap: 4px; margin-bottom: 24px; }
+    .login-tab {
+      flex: 1; padding: 9px 6px; border-radius: 10px; border: none; background: transparent;
+      font-family: 'Fredoka One', cursive; font-size: 0.95rem; cursor: pointer; color: #888;
+      transition: background 0.15s, color 0.15s;
+    }
+    .login-tab.active { background: #fff; color: var(--purple); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+    /* Panels */
+    .login-panel { display: none; }
+    .login-panel.active { display: block; }
+
+    /* Forms */
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 700; color: #555; margin-bottom: 4px; }
+    .form-group input {
+      width: 100%; padding: 12px 15px; border-radius: 12px; border: 2px solid #dde3ff;
+      font-family: 'Nunito', sans-serif; font-size: 0.97rem; box-sizing: border-box; transition: border-color 0.15s;
+    }
+    .form-group input:focus { outline: none; border-color: var(--purple); }
+
+    .submit-btn {
+      width: 100%; padding: 14px; border-radius: 14px; border: none; margin-top: 4px;
+      font-family: 'Fredoka One', cursive; font-size: 1.15rem; cursor: pointer;
+      transition: background 0.15s, transform 0.1s; color: #fff;
+    }
+    .submit-btn.purple { background: var(--purple); }
+    .submit-btn.purple:hover { background: var(--purple-dk); }
+    .submit-btn.orange { background: var(--orange); }
+    .submit-btn.orange:hover { background: var(--orange-dk); }
+    .submit-btn.teal   { background: var(--teal); }
+    .submit-btn.teal:hover { background: var(--teal-dk); }
+    .submit-btn:active { transform: scale(0.97); }
+
+    .divider { text-align: center; color: #ccc; font-size: 0.82rem; margin: 14px 0; position: relative; }
+    .divider::before, .divider::after { content:''; position:absolute; top:50%; width:44%; height:1px; background:#eee; }
+    .divider::before { left:0; } .divider::after { right:0; }
+
+    .switch-link { text-align: center; font-size: 0.88rem; color: #777; margin-top: 12px; }
+    .switch-link a { color: var(--purple); font-weight: 700; text-decoration: none; }
+
+    .err { color: #dc3545; font-size: 0.83rem; text-align: center; min-height: 18px; margin: 4px 0; }
+
+    /* ── STUDENT: class code big input ── */
+    .class-code-input-wrap { position: relative; }
+    .class-code-input-wrap input {
+      font-family: 'Fredoka One', cursive; font-size: 1.6rem; text-align: center;
+      letter-spacing: 3px; text-transform: uppercase; padding: 16px;
+      border: 3px solid #dde3ff; border-radius: 16px; width: 100%; box-sizing: border-box;
+    }
+    .class-code-input-wrap input:focus { border-color: var(--purple); }
+
+    /* ── Student avatar grid ── */
+    .avatar-panel { margin-top: 16px; }
+    .avatar-panel h3 { font-family: 'Fredoka One', cursive; font-size: 1.25rem; color: var(--dark); text-align: center; margin-bottom: 14px; }
+    .avatar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .avatar-btn {
+      aspect-ratio: 1; border-radius: 16px; border: 3px solid #dde3ff; background: #f8f8ff;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 3px; cursor: pointer; font-size: 2rem; transition: border-color 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .avatar-btn .av-name { font-family: 'Nunito', sans-serif; font-size: 0.62rem; font-weight: 800; color: #555; }
+    .avatar-btn:hover  { border-color: var(--purple); transform: scale(1.05); }
+    .avatar-btn:active { transform: scale(0.94); }
+
+    /* QR scan option */
+    .qr-scan-btn {
+      width: 100%; padding: 13px; border-radius: 14px; border: 2px solid #dde3ff;
+      background: #f8f8ff; font-family: 'Fredoka One', cursive; font-size: 1.05rem;
+      cursor: pointer; color: var(--dark); transition: border-color 0.15s;
+    }
+    .qr-scan-btn:hover { border-color: var(--teal); background: #f0fffd; }
+
+    /* ── Teacher dashboard ── */
+    .teacher-dash { display: flex; flex-direction: column; gap: 14px; }
+    .class-code-box {
+      background: #f0f2ff; border-radius: 16px; padding: 18px 16px; text-align: center;
+    }
+    .cc-label { font-size: 0.8rem; font-weight: 700; color: #888; margin-bottom: 4px; }
+    .cc-value { font-family: 'Fredoka One', cursive; font-size: 1.9rem; color: var(--purple); letter-spacing: 3px; }
+    #qrCanvas { display: block; margin: 10px auto 0; border-radius: 10px; }
+    .copy-btn {
+      background: none; border: 2px solid var(--purple); color: var(--purple);
+      border-radius: 10px; padding: 7px 16px; font-family: 'Fredoka One', cursive;
+      font-size: 0.9rem; cursor: pointer; margin-top: 6px;
+    }
+    .copy-btn:hover { background: #f0f2ff; }
+
+    .add-row { display: flex; gap: 8px; margin-top: 4px; }
+    .add-row input { flex: 1; padding: 9px 12px; border-radius: 10px; border: 2px solid #dde3ff; font-family: 'Nunito', sans-serif; font-size: 0.9rem; }
+    .add-row button { padding: 9px 15px; border-radius: 10px; border: none; background: var(--teal); color: #fff; font-family: 'Fredoka One', cursive; font-size: 0.95rem; cursor: pointer; }
+
+    .students-list { display: flex; flex-wrap: wrap; gap: 8px; min-height: 32px; }
+    .s-chip {
+      background: #f0f2ff; border-radius: 50px; padding: 5px 12px 5px 9px;
+      display: flex; align-items: center; gap: 5px; font-size: 0.88rem; font-weight: 700;
+    }
+    .s-chip .rm { cursor: pointer; color: #bbb; margin-left: 3px; font-size: 0.78rem; }
+    .s-chip .rm:hover { color: #e55; }
+
+    .section-lbl { font-weight: 800; font-size: 0.88rem; color: #555; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+  <div class="login-header">
+    <a href="index.html" class="logo">
+      <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+    </a>
+  </div>
+
+  <div class="login-wrap">
+    <div class="login-card">
+      <h1>Welcome! 👋</h1>
+      <p class="login-sub">Sign in to save your progress — it's completely free!</p>
+
+      <div class="login-tabs">
+        <button class="login-tab active" data-tab="student">🎒 Student</button>
+        <button class="login-tab" data-tab="parent">👪 Parent</button>
+        <button class="login-tab" data-tab="teacher">🍎 Teacher</button>
+      </div>
+
+      <!-- ══ STUDENT PANEL ══ -->
+      <div class="login-panel active" id="panel-student">
+
+        <!-- Step 1: enter class code -->
+        <div id="step-code">
+          <div class="section-lbl">Enter your class code:</div>
+          <div class="class-code-input-wrap">
+            <input type="text" id="codeInput" placeholder="FSM-XXXXX" maxlength="9" autocomplete="off">
+          </div>
+          <div class="err" id="codeErr"></div>
+          <button class="submit-btn purple" id="findClassBtn" style="margin-top:10px">Find My Class 🔍</button>
+          <div class="divider">or</div>
+          <button class="qr-scan-btn" id="qrHintBtn">📷 I have a QR code — scan it with your camera!</button>
+          <p style="font-size:0.78rem;color:#aaa;text-align:center;margin-top:8px">Ask your teacher for your class code or QR code.</p>
+        </div>
+
+        <!-- Step 2: pick avatar -->
+        <div id="step-avatar" style="display:none">
+          <div class="avatar-panel">
+            <h3>Tap your picture! 👇</h3>
+            <div class="avatar-grid" id="avatarGrid"></div>
+          </div>
+          <button class="qr-scan-btn" style="margin-top:12px" id="backToCodeBtn">← Back</button>
+        </div>
+
+      </div>
+
+      <!-- ══ PARENT PANEL ══ -->
+      <div class="login-panel" id="panel-parent">
+        <form id="parentLoginForm">
+          <div class="form-group"><label>Email</label><input type="email" id="pEmail" placeholder="parent@email.com" autocomplete="email"></div>
+          <div class="form-group"><label>Password</label><input type="password" id="pPass" placeholder="••••••••" autocomplete="current-password"></div>
+          <div class="err" id="pLoginErr"></div>
+          <button type="submit" class="submit-btn orange">Sign In 👪</button>
+        </form>
+        <div class="divider">or</div>
+        <form id="parentRegForm" style="display:none">
+          <div class="form-group"><label>Child's Name</label><input type="text" id="prName" placeholder="First name"></div>
+          <div class="form-group"><label>Your Email</label><input type="email" id="prEmail" placeholder="parent@email.com"></div>
+          <div class="form-group"><label>Password</label><input type="password" id="prPass" placeholder="Create a password"></div>
+          <div class="err" id="pRegErr"></div>
+          <button type="submit" class="submit-btn orange">Create Free Account →</button>
+        </form>
+        <div class="switch-link" id="pSwitchWrap">
+          New parent? <a href="#" id="showParentReg">Create free account</a>
+        </div>
+        <div class="switch-link" style="display:none" id="pBackWrap">
+          <a href="#" id="backParentLogin">← Back to sign in</a>
+        </div>
+      </div>
+
+      <!-- ══ TEACHER PANEL ══ -->
+      <div class="login-panel" id="panel-teacher">
+
+        <form id="teacherLoginForm">
+          <div class="form-group"><label>Teacher Email</label><input type="email" id="tEmail" placeholder="teacher@school.com" autocomplete="email"></div>
+          <div class="form-group"><label>Password</label><input type="password" id="tPass" placeholder="••••••••" autocomplete="current-password"></div>
+          <div class="err" id="tLoginErr"></div>
+          <button type="submit" class="submit-btn purple">Teacher Sign In 🍎</button>
+        </form>
+        <div class="divider">or</div>
+        <form id="teacherRegForm" style="display:none">
+          <div class="form-group"><label>Your Name</label><input type="text" id="trName" placeholder="Ms. Smith"></div>
+          <div class="form-group"><label>Email</label><input type="email" id="trEmail" placeholder="teacher@school.com"></div>
+          <div class="form-group"><label>Password</label><input type="password" id="trPass" placeholder="Create a password"></div>
+          <div class="err" id="trErr"></div>
+          <button type="submit" class="submit-btn purple">Create Teacher Account</button>
+        </form>
+        <div class="switch-link" id="tSwitchWrap">
+          New teacher? <a href="#" id="showTeacherReg">Create free account</a>
+        </div>
+        <div class="switch-link" style="display:none" id="tBackWrap">
+          <a href="#" id="backTeacherLogin">← Back to sign in</a>
+        </div>
+
+        <!-- Teacher dashboard (after login) -->
+        <div class="teacher-dash" id="teacherDash" style="display:none">
+          <div class="class-code-box">
+            <div class="cc-label">Your Class Code</div>
+            <div class="cc-value" id="dashCode">FSM-XXXX</div>
+            <canvas id="qrCanvas" width="130" height="130"></canvas>
+            <div><button class="copy-btn" id="copyCodeBtn">📋 Copy Code</button></div>
+          </div>
+          <div>
+            <div class="section-lbl">Add Students:</div>
+            <div class="add-row">
+              <input type="text" id="newStudentName" placeholder="Student name" maxlength="20">
+              <button type="button" id="addStudentBtn">+ Add</button>
+            </div>
+          </div>
+          <div>
+            <div class="section-lbl">My Students (<span id="studentCount">0</span>):</div>
+            <div class="students-list" id="studentsList"></div>
+            <p style="font-size:0.75rem;color:#aaa;margin-top:6px">Students tap their emoji icon to log in using the class code.</p>
+          </div>
+          <button type="button" class="submit-btn teal" id="goToQuizBtn">📚 Go to Quizzes</button>
+          <button type="button" class="qr-scan-btn" id="teacherLogoutBtn" style="margin-top:0">Sign Out</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    const USERS_KEY   = 'fsm_users';
+    const SESSION_KEY = 'fsm_session';
+
+    const AVATARS = ['🐱','🐶','🐸','🐰','🦊','🐻','🐼','🐨','🦁','🐯','🐮','🐷','🐙','🦋','🐢','🦄','🐬','🦕','🤖','🧸'];
+
+    const getUsers  = () => JSON.parse(localStorage.getItem(USERS_KEY)   || '[]');
+    const saveUsers = u => localStorage.setItem(USERS_KEY, JSON.stringify(u));
+    const getSession= () => JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+    const setSession= u => sessionStorage.setItem(SESSION_KEY, JSON.stringify(u));
+    const clearSession = () => sessionStorage.removeItem(SESSION_KEY);
+    const genCode = () => 'FSM-' + Math.random().toString(36).substr(2,5).toUpperCase();
+
+    /* ── Tab switching ── */
+    document.querySelectorAll('.login-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.login-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    /* ══ STUDENT: class code → avatar ══ */
+    document.getElementById('findClassBtn').addEventListener('click', () => {
+      const code = document.getElementById('codeInput').value.trim().toUpperCase();
+      if (!code) { document.getElementById('codeErr').textContent = 'Please enter your class code.'; return; }
+      const users = getUsers();
+      const teacher = users.find(u => u.type === 'teacher' && u.classCode === code);
+      if (!teacher) { document.getElementById('codeErr').textContent = 'Code not found — check with your teacher!'; return; }
+      document.getElementById('codeErr').textContent = '';
+      buildAvatarGrid(teacher, code);
+      document.getElementById('step-code').style.display = 'none';
+      document.getElementById('step-avatar').style.display = 'block';
+    });
+
+    document.getElementById('codeInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('findClassBtn').click();
+    });
+
+    document.getElementById('backToCodeBtn').addEventListener('click', () => {
+      document.getElementById('step-avatar').style.display = 'none';
+      document.getElementById('step-code').style.display = 'block';
+      document.getElementById('avatarGrid').innerHTML = '';
+    });
+
+    document.getElementById('qrHintBtn').addEventListener('click', () => {
+      alert('Ask your teacher to show you the QR code. Scan it with your device camera to join instantly!');
+    });
+
+    function buildAvatarGrid(teacher, code) {
+      const grid = document.getElementById('avatarGrid');
+      grid.innerHTML = '';
+      const students = teacher.students || [];
+      if (students.length === 0) {
+        grid.innerHTML = '<p style="font-size:0.85rem;color:#aaa;grid-column:1/-1;text-align:center">No students added yet. Ask your teacher!</p>';
+        return;
+      }
+      students.forEach(s => {
+        const btn = document.createElement('button');
+        btn.className = 'avatar-btn';
+        btn.innerHTML = s.avatar + '<span class="av-name">' + s.name + '</span>';
+        btn.addEventListener('click', () => {
+          setSession({ name: s.name, avatar: s.avatar, type: 'student', classCode: code });
+          localStorage.setItem('fsm_q_count', '0'); // reset gate for logged-in students
+          window.location.href = 'index.html';
+        });
+        grid.appendChild(btn);
+      });
+    }
+
+    /* ══ PARENT ══ */
+    document.getElementById('parentLoginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('pEmail').value.trim();
+      const pass  = document.getElementById('pPass').value;
+      const user  = getUsers().find(u => u.email === email && u.password === pass && u.type === 'parent');
+      if (!user) { document.getElementById('pLoginErr').textContent = 'Email or password is incorrect.'; return; }
+      setSession(user);
+      localStorage.setItem('fsm_q_count', '0');
+      window.location.href = 'index.html';
+    });
+
+    document.getElementById('showParentReg').addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('parentLoginForm').style.display = 'none';
+      document.querySelector('.divider').style.display = 'none';
+      document.getElementById('parentRegForm').style.display = '';
+      document.getElementById('pSwitchWrap').style.display = 'none';
+      document.getElementById('pBackWrap').style.display = '';
+    });
+    document.getElementById('backParentLogin').addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('parentRegForm').style.display = 'none';
+      document.getElementById('parentLoginForm').style.display = '';
+      document.querySelector('.divider').style.display = '';
+      document.getElementById('pSwitchWrap').style.display = '';
+      document.getElementById('pBackWrap').style.display = 'none';
+    });
+    document.getElementById('parentRegForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name  = document.getElementById('prName').value.trim();
+      const email = document.getElementById('prEmail').value.trim();
+      const pass  = document.getElementById('prPass').value;
+      if (!name || !email || !pass) { document.getElementById('pRegErr').textContent = 'Please fill in all fields.'; return; }
+      const users = getUsers();
+      if (users.find(u => u.email === email)) { document.getElementById('pRegErr').textContent = 'That email is already registered.'; return; }
+      const user = { email, password: pass, name, type: 'parent', childName: name, nickels: 0, purchases: [] };
+      users.push(user); saveUsers(users); setSession(user);
+      localStorage.setItem('fsm_q_count', '0');
+      window.location.href = 'index.html';
+    });
+
+    /* ══ TEACHER ══ */
+    document.getElementById('teacherLoginForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('tEmail').value.trim();
+      const pass  = document.getElementById('tPass').value;
+      const users = getUsers();
+      const user  = users.find(u => u.email === email && u.password === pass && u.type === 'teacher');
+      if (!user) { document.getElementById('tLoginErr').textContent = 'Email or password is incorrect.'; return; }
+      setSession(user); showTeacherDash(user);
+    });
+    document.getElementById('showTeacherReg').addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('teacherLoginForm').style.display = 'none';
+      document.getElementById('teacherRegForm').style.display = '';
+      document.getElementById('tSwitchWrap').style.display = 'none';
+      document.getElementById('tBackWrap').style.display = '';
+    });
+    document.getElementById('backTeacherLogin').addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('teacherRegForm').style.display = 'none';
+      document.getElementById('teacherLoginForm').style.display = '';
+      document.getElementById('tSwitchWrap').style.display = '';
+      document.getElementById('tBackWrap').style.display = 'none';
+    });
+    document.getElementById('teacherRegForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name  = document.getElementById('trName').value.trim();
+      const email = document.getElementById('trEmail').value.trim();
+      const pass  = document.getElementById('trPass').value;
+      if (!name || !email || !pass) { document.getElementById('trErr').textContent = 'Please fill in all fields.'; return; }
+      const users = getUsers();
+      if (users.find(u => u.email === email)) { document.getElementById('trErr').textContent = 'That email is already registered.'; return; }
+      const user = { email, password: pass, name, type: 'teacher', classCode: genCode(), students: [] };
+      users.push(user); saveUsers(users); setSession(user);
+      showTeacherDash(user);
+    });
+
+    function showTeacherDash(user) {
+      document.getElementById('teacherLoginForm').style.display = 'none';
+      document.getElementById('teacherRegForm').style.display  = 'none';
+      document.querySelectorAll('#panel-teacher .divider, #tSwitchWrap, #tBackWrap').forEach(el => el.style.display = 'none');
+      const dash = document.getElementById('teacherDash');
+      dash.style.display = 'flex';
+      document.getElementById('dashCode').textContent = user.classCode;
+      drawQR(user.classCode);
+      renderStudents(user);
+    }
+
+    function saveTeacher(user) {
+      const users = getUsers();
+      const idx = users.findIndex(u => u.email === user.email);
+      if (idx >= 0) { users[idx] = user; saveUsers(users); setSession(user); }
+    }
+
+    function renderStudents(user) {
+      const list = document.getElementById('studentsList');
+      document.getElementById('studentCount').textContent = (user.students || []).length;
+      list.innerHTML = '';
+      (user.students || []).forEach((s, i) => {
+        const chip = document.createElement('div');
+        chip.className = 's-chip';
+        chip.innerHTML = s.avatar + ' ' + s.name + ' <span class="rm" data-i="' + i + '">✕</span>';
+        chip.querySelector('.rm').addEventListener('click', () => {
+          user.students.splice(i, 1); saveTeacher(user); renderStudents(user);
+        });
+        list.appendChild(chip);
+      });
+    }
+
+    document.getElementById('addStudentBtn').addEventListener('click', () => {
+      const inp  = document.getElementById('newStudentName');
+      const name = inp.value.trim();
+      if (!name) return;
+      const session = getSession();
+      if (!session || session.type !== 'teacher') return;
+      const users = getUsers();
+      const user  = users.find(u => u.email === session.email);
+      if (!user) return;
+      user.students = user.students || [];
+      user.students.push({ name, avatar: AVATARS[user.students.length % AVATARS.length] });
+      saveTeacher(user);
+      renderStudents(user);
+      inp.value = '';
+    });
+
+    document.getElementById('goToQuizBtn').addEventListener('click', () => window.location.href = 'index.html');
+    document.getElementById('teacherLogoutBtn').addEventListener('click', () => { clearSession(); location.reload(); });
+    document.getElementById('copyCodeBtn').addEventListener('click', () => {
+      const code = document.getElementById('dashCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        document.getElementById('copyCodeBtn').textContent = '✓ Copied!';
+        setTimeout(() => document.getElementById('copyCodeBtn').textContent = '📋 Copy Code', 2000);
+      });
+    });
+
+    /* ── Simple QR renderer ── */
+    function drawQR(classCode) {
+      const canvas = document.getElementById('qrCanvas');
+      const ctx = canvas.getContext('2d');
+      const url = location.origin + location.pathname + '?class=' + classCode;
+      if (window.QRCode) {
+        canvas.style.display = 'none';
+        if (!document.getElementById('qrDiv')) {
+          const div = document.createElement('div');
+          div.id = 'qrDiv'; div.style.cssText = 'margin:10px auto;width:130px';
+          canvas.parentNode.insertBefore(div, canvas);
+          new QRCode(div, { text: url, width: 130, height: 130, correctLevel: QRCode.CorrectLevel.M });
+        }
+      } else {
+        ctx.fillStyle = '#f0f2ff'; ctx.fillRect(4,4,122,122);
+        ctx.fillStyle = '#6C63FF'; ctx.font = 'bold 20px Fredoka One,cursive'; ctx.textAlign = 'center';
+        ctx.fillText(classCode, 65, 60);
+        ctx.fillStyle = '#888'; ctx.font = '10px Nunito,sans-serif';
+        ctx.fillText('Share with your students', 65, 85);
+        ctx.fillText('login.html?class=' + classCode, 65, 100);
+      }
+    }
+
+    /* ── Auto-restore ── */
+    const session = getSession();
+    if (session) {
+      if (session.type === 'teacher') {
+        document.querySelector('[data-tab="teacher"]').click();
+        const user = getUsers().find(u => u.email === session.email);
+        if (user) showTeacherDash(user);
+      } else {
+        window.location.href = 'index.html';
+      }
+    }
+
+    /* ── Handle ?class= QR scan ── */
+    const classParam = new URLSearchParams(location.search).get('class');
+    if (classParam) {
+      document.getElementById('codeInput').value = classParam.toUpperCase();
+      document.getElementById('findClassBtn').click();
+    }
+
+  })();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" async></script>
+</body>
+</html>

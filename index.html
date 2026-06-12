@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FirstStepMath – Fun Math for Little Learners!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="about.html" class="nav-link">About</a>
+        <a href="worksheets.html" class="nav-link">📄 Worksheets</a>
+        <a href="store.html" class="nav-link nav-link-store">🪙 Store</a>
+        <a href="login.html" class="btn btn-outline">Sign In</a>
+        <a href="#grades" class="btn btn-primary">Get Started Free</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🏆 #1 Math Practice for Little Learners</div>
+      <h1 class="hero-title">Make Math Fun<br>for Your Child!</h1>
+      <p class="hero-subtitle">Interactive math activities for Pre‑K through 1st Grade — built to spark a love of numbers.</p>
+      <a href="#grades" class="btn btn-hero">Start Learning Free →</a>
+      <div class="hero-stats">
+        <div class="stat"><strong>3</strong><span>Grade Levels</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>17</strong><span>Topics</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>150+</strong><span>Questions</span></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-bubble bubble-1">1 + 2 = 3</div>
+      <div class="hero-bubble bubble-2">🔺 = 3 sides</div>
+      <div class="hero-bubble bubble-3">5 &#8722; 3 = 2</div>
+      <div class="mascot-wrap">
+        <div class="mascot">🌟</div>
+        <div class="mascot-shadow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-section">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">🎯</div>
+          <h3>Pick a Topic</h3>
+          <p>Choose from counting, shapes, addition, subtraction, and more!</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">✏️</div>
+          <h3>Answer Questions</h3>
+          <p>Fun, colorful multiple-choice questions designed for young learners.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">⭐</div>
+          <h3>Earn Stars</h3>
+          <p>Get instant feedback and earn stars as you master each topic!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GRADE TABS ===== -->
+  <section class="grades-section" id="grades">
+    <div class="container">
+      <h2 class="section-title">Choose Your Grade</h2>
+      <p class="section-subtitle">Select a grade to see all available math topics</p>
+      <div class="grade-tabs" role="tablist">
+        <button class="grade-tab active" data-grade="prek" role="tab" aria-selected="true">
+          <span class="grade-tab-icon">🌱</span>
+          <span class="grade-tab-label">Pre-K</span>
+          <span class="grade-tab-desc">Ages 3–4</span>
+        </button>
+        <button class="grade-tab" data-grade="kindergarten" role="tab" aria-selected="false">
+          <span class="grade-tab-icon">⭐</span>
+          <span class="grade-tab-label">Kindergarten</span>
+          <span class="grade-tab-desc">Ages 5–6</span>
+        </button>
+        <button class="grade-tab" data-grade="grade1" role="tab" aria-selected="false">
+          <span class="grade-tab-icon">🚀</span>
+          <span class="grade-tab-label">1st Grade</span>
+          <span class="grade-tab-desc">Ages 6–7</span>
+        </button>
+        <button class="grade-tab" data-grade="grade2" role="tab" aria-selected="false">
+          <span class="grade-tab-icon">🎯</span>
+          <span class="grade-tab-label">2nd Grade</span>
+          <span class="grade-tab-desc">Ages 7–8</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOPICS GRID ===== -->
+  <section class="topics-section">
+    <div class="container">
+      <div class="grade-intro" id="gradeIntro"></div>
+      <div class="topics-grid" id="topicsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo footer-logo">
+            <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+          </div>
+          <p>Making math fun, one step at a time! 🎉</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Learn</h4>
+          <a href="#grades">Pre-K Math</a>
+          <a href="#grades">Kindergarten Math</a>
+          <a href="#grades">1st Grade Math</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 FirstStepMath. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/questions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
