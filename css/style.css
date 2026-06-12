@@ -72,7 +72,7 @@ button, a { touch-action: manipulation; }
   background: #fff; padding: 0; display: block; min-height: unset; overflow: hidden;
 }
 .hero-banner-img {
-  width: 100%; display: block; max-height: 280px; object-fit: cover; object-position: center top;
+  width: 100%; display: block; max-height: 140px; object-fit: cover; object-position: center top;
 }
 .hero-banner-cta {
   background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
