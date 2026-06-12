@@ -3,101 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Star Store – FirstStepMath</title>
+  <title>Toy Store – FirstStepMath</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ── Store page styles ── */
-    .store-header-bar {
-      background: linear-gradient(135deg, #6C63FF 0%, #4ECDC4 100%);
-      padding: 60px 24px 40px; text-align: center; color: #fff;
-    }
-    .store-header-bar h1 { font-family: 'Fredoka One', cursive; font-size: 2.8rem; margin-bottom: 10px; text-shadow: 2px 3px 0 rgba(0,0,0,0.12); }
-    .store-header-bar p   { font-size: 1.05rem; opacity: 0.95; font-weight: 600; }
-
-    .stars-balance-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5);
-      border-radius: 50px; padding: 10px 24px; font-family: 'Fredoka One', cursive;
-      font-size: 1.4rem; margin-top: 20px;
-    }
-
-    .store-main { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; }
-
-    .store-section-title {
-      font-family: 'Fredoka One', cursive; font-size: 1.6rem; color: var(--dark);
-      margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
-    }
-
-    .store-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 18px;
-    }
-    @media (max-width: 480px) {
-      .store-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    }
-
-    .store-item {
-      background: #fff; border-radius: 20px; padding: 20px 12px 16px;
-      text-align: center; border: 3px solid #eee;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    /* ── Hero ── */
+    .store-hero {
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #f59e0b 100%);
+      padding: 56px 24px 36px; text-align: center; color: #fff;
       position: relative; overflow: hidden;
     }
-    .store-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(108,99,255,0.15); border-color: #c8c0ff; }
-    .store-item.owned { border-color: #28a745; background: #f0fff4; }
-    .store-item.owned::before {
-      content: '✓ Owned'; position: absolute; top: 8px; right: -22px;
-      background: #28a745; color: #fff; font-size: 0.65rem; font-weight: 800;
-      padding: 3px 28px; transform: rotate(45deg); letter-spacing: 0.5px;
+    .store-hero::before {
+      content: '⭐ 🌟 💫 ✨ ⭐ 🌟 💫 ✨ ⭐ 🌟';
+      position: absolute; top: 8px; left: 0; right: 0;
+      font-size: 1.1rem; opacity: 0.2; letter-spacing: 6px;
+    }
+    .store-hero h1 { font-family:'Fredoka One',cursive; font-size:3rem; margin-bottom:6px; text-shadow:3px 4px 0 rgba(0,0,0,0.15); }
+    .store-hero p  { font-size:1.05rem; font-weight:700; opacity:0.95; }
+    .balance-pill {
+      display:inline-flex; align-items:center; gap:10px;
+      background:rgba(255,255,255,0.22); border:3px solid rgba(255,255,255,0.5);
+      border-radius:60px; padding:12px 28px; margin-top:18px;
+      font-family:'Fredoka One',cursive; font-size:1.6rem; color:#fff;
     }
 
-    .store-item-img { font-size: 3.2rem; line-height: 1; margin-bottom: 4px; }
-    .store-item-name { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--dark); }
-    .store-item-desc { font-size: 0.78rem; color: #777; line-height: 1.4; flex: 1; }
-    .store-item-price {
-      font-family: 'Fredoka One', cursive; font-size: 1.1rem;
-      color: var(--orange); display: flex; align-items: center; gap: 4px;
+    /* ── Layout ── */
+    .store-main  { max-width:1100px; margin:0 auto; padding:32px 18px 80px; }
+    .store-banner {
+      background:#fffbeb; border:3px dashed #f59e0b; border-radius:18px;
+      padding:14px 24px; text-align:center; margin-bottom:28px;
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#92400e;
+    }
+    .store-section-title {
+      font-family:'Fredoka One',cursive; font-size:2rem; color:#3b0764;
+      text-align:center; margin-bottom:24px;
     }
 
+    /* ── Grid ── */
+    .store-grid {
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:16px;
+    }
+    @media(max-width:1000px){ .store-grid{ grid-template-columns:repeat(4,1fr); } }
+    @media(max-width:760px) { .store-grid{ grid-template-columns:repeat(3,1fr); gap:12px; } }
+    @media(max-width:520px) { .store-grid{ grid-template-columns:repeat(2,1fr); gap:10px; } }
+
+    /* ── Card ── */
+    .store-card {
+      border-radius:22px; overflow:hidden; border:3px solid transparent;
+      box-shadow:0 6px 20px rgba(0,0,0,0.10);
+      display:flex; flex-direction:column;
+      cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;
+      position:relative;
+    }
+    .store-card:hover { transform:translateY(-6px); box-shadow:0 14px 32px rgba(0,0,0,0.18); }
+    .store-card.owned { opacity:0.75; }
+    .store-card.owned::after {
+      content:'✓ OWNED'; position:absolute; top:12px; right:-26px;
+      background:#16a34a; color:#fff; font-family:'Fredoka One',cursive;
+      font-size:0.6rem; padding:4px 34px; transform:rotate(45deg);
+      letter-spacing:1px; z-index:5;
+    }
+
+    /* Image area */
+    .card-img-area {
+      width:100%; aspect-ratio:1/1;
+      display:flex; align-items:center; justify-content:center;
+      font-size:4.5rem; line-height:1;
+      position:relative;
+    }
+    .card-img-area img {
+      width:100%; height:100%; object-fit:contain;
+      padding:8px;
+    }
+
+    /* Bottom label */
+    .card-label {
+      background:#5b21b6; padding:10px 10px 12px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .card-num-badge {
+      width:28px; height:28px; border-radius:50%; flex-shrink:0;
+      background:#fff; color:#5b21b6; font-family:'Fredoka One',cursive;
+      font-size:0.8rem; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.2);
+    }
+    .card-name-price { flex:1; min-width:0; }
+    .card-name {
+      font-family:'Fredoka One',cursive; font-size:0.9rem; color:#fff;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.2;
+    }
+    .card-price {
+      display:flex; align-items:center; gap:4px; margin-top:3px;
+    }
+    .coin-icon { font-size:0.9rem; }
+    .price-text { font-family:'Fredoka One',cursive; font-size:0.85rem; color:#fde68a; }
+
+    /* Buy button */
+    .card-buy-row { background:#4c1d95; padding:0 10px 12px; }
     .buy-btn {
-      width: 100%; padding: 10px; border-radius: 12px; border: none;
-      background: var(--purple); color: #fff; font-family: 'Fredoka One', cursive;
-      font-size: 1rem; cursor: pointer; transition: background 0.15s, transform 0.1s;
-      -webkit-tap-highlight-color: transparent;
+      width:100%; padding:9px; border-radius:12px; border:none;
+      background:#f59e0b; color:#fff; font-family:'Fredoka One',cursive;
+      font-size:0.95rem; cursor:pointer; transition:background 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color:transparent;
     }
-    .buy-btn:hover:not(:disabled)  { background: #5a53e6; }
-    .buy-btn:active:not(:disabled) { transform: scale(0.95); }
-    .buy-btn:disabled { background: #ccc; cursor: default; }
-    .buy-btn.owned-btn { background: #28a745; }
+    .buy-btn:hover:not(:disabled) { background:#d97706; }
+    .buy-btn:active:not(:disabled){ transform:scale(0.95); }
+    .buy-btn:disabled { background:#9ca3af; cursor:default; color:#e5e7eb; font-size:0.8rem; }
+    .buy-btn.owned-btn { background:#16a34a; }
 
-    .store-empty { text-align: center; padding: 60px 20px; color: #aaa; }
-    .store-empty .empty-icon { font-size: 3rem; margin-bottom: 12px; }
-    .store-empty p { font-size: 1rem; }
-
-    .toast {
-      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
-      background: #28a745; color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.1rem;
-      padding: 14px 28px; border-radius: 50px; box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-      transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); z-index: 9999;
-      pointer-events: none;
-    }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-
-    .my-collection { margin-top: 48px; }
-    .collection-grid {
-      display: flex; flex-wrap: wrap; gap: 12px;
-    }
+    /* ── Collection ── */
+    .my-collection { margin-top:52px; }
+    .collection-grid { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
     .collection-chip {
-      background: #f0f2ff; border-radius: 50px; padding: 10px 18px;
-      font-size: 1.4rem; border: 2px solid #dde3ff;
-      transition: transform 0.1s; cursor: default;
+      background:#f5f3ff; border-radius:16px; padding:14px 16px;
+      font-size:2rem; border:2px solid #ddd6fe;
+      box-shadow:0 3px 10px rgba(0,0,0,0.07);
+      transition:transform 0.1s; cursor:default; text-align:center; min-width:60px;
     }
-    .collection-chip:hover { transform: scale(1.1); }
-    .no-items { color: #aaa; font-size: 0.95rem; padding: 12px 0; }
+    .collection-chip:hover { transform:scale(1.12) rotate(-3deg); }
+    .collection-chip .chip-name { font-size:0.62rem; font-weight:800; color:#7c3aed; margin-top:4px; display:block; }
+    .no-items { color:#aaa; font-size:0.95rem; padding:20px 0; text-align:center; width:100%; }
+
+    /* ── Toast ── */
+    .toast {
+      position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(80px);
+      background:#16a34a; color:#fff; font-family:'Fredoka One',cursive; font-size:1.1rem;
+      padding:14px 28px; border-radius:50px; box-shadow:0 8px 24px rgba(0,0,0,0.18);
+      transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); z-index:9999; pointer-events:none;
+    }
+    .toast.show { transform:translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -110,8 +147,8 @@
       </a>
       <nav class="main-nav" id="mainNav">
         <a href="about.html" class="nav-link">About</a>
-        <a href="#" class="nav-link">For Teachers</a>
-        <a href="store.html" class="nav-link nav-link-store" style="color:var(--orange);font-weight:800">🪙 Store</a>
+        <a href="worksheets.html" class="nav-link">📄 Worksheets</a>
+        <a href="store.html" class="nav-link" style="color:var(--orange);font-weight:800">🛒 Toy Store</a>
         <a href="login.html" class="btn btn-outline">Sign In</a>
         <a href="index.html#grades" class="btn btn-primary">Play Now</a>
       </nav>
@@ -119,24 +156,27 @@
     </div>
   </header>
 
-  <!-- STORE HERO -->
-  <div class="store-header-bar">
-    <h1>🛒 Nickel Store</h1>
-    <p>Earn nickels by answering questions correctly, then spend them here!</p>
-    <div class="stars-balance-pill">
-      🪙 <span id="starBalance">0</span> Nickels
+  <!-- HERO -->
+  <div class="store-hero">
+    <h1>🧸 Toys &amp; Prizes</h1>
+    <p>Answer questions correctly to earn pretend money — then spend it here!</p>
+    <div class="balance-pill">
+      💵 $<span id="balanceAmt">0.00</span> <span style="font-size:1rem;opacity:0.8">saved up</span>
     </div>
   </div>
 
-  <!-- STORE MAIN -->
+  <!-- MAIN -->
   <div class="store-main">
-    <div class="store-section-title">🧸 Toys &amp; Prizes</div>
+    <div class="store-banner">
+      💡 Each correct answer earns you <strong>$0.10</strong> — save up and buy something fun!
+    </div>
+    <div class="store-section-title">🎁 Pick Your Prize!</div>
     <div class="store-grid" id="storeGrid"></div>
 
-    <div class="my-collection" id="myCollection">
+    <div class="my-collection">
       <div class="store-section-title">🎒 My Collection</div>
       <div class="collection-grid" id="collectionGrid">
-        <div class="no-items">Nothing yet — earn nickels and buy your first prize!</div>
+        <div class="no-items">Nothing yet — earn money and buy your first prize!</div>
       </div>
     </div>
   </div>
@@ -146,51 +186,52 @@
   <script src="js/tts.js"></script>
   <script>
   (() => {
-    const STARS_KEY     = 'fsm_nickels';
+    const MONEY_KEY     = 'fsm_dollars';
     const PURCHASES_KEY = 'fsm_purchases';
 
-    const ITEMS = [
-      { id:'teddy',    name:'Teddy Bear',      emoji:'🧸', price: 50,  desc:'A soft cuddly teddy bear!'       },
-      { id:'unicorn',  name:'Unicorn',          emoji:'🦄', price: 75,  desc:'Magical rainbow unicorn!'        },
-      { id:'rocket',   name:'Rocket Ship',      emoji:'🚀', price: 60,  desc:'Blast off into space!'           },
-      { id:'dino',     name:'Dinosaur',         emoji:'🦕', price: 65,  desc:'A friendly long-neck dino!'      },
-      { id:'dragon',   name:'Dragon',           emoji:'🐉', price:120,  desc:'A friendly fire-breathing pal!'  },
-      { id:'dolphin',  name:'Dolphin',          emoji:'🐬', price: 70,  desc:'Splash splash!'                  },
-      { id:'kite',     name:'Rainbow Kite',     emoji:'🪁', price: 45,  desc:'Fly it high in the sky!'         },
-      { id:'wand',     name:'Magic Wand',       emoji:'🪄', price: 90,  desc:'Make math magic happen!'         },
-      { id:'trophy',   name:'Golden Trophy',    emoji:'🏆', price:150,  desc:'You are a math champion!'        },
-      { id:'crown',    name:'Star Crown',       emoji:'👑', price:130,  desc:'Wear your math crown with pride!'},
-      { id:'art',      name:'Art Set',          emoji:'🎨', price: 80,  desc:'Create colorful masterpieces!'   },
-      { id:'gamepad',  name:'Game Controller',  emoji:'🎮', price:100,  desc:'Level up your play time!'        },
-      { id:'puppet',   name:'Puppet Show',      emoji:'🎭', price:110,  desc:'Put on a show for your friends!' },
-      { id:'carousel', name:'Merry-Go-Round',   emoji:'🎠', price:175,  desc:'Round and round you go!'         },
-      { id:'robot',    name:'Robot Friend',     emoji:'🤖', price:140,  desc:'Your new robot best friend!'     },
-      { id:'treasure', name:'Treasure Chest',   emoji:'💰', price:200,  desc:'Full of gold and gems!'          },
+    // Background colors cycling like the poster
+    const BG_COLORS = [
+      '#fef9c3','#ede9fe','#dbeafe','#dcfce7',
+      '#fce7f3','#ffedd5','#e0f2fe','#f0fdf4',
+      '#fef3c7','#ede9fe',
     ];
 
-    let stars = parseInt(localStorage.getItem(STARS_KEY) || '0');
+    const ITEMS = [
+      { id:'puppy',      num:1,  name:'Puppy Plush',    emoji:'🐶', price:0.55, desc:'Soft cuddly puppy!'        },
+      { id:'kitty',      num:2,  name:'Kitty Plush',    emoji:'🐱', price:0.55, desc:'Adorable fluffy kitty!'    },
+      { id:'racecar',    num:3,  name:'Race Car',       emoji:'🏎️', price:0.65, desc:'Zoom zoom!'                },
+      { id:'playground', num:4,  name:'Mini Playground',emoji:'🛝', price:0.85, desc:'Slide and climb!'          },
+      { id:'puzzle',     num:5,  name:'Puzzle Box',     emoji:'🧩', price:0.70, desc:'Wild adventure puzzle!'    },
+      { id:'yoyo',       num:6,  name:'Light-Up Yo-Yo', emoji:'🪀', price:0.45, desc:'Lights up as it spins!'    },
+      { id:'bubbles',    num:7,  name:'Bubble Wand',    emoji:'🫧', price:0.40, desc:'Blow giant bubbles!'       },
+      { id:'bnet',       num:8,  name:'Butterfly Net',  emoji:'🦋', price:0.50, desc:'Catch butterflies!'        },
+      { id:'fishbowl',   num:9,  name:'Fish Bowl',      emoji:'🐠', price:0.75, desc:'Your own little fish!'     },
+      { id:'train',      num:10, name:'Toy Train',      emoji:'🚂', price:0.95, desc:'Choo choo all day!'        },
+    ];
+
+    let balance   = parseFloat(localStorage.getItem(MONEY_KEY) || '0');
     let purchases = JSON.parse(localStorage.getItem(PURCHASES_KEY) || '[]');
 
     function saveState() {
-      localStorage.setItem(STARS_KEY,     String(stars));
+      localStorage.setItem(MONEY_KEY,     balance.toFixed(2));
       localStorage.setItem(PURCHASES_KEY, JSON.stringify(purchases));
     }
 
-    function updateBalanceDisplay() {
-      document.getElementById('starBalance').textContent = stars;
+    function updateBalance() {
+      document.getElementById('balanceAmt').textContent = balance.toFixed(2);
     }
 
     function showToast(msg) {
       const t = document.getElementById('toast');
       t.textContent = msg;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2200);
+      setTimeout(() => t.classList.remove('show'), 2400);
     }
 
     function renderCollection() {
       const grid = document.getElementById('collectionGrid');
-      if (purchases.length === 0) {
-        grid.innerHTML = '<div class="no-items">Nothing yet — earn nickels and buy your first prize!</div>';
+      if (!purchases.length) {
+        grid.innerHTML = '<div class="no-items">Nothing yet — earn money and buy your first prize!</div>';
         return;
       }
       grid.innerHTML = '';
@@ -200,7 +241,7 @@
         const chip = document.createElement('div');
         chip.className = 'collection-chip';
         chip.title = item.name;
-        chip.textContent = item.emoji;
+        chip.innerHTML = item.emoji + '<span class="chip-name">' + item.name + '</span>';
         grid.appendChild(chip);
       });
     }
@@ -208,36 +249,47 @@
     function renderStore() {
       const grid = document.getElementById('storeGrid');
       grid.innerHTML = '';
-      ITEMS.forEach(item => {
-        const owned   = purchases.includes(item.id);
-        const canBuy  = !owned && stars >= item.price;
+
+      ITEMS.forEach((item, idx) => {
+        const owned  = purchases.includes(item.id);
+        const canBuy = !owned && balance >= item.price;
+        const bg     = BG_COLORS[idx % BG_COLORS.length];
 
         const card = document.createElement('div');
-        card.className = 'store-item' + (owned ? ' owned' : '');
+        card.className = 'store-card' + (owned ? ' owned' : '');
+
+        let btnText = owned ? '✓ Owned' : canBuy ? 'Buy Now! 🛒' : 'Need $' + item.price.toFixed(2);
+        let btnCls  = 'buy-btn' + (owned ? ' owned-btn' : '');
+        let btnDis  = (owned || !canBuy) ? 'disabled' : '';
 
         card.innerHTML = `
-          <div class="store-item-img">${item.emoji}</div>
-          <div class="store-item-name">${item.name}</div>
-          <div class="store-item-desc">${item.desc}</div>
-          <div class="store-item-price">🪙 ${item.price} nickels</div>
-          <button class="buy-btn ${owned ? 'owned-btn' : ''}" ${owned || !canBuy ? 'disabled' : ''}>
-            ${owned ? '✓ Owned' : canBuy ? 'Buy!' : 'Need ' + item.price + ' 🪙'}
-          </button>
+          <div class="card-img-area" style="background:${bg}">
+            <span style="filter:drop-shadow(2px 6px 8px rgba(0,0,0,0.15));font-size:5rem">${item.emoji}</span>
+          </div>
+          <div class="card-label">
+            <div class="card-num-badge">${item.num}</div>
+            <div class="card-name-price">
+              <div class="card-name">${item.name}</div>
+              <div class="card-price">
+                <span class="coin-icon">🪙</span>
+                <span class="price-text">$${item.price.toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-buy-row">
+            <button class="${btnCls}" ${btnDis}>${btnText}</button>
+          </div>
         `;
 
         if (!owned) {
           card.querySelector('.buy-btn').addEventListener('click', () => {
-            if (stars < item.price) return;
-            stars -= item.price;
+            if (balance < item.price) return;
+            balance = parseFloat((balance - item.price).toFixed(2));
             purchases.push(item.id);
             saveState();
-            updateBalanceDisplay();
+            updateBalance();
             showToast('🎉 You got ' + item.name + '!');
-            if (window.speechSynthesis) {
-              const utt = new SpeechSynthesisUtterance('You got ' + item.name + '! Great job!');
-              utt.rate = 0.9;
-              window.speechSynthesis.speak(utt);
-            }
+            speakText('You got ' + item.name + '! Amazing job!');
             renderStore();
             renderCollection();
           });
@@ -247,11 +299,40 @@
       });
     }
 
-    updateBalanceDisplay();
+    updateBalance();
     renderStore();
     renderCollection();
   })();
   </script>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo footer-logo"><span class="logo-first">FirstStep</span><span class="logo-math">Math</span></div>
+          <p>Making math fun, one step at a time! 🎉</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Learn</h4>
+          <a href="index.html#grades">Pre-K Math</a>
+          <a href="index.html#grades">Kindergarten Math</a>
+          <a href="index.html#grades">1st Grade Math</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Resources</h4>
+          <a href="worksheets.html">Free Worksheets</a>
+          <a href="about.html">About Us</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 FirstStepMath. All rights reserved.</p></div>
+    </div>
+  </footer>
 
 </body>
 </html>

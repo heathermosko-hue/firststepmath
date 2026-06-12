@@ -616,9 +616,9 @@ function nextQuestion() {
   showQuestion();
 }
 
-function saveNickels(earned) {
-  const prev = parseInt(localStorage.getItem('fsm_nickels') || '0');
-  localStorage.setItem('fsm_nickels', prev + earned);
+function saveMoney(earned) {
+  const prev = parseFloat(localStorage.getItem('fsm_dollars') || '0');
+  localStorage.setItem('fsm_dollars', (prev + earned * 0.10).toFixed(2));
 }
 
 function checkQuestionGate() {
@@ -637,7 +637,7 @@ function incrementQuestionCount() {
 }
 
 function showEndScreen() {
-  saveNickels(score);
+  saveMoney(score);
   document.getElementById('feedbackOverlay').classList.remove('show');
   const total = questions.length;
   const pct   = Math.round((score / total) * 100);
@@ -647,7 +647,8 @@ function showEndScreen() {
   else                { stars = '⭐';     title = 'Good Try! Practice Makes Perfect! 💪'; }
   document.getElementById('endStars').textContent = stars;
   document.getElementById('endTitle').textContent  = title;
-  document.getElementById('endScore').textContent  = `You got ${score} out of ${total} correct! (${pct}%) — Earned ${score} 🪙`;
+  const earned = (score * 0.10).toFixed(2);
+  document.getElementById('endScore').textContent  = `You got ${score} out of ${total} correct! (${pct}%) — Earned $${earned}!`;
   document.getElementById('endScreen').style.display = 'flex';
   speakText(title.replace(/[^\w\s!]/g, ''));
 }
