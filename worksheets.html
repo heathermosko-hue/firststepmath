@@ -68,39 +68,86 @@
     }
     .ws-print-btn:hover { background:var(--orange-dk); }
 
-    /* ── Worksheet content (print-styled) ── */
-    .worksheet {
-      padding:32px 36px; font-family:'Nunito',sans-serif;
+    /* ── Worksheet (redesigned) ── */
+    .worksheet { font-family:'Nunito',sans-serif; background:#fff; }
+
+    .ws-top-banner {
+      padding:22px 32px 16px;
+      display:flex; justify-content:space-between; align-items:center;
+      border-bottom: 5px solid;
     }
-    .ws-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; }
-    .ws-title-block .ws-school { font-size:0.8rem; color:#888; }
-    .ws-title-block .ws-subject { font-family:'Fredoka One',cursive; font-size:1.5rem; color:var(--dark); }
-    .ws-title-block .ws-grade  { font-size:0.9rem; color:#666; margin-top:2px; }
-    .ws-meta-block { text-align:right; font-size:0.85rem; color:#555; line-height:1.8; }
-    .ws-meta-block .ws-line { display:flex; align-items:center; gap:6px; justify-content:flex-end; }
-    .ws-meta-block .ws-blank { border-bottom:2px solid #333; width:100px; display:inline-block; }
+    .ws-top-banner.prek   { background:#fff9e6; border-color:#FF6B9D; }
+    .ws-top-banner.kinder { background:#eef4ff; border-color:#4A90E2; }
+    .ws-top-banner.grade1 { background:#f3eeff; border-color:#7B5EA7; }
 
-    .ws-divider { border:none; border-top:2px solid #ddd; margin:16px 0; }
-    .ws-instructions { font-size:0.9rem; color:#444; margin-bottom:18px; font-style:italic; }
+    .ws-brand { font-family:'Fredoka One',cursive; font-size:1.05rem; }
+    .ws-brand span:first-child { color:#4A90E2; }
+    .ws-brand span:last-child  { color:#FF6B9D; }
 
-    .ws-problems { display:flex; flex-direction:column; gap:14px; }
-    .ws-problem { display:flex; align-items:center; gap:12px; }
-    .ws-problem-num { font-family:'Fredoka One',cursive; font-size:1rem; color:var(--orange); min-width:24px; }
-    .ws-problem-body { flex:1; }
-    .ws-eq { font-family:'Fredoka One',cursive; font-size:1.4rem; color:var(--dark); }
-    .ws-blank-ans { border-bottom:3px solid #333; width:48px; display:inline-block; min-height:24px; margin-left:4px; }
-    .ws-visual-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; font-size:1.4rem; }
-    .ws-circle { width:28px; height:28px; border-radius:50%; border:2px solid #666; display:inline-block; }
-    .ws-square { width:28px; height:28px; border:2px solid #666; display:inline-block; }
+    .ws-title-area { text-align:center; }
+    .ws-title-area .ws-grade-badge {
+      display:inline-block; padding:3px 14px; border-radius:50px;
+      font-family:'Fredoka One',cursive; font-size:0.78rem; color:#fff; margin-bottom:4px;
+    }
+    .prek   .ws-grade-badge { background:#FF6B9D; }
+    .kinder .ws-grade-badge { background:#4A90E2; }
+    .grade1 .ws-grade-badge { background:#7B5EA7; }
 
-    .ws-footer { margin-top:28px; text-align:center; font-size:0.75rem; color:#bbb; border-top:1px solid #eee; padding-top:12px; }
+    .ws-title-area h2 {
+      font-family:'Fredoka One',cursive; font-size:1.6rem; margin:0; color:#1a1a2e;
+    }
+    .ws-title-area .ws-standard { font-size:0.75rem; color:#999; margin-top:2px; }
+
+    .ws-name-block { text-align:right; font-size:0.82rem; color:#555; line-height:2.2; }
+    .ws-name-block span { border-bottom:2px solid #aaa; display:inline-block; width:110px; }
+
+    .ws-instructions-bar {
+      background:#f8f8f8; border-left:5px solid #fbbf24;
+      padding:8px 20px; font-size:0.88rem; font-style:italic; color:#555;
+      margin:0;
+    }
+
+    .ws-problems-grid {
+      padding:18px 24px 12px;
+      display:grid; grid-template-columns:1fr 1fr; gap:14px;
+    }
+    .ws-prob-card {
+      border:2px solid #eee; border-radius:14px; padding:12px 14px;
+      display:flex; gap:10px; align-items:flex-start; background:#fafafa;
+    }
+    .ws-num-circle {
+      width:26px; height:26px; border-radius:50%; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Fredoka One',cursive; font-size:0.88rem; color:#fff;
+    }
+    .prek-num   { background:#FF6B9D; }
+    .kinder-num { background:#4A90E2; }
+    .grade1-num { background:#7B5EA7; }
+
+    .ws-prob-inner { flex:1; }
+    .ws-prob-label { font-size:0.75rem; color:#888; margin-bottom:4px; }
+    .ws-eq2 { font-family:'Fredoka One',cursive; font-size:1.25rem; color:#1a1a2e; line-height:1.5; }
+    .ws-blank-ans { border-bottom:3px solid #555; min-width:44px; display:inline-block; min-height:22px; margin:0 3px; }
+    .ws-visual-row { display:flex; flex-wrap:wrap; gap:4px; margin:4px 0; }
+    .ws-tf { display:inline-grid; grid-template-columns:repeat(5,22px); grid-template-rows:repeat(2,22px); gap:2px; border:2px solid #555; padding:3px; border-radius:5px; }
+    .ws-tf-dot { width:22px; height:22px; border-radius:50%; border:2px solid #999; }
+    .ws-tf-dot.filled { background:#FF6B35; border-color:#c94f1a; }
+    .ws-pattern-row { font-size:1.3rem; letter-spacing:1px; line-height:1.8; }
+    .ws-compare-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:4px; font-family:'Fredoka One',cursive; }
+    .ws-compare-pill { background:#eef4ff; border:2px solid #bbd3f7; border-radius:8px; padding:3px 10px; font-size:0.95rem; }
+
+    .ws-footer2 {
+      margin:4px 24px 16px; padding-top:10px; border-top:1px dashed #ddd;
+      text-align:center; font-size:0.7rem; color:#bbb;
+    }
 
     /* ── Print CSS ── */
     @media print {
       body > *:not(#printArea) { display:none !important; }
       #printArea { display:block !important; }
-      .worksheet { padding: 20px 28px; }
       .ws-modal-head { display:none; }
+      .ws-prob-card { break-inside:avoid; }
+      @page { margin:14mm 12mm; }
     }
   </style>
 </head>
@@ -441,65 +488,78 @@
     },
   };
 
+  const GRADE_CLASS = { 'Pre-K':'prek', 'Kindergarten':'kinder', '1st Grade':'grade1' };
+  const NUM_CLASS   = { 'Pre-K':'prek-num', 'Kindergarten':'kinder-num', '1st Grade':'grade1-num' };
+  const GRADE_LABEL = { 'Pre-K':'🌱 Pre-K', 'Kindergarten':'⭐ Kindergarten', '1st Grade':'🚀 1st Grade' };
+
   function buildTenFrame(filled) {
-    let html = '<div style="display:inline-flex;flex-direction:column;gap:2px;border:2px solid #333;padding:3px;border-radius:4px">';
-    for (let r = 0; r < 2; r++) {
-      html += '<div style="display:flex;gap:2px">';
-      for (let c = 0; c < 5; c++) {
-        const i = r * 5 + c;
-        const bg = i < filled ? '#FF6B35' : '#fff';
-        html += `<div style="width:24px;height:24px;border-radius:50%;border:2px solid #999;background:${bg}"></div>`;
-      }
-      html += '</div>';
-    }
-    html += '</div>';
-    return html;
+    let dots = '';
+    for (let i = 0; i < 10; i++)
+      dots += `<div class="ws-tf-dot${i < filled ? ' filled' : ''}"></div>`;
+    return `<div class="ws-tf">${dots}</div>`;
   }
 
   function buildWS(key) {
     const ws = WS_DATA[key];
     if (!ws) return '<p>Worksheet not found.</p>';
+    const gc  = GRADE_CLASS[ws.grade]  || 'grade1';
+    const nc  = NUM_CLASS[ws.grade]    || 'grade1-num';
+    const gl  = GRADE_LABEL[ws.grade]  || ws.grade;
+
     let probs = '';
     ws.problems.forEach((p, i) => {
-      probs += `<div class="ws-problem"><div class="ws-problem-num">${i+1}.</div><div class="ws-problem-body">`;
-      if (p.label) probs += `<div style="font-size:0.88rem;color:#666;margin-bottom:4px">${p.label}</div>`;
+      let inner = '';
+      if (p.label) inner += `<div class="ws-prob-label">${p.label}</div>`;
+
       if (p.type === 'fill') {
         const eq = p.eq.replace(/___/g, '<span class="ws-blank-ans"></span>').replace(/\n/g,'<br>');
-        probs += `<div class="ws-eq">${eq}</div>`;
+        inner += `<div class="ws-eq2">${eq}</div>`;
       } else if (p.type === 'count') {
-        probs += `<div class="ws-visual-row">${p.emojis.split('').map(e=>`<span style="font-size:1.6rem">${e}</span>`).join('')}</div>`;
-        probs += `<div style="margin-top:6px;font-family:Fredoka One,cursive">= <span class="ws-blank-ans"></span></div>`;
+        const emojiArr = [...p.emojis];
+        inner += `<div class="ws-visual-row">${emojiArr.map(e=>`<span style="font-size:1.7rem">${e}</span>`).join('')}</div>`;
+        inner += `<div class="ws-eq2">= <span class="ws-blank-ans"></span></div>`;
       } else if (p.type === 'tenframe') {
-        probs += buildTenFrame(p.filled);
-        probs += `<div style="margin-top:6px;font-family:Fredoka One,cursive">${p.label}: <span class="ws-blank-ans"></span></div>`;
+        inner += buildTenFrame(p.filled);
+        inner += `<div class="ws-eq2" style="margin-top:6px">= <span class="ws-blank-ans"></span></div>`;
       } else if (p.type === 'pattern') {
-        probs += `<div style="font-size:1.5rem;letter-spacing:2px">${p.seq}</div>`;
+        inner += `<div class="ws-pattern-row">${p.seq}</div>`;
       } else if (p.type === 'compare') {
-        probs += `<div style="font-family:Fredoka One,cursive;font-size:1.1rem">${p.q}<br><span style="background:#f0f2ff;padding:4px 12px;border-radius:8px;margin-right:8px">${p.a}</span> or <span style="background:#f0f2ff;padding:4px 12px;border-radius:8px;margin-left:8px">${p.b}</span></div>`;
+        inner += `<div class="ws-eq2" style="font-size:1rem;margin-bottom:4px">${p.q}</div>`;
+        inner += `<div class="ws-compare-row"><span class="ws-compare-pill">${p.a}</span><span style="color:#aaa">or</span><span class="ws-compare-pill">${p.b}</span></div>`;
       } else if (p.type === 'count-add') {
-        probs += `<div class="ws-visual-row">${p.a.split('').map(e=>`<span style="font-size:1.4rem">${e}</span>`).join('')}<span style="font-family:Fredoka One,cursive;font-size:1.4rem;margin:0 8px">+</span>${p.b.split('').map(e=>`<span style="font-size:1.4rem">${e}</span>`).join('')}</div>`;
-        probs += `<div style="font-family:Fredoka One,cursive;font-size:1.3rem;margin-top:4px">${p.eq.replace(/___/,'<span class="ws-blank-ans"></span>')}</div>`;
+        const aArr = [...p.a], bArr = [...p.b];
+        inner += `<div class="ws-visual-row">${aArr.map(e=>`<span style="font-size:1.5rem">${e}</span>`).join('')}<span class="ws-eq2" style="margin:0 6px">+</span>${bArr.map(e=>`<span style="font-size:1.5rem">${e}</span>`).join('')}</div>`;
+        inner += `<div class="ws-eq2">${p.eq.replace(/___/g,'<span class="ws-blank-ans"></span>')}</div>`;
+      } else if (p.type === 'circle-more') {
+        inner += `<div class="ws-compare-row"><span class="ws-compare-pill">${p.a}</span><span style="color:#aaa">vs</span><span class="ws-compare-pill">${p.b}</span></div>`;
+        inner += `<div class="ws-eq2" style="font-size:0.9rem;margin-top:4px">Circle the group with MORE ⭕</div>`;
+      } else if (p.type === 'trace') {
+        inner += `<div class="ws-eq2" style="font-size:1.5rem;letter-spacing:8px;color:#ccc;border-bottom:2px dashed #ddd;padding-bottom:4px">${p.nums}</div>`;
       }
-      probs += '</div></div>';
+
+      probs += `<div class="ws-prob-card">
+        <div class="ws-num-circle ${nc}">${i+1}</div>
+        <div class="ws-prob-inner">${inner}</div>
+      </div>`;
     });
 
     return `<div class="worksheet">
-      <div class="ws-header">
-        <div class="ws-title-block">
-          <div class="ws-school">FirstStepMath.com — Free Printable</div>
-          <div class="ws-subject">${ws.title}</div>
-          <div class="ws-grade">${ws.grade} · Standard: ${ws.standard}</div>
+      <div class="ws-top-banner ${gc}">
+        <div class="ws-brand"><span>FirstStep</span><span>Math</span><div style="font-size:0.7rem;color:#888;font-family:Nunito,sans-serif;font-weight:700">firststepmmath.com · Free Printable</div></div>
+        <div class="ws-title-area">
+          <div class="ws-grade-badge">${gl}</div>
+          <h2>${ws.title}</h2>
+          <div class="ws-standard">Common Core ${ws.standard}</div>
         </div>
-        <div class="ws-meta-block">
-          <div class="ws-line">Name: <span class="ws-blank"></span></div>
-          <div class="ws-line">Date: <span class="ws-blank"></span></div>
-          <div class="ws-line">Score: ___  / ${ws.problems.length}</div>
+        <div class="ws-name-block">
+          Name: <span></span><br>
+          Date: <span></span><br>
+          Score: ___&nbsp;/&nbsp;${ws.problems.length}
         </div>
       </div>
-      <hr class="ws-divider">
-      <div class="ws-instructions">${ws.instructions}</div>
-      <div class="ws-problems">${probs}</div>
-      <div class="ws-footer">FirstStepMath.com · Free Common Core Worksheets · Print as many copies as you need!</div>
+      <div class="ws-instructions-bar">📝 ${ws.instructions}</div>
+      <div class="ws-problems-grid">${probs}</div>
+      <div class="ws-footer2">🌟 FirstStepMath.com &nbsp;·&nbsp; Free Common Core Worksheets &nbsp;·&nbsp; Print as many copies as you need!</div>
     </div>`;
   }
 
