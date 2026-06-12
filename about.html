@@ -38,8 +38,9 @@
       font-family: 'Fredoka One', cursive; font-size: 2.2rem; color: var(--dark);
       text-align: center; margin-bottom: 36px;
     }
-    .hiw-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    @media (max-width: 640px) { .hiw-steps { grid-template-columns: 1fr; } }
+    .hiw-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+    @media (max-width: 860px) { .hiw-steps { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .hiw-steps { grid-template-columns: 1fr; } }
     .hiw-step {
       text-align: center; background: #f8f8ff; border-radius: 18px; padding: 28px 20px;
       border: 2px solid #eee;
@@ -64,7 +65,8 @@
       border: 2px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     .tool-card-icon { font-size: 2rem; margin-bottom: 8px; }
-    .tool-card-name { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--dark); }
+    .tool-card-name { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--dark); margin-bottom: 4px; }
+    .tool-card-desc { font-size: 0.8rem; color: #777; line-height: 1.4; }
 
     /* ── Free badge ── */
     .free-section {
@@ -102,7 +104,7 @@
   <!-- HERO -->
   <div class="about-hero">
     <h1>About FirstStepMath</h1>
-    <p>A free, hands-on math practice site built for Pre-K through 2nd Grade — 100% aligned to Common Core standards.</p>
+    <p>A free, hands-on math practice website built for Pre-K through Grade 2 — aligned to Common Core Math standards, so children practice exactly what they need for their grade level.</p>
   </div>
 
   <!-- HOW IT WORKS -->
@@ -114,17 +116,22 @@
           <div class="hiw-step">
             <div class="hiw-step-icon">🎯</div>
             <h3>Pick a Topic</h3>
-            <p>Choose from counting, shapes, addition, subtraction, and more!</p>
+            <p>Choose from counting, shapes, addition, subtraction, place value, measurement, and more.</p>
           </div>
           <div class="hiw-step">
             <div class="hiw-step-icon">✏️</div>
             <h3>Answer Questions</h3>
-            <p>Fun, colorful multiple-choice questions designed for young learners.</p>
+            <p>Children solve simple, colorful multiple-choice math questions made for young learners.</p>
           </div>
           <div class="hiw-step">
             <div class="hiw-step-icon">💵</div>
             <h3>Earn Pretend Money</h3>
-            <p>Get instant feedback and earn pretend money for every correct answer — then spend it in the Play Store!</p>
+            <p>Kids get instant feedback and earn pretend money for every correct answer.</p>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-step-icon">🛒</div>
+            <h3>Spend Rewards</h3>
+            <p>Use pretend money in the Play Store to buy toys, pets, accessories, and other fun prizes.</p>
           </div>
         </div>
       </div>
@@ -135,7 +142,7 @@
   <section class="about-section">
     <div class="about-inner">
       <h2>📚 Aligned to Common Core</h2>
-      <p>Every question is mapped to a specific Common Core Math standard — so kids are always practicing exactly what they need to know for their grade level.</p>
+      <p>Every question is connected to a specific Common Core Math standard, helping children build strong skills step by step.</p>
       <div class="cc-grid">
         <div class="cc-card">
           <div class="cc-grade">🌱 Pre-K</div>
@@ -143,11 +150,15 @@
         </div>
         <div class="cc-card">
           <div class="cc-grade">⭐ Kindergarten</div>
-          <div class="cc-topics">Counting to 20 · Addition &amp; Subtraction · Make 10 · Teen Numbers · Shapes</div>
+          <div class="cc-topics">Counting to 20 · Addition &amp; Subtraction · Making 10 · Teen Numbers · Shapes</div>
         </div>
         <div class="cc-card">
-          <div class="cc-grade">🚀 1st Grade</div>
+          <div class="cc-grade">🚀 Grade 1</div>
           <div class="cc-topics">Add &amp; Subtract within 20 · Place Value · Tens &amp; Ones · Word Problems · Measurement</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">📘 Grade 2</div>
+          <div class="cc-topics">Skip Counting · Place Value to Hundreds · Add &amp; Subtract · Money · Time · Measurement · Word Problems</div>
         </div>
       </div>
     </div>
@@ -156,44 +167,26 @@
   <!-- INTERACTIVE TOOLS -->
   <section class="about-section">
     <div class="about-inner">
-      <h2>🧮 Hands-On Math Tools</h2>
-      <p>Every quiz includes access to a real interactive Math Toolbox — the same manipulatives used in classrooms, right on screen. Kids can explore, count, and model their thinking.</p>
+      <h2>🧮 Hands-On Math Toolbox</h2>
+      <p>Every quiz includes an interactive Math Toolbox with the same manipulatives used in classrooms. Children can model their thinking, count, compare, build numbers, and solve problems on screen.</p>
       <div class="tools-grid">
-        <div class="tool-card"><div class="tool-card-icon">🧱</div><div class="tool-card-name">Base 10 Blocks</div></div>
-        <div class="tool-card"><div class="tool-card-icon">📋</div><div class="tool-card-name">Ten Frame</div></div>
-        <div class="tool-card"><div class="tool-card-icon">📏</div><div class="tool-card-name">Number Line</div></div>
-        <div class="tool-card"><div class="tool-card-icon">📊</div><div class="tool-card-name">100 Chart</div></div>
-        <div class="tool-card"><div class="tool-card-icon">🔴</div><div class="tool-card-name">Counters</div></div>
-        <div class="tool-card"><div class="tool-card-icon">🔘</div><div class="tool-card-name">Number Bonds</div></div>
-        <div class="tool-card"><div class="tool-card-icon">💰</div><div class="tool-card-name">Play Money</div></div>
-        <div class="tool-card"><div class="tool-card-icon">🕐</div><div class="tool-card-name">Analog Clock</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🧱</div><div class="tool-card-name">Base 10 Blocks</div><div class="tool-card-desc">Build ones, tens, and hundreds.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📋</div><div class="tool-card-name">Ten Frame</div><div class="tool-card-desc">Practice counting, making 10, addition, and subtraction.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📏</div><div class="tool-card-name">Number Line</div><div class="tool-card-desc">Count forward and backward, compare and solve problems.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📊</div><div class="tool-card-name">100 Chart</div><div class="tool-card-desc">Explore number patterns, counting, and skip counting.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🔴</div><div class="tool-card-name">Counters</div><div class="tool-card-desc">Model groups, compare amounts, and solve basic problems.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🔘</div><div class="tool-card-name">Number Bonds</div><div class="tool-card-desc">Break numbers into parts and understand addition and subtraction.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">💰</div><div class="tool-card-name">Play Money</div><div class="tool-card-desc">Practice coins, bills, and simple money skills.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🕐</div><div class="tool-card-name">Analog Clock</div><div class="tool-card-desc">Learn time using a classroom-style clock.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- INTERACTIVE QUESTION TYPES -->
+  <!-- WHY IT WORKS -->
   <section class="about-section">
     <div class="about-inner">
-      <h2>🎮 Interactive Activities</h2>
-      <p>Questions aren't just multiple choice — kids tap, drag, count, and cross off objects to find their answers. Learning happens through doing.</p>
-      <div class="cc-grid">
-        <div class="cc-card">
-          <div class="cc-grade">👆 Tap to Count</div>
-          <div class="cc-topics">Tap each object one by one to count them out loud</div>
-        </div>
-        <div class="cc-card">
-          <div class="cc-grade">➕ Tap to Add</div>
-          <div class="cc-topics">Move objects from one group to another to see addition happen</div>
-        </div>
-        <div class="cc-card">
-          <div class="cc-grade">✕ Cross Off</div>
-          <div class="cc-topics">Cross off objects to model subtraction hands-on</div>
-        </div>
-        <div class="cc-card">
-          <div class="cc-grade">🎨 Patterns</div>
-          <div class="cc-topics">Complete AB, AAB, and ABC patterns by picking what comes next</div>
-        </div>
-      </div>
+      <h2>💡 Why FirstStepMath Works</h2>
+      <p>FirstStepMath combines Common Core practice, hands-on math tools, instant feedback, and fun rewards. Children don't just guess answers — they can use manipulatives to understand the math behind each question. It makes early math feel like play while helping kids build real confidence.</p>
     </div>
   </section>
 
