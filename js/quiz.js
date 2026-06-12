@@ -643,7 +643,7 @@ function nextQuestion() {
 
 function saveMoney(earned) {
   const prev = parseFloat(localStorage.getItem('fsm_dollars') || '0');
-  localStorage.setItem('fsm_dollars', (prev + earned * 0.10).toFixed(2));
+  localStorage.setItem('fsm_dollars', (prev + earned * 0.05).toFixed(2));
 }
 
 function checkQuestionGate() {
@@ -672,7 +672,7 @@ function showEndScreen() {
   else                { stars = '⭐';     title = 'Good Try! Practice Makes Perfect! 💪'; }
   document.getElementById('endStars').textContent = stars;
   document.getElementById('endTitle').textContent  = title;
-  const earned = (score * 0.10).toFixed(2);
+  const earned = (score * 0.05).toFixed(2);
   document.getElementById('endScore').textContent  = `You got ${score} out of ${total} correct! (${pct}%) — Earned $${earned}!`;
   document.getElementById('endScreen').style.display = 'flex';
   speakText(title.replace(/[^\w\s!]/g, ''));
