@@ -69,7 +69,8 @@ button, a { touch-action: manipulation; }
 }
 /* Banner hero override */
 .hero.hero-banner {
-  background: #fff; padding: 0; display: block; min-height: unset; overflow: hidden;
+  background: #fff !important; padding: 0 !important; display: block !important;
+  min-height: unset !important; overflow: hidden; gap: 0; flex-wrap: unset;
 }
 .hero-banner-img {
   width: 100%; display: block; height: auto; object-fit: contain;
