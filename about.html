@@ -68,6 +68,24 @@
     .tool-card-name { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--dark); margin-bottom: 4px; }
     .tool-card-desc { font-size: 0.8rem; color: #777; line-height: 1.4; }
 
+    /* ── FAQ ── */
+    .faq-section { padding: 64px 24px; background: #f8f8ff; }
+    .faq-inner { max-width: 780px; margin: 0 auto; }
+    .faq-section h2 { font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--purple); text-align: center; margin-bottom: 36px; }
+    .faq-item { background: #fff; border-radius: 16px; border: 2px solid #eee; margin-bottom: 14px; overflow: hidden; }
+    .faq-question {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      padding: 20px 24px; font-family: 'Nunito', sans-serif; font-size: 1.05rem;
+      font-weight: 800; color: var(--dark); display: flex; justify-content: space-between;
+      align-items: center; gap: 12px;
+    }
+    .faq-question:hover { background: #f8f8ff; }
+    .faq-arrow { font-size: 1.1rem; transition: transform 0.25s; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer-inner { padding: 0 24px 20px; font-size: 0.98rem; color: #555; line-height: 1.7; }
+    .faq-answer-inner a { color: var(--purple); font-weight: 700; }
+
     /* ── Free badge ── */
     .free-section {
       background: linear-gradient(135deg, var(--orange) 0%, #FF8E53 100%);
@@ -190,6 +208,77 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">Who created FirstStepMath? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          FirstStepMath was created by <strong>Heather Ross</strong>, the author and founder of <a href="https://www.firststepreading.com" target="_blank">FirstStepReading.com</a>. Heather has spent years developing fun, effective learning tools for young children. After building FirstStepReading to help kids learn to read, she created FirstStepMath to give families the same high-quality, free practice for early math skills.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Is FirstStepMath really free? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Yes — 100% free, always. There is no credit card required, no subscription, and no ads. Every grade level, every topic, and every tool is available at no cost.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What is Common Core Math? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Common Core Math is a set of learning standards used in most U.S. states that defines exactly what math skills children should know at each grade level. The standards focus on deep understanding — not just memorizing answers — so kids learn <em>why</em> math works, not just how to get the right answer. FirstStepMath aligns every question to these standards so children practice the right skills for their age.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Why is Common Core alignment important? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          When practice is aligned to Common Core standards, you can be confident that your child is working on exactly what their teacher is teaching in school. It removes guesswork for parents and gives kids targeted practice — not random worksheets, but the specific skills mapped to their grade.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What grades does FirstStepMath cover? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          FirstStepMath covers <strong>Pre-K through Grade 2</strong> — the foundational years for math. Topics include counting, shapes, patterns, addition, subtraction, place value, measurement, money, time, and more.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">How does the Play Store work? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Every correct answer earns your child <strong>5¢ in pretend money</strong>. They can save it up and visit the Play Store to "buy" virtual pets, toys, and accessories. It's a motivational reward system — no real money is ever involved. Everything stays saved in the browser so their balance is always there when they come back.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What are the Math Tools? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          The Math Toolbox is a built-in set of interactive manipulatives available during every quiz. It includes Base 10 Blocks, a Ten Frame, Number Line, 100 Chart, Counters, Number Bonds, Play Money, and an Analog Clock — the same tools teachers use in classrooms. Children can open the toolbox at any time to model a problem before answering.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Does my child need an account? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          No account is needed to start. Children can jump right in and answer questions immediately. Creating a free account lets them save their progress and pretend money balance across devices.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What devices does FirstStepMath work on? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          FirstStepMath works on any device with a web browser — computers, tablets, Chromebooks, and smartphones. No app download needed. It is designed to be touch-friendly for young learners on tablets.
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- FREE -->
   <div class="free-section">
     <div class="container">
@@ -239,5 +328,22 @@
     </div>
   </footer>
 
+<script>
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
 </body>
 </html>
