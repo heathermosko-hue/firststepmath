@@ -72,7 +72,7 @@ button, a { touch-action: manipulation; }
   background: #fff; padding: 0; display: block; min-height: unset; overflow: hidden;
 }
 .hero-banner-img {
-  width: 100%; display: block; max-height: 140px; object-fit: cover; object-position: center top;
+  width: 100%; display: block; height: auto; object-fit: contain;
 }
 .hero-banner-cta {
   background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
@@ -80,8 +80,7 @@ button, a { touch-action: manipulation; }
   padding: 24px 48px; flex-wrap: wrap;
 }
 @media(max-width:600px) {
-  .hero-banner-img { max-height: 220px; }
-  .hero-banner-cta { padding: 18px 20px; gap: 20px; }
+  .hero.hero-banner { display: none; }
 }
 .hero::before { content: ''; position: absolute; width: 700px; height: 700px; background: rgba(255,255,255,0.05); border-radius: 50%; top: -300px; right: -200px; pointer-events: none; }
 .hero-content { color: #fff; max-width: 520px; position: relative; z-index: 1; }
