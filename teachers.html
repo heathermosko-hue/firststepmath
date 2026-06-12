@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Teachers – FirstStepMath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .teacher-hero {
+      background: linear-gradient(135deg, #0f766e 0%, #0ea5e9 50%, #7c3aed 100%);
+      color: #fff; padding: 80px 24px 60px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .teacher-hero::before {
+      content: '📚 ✏️ 🔢 📐 🌟 📚 ✏️ 🔢 📐 🌟';
+      position: absolute; top: 10px; left: 0; right: 0;
+      font-size: 1.3rem; letter-spacing: 14px; opacity: 0.2;
+      white-space: nowrap; overflow: hidden;
+    }
+    .teacher-hero::after {
+      content: '🌟 📐 🔢 ✏️ 📚 🌟 📐 🔢 ✏️ 📚';
+      position: absolute; bottom: 10px; left: 0; right: 0;
+      font-size: 1.3rem; letter-spacing: 14px; opacity: 0.2;
+      white-space: nowrap; overflow: hidden;
+    }
+    .teacher-hero h1 {
+      font-family: 'Fredoka One', cursive; font-size: 3rem; margin-bottom: 14px;
+      text-shadow: 2px 3px 0 rgba(0,0,0,0.18); position: relative;
+    }
+    .teacher-hero p {
+      font-size: 1.2rem; opacity: 0.95; max-width: 600px;
+      margin: 0 auto; font-weight: 600; position: relative;
+    }
+
+    .t-section { padding: 64px 24px; }
+    .t-section:nth-child(even) { background: #f8f8ff; }
+    .t-inner { max-width: 920px; margin: 0 auto; }
+    .t-section h2 {
+      font-family: 'Fredoka One', cursive; font-size: 2rem; color: #3b0764;
+      margin-bottom: 8px;
+    }
+    .t-section h2 .ico { margin-right: 10px; }
+    .t-lead { font-size: 1.05rem; color: #555; margin-bottom: 32px; font-weight: 600; }
+
+    /* Feature grid */
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    @media(max-width: 700px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature-card {
+      background: #fff; border-radius: 20px; padding: 28px 20px;
+      border: 3px solid #ede9fe; box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+      text-align: center;
+    }
+    .feature-card .f-icon { font-size: 2.6rem; margin-bottom: 12px; display: block; }
+    .feature-card h3 {
+      font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: #3b0764;
+      margin-bottom: 8px;
+    }
+    .feature-card p { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+    /* Grade alignment */
+    .grade-table-wrap { overflow-x: auto; }
+    .grade-table {
+      width: 100%; border-collapse: collapse; font-size: 0.9rem;
+    }
+    .grade-table th {
+      font-family: 'Fredoka One', cursive; font-size: 1rem; padding: 14px 16px;
+      text-align: left; color: #fff;
+    }
+    .grade-table th.prek-hd { background: #FF6B9D; }
+    .grade-table th.kinder-hd { background: #4A90E2; }
+    .grade-table th.grade1-hd { background: #7B5EA7; }
+    .grade-table th.topic-hd { background: #374151; }
+    .grade-table td { padding: 11px 16px; border-bottom: 1px solid #f0f0f0; color: #333; }
+    .grade-table tr:last-child td { border-bottom: none; }
+    .grade-table tr:hover td { background: #faf5ff; }
+    .check { color: #16a34a; font-size: 1.1rem; font-weight: 900; }
+    .dash  { color: #ccc; }
+
+    /* Tips list */
+    .tips-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media(max-width: 640px) { .tips-list { grid-template-columns: 1fr; } }
+    .tips-list li {
+      background: #fff; border-radius: 16px; padding: 18px 20px;
+      border-left: 5px solid #7c3aed; box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+      font-size: 0.95rem; color: #333; line-height: 1.6; font-weight: 600;
+    }
+    .tips-list li strong { color: #3b0764; display: block; margin-bottom: 4px; font-family: 'Fredoka One', cursive; font-size: 1rem; }
+
+    /* CTA */
+    .teacher-cta {
+      background: linear-gradient(135deg, #7c3aed, #0ea5e9);
+      padding: 64px 24px; text-align: center; color: #fff;
+    }
+    .teacher-cta h2 {
+      font-family: 'Fredoka One', cursive; font-size: 2.2rem;
+      margin-bottom: 12px; text-shadow: 1px 2px 0 rgba(0,0,0,0.15);
+    }
+    .teacher-cta p { font-size: 1.05rem; font-weight: 600; opacity: 0.95; max-width: 500px; margin: 0 auto 28px; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn-white {
+      font-family: 'Fredoka One', cursive; font-size: 1.1rem;
+      background: #fff; color: #7c3aed; padding: 14px 32px;
+      border-radius: 50px; text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2); transition: transform 0.15s;
+    }
+    .cta-btn-white:hover { transform: translateY(-3px); }
+    .cta-btn-outline {
+      font-family: 'Fredoka One', cursive; font-size: 1.1rem;
+      background: transparent; color: #fff; padding: 14px 32px;
+      border-radius: 50px; text-decoration: none;
+      border: 3px solid rgba(255,255,255,0.7); transition: transform 0.15s;
+    }
+    .cta-btn-outline:hover { transform: translateY(-3px); background: rgba(255,255,255,0.1); }
+
+    /* Common Core pill badges */
+    .cc-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+    .cc-badge {
+      font-family: 'Fredoka One', cursive; font-size: 0.9rem;
+      padding: 8px 18px; border-radius: 50px; color: #fff;
+    }
+    .cc-badge.prek  { background: #FF6B9D; }
+    .cc-badge.kinder{ background: #4A90E2; }
+    .cc-badge.grade1{ background: #7B5EA7; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="about.html" class="nav-link">Our Program</a>
+        <a href="teachers.html" class="nav-link" style="color:var(--purple);font-weight:800">For Teachers</a>
+        <a href="worksheets.html" class="nav-link">📄 Worksheets</a>
+        <a href="store.html" class="nav-link">🛒 Toy Store</a>
+        <a href="login.html" class="btn btn-outline">Sign In</a>
+        <a href="index.html#grades" class="btn btn-primary">Play Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="teacher-hero">
+    <h1>🍎 For Teachers</h1>
+    <p>Classroom-ready math practice aligned to Common Core — Pre-K through Grade 1.</p>
+  </div>
+
+  <!-- WHY FIRSTSTEMATH -->
+  <section class="t-section">
+    <div class="t-inner">
+      <h2><span class="ico">🎯</span>Built for the Classroom</h2>
+      <p class="t-lead">FirstStepMath gives every young learner targeted, standard-aligned practice with the same tools teachers already use — plus a motivating reward system that keeps kids engaged.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <span class="f-icon">📐</span>
+          <h3>Common Core Aligned</h3>
+          <p>Every question is tied to a specific K–1 Common Core math domain. Students practice exactly what the standards require.</p>
+        </div>
+        <div class="feature-card">
+          <span class="f-icon">🧮</span>
+          <h3>Built-In Math Tools</h3>
+          <p>Students access Ten Frames, Base 10 Blocks, Number Lines, 100 Charts, Play Money, and more — right on screen.</p>
+        </div>
+        <div class="feature-card">
+          <span class="f-icon">💰</span>
+          <h3>Motivating Reward System</h3>
+          <p>Each correct answer earns pretend money that kids spend in the Toy Store. It keeps practice fun without screen-time guilt.</p>
+        </div>
+        <div class="feature-card">
+          <span class="f-icon">🖨️</span>
+          <h3>Printable Worksheets</h3>
+          <p>33 colorful printable worksheets — one for every quiz topic across Pre-K, Kindergarten, and Grade 1. Print-ready PDFs.</p>
+        </div>
+        <div class="feature-card">
+          <span class="f-icon">📱</span>
+          <h3>Works on Any Device</h3>
+          <p>Chromebooks, tablets, laptops, and phones. No app install needed. Perfect for tech centers or take-home practice.</p>
+        </div>
+        <div class="feature-card">
+          <span class="f-icon">🆓</span>
+          <h3>Free to Use</h3>
+          <p>Free accounts for students save progress across devices. Teachers can direct students to practice any topic at any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMON CORE ALIGNMENT -->
+  <section class="t-section">
+    <div class="t-inner">
+      <h2><span class="ico">📋</span>Standards Alignment</h2>
+      <p class="t-lead">FirstStepMath covers the critical foundational domains in the Common Core State Standards for Mathematics (CCSS-M).</p>
+      <div class="cc-badges">
+        <span class="cc-badge prek">Pre-K</span>
+        <span class="cc-badge kinder">Kindergarten</span>
+        <span class="cc-badge grade1">Grade 1</span>
+      </div>
+      <br>
+      <div class="grade-table-wrap">
+        <table class="grade-table">
+          <thead>
+            <tr>
+              <th class="topic-hd">Topic / Domain</th>
+              <th class="prek-hd">Pre-K</th>
+              <th class="kinder-hd">Kindergarten</th>
+              <th class="grade1-hd">Grade 1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Counting &amp; Cardinality</td><td class="check">✓</td><td class="check">✓</td><td class="dash">—</td></tr>
+            <tr><td>Counting to 5 / 10 / 20</td><td class="check">✓</td><td class="check">✓</td><td class="dash">—</td></tr>
+            <tr><td>Comparing Numbers</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Addition (within 5 / 10 / 20)</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Missing Number / Equations</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+            <tr><td>Make a Ten / Teen Numbers</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Place Value</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+            <tr><td>Ten More / Ten Less</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+            <tr><td>Fact Families</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+            <tr><td>2D &amp; 3D Shapes</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Patterns</td><td class="check">✓</td><td class="dash">—</td><td class="dash">—</td></tr>
+            <tr><td>Sorting &amp; Classifying</td><td class="check">✓</td><td class="dash">—</td><td class="dash">—</td></tr>
+            <tr><td>Position Words</td><td class="check">✓</td><td class="dash">—</td><td class="dash">—</td></tr>
+            <tr><td>Number Path / Number Line</td><td class="check">✓</td><td class="dash">—</td><td class="check">✓</td></tr>
+            <tr><td>Measurement</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Time</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+            <tr><td>Money</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+            <tr><td>Fractions (Halves &amp; Fourths)</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+            <tr><td>Word Problems</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+            <tr><td>Graphs &amp; Data</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section class="t-section">
+    <div class="t-inner">
+      <h2><span class="ico">💡</span>Classroom Tips</h2>
+      <p class="t-lead">Ways teachers and parents are using FirstStepMath to reinforce learning.</p>
+      <ul class="tips-list">
+        <li>
+          <strong>Morning Warm-Up</strong>
+          Open FirstStepMath at a tech center. Students pick their grade and a topic from today's lesson as a 5-minute warm-up.
+        </li>
+        <li>
+          <strong>Targeted Practice</strong>
+          After introducing a concept (e.g. Making Ten), assign that specific quiz topic so students get immediate repetition.
+        </li>
+        <li>
+          <strong>Math Tools Station</strong>
+          Let students explore the built-in Math Toolbox independently — the same manipulatives used on your whiteboard, available on-screen.
+        </li>
+        <li>
+          <strong>Print & Go Worksheets</strong>
+          Every quiz topic has a matching printable worksheet. Print a set to send home as homework that mirrors in-class practice.
+        </li>
+        <li>
+          <strong>Progress Motivation</strong>
+          Students see their pretend money grow with every correct answer. The store visit is a natural reward at the end of a session.
+        </li>
+        <li>
+          <strong>Differentiation</strong>
+          Struggling students can work on Pre-K or K topics. Advanced learners can move into Grade 1 topics — all from the same site.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="teacher-cta">
+    <h2>Ready to Use in Your Classroom?</h2>
+    <p>It's free to start — just point your students to FirstStepMath and pick a grade level!</p>
+    <div class="cta-btns">
+      <a href="index.html#grades" class="cta-btn-white">🎮 Try It Now</a>
+      <a href="worksheets.html" class="cta-btn-outline">🖨️ Get Worksheets</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo footer-logo"><span class="logo-first">FirstStep</span><span class="logo-math">Math</span></div>
+          <p>Making math fun, one step at a time! 🎉</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Learn</h4>
+          <a href="index.html#grades">Pre-K Math</a>
+          <a href="index.html#grades">Kindergarten Math</a>
+          <a href="index.html#grades">1st Grade Math</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Resources</h4>
+          <a href="worksheets.html">Free Worksheets</a>
+          <a href="teachers.html">For Teachers</a>
+          <a href="about.html">Our Program</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 FirstStepMath. All rights reserved.</p></div>
+    </div>
+  </footer>
+</body>
+</html>

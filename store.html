@@ -213,6 +213,147 @@
       transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); z-index:9999; pointer-events:none;
     }
     .toast.show { transform:translateX(-50%) translateY(0); }
+
+    /* ══════════ CASH REGISTER MODAL ══════════ */
+    .register-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:10000;
+      display:flex; align-items:center; justify-content:center; padding:16px;
+      animation:fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    .register-modal {
+      background:#1a3a2a; border-radius:28px; width:100%; max-width:440px;
+      box-shadow:0 24px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
+      overflow:hidden; animation:slideUp 0.25s cubic-bezier(0.175,0.885,0.32,1.275);
+      border:3px solid #2d5a3e;
+    }
+    @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+    .register-top {
+      background:linear-gradient(135deg,#0f4c2a,#1e6b3e);
+      padding:16px 20px; display:flex; align-items:center; justify-content:space-between;
+      border-bottom:2px solid #2d7a4a;
+    }
+    .register-title {
+      font-family:'Fredoka One',cursive; font-size:1.4rem; color:#7fffa0;
+      letter-spacing:1px; text-shadow:0 0 12px rgba(100,255,150,0.4);
+    }
+    .register-close {
+      background:rgba(255,255,255,0.12); border:none; color:#fff; font-size:1rem;
+      width:32px; height:32px; border-radius:50%; cursor:pointer; transition:background 0.15s;
+      font-family:'Fredoka One',cursive; line-height:32px; text-align:center; padding:0;
+    }
+    .register-close:hover { background:rgba(255,80,80,0.5); }
+
+    /* Item row */
+    .register-item {
+      background:#0f2a1a; padding:14px 20px;
+      display:flex; align-items:center; gap:14px; border-bottom:1px solid #2d4a35;
+    }
+    .reg-item-emoji { font-size:2.4rem; line-height:1; }
+    .reg-item-name  { font-family:'Fredoka One',cursive; font-size:1.1rem; color:#e2fce8; }
+    .reg-item-price { font-family:'Fredoka One',cursive; font-size:0.9rem; color:#7fffa0; margin-top:2px; }
+
+    /* LED Display */
+    .register-display {
+      background:#0a1f12; margin:14px 16px; border-radius:14px; padding:12px 18px;
+      border:2px solid #1a4a28; font-family:'Courier New',monospace;
+      box-shadow:inset 0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(50,255,100,0.08);
+    }
+    .display-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:4px 0; font-size:1rem; color:#3a5a42;
+    }
+    .display-row .display-val {
+      font-size:1.4rem; color:#00ff66; text-shadow:0 0 8px rgba(0,255,100,0.6);
+      letter-spacing:2px;
+    }
+    .display-row.paid-row .display-val { color:#ffdd00; text-shadow:0 0 8px rgba(255,200,0,0.5); }
+
+    /* Breakdown hint */
+    .register-hint {
+      margin:0 16px 4px; background:rgba(255,255,255,0.06); border-radius:12px;
+      padding:12px 16px; border:1px solid rgba(255,255,255,0.1);
+    }
+    .hint-label {
+      font-family:'Fredoka One',cursive; font-size:0.85rem; color:#aaffcc; margin-bottom:8px;
+    }
+    .hint-coins { display:flex; gap:10px; flex-wrap:wrap; }
+    .hint-chip {
+      font-family:'Fredoka One',cursive; font-size:0.8rem; color:#fff;
+      background:rgba(255,255,255,0.12); border-radius:50px; padding:4px 12px;
+      border:1px solid rgba(255,255,255,0.2);
+    }
+
+    /* Coins */
+    .reg-coins-label {
+      font-family:'Fredoka One',cursive; font-size:0.9rem; color:#aaffcc;
+      padding:10px 20px 6px; text-align:center;
+    }
+    .register-coins {
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
+      padding:10px 16px 14px;
+    }
+    .coin-btn {
+      width:68px; height:68px; border-radius:50%; border:none; cursor:pointer;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-family:'Fredoka One',cursive; line-height:1.2;
+      box-shadow:0 4px 12px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.3);
+      transition:transform 0.1s, opacity 0.3s, box-shadow 0.1s;
+      position:relative; overflow:hidden;
+    }
+    .coin-btn:active { transform:scale(0.9); }
+    .coin-btn.used {
+      opacity:0.25; cursor:default; transform:translateY(6px);
+      box-shadow:none;
+    }
+    .coin-btn.used::after {
+      content:'✓'; position:absolute; inset:0; background:rgba(0,0,0,0.4);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem; color:#fff;
+    }
+    .coin-btn .coin-value { font-size:1rem; color:#fff; text-shadow:1px 1px 0 rgba(0,0,0,0.3); }
+    .coin-btn .coin-name  { font-size:0.55rem; color:rgba(255,255,255,0.85); text-shadow:1px 1px 0 rgba(0,0,0,0.3); }
+
+    /* Coin colors */
+    .coin-dollar  { background:radial-gradient(circle at 35% 35%, #4ade80, #15803d); border:3px solid #166534; }
+    .coin-quarter { background:radial-gradient(circle at 35% 35%, #fde68a, #b45309); border:3px solid #92400e; }
+    .coin-dime    { background:radial-gradient(circle at 35% 35%, #e2e8f0, #64748b); border:3px solid #475569; width:58px; height:58px; }
+    .coin-nickel  { background:radial-gradient(circle at 35% 35%, #d4d4d4, #737373); border:3px solid #525252; }
+
+    /* Progress bar */
+    .register-progress-wrap {
+      margin:0 16px 14px; height:14px; background:rgba(255,255,255,0.1);
+      border-radius:99px; overflow:hidden; border:1px solid rgba(255,255,255,0.15);
+    }
+    .register-progress-bar {
+      height:100%; background:linear-gradient(90deg,#00cc44,#00ff66);
+      border-radius:99px; transition:width 0.35s ease;
+      box-shadow:0 0 8px rgba(0,255,100,0.5);
+    }
+
+    /* Ding screen */
+    .register-ding {
+      display:none; flex-direction:column; align-items:center; justify-content:center;
+      padding:36px 20px; text-align:center;
+    }
+    .ding-emoji { font-size:4rem; animation:bounce 0.5s ease infinite alternate; display:block; }
+    @keyframes bounce { from{transform:translateY(0)} to{transform:translateY(-12px)} }
+    .ding-text {
+      font-family:'Fredoka One',cursive; font-size:1.8rem; color:#7fffa0;
+      text-shadow:0 0 20px rgba(100,255,150,0.6); margin:12px 0 6px;
+    }
+    .ding-sub { font-family:'Fredoka One',cursive; font-size:1rem; color:#aaffcc; }
+
+    /* Cancel btn */
+    .register-cancel {
+      display:block; width:calc(100% - 32px); margin:0 16px 16px;
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#aaa;
+      background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+      border-radius:50px; padding:10px; cursor:pointer; transition:background 0.15s;
+    }
+    .register-cancel:hover { background:rgba(255,80,80,0.2); color:#ff9999; }
   </style>
 </head>
 <body>
@@ -324,6 +465,59 @@
       <div class="section-title">🎒 My Collection</div>
       <div class="collection-grid" id="collectionGrid">
         <div class="no-items">Nothing yet — earn money and start shopping!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASH REGISTER MODAL -->
+  <div id="registerOverlay" class="register-overlay" style="display:none" onclick="overlayClick(event)">
+    <div class="register-modal" id="registerModal">
+      <div class="register-top">
+        <div class="register-title">🏧 Cash Register</div>
+        <button class="register-close" onclick="closeRegister()">✕</button>
+      </div>
+
+      <!-- Pay flow -->
+      <div id="regPayFlow">
+        <div class="register-item">
+          <span class="reg-item-emoji" id="regItemEmoji"></span>
+          <div>
+            <div class="reg-item-name" id="regItemName"></div>
+            <div class="reg-item-price" id="regItemPrice"></div>
+          </div>
+        </div>
+
+        <div class="register-display">
+          <div class="display-row">
+            <span>TOTAL</span>
+            <span class="display-val" id="regTotal">$0.00</span>
+          </div>
+          <div class="display-row paid-row">
+            <span>PAID &nbsp;</span>
+            <span class="display-val" id="regPaid">$0.00</span>
+          </div>
+        </div>
+
+        <div class="register-hint">
+          <div class="hint-label">💡 You need these coins:</div>
+          <div class="hint-coins" id="regBreakdown"></div>
+        </div>
+
+        <div class="reg-coins-label">👆 Click each coin to put it in the register!</div>
+        <div id="regCoins" class="register-coins"></div>
+
+        <div class="register-progress-wrap">
+          <div class="register-progress-bar" id="regProgressBar" style="width:0%"></div>
+        </div>
+
+        <button class="register-cancel" onclick="closeRegister()">Cancel</button>
+      </div>
+
+      <!-- Ding screen -->
+      <div class="register-ding" id="regDing">
+        <span class="ding-emoji" id="dingEmoji">🎉</span>
+        <div class="ding-text">DING! You paid!</div>
+        <div class="ding-sub" id="dingItemName"></div>
       </div>
     </div>
   </div>
@@ -476,12 +670,7 @@
       if (!btnDis) {
         btn.addEventListener('click', () => {
           if (balance < item.price) return;
-          balance = parseFloat((balance - item.price).toFixed(2));
-          purchases[item.id] = (purchases[item.id] || 0) + 1;
-          saveState(); updateBalance();
-          showToast('🎉 You got ' + item.name + '!');
-          speakText('You got ' + item.name + '! Amazing job!');
-          renderAll();
+          openRegister(item, repeatable);
         });
       }
       return card;
@@ -556,6 +745,108 @@
 
     updateBalance();
     renderAll();
+
+  // ── CASH REGISTER ────────────────────────────────
+  let regItem = null, regRepeatable = false, regPaidCents = 0, regTotalCents = 0;
+
+  function getCoins(cents) {
+    const denoms = [
+      { v:100, name:'Dollar',  label:'$1.00', cls:'coin-dollar'  },
+      { v:25,  name:'Quarter', label:'25¢',   cls:'coin-quarter' },
+      { v:10,  name:'Dime',    label:'10¢',   cls:'coin-dime'    },
+      { v:5,   name:'Nickel',  label:'5¢',    cls:'coin-nickel'  },
+      { v:1,   name:'Penny',   label:'1¢',    cls:'coin-penny'   },
+    ];
+    const result = [];
+    let rem = cents;
+    for (const d of denoms) {
+      while (rem >= d.v) { result.push(Object.assign({}, d)); rem -= d.v; }
+    }
+    return result;
+  }
+
+  window.openRegister = function(item, repeatable) {
+    regItem = item; regRepeatable = repeatable || false;
+    regPaidCents = 0;
+    regTotalCents = Math.round(item.price * 100);
+
+    document.getElementById('regItemEmoji').textContent = item.emoji || '🛍️';
+    document.getElementById('regItemName').textContent  = item.name;
+    document.getElementById('regItemPrice').textContent = 'Price: $' + item.price.toFixed(2);
+    document.getElementById('regTotal').textContent     = '$' + item.price.toFixed(2);
+    document.getElementById('regPaid').textContent      = '$0.00';
+    document.getElementById('regProgressBar').style.width = '0%';
+
+    // Build hint breakdown
+    const coins = getCoins(regTotalCents);
+    const counts = {};
+    coins.forEach(c => { counts[c.name] = (counts[c.name] || 0) + 1; });
+    const breakdown = document.getElementById('regBreakdown');
+    breakdown.innerHTML = '';
+    Object.entries(counts).forEach(([name, cnt]) => {
+      const chip = document.createElement('span');
+      chip.className = 'hint-chip';
+      chip.textContent = cnt + ' ' + name + (cnt > 1 ? 's' : '');
+      breakdown.appendChild(chip);
+    });
+
+    // Build clickable coins
+    const coinsEl = document.getElementById('regCoins');
+    coinsEl.innerHTML = '';
+    coins.forEach((coin, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'coin-btn ' + coin.cls;
+      btn.innerHTML = `<span class="coin-value">${coin.label}</span><span class="coin-name">${coin.name}</span>`;
+      btn.dataset.value = coin.v;
+      btn.addEventListener('click', function() {
+        if (this.classList.contains('used')) return;
+        this.classList.add('used');
+        regPaidCents += coin.v;
+        const paidDollars = (regPaidCents / 100).toFixed(2);
+        document.getElementById('regPaid').textContent = '$' + paidDollars;
+        const pct = Math.min(100, Math.round(regPaidCents / regTotalCents * 100));
+        document.getElementById('regProgressBar').style.width = pct + '%';
+        if (regPaidCents >= regTotalCents) {
+          setTimeout(completePayment, 320);
+        }
+      });
+      coinsEl.appendChild(btn);
+    });
+
+    // Show pay flow, hide ding
+    document.getElementById('regPayFlow').style.display = 'block';
+    document.getElementById('regDing').style.display    = 'none';
+    document.getElementById('registerOverlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  function completePayment() {
+    balance = parseFloat((balance - regItem.price).toFixed(2));
+    purchases[regItem.id] = (purchases[regItem.id] || 0) + 1;
+    saveState(); updateBalance();
+
+    // Show ding screen
+    document.getElementById('regPayFlow').style.display = 'none';
+    const ding = document.getElementById('regDing');
+    ding.style.display = 'flex';
+    document.getElementById('dingEmoji').textContent  = regItem.emoji || '🎉';
+    document.getElementById('dingItemName').textContent = 'You got ' + regItem.name + '!';
+
+    speakText('Ding! You paid! You got ' + regItem.name + '! Amazing job!');
+    showToast('🎉 You got ' + regItem.name + '!');
+    renderAll();
+
+    setTimeout(closeRegister, 2200);
+  }
+
+  window.closeRegister = function() {
+    document.getElementById('registerOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  window.overlayClick = function(e) {
+    if (e.target === document.getElementById('registerOverlay')) closeRegister();
+  };
 
   // ── ENTRANCE NAVIGATION ──────────────────────────
   window.enterStore = function(tab) {
