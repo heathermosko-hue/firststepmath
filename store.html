@@ -300,36 +300,36 @@
 
     // ── FOOD ──────────────────────────────────────────
     const FOOD = [
-      { id:'dog-food',      num:1,  name:'Dog Treats',     emoji:'🦴', price:0.20, desc:'Yummy bones for your pup!',   bg:'#fef9c3', repeatable:true },
-      { id:'cat-food',      num:2,  name:'Cat Kibble',     emoji:'🐟', price:0.20, desc:'Fishy bites for your kitty!', bg:'#dbeafe', repeatable:true },
-      { id:'fish-food',     num:3,  name:'Fish Flakes',    emoji:'🫙', price:0.15, desc:'Sprinkle some for your fish!', bg:'#e0f2fe', repeatable:true },
-      { id:'hamster-food',  num:4,  name:'Hamster Mix',    emoji:'🌾', price:0.15, desc:'Seeds and grains!',            bg:'#fef3c7', repeatable:true },
-      { id:'bunny-food',    num:5,  name:'Bunny Carrots',  emoji:'🥕', price:0.15, desc:'Fresh carrots for your bunny!',bg:'#ffedd5', repeatable:true },
-      { id:'alien-food',    num:6,  name:'Star Dust Snack',emoji:'✨', price:0.25, desc:'Out-of-this-world food!',      bg:'#ede9fe', repeatable:true },
-      { id:'dino-food',     num:7,  name:'Dino Berries',   emoji:'🫐', price:0.25, desc:'Big berries for big dinos!',   bg:'#dcfce7', repeatable:true },
-      { id:'robot-fuel',    num:8,  name:'Robot Fuel',     emoji:'⚡', price:0.20, desc:'Power up your robo pet!',      bg:'#fce7f3', repeatable:true },
+      { id:'dog-food',     num:1, name:'Puppy Food',       emoji:'🦴', img:'img/store/food-puppy.png',   price:0.20, desc:'Crunch • Munch • Woof!',      bg:'#fef9c3', repeatable:true },
+      { id:'cat-food',     num:2, name:'Kitty Food',       emoji:'🐟', img:'img/store/food-kitty.png',   price:0.20, desc:'Crunch • Purr • Yum!',        bg:'#fce7f3', repeatable:true },
+      { id:'bunny-food',   num:3, name:'Bunny Treats',     emoji:'🥕', img:'img/store/food-bunny.png',   price:0.15, desc:'Munch • Hop • Yum!',          bg:'#dcfce7', repeatable:true },
+      { id:'hamster-food', num:4, name:'Hamster Snack Mix',emoji:'🌾', img:'img/store/food-hamster.png', price:0.15, desc:'Nibble • Crunch • Fun!',       bg:'#fef3c7', repeatable:true },
+      { id:'fish-food',    num:5, name:'Goldfish Flakes',  emoji:'🫙', img:'img/store/food-fish.png',    price:0.15, desc:'Sprinkle • Swim • Smile!',     bg:'#dbeafe', repeatable:true },
+      { id:'alien-food',   num:6, name:'Star Dust Snack',  emoji:'✨', price:0.25, desc:'Out-of-this-world food!',      bg:'#ede9fe', repeatable:true },
+      { id:'dino-food',    num:7, name:'Dino Berries',     emoji:'🫐', price:0.25, desc:'Big berries for big dinos!',   bg:'#dcfce7', repeatable:true },
+      { id:'robot-fuel',   num:8, name:'Robot Fuel',       emoji:'⚡', price:0.20, desc:'Power up your robo pet!',      bg:'#e0f2fe', repeatable:true },
     ];
 
     // ── ACCESSORIES ───────────────────────────────────
     const ACCESSORIES = [
-      { id:'red-collar',    num:1,  name:'Red Collar',     emoji:'🔴', price:0.30, desc:'A cute red collar!',          bg:'#fef2f2'  },
-      { id:'blue-bow',      num:2,  name:'Blue Bow',       emoji:'🎀', price:0.25, desc:'Tie a pretty bow!',           bg:'#dbeafe'  },
-      { id:'party-hat',     num:3,  name:'Party Hat',      emoji:'🎉', price:0.30, desc:'Party time every day!',       bg:'#fef9c3'  },
-      { id:'sunglasses',    num:4,  name:'Sunglasses',     emoji:'🕶️', price:0.35, desc:'Cool shades for your pet!',   bg:'#ede9fe'  },
-      { id:'pet-ball',      num:5,  name:'Bouncy Ball',    emoji:'⚽', price:0.25, desc:'Play fetch all day!',         bg:'#dcfce7'  },
-      { id:'squeaky-toy',   num:6,  name:'Squeaky Toy',    emoji:'🦆', price:0.25, desc:'Squeak squeak!',             bg:'#fff7ed'  },
-      { id:'star-tag',      num:7,  name:'Star ID Tag',    emoji:'⭐', price:0.20, desc:'A shiny name tag!',           bg:'#fef3c7'  },
-      { id:'rainbow-leash', num:8,  name:'Rainbow Leash',  emoji:'🌈', price:0.35, desc:'Walk in style!',             bg:'#fce7f3'  },
+      { id:'collar-leash',  num:1, name:'Collar & Leash',  emoji:'🐾', img:'img/store/collar-leash.png',  price:0.35, desc:'Clip • Walk • Play!',         bg:'#dbeafe' },
+      { id:'squeaky-toy',   num:2, name:'Squeaky Toy',     emoji:'🦴', img:'img/store/squeaky-toy.png',   price:0.25, desc:'Squeak • Toss • Fun!',        bg:'#fef9c3' },
+      { id:'blue-bow',      num:3, name:'Blue Bow',        emoji:'🎀', price:0.20, desc:'Tie a pretty bow!',           bg:'#fce7f3' },
+      { id:'party-hat',     num:4, name:'Party Hat',       emoji:'🎉', price:0.25, desc:'Party time every day!',       bg:'#fff7ed' },
+      { id:'sunglasses',    num:5, name:'Sunglasses',      emoji:'🕶️', price:0.30, desc:'Cool shades for your pet!',   bg:'#ede9fe' },
+      { id:'star-tag',      num:6, name:'Star ID Tag',     emoji:'⭐', price:0.20, desc:'A shiny name tag!',           bg:'#fef3c7' },
+      { id:'pet-ball',      num:7, name:'Bouncy Ball',     emoji:'⚽', price:0.20, desc:'Play fetch all day!',         bg:'#dcfce7' },
+      { id:'robo-charger',  num:8, name:'Robo Charger',    emoji:'⚡', img:'img/store/robo-charger.png',  price:0.40, desc:'Charge • Beep • Play!',        bg:'#e0f2fe' },
     ];
 
     // ── BEDS & HOMES ──────────────────────────────────
     const BEDS = [
-      { id:'cozy-bed',     num:1, name:'Cozy Pet Bed',    emoji:'🛏️', price:0.45, desc:'Soft fluffy pet bed!',        bg:'#fef9c3'  },
-      { id:'doghouse',     num:2, name:'Dog House',       emoji:'🏠', price:0.60, desc:'A home for your pup!',        bg:'#ffedd5'  },
-      { id:'cat-tree',     num:3, name:'Cat Tree',        emoji:'🌳', price:0.55, desc:'Climb and scratch!',          bg:'#dcfce7'  },
-      { id:'fish-tank',    num:4, name:'Fish Tank',       emoji:'🐠', price:0.50, desc:'A beautiful aquarium!',       bg:'#dbeafe'  },
-      { id:'hamster-cage', num:5, name:'Hamster Cage',    emoji:'🏡', price:0.45, desc:'A cozy hamster home!',        bg:'#fef3c7'  },
-      { id:'space-pod',    num:6, name:'Space Pod',       emoji:'🚀', price:0.70, desc:'For your alien friend!',      bg:'#ede9fe'  },
+      { id:'pet-bed',      num:1, name:'Pet Bed',          emoji:'🛏️', img:'img/store/pet-bed.png',       price:0.45, desc:'Rest • Cuddle • Dream!',       bg:'#fef9c3' },
+      { id:'pet-carrier',  num:2, name:'Pet Carrier',      emoji:'🏡', img:'img/store/pet-carrier.png',   price:0.55, desc:'Travel • Safe • Go!',          bg:'#dbeafe' },
+      { id:'doghouse',     num:3, name:'Dog House',        emoji:'🏠', price:0.60, desc:'A home for your pup!',        bg:'#ffedd5' },
+      { id:'cat-tree',     num:4, name:'Cat Tree',         emoji:'🌳', price:0.55, desc:'Climb and scratch!',          bg:'#dcfce7' },
+      { id:'fish-tank',    num:5, name:'Fish Tank',        emoji:'🐠', price:0.50, desc:'A beautiful aquarium!',       bg:'#e0f2fe' },
+      { id:'space-pod',    num:6, name:'Space Pod',        emoji:'🚀', price:0.70, desc:'For your alien friend!',      bg:'#ede9fe' },
     ];
 
     // ── TOYS ──────────────────────────────────────────
