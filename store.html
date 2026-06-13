@@ -663,17 +663,6 @@
       { id:'goat',      num:24, name:'Goat Pal',     emoji:'🐐', img:'img/store/goat.png',     price:15.00, desc:'Bleat • Play • Climb!'    },
       { id:'gator',     num:25, name:'Gator Pal',    emoji:'🐊', img:'img/store/gator.png',    price:20.00, desc:'Splash • Play • Snap!'    },
       { id:'frog',      num:26, name:'Froggy Pal',   emoji:'🐸', img:'img/store/frog.png',     price:10.00, desc:'Hop • Splash • Play!'     },
-      // Toys
-      { id:'toy-bone',        num:27, name:'Rainbow Bone',       emoji:'🦴', img:'img/store/toy-bone.png',        price:0.25, desc:'Chew • Toss • Play!'      },
-      { id:'toy-rope',        num:28, name:'Rainbow Rope Ring',  emoji:'🌈', img:'img/store/toy-rope.png',        price:0.25, desc:'Tug • Twist • Fun!'       },
-      { id:'toy-fish-plush',  num:29, name:'Fish Plush Toy',     emoji:'🐟', img:'img/store/toy-fish-plush.png',  price:0.30, desc:'Squish • Cuddle • Play!'  },
-      { id:'toy-ball',        num:30, name:'Paw Play Ball',      emoji:'⚽', img:'img/store/toy-ball.png',        price:0.25, desc:'Roll • Pounce • Fun!'     },
-      { id:'toy-feather-wand',num:31, name:'Feather Wand',       emoji:'🪶', img:'img/store/toy-feather-wand.png',price:0.30, desc:'Swish • Flutter • Play!'  },
-      { id:'toy-mouse',       num:32, name:'Mouse Plush Toy',    emoji:'🐭', img:'img/store/toy-mouse.png',       price:0.25, desc:'Squeak • Chase • Fun!'    },
-      { id:'toy-star-ring',   num:33, name:'Star Chew Ring',     emoji:'⭐', img:'img/store/toy-star-ring.png',   price:0.25, desc:'Bite • Chew • Play!'      },
-      { id:'toy-donut',       num:34, name:'Donut Plush Toy',    emoji:'🍩', img:'img/store/toy-donut.png',       price:0.30, desc:'Squish • Cuddle • Sweet!' },
-      { id:'toy-rattle',      num:35, name:'Rattle Toy',          emoji:'🎵', img:'img/store/toy-rattle.png',      price:0.25, desc:'Shake • Rattle • Play!'    },
-      { id:'toy-butterfly',   num:36, name:'Butterfly Plush',     emoji:'🦋', img:'img/store/toy-butterfly.png',   price:0.30, desc:'Flutter • Cuddle • Play!'  },
     ];
 
     // ── FOOD ──────────────────────────────────────────
@@ -743,6 +732,17 @@
       { id:'purse',             num:33, name:'Heart Purse',          emoji:'👜', img:'img/store/acc-purse.png',             price:0.35, desc:'Fancy • Carry • Style!',       bg:'#ede9fe' },
       { id:'butterfly-wings',   num:34, name:'Butterfly Wings',      emoji:'🦋', img:'img/store/acc-butterfly-wings.png',   price:0.45, desc:'Flutter • Magic • Fly!',       bg:'#fce7f3' },
       { id:'pearl-collar',      num:35, name:'Pearl Collar',         emoji:'🌸', img:'img/store/acc-pearl-collar.png',      price:0.40, desc:'Fancy • Bow • Pearl!',         bg:'#fce7f3' },
+      // Toys
+      { id:'toy-bone',         num:36, name:'Rainbow Bone',        emoji:'🦴', img:'img/store/toy-bone.png',         price:0.25, desc:'Chew • Toss • Play!',          bg:'#fef9c3' },
+      { id:'toy-rope',         num:37, name:'Rainbow Rope Ring',   emoji:'🌈', img:'img/store/toy-rope.png',         price:0.25, desc:'Tug • Twist • Fun!',           bg:'#ede9fe' },
+      { id:'toy-fish-plush',   num:38, name:'Fish Plush Toy',      emoji:'🐟', img:'img/store/toy-fish-plush.png',   price:0.30, desc:'Squish • Cuddle • Play!',      bg:'#dbeafe' },
+      { id:'toy-ball',         num:39, name:'Paw Play Ball',       emoji:'⚽', img:'img/store/toy-ball.png',         price:0.25, desc:'Roll • Pounce • Fun!',         bg:'#dcfce7' },
+      { id:'toy-feather-wand', num:40, name:'Feather Wand',        emoji:'🪶', img:'img/store/toy-feather-wand.png', price:0.30, desc:'Swish • Flutter • Play!',      bg:'#fce7f3' },
+      { id:'toy-mouse',        num:41, name:'Mouse Plush Toy',     emoji:'🐭', img:'img/store/toy-mouse.png',        price:0.25, desc:'Squeak • Chase • Fun!',        bg:'#fef9c3' },
+      { id:'toy-star-ring',    num:42, name:'Star Chew Ring',      emoji:'⭐', img:'img/store/toy-star-ring.png',    price:0.25, desc:'Bite • Chew • Play!',          bg:'#fef3c7' },
+      { id:'toy-donut',        num:43, name:'Donut Plush Toy',     emoji:'🍩', img:'img/store/toy-donut.png',        price:0.30, desc:'Squish • Cuddle • Sweet!',     bg:'#fce7f3' },
+      { id:'toy-rattle',       num:44, name:'Rattle Toy',          emoji:'🎵', img:'img/store/toy-rattle.png',       price:0.25, desc:'Shake • Rattle • Play!',       bg:'#dbeafe' },
+      { id:'toy-butterfly',    num:45, name:'Butterfly Plush',     emoji:'🦋', img:'img/store/toy-butterfly.png',    price:0.30, desc:'Flutter • Cuddle • Play!',     bg:'#ede9fe' },
     ];
 
     // ── BEDS & HOMES ──────────────────────────────────
@@ -770,6 +770,16 @@
       { id:'frog-pond',         num:21, name:'Frog Pond',            emoji:'🐸', img:'img/store/home-frog-pond.png',         price:0.55, desc:'Hop • Splash • Home!',           bg:'#dcfce7' },
       { id:'snake-den',         num:22, name:'Snake Den',            emoji:'🐍', img:'img/store/home-snake-den.png',         price:0.60, desc:'Coil • Hide • Home!',            bg:'#d1fae5' },
     ];
+
+    // ── ADMIN UNLOCK (?unlock=heather) ────────────────
+    if (new URLSearchParams(location.search).get('unlock') === 'heather') {
+      var allIds = {};
+      [...PETS, ...ACCESSORIES, ...BEDS, ...FOOD].forEach(function(item) {
+        allIds[item.id] = 1;
+      });
+      localStorage.setItem(PURCH_KEY, JSON.stringify(allIds));
+      localStorage.setItem(MONEY_KEY, '999.99');
+    }
 
     // ── STATE ──────────────────────────────────────────
     let balance   = parseFloat(localStorage.getItem(MONEY_KEY) || '0');
