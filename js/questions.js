@@ -178,9 +178,14 @@ const QUESTIONS = {
         { q: "How are these sorted?", visual: { type:"emoji_row", items:["💛","⭐","🌟","🍋"] },                                                                                               answers: ["Size","Shape","Colour","Type"], correct: "Colour", standard:"PK.NS.1" },
         { q: "How are these sorted?", visual: { type:"emoji_row", items:["🐕","🐱","🐟","🐦"] },                                                                                               answers: ["Size","Shape","Colour","Type"], correct: "Type",   standard:"PK.AF.1" },
         { q: "How are these sorted?", visual: { type:"emoji_row", items:["🍎","🍊","🍋","🍇"] },                                                                                               answers: ["Size","Shape","Colour","Type"], correct: "Type",   standard:"PK.AF.1" },
-        { q: "How are these sorted?", visual: { type:"emoji_row", items:["🚗","🚌","🚲","✈️"] },                                                                                               answers: ["Size","Shape","Colour","Type"], correct: "Type",   standard:"PK.AF.1" },
-      ]
-    },
+        { q: "How are these sorted?", visual: { type:"emoji_row", items:["🚗","🚌","🚲","✈️"] },                                                                                               answers: ["Size","Shape","Colour","Type"],      correct: "Type",         standard:"PK.AF.1" },
+        { q: "🔘🔘 has 2 holes. 🔲🔲 has 4 holes. How are the buttons sorted?", visual: null,                                                                                                   answers: ["Colour","Size","Number of holes","Shape"], correct: "Number of holes", standard:"PK.AF.1" },
+        { q: "How are these sorted?", visual: { type:"emoji_row", items:["🐛","🐜","🦋","🐝"] },                                                                                               answers: ["Number of legs","Colour","Size","Type"],    correct: "Number of legs",  standard:"PK.AF.1" },
+        { q: "How are these sorted?", visual: { type:"emoji_row", items:["🐟","🐠","🦈","🐙"] },                                                                                               answers: ["Type","Colour","Size","Where they live"],   correct: "Where they live", standard:"PK.AF.1" },
+        { q: "How are these sorted?", visual: { type:"emoji_row", items:["🚗","🚌","🚛","🏎️"] },                                                                                               answers: ["Colour","Has wheels","Size","Shape"],       correct: "Has wheels",      standard:"PK.AF.1" },
+        { q: "How are these sorted?", visual: { type:"emoji_row", items:["🍎","🍓","🍒","🌹"] },                                                                                               answers: ["Type","Size","Shape","Colour"],             correct: "Colour",          standard:"PK.NS.1" },
+        { q: "🐕🐘🦒🐘 — how could you sort these?",         visual: null,                                                                                                                       answers: ["By size","By colour","By number of holes","By wheels"], correct: "By size", standard:"PK.AF.1" },
+        { q: "🐾🐾 animals with 4 legs. 🐦🐍 animals without 4 legs. How are they sorted?", visual: null,                                                                                      answers: ["Colour","Size","Number of legs","Type"],    correct: "Number of legs",  standard:"PK.AF.1" },
 
     position: {
       title: "Position Words", icon: "📦", difficulty: 1,
