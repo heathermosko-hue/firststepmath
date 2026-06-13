@@ -51,6 +51,7 @@
     .entrance-card.pets-card { background:linear-gradient(135deg,#fde68a,#fbbf24); border-color:#f59e0b; }
     .entrance-card.toys-card { background:linear-gradient(135deg,#a5f3fc,#38bdf8); border-color:#0ea5e9; }
     .entrance-card.access-card { background:linear-gradient(135deg,#fbcfe8,#f472b6); border-color:#ec4899; }
+    .entrance-card.world-card  { background:linear-gradient(135deg,#bbf7d0,#34d399); border-color:#10b981; }
     .entrance-icon { font-size:4rem; display:block; margin-bottom:12px; }
     .entrance-name {
       font-family:'Fredoka One',cursive; font-size:1.6rem; color:#1e1b4b;
@@ -444,8 +445,12 @@
         <span class="entrance-name">Pet Accessories</span>
         <span class="entrance-desc">Food &amp; beds!</span>
       </div>
+      <div class="entrance-card world-card" onclick="enterStore('collection')">
+        <span class="entrance-icon">🌿</span>
+        <span class="entrance-name">My Pet World</span>
+        <span class="entrance-desc">Arrange your pets!</span>
+      </div>
     </div>
-    <button class="entrance-collection-btn" onclick="enterStore('collection')">🌿 My Pet World</button>
   </div>
 
   <!-- TABS (hidden — used internally) -->
