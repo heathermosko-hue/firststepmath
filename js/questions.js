@@ -578,7 +578,7 @@ const QUESTIONS = {
         { q: "5 kids chose pizza, 3 chose tacos, 4 chose salad. How many kids in all?",visual: null, answers: ["10","11","12","13"],              correct: "12",    standard:"1.MD.4" },
       ]
     }
-  },
+  }
 
 };
 
