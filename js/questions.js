@@ -187,6 +187,8 @@ const QUESTIONS = {
         { q: "How are these sorted?", visual: { type:"emoji_row", items:["🍎","🍓","🍒","🌹"] },                                                                                               answers: ["Type","Size","Shape","Colour"],             correct: "Colour",          standard:"PK.NS.1" },
         { q: "🐕🐘🦒🐘 — how could you sort these?",         visual: null,                                                                                                                       answers: ["By size","By colour","By number of holes","By wheels"], correct: "By size", standard:"PK.AF.1" },
         { q: "🐾🐾 animals with 4 legs. 🐦🐍 animals without 4 legs. How are they sorted?", visual: null,                                                                                      answers: ["Colour","Size","Number of legs","Type"],    correct: "Number of legs",  standard:"PK.AF.1" },
+      ]
+    },
 
     position: {
       title: "Position Words", icon: "📦", difficulty: 1,
