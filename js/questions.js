@@ -47,10 +47,10 @@ const QUESTIONS = {
         { q: "How many dots are in the ten frame?", visual: { type:"tenframe", filled:7  }, answers: ["6","7","8","9"],   correct: "7",  standard:"PK.NS.1" },
         { q: "How many dots are in the ten frame?", visual: { type:"tenframe", filled:9  }, answers: ["7","8","9","10"],  correct: "9",  standard:"PK.NS.2" },
         { q: "How many dots are in the ten frame?", visual: { type:"tenframe", filled:8  }, answers: ["6","7","8","9"],   correct: "8",  standard:"PK.NS.1" },
-        { q: "How many empty spaces are there?",    visual: { type:"tenframe", filled:7  }, answers: ["2","3","4","5"],   correct: "3",  standard:"PK.NS.2" },
+        { q: "How many more are needed to make 10?",  visual: { type:"tenframe", filled:7  }, answers: ["2","3","4","5"],   correct: "3",  standard:"PK.NS.2" },
         { q: "How many dots are in the ten frame?", visual: { type:"tenframe", filled:10 }, answers: ["8","9","10","11"], correct: "10", standard:"PK.NS.1" },
         { q: "How many dots are in the ten frame?", visual: { type:"tenframe", filled:4  }, answers: ["3","4","5","6"],   correct: "4",  standard:"PK.NS.1" },
-        { q: "How many empty spaces are there?",    visual: { type:"tenframe", filled:6  }, answers: ["3","4","5","6"],   correct: "4",  standard:"PK.NS.2" },
+        { q: "How many more are needed to make 10?",  visual: { type:"tenframe", filled:6  }, answers: ["3","4","5","6"],   correct: "4",  standard:"PK.NS.2" },
       ]
     },
 
