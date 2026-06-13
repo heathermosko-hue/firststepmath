@@ -284,6 +284,21 @@
       position:absolute; pointer-events:none; font-size:1.4rem; z-index:999;
       animation:foodFloat 1.1s ease-out forwards;
     }
+    @keyframes toyBounce {
+      0%   { transform:scale(1) rotate(0deg) translateY(0); }
+      15%  { transform:scale(1.35) rotate(-18deg) translateY(-14px); }
+      35%  { transform:scale(1.25) rotate(14deg) translateY(-20px); }
+      55%  { transform:scale(1.15) rotate(-8deg) translateY(-10px); }
+      75%  { transform:scale(1.08) rotate(5deg) translateY(-4px); }
+      100% { transform:scale(1) rotate(0deg) translateY(0); }
+    }
+    .toy-bouncing { animation:toyBounce 0.65s ease-out !important; }
+    @keyframes fishSwim {
+      0%,100% { transform:translateX(0) rotate(0deg); }
+      25%     { transform:translateX(7px) rotate(6deg); }
+      75%     { transform:translateX(-7px) rotate(-6deg); }
+    }
+    .fish-swimming { animation:fishSwim 2.4s ease-in-out infinite; }
     @keyframes petPopIn {
       0%   { transform:scale(0) rotate(-15deg); opacity:0; }
       70%  { transform:scale(1.15) rotate(3deg); opacity:1; }
@@ -572,9 +587,9 @@
       <div class="pw-outer">
         <!-- Sidebar -->
         <div class="pw-sidebar" id="pwSidebar">
-          <button class="pw-cat-btn active" data-cat="pet" onclick="pwSetCat('pet')"><span class="pw-cat-icon">🐾</span><span>Pets</span></button>
-          <button class="pw-cat-btn" data-cat="acc" onclick="pwSetCat('acc')"><span class="pw-cat-icon">✨</span><span>Access.</span></button>
-          <button class="pw-cat-btn" data-cat="home" onclick="pwSetCat('home')"><span class="pw-cat-icon">🏠</span><span>Homes</span></button>
+          <button class="pw-cat-btn active" data-cat="pet" onclick="pwSetCat('pet')"><span class="pw-cat-icon">🐾</span><span>My Pets</span></button>
+          <button class="pw-cat-btn" data-cat="acc" onclick="pwSetCat('acc')"><span class="pw-cat-icon">✨</span><span>My Access.</span></button>
+          <button class="pw-cat-btn" data-cat="home" onclick="pwSetCat('home')"><span class="pw-cat-icon">🏠</span><span>My Homes</span></button>
           <div class="pw-limit" id="pwLimit"></div>
           <div class="pw-items-list" id="pwItemsList"></div>
         </div>
@@ -1145,6 +1160,29 @@
                 scene.appendChild(el);
                 setTimeout(function(e){ if (e.parentNode) e.parentNode.removeChild(e); }, 1400, el);
               }
+            });
+          }
+
+          // Fish pet: gentle swim animation
+          if (layer === 'pet' && item.id === 'fishpet') {
+            sticker.classList.add('fish-swimming');
+          }
+
+          // Toy tap: bounce animation
+          if (layer === 'acc' && item.id.indexOf('toy-') === 0) {
+            var _toyMoved = false;
+            sticker.addEventListener('mousedown', function() { _toyMoved = false; }, true);
+            sticker.addEventListener('mousemove', function() { _toyMoved = true; }, true);
+            sticker.addEventListener('touchstart', function() { _toyMoved = false; }, { passive:true, capture:true });
+            sticker.addEventListener('touchmove', function() { _toyMoved = true; }, { passive:true, capture:true });
+            sticker.addEventListener('click', function() {
+              if (_toyMoved) return;
+              sticker.classList.remove('toy-bouncing');
+              void sticker.offsetWidth; // force reflow to restart animation
+              sticker.classList.add('toy-bouncing');
+              sticker.addEventListener('animationend', function() {
+                sticker.classList.remove('toy-bouncing');
+              }, { once: true });
             });
           }
 
