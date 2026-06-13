@@ -845,6 +845,10 @@
       function savePositions(pos) {
         localStorage.setItem('fsm_pet_positions', JSON.stringify(pos));
       }
+      function loadAttach() {
+        try { return JSON.parse(localStorage.getItem('fsm_pet_attach') || '{}'); } catch(e) { return {}; }
+      }
+      function saveAttach(a) { localStorage.setItem('fsm_pet_attach', JSON.stringify(a)); }
 
       window.renderCollection = function() {
         var scene    = document.getElementById('petWorldScene');
@@ -895,6 +899,7 @@
           var sticker = document.createElement('div');
           sticker.className = 'world-sticker';
           sticker.dataset.itemId = uid;
+          sticker.dataset.layer  = layer;
           sticker.style.left    = p.x + '%';
           sticker.style.top     = p.y + '%';
           sticker.style.zIndex  = LAYER_Z[layer];
@@ -909,10 +914,13 @@
           sticker.addEventListener('mousedown', function(e) {
             if (e.button !== 0) return;
             var rect = sticker.getBoundingClientRect();
+            var scRect = scene.getBoundingClientRect();
             _dragOffX = e.clientX - rect.left;
             _dragOffY = e.clientY - rect.top;
             _dragId = uid; _dragLayer = LAYER_Z[layer];
             _dragEl = sticker;
+            _prevX = parseFloat(sticker.style.left);
+            _prevY = parseFloat(sticker.style.top);
             sticker.style.zIndex = 100;
             sticker.classList.add('dragging');
             e.preventDefault();
@@ -926,6 +934,8 @@
             _dragOffY = t.clientY - rect.top;
             _dragId = uid; _dragLayer = LAYER_Z[layer];
             _dragEl = sticker;
+            _prevX = parseFloat(sticker.style.left);
+            _prevY = parseFloat(sticker.style.top);
             sticker.style.zIndex = 100;
             sticker.classList.add('dragging');
             e.preventDefault();
@@ -935,6 +945,51 @@
         });
 
         // Mouse move / up on document (once, not per pet)
+        // Move attached stickers when a home is dragged
+        function moveAttached(homeId, dx, dy) {
+          var attach = loadAttach();
+          Object.keys(attach).forEach(function(childId) {
+            if (attach[childId] !== homeId) return;
+            var el = scene.querySelector('[data-item-id="' + childId + '"]');
+            if (!el) return;
+            el.style.left = (parseFloat(el.style.left) + dx) + '%';
+            el.style.top  = (parseFloat(el.style.top)  + dy) + '%';
+          });
+        }
+
+        // Snap pet/acc/food onto a home if dropped inside it
+        function trySnap(droppedId, droppedEl, droppedLayer, scRect) {
+          if (droppedLayer === 'home') return;
+          var dr = droppedEl.getBoundingClientRect();
+          var cx = dr.left + dr.width  / 2;
+          var cy = dr.top  + dr.height / 2;
+          var homes = scene.querySelectorAll('[data-layer="home"]');
+          var attach = loadAttach();
+          for (var i = 0; i < homes.length; i++) {
+            var hr = homes[i].getBoundingClientRect();
+            if (cx >= hr.left && cx <= hr.right && cy >= hr.top && cy <= hr.bottom) {
+              // Snap to inside the home: center horizontally, ~40% down
+              var snapX = ((hr.left - scRect.left + hr.width  * 0.28) / scRect.width  * 100);
+              var snapY = ((hr.top  - scRect.top  + hr.height * 0.38) / scRect.height * 100);
+              snapX = Math.max(0, Math.min(88, snapX));
+              snapY = Math.max(0, Math.min(80, snapY));
+              droppedEl.style.left = snapX + '%';
+              droppedEl.style.top  = snapY + '%';
+              attach[droppedId] = homes[i].dataset.itemId;
+              saveAttach(attach);
+              // Visual feedback
+              droppedEl.style.transition = 'left 0.2s, top 0.2s';
+              setTimeout(function() { droppedEl.style.transition = ''; }, 250);
+              return { x: snapX, y: snapY };
+            }
+          }
+          // Not over any home — detach
+          delete attach[droppedId];
+          saveAttach(attach);
+          return null;
+        }
+
+        var _prevX = 0, _prevY = 0;
         function onMouseMove(e) {
           if (!_dragEl) return;
           var scRect = scene.getBoundingClientRect();
@@ -942,8 +997,11 @@
           var y = ((e.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
           x = Math.max(0, Math.min(88, x));
           y = Math.max(0, Math.min(80, y));
+          var dx = x - _prevX, dy = y - _prevY;
+          _prevX = x; _prevY = y;
           _dragEl.style.left = x + '%';
           _dragEl.style.top  = y + '%';
+          if (_dragEl.dataset.layer === 'home') moveAttached(_dragId, dx, dy);
         }
         function onMouseUp(e) {
           if (!_dragEl) return;
@@ -952,8 +1010,19 @@
           var y = ((e.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
           x = Math.max(0, Math.min(88, x));
           y = Math.max(0, Math.min(80, y));
+          var snapped = trySnap(_dragId, _dragEl, _dragEl.dataset.layer, scRect);
+          if (snapped) { x = snapped.x; y = snapped.y; }
           var savedPos = loadPositions();
           savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
+          // Also save positions of any attached children if this was a home
+          if (_dragEl.dataset.layer === 'home') {
+            var attach = loadAttach();
+            Object.keys(attach).forEach(function(childId) {
+              if (attach[childId] !== _dragId) return;
+              var el = scene.querySelector('[data-item-id="' + childId + '"]');
+              if (el) savedPos[childId] = { x: parseFloat(parseFloat(el.style.left).toFixed(1)), y: parseFloat(parseFloat(el.style.top).toFixed(1)) };
+            });
+          }
           savePositions(savedPos);
           _dragEl.style.zIndex = _dragLayer;
           _dragEl.classList.remove('dragging');
@@ -967,8 +1036,11 @@
           var y = ((t.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
           x = Math.max(0, Math.min(88, x));
           y = Math.max(0, Math.min(80, y));
+          var dx = x - _prevX, dy = y - _prevY;
+          _prevX = x; _prevY = y;
           _dragEl.style.left = x + '%';
           _dragEl.style.top  = y + '%';
+          if (_dragEl.dataset.layer === 'home') moveAttached(_dragId, dx, dy);
           e.preventDefault();
         }
         function onTouchEnd(e) {
@@ -979,8 +1051,18 @@
           var y = ((t.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
           x = Math.max(0, Math.min(88, x));
           y = Math.max(0, Math.min(80, y));
+          var snapped = trySnap(_dragId, _dragEl, _dragEl.dataset.layer, scRect);
+          if (snapped) { x = snapped.x; y = snapped.y; }
           var savedPos = loadPositions();
           savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
+          if (_dragEl.dataset.layer === 'home') {
+            var attach = loadAttach();
+            Object.keys(attach).forEach(function(childId) {
+              if (attach[childId] !== _dragId) return;
+              var el = scene.querySelector('[data-item-id="' + childId + '"]');
+              if (el) savedPos[childId] = { x: parseFloat(parseFloat(el.style.left).toFixed(1)), y: parseFloat(parseFloat(el.style.top).toFixed(1)) };
+            });
+          }
           savePositions(savedPos);
           _dragEl.style.zIndex = _dragLayer;
           _dragEl.classList.remove('dragging');
