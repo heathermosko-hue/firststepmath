@@ -165,8 +165,55 @@ function renderVisual(visual) {
     case 'text':           return `<div class="equation-display">${visual.text || visual.content}</div>`;
     case 'emoji':          return `<span class="visual-emoji">${visual.content}</span>`;
     case 'shape':          return renderShape(visual.name);
+    case 'compare':        return renderCompare(visual.compare, visual.items);
     default: return null;
   }
+}
+
+function renderCompare(compType, items) {
+  const W = 240, H = 180;
+  const fill = '#a78bfa', stroke = '#6d28d9', sw = 3;
+
+  if (compType === 'tall') {
+    const spacing = W / (items.length + 1);
+    const shapes = items.map(function(item, i) {
+      const cx = spacing * (i + 1);
+      const barH = item.size === 'large' ? 105 : 52;
+      const barY = H - barH - 28;
+      return '<rect x="' + (cx-20) + '" y="' + barY + '" width="40" height="' + barH + '" rx="6" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>'
+           + '<text x="' + cx + '" y="' + (barY - 6) + '" text-anchor="middle" font-size="26">' + item.emoji + '</text>'
+           + '<text x="' + cx + '" y="' + (H - 6) + '" text-anchor="middle" font-size="14" font-family="Fredoka One,cursive" fill="#333">' + item.label + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" xmlns="http://www.w3.org/2000/svg">' + shapes + '</svg>';
+  }
+
+  if (compType === 'long') {
+    const rowH = H / (items.length + 1);
+    const shapes = items.map(function(item, i) {
+      const cy = rowH * (i + 1);
+      const barW = item.size === 'large' ? 155 : 75;
+      return '<text x="8" y="' + (cy + 8) + '" font-size="24">' + item.emoji + '</text>'
+           + '<rect x="42" y="' + (cy - 14) + '" width="' + barW + '" height="26" rx="6" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>'
+           + '<text x="' + (42 + barW + 8) + '" y="' + (cy + 8) + '" font-size="14" font-family="Fredoka One,cursive" fill="#333">' + item.label + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" xmlns="http://www.w3.org/2000/svg">' + shapes + '</svg>';
+  }
+
+  if (compType === 'big') {
+    const spacing = W / (items.length + 1);
+    const shapes = items.map(function(item, i) {
+      const cx = spacing * (i + 1);
+      const cy = H / 2 - 12;
+      const r = item.size === 'large' ? 54 : 28;
+      const fs = item.size === 'large' ? 36 : 20;
+      return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>'
+           + '<text x="' + cx + '" y="' + (cy + fs * 0.38) + '" text-anchor="middle" font-size="' + fs + '">' + item.emoji + '</text>'
+           + '<text x="' + cx + '" y="' + (H - 6) + '" text-anchor="middle" font-size="13" font-family="Fredoka One,cursive" fill="#333">' + item.label + '</text>';
+    }).join('');
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" xmlns="http://www.w3.org/2000/svg">' + shapes + '</svg>';
+  }
+
+  return null;
 }
 
 function renderShape(name) {
