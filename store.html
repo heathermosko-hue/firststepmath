@@ -963,7 +963,7 @@
         renderSidebar();
       };
 
-      function renderSidebar() {
+      window.renderSidebar = function renderSidebar() {
         var list  = document.getElementById('pwItemsList');
         var badge = document.getElementById('pwLimit');
         if (!list) return;
