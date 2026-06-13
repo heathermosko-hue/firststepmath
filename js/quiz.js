@@ -783,6 +783,12 @@ function showStorePrompt() {
     'parrot':   { emoji:'🦜', name:'Parrot',    food:'parrot-food',   bed:'pet-carrier'},
     'alien':    { emoji:'👽', name:'Alien',     food:'alien-food',    bed:'space-pod'  },
     'dino':     { emoji:'🦕', name:'Dino',      food:'dino-food',     bed:'pet-bed'    },
+    'chicken':  { emoji:'🐔', name:'Chicken',   food:'chicken-food',  bed:'pet-bed'    },
+    'snake':    { emoji:'🐍', name:'Snake',     food:'snake-food',    bed:'pet-carrier'},
+    'lizard':   { emoji:'🦎', name:'Lizard',    food:'lizard-food',   bed:'pet-carrier'},
+    'cow':      { emoji:'🐮', name:'Cow',       food:'cow-food',      bed:'doghouse'   },
+    'goat':     { emoji:'🐐', name:'Goat',      food:'goat-food',     bed:'doghouse'   },
+    'gator':    { emoji:'🐊', name:'Gator',     food:'gator-food',    bed:'fish-tank'  },
   };
   var ownedPetIds = Object.keys(PET_INFO).filter(owns);
   var hasBed    = ['pet-bed','pet-carrier','doghouse','cat-tree','fish-tank','space-pod'].some(owns);
