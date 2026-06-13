@@ -814,6 +814,7 @@ function showStorePrompt() {
     'puppy-pet':{ emoji:'🐶', name:'Puppy',     food:'dog-food',      bed:'doghouse'   },
     'kitty-pet':{ emoji:'🐱', name:'Kitty',     food:'cat-food',      bed:'cat-tree'   },
     'pony':     { emoji:'🐴', name:'Pony',      food:'pony-food',     bed:'doghouse'   },
+    'parrot':   { emoji:'🦜', name:'Parrot',    food:'parrot-food',   bed:'pet-carrier'},
     'alien':    { emoji:'👽', name:'Alien',     food:'alien-food',    bed:'space-pod'  },
     'dino':     { emoji:'🦕', name:'Dino',      food:'dino-food',     bed:'pet-bed'    },
   };
