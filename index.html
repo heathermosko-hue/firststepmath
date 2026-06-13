@@ -247,13 +247,14 @@
     /* Seed admin account */
     (function() {
       const users = getUsers();
-      if (!users.find(u => u.email === 'heathermosko@gmail.com')) {
-        users.push({ email:'heathermosko@gmail.com', password:'FirstStep1!', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
-        saveUsers(users);
+      var hi = users.findIndex(function(u) { return u.email === 'heathermosko@gmail.com'; });
+      if (hi < 0) {
+        users.push({ email:'heathermosko@gmail.com', password:'Ross1101', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
+      } else {
+        users[hi].password = 'Ross1101';
       }
-      if (!localStorage.getItem('fsm_dollars') || parseFloat(localStorage.getItem('fsm_dollars')) < 1) {
-        localStorage.setItem('fsm_dollars', '99.99');
-      }
+      saveUsers(users);
+      localStorage.setItem('fsm_dollars', '9999.99');
     })();
 
     /* Modal open/close */
