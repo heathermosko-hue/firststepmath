@@ -243,6 +243,15 @@
       55%  { transform:scale(1.3) rotate(4deg);  filter:drop-shadow(0 0 8px gold); }
     }
     .pw-highlight { animation:pwHighlight 0.75s ease-out !important; }
+    #pwLimitToast {
+      position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px);
+      background:#7c3aed; color:#fff; font-family:'Fredoka One',cursive;
+      font-size:1.05rem; padding:12px 22px; border-radius:999px;
+      box-shadow:0 4px 18px rgba(0,0,0,0.22); pointer-events:none;
+      opacity:0; transition:opacity 0.25s, transform 0.25s; z-index:9999;
+      text-align:center; max-width:88vw;
+    }
+    #pwLimitToast.show { opacity:1; transform:translateX(-50%) translateY(0); }
     @media(max-width:500px) {
       .pw-sidebar { width:72px; }
       .pw-chip img { width:40px; height:40px; }
@@ -600,6 +609,7 @@
     <div class="store-section" id="tab-collection">
       <div class="section-title">🌿 My Pet World</div>
       <div class="pw-outer">
+        <div id="pwLimitToast"></div>
         <!-- Sidebar -->
         <div class="pw-sidebar" id="pwSidebar">
           <button class="pw-cat-btn active" data-cat="pet" onclick="pwSetCat('pet')"><span class="pw-cat-icon">🐾</span><span>My Pets</span></button>
@@ -960,6 +970,20 @@
       function saveHidden(h) { localStorage.setItem('fsm_scene_hidden', JSON.stringify(h)); }
 
       var CAT_LIMIT = { pet: 3, acc: 6, home: 3 };
+      var CAT_MSG = {
+        pet:  'Sorry, you can only play with 3 pets at a time!',
+        home: 'Sorry, you can only have 3 houses open at a time!',
+        acc:  'Sorry, you can only have 6 accessories open at a time!'
+      };
+      var _toastTimer;
+      function showLimitToast(cat) {
+        var el = document.getElementById('pwLimitToast');
+        if (!el) return;
+        el.textContent = CAT_MSG[cat] || 'Limit reached!';
+        el.classList.add('show');
+        clearTimeout(_toastTimer);
+        _toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2800);
+      }
 
       function renderSidebar() {
         var list  = document.getElementById('pwItemsList');
@@ -993,10 +1017,10 @@
           xBtn.className = 'pw-chip-x';
           xBtn.textContent = on ? '×' : '+';
           xBtn.title = on ? 'Hide' : (atLimit ? 'Limit reached' : 'Show');
-          if (atLimit) { xBtn.disabled = true; xBtn.style.opacity = '0.35'; xBtn.style.cursor = 'not-allowed'; }
+          if (atLimit) { xBtn.style.opacity = '0.35'; xBtn.style.cursor = 'not-allowed'; }
           xBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            if (atLimit) return;
+            if (atLimit) { showLimitToast(_pwCat); return; }
             var h = loadHidden();
             if (!h[_pwCat]) h[_pwCat] = [];
             var idx = h[_pwCat].indexOf(item.id);
@@ -1016,7 +1040,7 @@
             if (idx >= 0) {
               // was hidden — only show if under limit
               var curOn = items.filter(function(x){ return (h[_pwCat]||[]).indexOf(x.id) < 0; }).length;
-              if (curOn >= limit) return;
+              if (curOn >= limit) { showLimitToast(_pwCat); return; }
               h[_pwCat].splice(idx, 1);
               saveHidden(h);
               renderSidebar();
