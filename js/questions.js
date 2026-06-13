@@ -167,16 +167,24 @@ const QUESTIONS = {
 
     sorting: {
       title: "Sorting", icon: "🗂️", difficulty: 1,
-      standard: "PK.G.1",
+      standard: "PK.AF.1",
       questions: [
-        { q: "Which animal is DIFFERENT from the others?", visual: null, answers: ["🐶🐶🐶🐱 — the cat","🐶🐶🐶🐶 — a dog","🐱🐱🐱🐱 — a cat","🐶🐶🐶🐶 — all dogs"], correct: "🐶🐶🐶🐱 — the cat", standard:"PK.G.1" },
-        { q: "Which shape is different from the others?",  visual: null, answers: ["○○○□ — the square","○○○○ — circle","□□□□ — square","△△△△ — triangle"], correct: "○○○□ — the square", standard:"PK.G.1" },
-        { q: "Which group shows ALL circles?",             visual: null, answers: ["○○△○","○○○○","□○□○","△△○△"], correct: "○○○○", standard:"PK.G.1" },
-        { q: "Which belongs with 🍎🍊🍋? (a fruit)",      visual: null, answers: ["🚗","🍇","🐶","🌳"],  correct: "🍇",  standard:"PK.AF.1" },
-        { q: "Which does NOT belong: 🐶🐱🐦🚗?",          visual: null, answers: ["🐶","🐱","🐦","🚗"],  correct: "🚗",  standard:"PK.AF.1" },
-        { q: "Which group shows ALL big shapes: 🔴🔵🟡?",  visual: null, answers: ["Sort by color","Sort by size","Sort by shape","Sort by number"], correct: "Sort by color", standard:"PK.G.1" },
-        { q: "🍎🍎🍊🍎 — which fruit appears MOST?",      visual: null, answers: ["🍊","🍎","Same","Neither"], correct: "🍎", standard:"PK.NS.4" },
-        { q: "Which two are the SAME shape?",             visual: null, answers: ["🔺 and 🟦","🔺 and 🔺","🟦 and ○","🔺 and ○"], correct: "🔺 and 🔺", standard:"PK.G.1" },
+        // Sort by Size
+        { q: "Which is the BIG apple?",   visual: { type:"compare", compare:"big", items:[{emoji:"🍎", label:"Big",   size:"large"},{emoji:"🍎", label:"Small", size:"small"}] }, answers: ["Big","Small"],           correct: "Big",         standard:"PK.M.1" },
+        { q: "Which is the SMALL bear?",  visual: { type:"compare", compare:"big", items:[{emoji:"🐻", label:"Big",   size:"large"},{emoji:"🐻", label:"Small", size:"small"}] }, answers: ["Big","Small"],           correct: "Small",       standard:"PK.M.1" },
+        { q: "Which is BIGGER?",          visual: { type:"compare", compare:"big", items:[{emoji:"🌳", label:"Tree",  size:"large"},{emoji:"🍄", label:"Mushroom",size:"small"}] }, answers: ["Tree","Mushroom"],     correct: "Tree",        standard:"PK.M.1" },
+        // Sort by Shape  — row: 🟢🟨🔺🔵🟥🟢🔺🟨🔵 → circles:4, squares:3, triangles:2
+        { q: "How many circles do you see?",   visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["2","3","4","5"],            correct: "4",           standard:"PK.G.1" },
+        { q: "Which shape appears the MOST?",  visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["Circles","Squares","Triangles"], correct: "Circles",    standard:"PK.G.1" },
+        { q: "How many triangles do you see?", visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["1","2","3","4"],            correct: "2",           standard:"PK.G.1" },
+        // Sort by Color — row: 🍎🍎⭐🍎🔵⭐🍎🔵🔵 → red:4, blue:3, yellow:2
+        { q: "How many yellow stars do you see?", visual: { type:"emoji_row", items:["🍎","🍎","⭐","🍎","🔵","⭐","🍎","🔵","🔵"] }, answers: ["1","2","3","4"],          correct: "2",           standard:"PK.NS.1" },
+        { q: "Which color has the MOST?",         visual: { type:"emoji_row", items:["🍎","🍎","⭐","🍎","🔵","⭐","🍎","🔵","🔵"] }, answers: ["Red","Blue","Yellow"],    correct: "Red",         standard:"PK.NS.1" },
+        // Sort by Type — row: 🐕🐱🐟🍎🍌🍪⚽🚗 → animals:3, food:3, toys:2
+        { q: "How many animals do you see?",         visual: { type:"emoji_row", items:["🐕","🐱","🐟","🍎","🍌","🍪","⚽","🚗"] }, answers: ["2","3","4","5"],           correct: "3",           standard:"PK.AF.1" },
+        { q: "Which one does NOT belong with the animals?", visual: { type:"emoji_row", items:["🐕","🐱","🐟","🚗"] }, answers: ["🐕","🐱","🐟","🚗"],             correct: "🚗",          standard:"PK.AF.1" },
+        { q: "Which belongs with 🍎🍊🍋?",          visual: null, answers: ["🚗","🍇","🐶","🌳"],                                                                            correct: "🍇",          standard:"PK.AF.1" },
+        { q: "Which does NOT belong: 🐶🐱🐦🚗?",    visual: null, answers: ["🐶","🐱","🐦","🚗"],                                                                            correct: "🚗",          standard:"PK.AF.1" },
       ]
     },
 

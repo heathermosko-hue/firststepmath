@@ -186,8 +186,16 @@ function renderVisual(visual) {
     case 'emoji':          return `<span class="visual-emoji">${visual.content}</span>`;
     case 'shape':          return renderShape(visual.name);
     case 'compare':        return renderCompare(visual.compare, visual.items);
+    case 'emoji_row':      return renderEmojiRow(visual.items);
     default: return null;
   }
+}
+
+function renderEmojiRow(items) {
+  const emojis = items.map(function(e) {
+    return '<span style="font-size:1.9rem;line-height:1">' + e + '</span>';
+  }).join('');
+  return '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:14px 10px;background:#f5f7ff;border-radius:14px;border:2px solid #dde3ff">' + emojis + '</div>';
 }
 
 function renderCompare(compType, items) {
