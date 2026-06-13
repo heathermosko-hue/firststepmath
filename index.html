@@ -136,26 +136,348 @@
     </div>
   </footer>
 
+  <!-- ══ LOGIN MODAL ══ -->
+  <div id="loginModal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(80,60,140,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px;">
+    <div style="background:#fff;border-radius:28px;padding:32px 28px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.25);position:relative;">
+      <button id="loginModalClose" style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#aaa;line-height:1;">✕</button>
+      <h1 style="font-family:'Fredoka One',cursive;font-size:1.7rem;color:#1a1a2e;margin:0 0 4px;text-align:center;">Welcome! 👋</h1>
+      <p style="text-align:center;color:#777;font-size:0.88rem;margin:0 0 20px;">Sign in to save your progress — it's free!</p>
+
+      <div class="login-tabs" style="display:flex;background:#f0f2ff;border-radius:14px;padding:4px;gap:4px;margin-bottom:20px;">
+        <button class="login-tab active" data-tab="student" style="flex:1;padding:9px 6px;border-radius:10px;border:none;background:transparent;font-family:'Fredoka One',cursive;font-size:0.92rem;cursor:pointer;color:#888;transition:background 0.15s,color 0.15s;">🎒 Student</button>
+        <button class="login-tab" data-tab="parent" style="flex:1;padding:9px 6px;border-radius:10px;border:none;background:transparent;font-family:'Fredoka One',cursive;font-size:0.92rem;cursor:pointer;color:#888;transition:background 0.15s,color 0.15s;">👪 Parent</button>
+        <button class="login-tab" data-tab="teacher" style="flex:1;padding:9px 6px;border-radius:10px;border:none;background:transparent;font-family:'Fredoka One',cursive;font-size:0.92rem;cursor:pointer;color:#888;transition:background 0.15s,color 0.15s;">🍎 Teacher</button>
+      </div>
+
+      <!-- STUDENT PANEL -->
+      <div class="login-panel active" id="panel-student">
+        <div id="step-code">
+          <div style="font-weight:800;font-size:0.88rem;color:#555;margin-bottom:6px;">Enter your class code:</div>
+          <input type="text" id="codeInput" placeholder="FSM-XXXXX" maxlength="9" autocomplete="off" style="width:100%;font-family:'Fredoka One',cursive;font-size:1.5rem;text-align:center;letter-spacing:3px;text-transform:uppercase;padding:14px;border:3px solid #dde3ff;border-radius:16px;box-sizing:border-box;">
+          <div class="err" id="codeErr" style="color:#dc3545;font-size:0.83rem;text-align:center;min-height:18px;margin:4px 0;"></div>
+          <button class="submit-btn purple" id="findClassBtn" style="width:100%;padding:13px;border-radius:14px;border:none;margin-top:8px;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;color:#fff;background:#7c3aed;">Find My Class 🔍</button>
+        </div>
+        <div id="step-avatar" style="display:none;">
+          <h3 style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:#1a1a2e;text-align:center;margin-bottom:12px;">Tap your picture! 👇</h3>
+          <div id="avatarGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;"></div>
+          <button id="backToCodeBtn" style="width:100%;margin-top:12px;padding:12px;border-radius:14px;border:2px solid #dde3ff;background:#f8f8ff;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;">← Back</button>
+        </div>
+      </div>
+
+      <!-- PARENT PANEL -->
+      <div class="login-panel" id="panel-parent" style="display:none;">
+        <form id="parentLoginForm">
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Email</label><input type="email" id="pEmail" placeholder="parent@email.com" autocomplete="email" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Password</label><input type="password" id="pPass" placeholder="••••••••" autocomplete="current-password" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div id="pLoginErr" style="color:#dc3545;font-size:0.83rem;text-align:center;min-height:18px;margin:4px 0;"></div>
+          <button type="submit" style="width:100%;padding:13px;border-radius:14px;border:none;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;color:#fff;background:#f97316;">Sign In 👪</button>
+        </form>
+        <div style="text-align:center;color:#ccc;font-size:0.82rem;margin:12px 0;position:relative;" id="pDivider">─── or ───</div>
+        <form id="parentRegForm" style="display:none;">
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Child's Name</label><input type="text" id="prName" placeholder="First name" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Your Email</label><input type="email" id="prEmail" placeholder="parent@email.com" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Password</label><input type="password" id="prPass" placeholder="Create a password" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div id="pRegErr" style="color:#dc3545;font-size:0.83rem;text-align:center;min-height:18px;margin:4px 0;"></div>
+          <button type="submit" style="width:100%;padding:13px;border-radius:14px;border:none;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;color:#fff;background:#f97316;">Create Free Account →</button>
+        </form>
+        <div style="text-align:center;font-size:0.88rem;color:#777;margin-top:10px;" id="pSwitchWrap">New parent? <a href="#" id="showParentReg" style="color:#7c3aed;font-weight:700;text-decoration:none;">Create free account</a></div>
+        <div style="text-align:center;font-size:0.88rem;color:#777;margin-top:10px;display:none;" id="pBackWrap"><a href="#" id="backParentLogin" style="color:#7c3aed;font-weight:700;text-decoration:none;">← Back to sign in</a></div>
+      </div>
+
+      <!-- TEACHER PANEL -->
+      <div class="login-panel" id="panel-teacher" style="display:none;">
+        <form id="teacherLoginForm">
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Teacher Email</label><input type="email" id="tEmail" placeholder="teacher@school.com" autocomplete="email" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Password</label><input type="password" id="tPass" placeholder="••••••••" autocomplete="current-password" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div id="tLoginErr" style="color:#dc3545;font-size:0.83rem;text-align:center;min-height:18px;margin:4px 0;"></div>
+          <button type="submit" style="width:100%;padding:13px;border-radius:14px;border:none;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;color:#fff;background:#7c3aed;">Teacher Sign In 🍎</button>
+        </form>
+        <div style="text-align:center;color:#ccc;font-size:0.82rem;margin:12px 0;" id="tDivider">─── or ───</div>
+        <form id="teacherRegForm" style="display:none;">
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Your Name</label><input type="text" id="trName" placeholder="Ms. Smith" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Email</label><input type="email" id="trEmail" placeholder="teacher@school.com" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div style="margin-bottom:12px;"><label style="display:block;font-size:0.82rem;font-weight:700;color:#555;margin-bottom:4px;">Password</label><input type="password" id="trPass" placeholder="Create a password" style="width:100%;padding:11px 14px;border-radius:12px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.95rem;box-sizing:border-box;"></div>
+          <div id="trErr" style="color:#dc3545;font-size:0.83rem;text-align:center;min-height:18px;margin:4px 0;"></div>
+          <button type="submit" style="width:100%;padding:13px;border-radius:14px;border:none;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;color:#fff;background:#7c3aed;">Create Teacher Account</button>
+        </form>
+        <div style="text-align:center;font-size:0.88rem;color:#777;margin-top:10px;" id="tSwitchWrap">New teacher? <a href="#" id="showTeacherReg" style="color:#7c3aed;font-weight:700;text-decoration:none;">Create free account</a></div>
+        <div style="text-align:center;font-size:0.88rem;color:#777;margin-top:10px;display:none;" id="tBackWrap"><a href="#" id="backTeacherLogin" style="color:#7c3aed;font-weight:700;text-decoration:none;">← Back to sign in</a></div>
+
+        <!-- Teacher dashboard -->
+        <div id="teacherDash" style="display:none;flex-direction:column;gap:14px;">
+          <div style="background:#f0f2ff;border-radius:16px;padding:18px 16px;text-align:center;">
+            <div style="font-size:0.8rem;font-weight:700;color:#888;margin-bottom:4px;">Your Class Code</div>
+            <div id="dashCode" style="font-family:'Fredoka One',cursive;font-size:1.9rem;color:#7c3aed;letter-spacing:3px;">FSM-XXXX</div>
+            <canvas id="qrCanvas" width="130" height="130" style="display:block;margin:10px auto 0;border-radius:10px;"></canvas>
+            <div><button id="copyCodeBtn" style="background:none;border:2px solid #7c3aed;color:#7c3aed;border-radius:10px;padding:7px 16px;font-family:'Fredoka One',cursive;font-size:0.9rem;cursor:pointer;margin-top:6px;">📋 Copy Code</button></div>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:0.88rem;color:#555;margin-bottom:6px;">Add Students:</div>
+            <div style="display:flex;gap:8px;margin-top:4px;">
+              <input type="text" id="newStudentName" placeholder="Student name" maxlength="20" style="flex:1;padding:9px 12px;border-radius:10px;border:2px solid #dde3ff;font-family:'Nunito',sans-serif;font-size:0.9rem;">
+              <button type="button" id="addStudentBtn" style="padding:9px 15px;border-radius:10px;border:none;background:#4ECDC4;color:#fff;font-family:'Fredoka One',cursive;font-size:0.95rem;cursor:pointer;">+ Add</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:0.88rem;color:#555;margin-bottom:6px;">My Students (<span id="studentCount">0</span>):</div>
+            <div id="studentsList" style="display:flex;flex-wrap:wrap;gap:8px;min-height:32px;"></div>
+          </div>
+          <button type="button" id="goToQuizBtn" style="width:100%;padding:13px;border-radius:14px;border:none;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;color:#fff;background:#4ECDC4;">📚 Go to Quizzes</button>
+          <button type="button" id="teacherLogoutBtn" style="width:100%;padding:12px;border-radius:14px;border:2px solid #dde3ff;background:#f8f8ff;font-family:'Fredoka One',cursive;font-size:1rem;cursor:pointer;">Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="js/questions.js?v=5"></script>
   <script src="js/app.js?v=4"></script>
   <script>
   (function() {
-    var session = null;
-    try { session = JSON.parse(sessionStorage.getItem('fsm_session')); } catch(e) {}
-    function doSignOut(e) {
-      e.preventDefault();
-      sessionStorage.removeItem('fsm_session');
-      window.location.href = 'login.html';
-    }
-    var mobileBtn = document.getElementById('mobileSignBtn');
+    const USERS_KEY   = 'fsm_users';
+    const SESSION_KEY = 'fsm_session';
+    const AVATARS = ['🐱','🐶','🐸','🐰','🦊','🐻','🐼','🐨','🦁','🐯','🐮','🐷','🐙','🦋','🐢','🦄','🐬','🦕','🤖','🧸'];
+
+    const getUsers   = () => JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+    const saveUsers  = u  => localStorage.setItem(USERS_KEY, JSON.stringify(u));
+    const getSession = () => JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+    const setSession = u  => sessionStorage.setItem(SESSION_KEY, JSON.stringify(u));
+    const clearSession   = ()  => sessionStorage.removeItem(SESSION_KEY);
+    const genCode    = () => 'FSM-' + Math.random().toString(36).substr(2,5).toUpperCase();
+
+    /* Seed admin account */
+    (function() {
+      const users = getUsers();
+      if (!users.find(u => u.email === 'heathermosko@gmail.com')) {
+        users.push({ email:'heathermosko@gmail.com', password:'FirstStep1!', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
+        saveUsers(users);
+      }
+      if (!localStorage.getItem('fsm_dollars') || parseFloat(localStorage.getItem('fsm_dollars')) < 1) {
+        localStorage.setItem('fsm_dollars', '99.99');
+      }
+    })();
+
+    /* Modal open/close */
+    var modal = document.getElementById('loginModal');
+    function openModal() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    function closeModal() { modal.style.display = 'none'; document.body.style.overflow = ''; }
+    document.getElementById('loginModalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+
+    /* Sign In / Sign Out buttons */
+    var session = getSession();
+    function doSignOut(e) { e.preventDefault(); clearSession(); location.reload(); }
+
+    var mobileBtn  = document.getElementById('mobileSignBtn');
     var desktopBtn = document.getElementById('desktopSignBtn');
     if (session) {
       [mobileBtn, desktopBtn].forEach(function(btn) {
+        if (!btn) return;
         btn.textContent = 'Sign Out';
         btn.classList.add('signout');
         btn.href = '#';
         btn.addEventListener('click', doSignOut);
       });
+    } else {
+      [mobileBtn, desktopBtn].forEach(function(btn) {
+        if (!btn) return;
+        btn.href = '#';
+        btn.addEventListener('click', function(e) { e.preventDefault(); openModal(); });
+      });
+    }
+
+    /* Tab switching */
+    document.querySelectorAll('.login-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.login-tab').forEach(function(t) {
+          t.style.background = 'transparent'; t.style.color = '#888'; t.style.boxShadow = '';
+        });
+        document.querySelectorAll('.login-panel').forEach(function(p) { p.style.display = 'none'; });
+        tab.style.background = '#fff'; tab.style.color = '#7c3aed'; tab.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+        document.getElementById('panel-' + tab.dataset.tab).style.display = 'block';
+      });
+    });
+    /* Init first tab active style */
+    var firstTab = document.querySelector('.login-tab.active');
+    if (firstTab) { firstTab.style.background = '#fff'; firstTab.style.color = '#7c3aed'; firstTab.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)'; }
+
+    /* Student */
+    document.getElementById('findClassBtn').addEventListener('click', function() {
+      var code = document.getElementById('codeInput').value.trim().toUpperCase();
+      if (!code) { document.getElementById('codeErr').textContent = 'Please enter your class code.'; return; }
+      var teacher = getUsers().find(function(u) { return u.type === 'teacher' && u.classCode === code; });
+      if (!teacher) { document.getElementById('codeErr').textContent = 'Code not found — check with your teacher!'; return; }
+      document.getElementById('codeErr').textContent = '';
+      buildAvatarGrid(teacher, code);
+      document.getElementById('step-code').style.display = 'none';
+      document.getElementById('step-avatar').style.display = 'block';
+    });
+    document.getElementById('codeInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('findClassBtn').click(); });
+    document.getElementById('backToCodeBtn').addEventListener('click', function() {
+      document.getElementById('step-avatar').style.display = 'none';
+      document.getElementById('step-code').style.display = 'block';
+      document.getElementById('avatarGrid').innerHTML = '';
+    });
+
+    function buildAvatarGrid(teacher, code) {
+      var grid = document.getElementById('avatarGrid');
+      grid.innerHTML = '';
+      var students = teacher.students || [];
+      if (!students.length) { grid.innerHTML = '<p style="font-size:0.85rem;color:#aaa;grid-column:1/-1;text-align:center">No students added yet.</p>'; return; }
+      students.forEach(function(s) {
+        var btn = document.createElement('button');
+        btn.style.cssText = 'aspect-ratio:1;border-radius:16px;border:3px solid #dde3ff;background:#f8f8ff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;font-size:2rem;';
+        btn.innerHTML = s.avatar + '<span style="font-family:Nunito,sans-serif;font-size:0.62rem;font-weight:800;color:#555;">' + s.name + '</span>';
+        btn.addEventListener('click', function() {
+          setSession({ name: s.name, avatar: s.avatar, type: 'student', classCode: code });
+          localStorage.setItem('fsm_q_count', '0');
+          closeModal(); location.reload();
+        });
+        grid.appendChild(btn);
+      });
+    }
+
+    /* Parent login */
+    document.getElementById('parentLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('pEmail').value.trim();
+      var pass  = document.getElementById('pPass').value;
+      var user  = getUsers().find(function(u) { return u.email === email && u.password === pass; });
+      if (!user) { document.getElementById('pLoginErr').textContent = 'Email or password is incorrect.'; return; }
+      setSession(user); localStorage.setItem('fsm_q_count', '0');
+      if (user.type === 'teacher') { showTeacherDash(user); return; }
+      closeModal(); location.reload();
+    });
+    document.getElementById('showParentReg').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('parentLoginForm').style.display = 'none';
+      document.getElementById('pDivider').style.display = 'none';
+      document.getElementById('parentRegForm').style.display = '';
+      document.getElementById('pSwitchWrap').style.display = 'none';
+      document.getElementById('pBackWrap').style.display = '';
+    });
+    document.getElementById('backParentLogin').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('parentRegForm').style.display = 'none';
+      document.getElementById('pDivider').style.display = '';
+      document.getElementById('parentLoginForm').style.display = '';
+      document.getElementById('pSwitchWrap').style.display = '';
+      document.getElementById('pBackWrap').style.display = 'none';
+    });
+    document.getElementById('parentRegForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var name  = document.getElementById('prName').value.trim();
+      var email = document.getElementById('prEmail').value.trim();
+      var pass  = document.getElementById('prPass').value;
+      if (!name || !email || !pass) { document.getElementById('pRegErr').textContent = 'Please fill in all fields.'; return; }
+      var users = getUsers();
+      if (users.find(function(u) { return u.email === email; })) { document.getElementById('pRegErr').textContent = 'That email is already registered.'; return; }
+      var user = { email: email, password: pass, name: name, type: 'parent', childName: name, nickels: 0, purchases: [] };
+      users.push(user); saveUsers(users); setSession(user);
+      localStorage.setItem('fsm_q_count', '0');
+      closeModal(); location.reload();
+    });
+
+    /* Teacher login */
+    document.getElementById('teacherLoginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = document.getElementById('tEmail').value.trim();
+      var pass  = document.getElementById('tPass').value;
+      var user  = getUsers().find(function(u) { return u.email === email && u.password === pass && u.type === 'teacher'; });
+      if (!user) { document.getElementById('tLoginErr').textContent = 'Email or password is incorrect.'; return; }
+      setSession(user); showTeacherDash(user);
+    });
+    document.getElementById('showTeacherReg').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('teacherLoginForm').style.display = 'none';
+      document.getElementById('tDivider').style.display = 'none';
+      document.getElementById('teacherRegForm').style.display = '';
+      document.getElementById('tSwitchWrap').style.display = 'none';
+      document.getElementById('tBackWrap').style.display = '';
+    });
+    document.getElementById('backTeacherLogin').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('teacherRegForm').style.display = 'none';
+      document.getElementById('tDivider').style.display = '';
+      document.getElementById('teacherLoginForm').style.display = '';
+      document.getElementById('tSwitchWrap').style.display = '';
+      document.getElementById('tBackWrap').style.display = 'none';
+    });
+    document.getElementById('teacherRegForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var name  = document.getElementById('trName').value.trim();
+      var email = document.getElementById('trEmail').value.trim();
+      var pass  = document.getElementById('trPass').value;
+      if (!name || !email || !pass) { document.getElementById('trErr').textContent = 'Please fill in all fields.'; return; }
+      var users = getUsers();
+      if (users.find(function(u) { return u.email === email; })) { document.getElementById('trErr').textContent = 'That email is already registered.'; return; }
+      var user = { email: email, password: pass, name: name, type: 'teacher', classCode: genCode(), students: [] };
+      users.push(user); saveUsers(users); setSession(user);
+      showTeacherDash(user);
+    });
+
+    function showTeacherDash(user) {
+      document.getElementById('teacherLoginForm').style.display = 'none';
+      document.getElementById('teacherRegForm').style.display = 'none';
+      document.getElementById('tDivider').style.display = 'none';
+      document.getElementById('tSwitchWrap').style.display = 'none';
+      document.getElementById('tBackWrap').style.display = 'none';
+      var dash = document.getElementById('teacherDash');
+      dash.style.display = 'flex';
+      document.getElementById('dashCode').textContent = user.classCode;
+      renderStudents(user);
+    }
+
+    function saveTeacher(user) {
+      var users = getUsers();
+      var idx = users.findIndex(function(u) { return u.email === user.email; });
+      if (idx >= 0) { users[idx] = user; saveUsers(users); setSession(user); }
+    }
+
+    function renderStudents(user) {
+      var list = document.getElementById('studentsList');
+      document.getElementById('studentCount').textContent = (user.students || []).length;
+      list.innerHTML = '';
+      (user.students || []).forEach(function(s, i) {
+        var chip = document.createElement('div');
+        chip.style.cssText = 'background:#f0f2ff;border-radius:50px;padding:5px 12px 5px 9px;display:flex;align-items:center;gap:5px;font-size:0.88rem;font-weight:700;';
+        chip.innerHTML = s.avatar + ' ' + s.name + ' <span style="cursor:pointer;color:#bbb;margin-left:3px;font-size:0.78rem;" data-i="' + i + '">✕</span>';
+        chip.querySelector('span').addEventListener('click', function() {
+          user.students.splice(i, 1); saveTeacher(user); renderStudents(user);
+        });
+        list.appendChild(chip);
+      });
+    }
+
+    document.getElementById('addStudentBtn').addEventListener('click', function() {
+      var inp  = document.getElementById('newStudentName');
+      var name = inp.value.trim();
+      if (!name) return;
+      var sess = getSession();
+      if (!sess || sess.type !== 'teacher') return;
+      var users = getUsers();
+      var user  = users.find(function(u) { return u.email === sess.email; });
+      if (!user) return;
+      user.students = user.students || [];
+      user.students.push({ name: name, avatar: AVATARS[user.students.length % AVATARS.length] });
+      saveTeacher(user); renderStudents(user); inp.value = '';
+    });
+
+    document.getElementById('goToQuizBtn').addEventListener('click', function() { closeModal(); });
+    document.getElementById('teacherLogoutBtn').addEventListener('click', function() { clearSession(); closeModal(); location.reload(); });
+    document.getElementById('copyCodeBtn').addEventListener('click', function() {
+      var code = document.getElementById('dashCode').textContent;
+      navigator.clipboard.writeText(code).then(function() {
+        document.getElementById('copyCodeBtn').textContent = '✓ Copied!';
+        setTimeout(function() { document.getElementById('copyCodeBtn').textContent = '📋 Copy Code'; }, 2000);
+      });
+    });
+
+    /* Auto-restore teacher session */
+    if (session && session.type === 'teacher') {
+      openModal();
+      document.querySelectorAll('.login-tab').forEach(function(t) { if (t.dataset.tab === 'teacher') t.click(); });
+      var user = getUsers().find(function(u) { return u.email === session.email; });
+      if (user) showTeacherDash(user);
     }
   })();
   </script>
