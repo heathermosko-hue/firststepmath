@@ -577,7 +577,7 @@
     <div class="store-section" id="tab-pet-care">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
         <div class="owned-pets-row" style="margin:0;flex:1;">
-          <h3 style="margin:0 0 6px">🐾 Your Pets</h3>
+          <h3 style="margin:0 0 6px;display:flex;align-items:center;gap:10px;">🐾 Your Pets <span id="accLimitBadge" style="font-family:'Fredoka One',cursive;font-size:0.75rem;color:#fff;background:#7c3aed;border-radius:50px;padding:3px 12px;">0 / 6 accessories</span></h3>
           <div class="owned-pets-chips" id="ownedPetsRow">
             <span class="no-pets-msg">Adopt a pet first to buy food and accessories!</span>
           </div>
@@ -848,22 +848,7 @@
       { id:'snake-den',         num:22, name:'Snake Den',            emoji:'🐍', img:'img/store/home-snake-den.png',         price:0.60, desc:'Coil • Hide • Home!',            bg:'#d1fae5' },
     ];
 
-    // ── ADMIN UNLOCK — always give all items ────────────
-    {
-      const allIds = {};
-      [...PETS, ...ACCESSORIES, ...BEDS, ...FOOD].forEach(item => { allIds[item.id] = 1; });
-      localStorage.setItem(PURCH_KEY, JSON.stringify(allIds));
-      localStorage.setItem(MONEY_KEY, '999.99');
-      // Enforce scene limits every load — rebuild hidden so only first N are visible
-      const LIMITS = { pet: 3, home: 3, acc: 6 };
-      const freshH = {};
-      [['pet', PETS], ['home', BEDS], ['acc', ACCESSORIES]].forEach(([cat, arr]) => {
-        if (arr.length > LIMITS[cat]) {
-          freshH[cat] = arr.slice(LIMITS[cat]).map(x => x.id);
-        }
-      });
-      localStorage.setItem('fsm_scene_hidden', JSON.stringify(freshH));
-    }
+    const ACC_LIMIT = 6; // max unique accessory-type items (food + accessories + beds)
 
     // ── STATE ──────────────────────────────────────────
     let balance   = parseFloat(localStorage.getItem(MONEY_KEY) || '0');
@@ -883,6 +868,10 @@
     }
     function owns(id)  { return (purchases[id] || 0) > 0; }
     function count(id) { return purchases[id] || 0; }
+    function accCount() {
+      return [...FOOD, ...ACCESSORIES, ...BEDS].filter(item => owns(item.id)).length;
+    }
+    function accAtLimit() { return accCount() >= ACC_LIMIT; }
 
     function updateBalance() {
       document.getElementById('balanceAmt').textContent = balance.toFixed(2);
@@ -896,9 +885,10 @@
     }
 
     // ── CARD BUILDER ─────────────────────────────────
-    function makeCard(item, repeatable) {
+    function makeCard(item, repeatable, isAcc) {
       const owned  = owns(item.id);
       const canBuy = balance >= item.price;
+      const limitHit = isAcc && !owned && accAtLimit();
       const bg     = item.bg || BG[item.num % BG.length];
 
       const card = document.createElement('div');
@@ -912,6 +902,7 @@
 
       let btnText, btnCls = 'buy-btn', btnDis = '';
       if (owned && !repeatable) { btnCls += ' owned-btn'; btnText = '✓ Owned'; btnDis = 'disabled'; }
+      else if (limitHit)        { btnText = '🎒 Bag Full (6/6)'; btnDis = 'disabled'; }
       else if (!canBuy)         { btnText = 'Need $' + item.price.toFixed(2); btnDis = 'disabled'; }
       else                      { btnText = (repeatable && owned) ? 'Buy Again 🛒' : 'Buy Now! 🛒'; }
 
@@ -944,10 +935,10 @@
       return card;
     }
 
-    function fillGrid(gridId, items, repeatable) {
+    function fillGrid(gridId, items, repeatable, isAcc) {
       const g = document.getElementById(gridId);
       g.innerHTML = '';
-      items.forEach(item => g.appendChild(makeCard(item, repeatable || false)));
+      items.forEach(item => g.appendChild(makeCard(item, repeatable || false, isAcc || false)));
     }
 
     // ── OWNED PETS ROW ────────────────────────────────
@@ -1522,14 +1513,24 @@
       };
     })();
 
+    function renderAccBadge() {
+      const used = accCount();
+      const el = document.getElementById('accLimitBadge');
+      if (el) {
+        el.textContent = used + ' / ' + ACC_LIMIT + ' accessories';
+        el.style.background = used >= ACC_LIMIT ? '#dc2626' : '#7c3aed';
+      }
+    }
+
     function renderAll() {
-      fillGrid('petsGrid',   PETS,        false);
-      fillGrid('foodGrid',   FOOD,        true);
-      fillGrid('accessGrid', ACCESSORIES, false);
-      fillGrid('bedsGrid',   BEDS,        false);
+      fillGrid('petsGrid',   PETS,        false, false);
+      fillGrid('foodGrid',   FOOD,        true,  true);
+      fillGrid('accessGrid', ACCESSORIES, false, true);
+      fillGrid('bedsGrid',   BEDS,        false, true);
       renderOwnedPets();
       renderCollection();
       renderSidebar();
+      renderAccBadge();
     }
 
     // ── PET CARE TABS ─────────────────────────────────
