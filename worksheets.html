@@ -196,6 +196,8 @@
       <div class="ws-card"><div class="ws-card-icon">📦</div><div class="ws-card-title">Position Words</div><div class="ws-card-desc">Above, below, beside, inside, outside — where is the object?</div><div class="ws-card-meta">PK.G.3 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-position')">📄 Preview &amp; Print</button></div>
       <div class="ws-card"><div class="ws-card-icon">🗂️</div><div class="ws-card-title">Sorting</div><div class="ws-card-desc">Sort by color, shape, and type. Find the one that doesn't belong.</div><div class="ws-card-meta">PK.G.1 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-sorting')">📄 Preview &amp; Print</button></div>
       <div class="ws-card"><div class="ws-card-icon">📐</div><div class="ws-card-title">Measurement</div><div class="ws-card-desc">Longer, shorter, taller, heavier — compare sizes and weights.</div><div class="ws-card-meta">PK.M.1–3 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-measurement')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📖</div><div class="ws-card-title">Word Problems</div><div class="ws-card-desc">Simple add and take-away stories using numbers 1–5.</div><div class="ws-card-meta">PK.OA.1 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-wordproblems')">📄 Preview &amp; Print</button></div>
+      <div class="ws-card"><div class="ws-card-icon">📊</div><div class="ws-card-title">Graphs &amp; Data</div><div class="ws-card-desc">Count picture-graph rows, find most/fewest, compare groups.</div><div class="ws-card-meta">PK.DA.1 · 8 problems</div><button class="ws-btn" onclick="openWS('prek-graphs')">📄 Preview &amp; Print</button></div>
     </div>
 
     <!-- KINDERGARTEN -->
@@ -299,6 +301,8 @@
         { type:'fill', eq:'2 is ___ than 7.  (more / less)', label:'Circle: more or less.' },
         { type:'fill', eq:'4 = 4. They are _____.', label:'Write: equal.' },
         { type:'fill', eq:'9 is the ___ number.  (6, 7, 8, 9)', label:'Circle the greatest.' },
+        { type:'compare', a:'🐶🐶🐶 (3)', b:'🐶🐶🐶🐶🐶 (5)', q:'Which group has FEWER?' },
+        { type:'fill', eq:'1 is ___ than 10.  (more / less)', label:'Circle: more or less.' },
       ]
     },
     'prek-patterns': {
@@ -324,6 +328,7 @@
         { type:'fill', eq:'A door 🚪 is shaped like a ___________.',label:'Name the shape.' },
         { type:'fill', eq:'The sun ☀️ is shaped like a ___________.', label:'Name the shape.' },
         { type:'fill', eq:'A pizza slice 🍕 is shaped like a _________.', label:'Name the shape.' },
+        { type:'fill', eq:'A square and a rectangle both have ___ sides.', label:'Count the sides.' },
       ]
     },
     'k-counting20': {
@@ -434,6 +439,35 @@
         { type:'fill', eq:'There are 15 fish in a tank. 6 swim away. How many are left?\nAnswer: ___', label:'' },
         { type:'fill', eq:'A bag has 7 red and 8 blue marbles. How many marbles in all?\nAnswer: ___', label:'' },
         { type:'fill', eq:'Lily read 14 pages. She needs to read 20. How many more does she need?\nAnswer: ___', label:'' },
+      ]
+    },
+
+    'prek-wordproblems': {
+      title:'Word Problems', grade:'Pre-K', standard:'PK.OA.1',
+      instructions:'Listen to the story. Write the answer.',
+      problems:[
+        { type:'fill', eq:'Mia has 2 cats. 1 more cat comes.\nHow many cats now? ___', label:'' },
+        { type:'fill', eq:'There are 4 birds. 1 flies away.\nHow many birds are left? ___', label:'' },
+        { type:'fill', eq:'Ben has 3 apples 🍎🍎🍎. He gets 2 more.\nHow many apples in all? ___', label:'' },
+        { type:'fill', eq:'5 frogs sit on a log. 2 hop away.\nHow many frogs are left? ___', label:'' },
+        { type:'fill', eq:'There are 1 dog and 3 cats.\nHow many animals in all? ___', label:'' },
+        { type:'fill', eq:'Mom has 4 balloons 🎈🎈🎈🎈. 1 pops.\nHow many are left? ___', label:'' },
+        { type:'fill', eq:'2 ducks are in the pond. 2 more swim in.\nHow many ducks now? ___', label:'' },
+        { type:'fill', eq:'There are 5 cookies 🍪. Jake eats 3.\nHow many cookies are left? ___', label:'' },
+      ]
+    },
+    'prek-graphs': {
+      title:'Graphs & Data', grade:'Pre-K', standard:'PK.DA.1',
+      instructions:'Use the data to answer each question.',
+      problems:[
+        { type:'fill', eq:'Favorite Animals: 🐶🐶🐶🐶  🐱🐱🐱  🐸🐸\nHow many dogs? ___', label:'' },
+        { type:'fill', eq:'Favorite Animals: 🐶🐶🐶🐶  🐱🐱🐱  🐸🐸\nHow many cats? ___', label:'' },
+        { type:'compare', a:'🐶 (4 votes)', b:'🐸 (2 votes)', q:'Which animal got MORE votes?' },
+        { type:'fill', eq:'Favorite Colors: Red=3  Blue=5  Yellow=2\nWhich color got the MOST votes? ___', label:'' },
+        { type:'fill', eq:'Favorite Colors: Red=3  Blue=5  Yellow=2\nWhich color got the FEWEST votes? ___', label:'' },
+        { type:'fill', eq:'Tally marks: | | | = how many? ___', label:'Count the tallies.' },
+        { type:'fill', eq:'Tally marks: | | | | | = how many? ___', label:'Count the tallies.' },
+        { type:'fill', eq:'Weather: ☀️☀️☀️☀️  🌧️🌧️  ❄️\nHow many sunny days? ___', label:'' },
       ]
     },
 
