@@ -572,11 +572,14 @@ function showQuestion() {
       const btn = document.createElement('button');
       btn.className   = 'answer-btn';
       btn.dataset.val = answer;
-      btn.innerHTML   = `<span class="ans-text">${answer}</span><span class="ans-speak" role="button" title="Hear this answer" aria-label="Listen">🔊</span>`;
-      btn.querySelector('.ans-speak').addEventListener('click', e => {
-        e.stopPropagation();
-        speakText(answer);
-      });
+      const hasWords = /[a-zA-Z]/.test(answer);
+      btn.innerHTML   = `<span class="ans-text">${answer}</span>${hasWords ? '<span class="ans-speak" role="button" title="Hear this answer" aria-label="Listen">🔊</span>' : ''}`;
+      if (hasWords) {
+        btn.querySelector('.ans-speak').addEventListener('click', e => {
+          e.stopPropagation();
+          speakText(answer);
+        });
+      }
       btn.addEventListener('click', () => {
         if (answered) return;
         document.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
