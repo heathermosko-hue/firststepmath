@@ -1081,15 +1081,14 @@
             return { x: snapX, y: snapY };
           }
 
-          // Snap accessory onto a pet (dress-up)
+          // Snap accessory onto a pet (dress-up) — keep wherever dropped
           if (droppedLayer === 'acc') {
             var pets = scene.querySelectorAll('[data-layer="pet"]');
             for (var j = 0; j < pets.length; j++) {
               var pr = pets[j].getBoundingClientRect();
               if (cx >= pr.left && cx <= pr.right && cy >= pr.top && cy <= pr.bottom) {
-                var accW = dr.width;
-                var sx = (pr.left - scRect.left + pr.width / 2 - accW / 2) / scRect.width  * 100;
-                var sy = (pr.top  - scRect.top  - accW * 0.05)              / scRect.height * 100;
+                var sx = parseFloat(droppedEl.style.left);
+                var sy = parseFloat(droppedEl.style.top);
                 return doSnap(sx, sy, pets[j].dataset.itemId);
               }
             }
