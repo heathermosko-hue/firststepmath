@@ -1036,33 +1036,53 @@
           });
         }
 
-        // Snap pet/acc/food onto a home if dropped inside it
+        // Snap pet/acc/food onto a home if dropped inside it;
+        // also snap accessories onto pets (dress-up)
         function trySnap(droppedId, droppedEl, droppedLayer, scRect) {
           if (droppedLayer === 'home') return;
           var dr = droppedEl.getBoundingClientRect();
           var cx = dr.left + dr.width  / 2;
           var cy = dr.top  + dr.height / 2;
-          var homes = scene.querySelectorAll('[data-layer="home"]');
           var attach = loadAttach();
+
+          function doSnap(snapX, snapY, parentId) {
+            snapX = Math.max(0, Math.min(88, snapX));
+            snapY = Math.max(0, Math.min(80, snapY));
+            droppedEl.style.left = snapX + '%';
+            droppedEl.style.top  = snapY + '%';
+            attach[droppedId] = parentId;
+            saveAttach(attach);
+            droppedEl.style.transition = 'left 0.2s, top 0.2s';
+            setTimeout(function() { droppedEl.style.transition = ''; }, 250);
+            return { x: snapX, y: snapY };
+          }
+
+          // Snap accessory onto a pet (dress-up)
+          if (droppedLayer === 'acc') {
+            var pets = scene.querySelectorAll('[data-layer="pet"]');
+            for (var j = 0; j < pets.length; j++) {
+              var pr = pets[j].getBoundingClientRect();
+              if (cx >= pr.left && cx <= pr.right && cy >= pr.top && cy <= pr.bottom) {
+                var accW = dr.width;
+                var sx = (pr.left - scRect.left + pr.width / 2 - accW / 2) / scRect.width  * 100;
+                var sy = (pr.top  - scRect.top  - accW * 0.05)              / scRect.height * 100;
+                return doSnap(sx, sy, pets[j].dataset.itemId);
+              }
+            }
+          }
+
+          // Snap anything onto a home
+          var homes = scene.querySelectorAll('[data-layer="home"]');
           for (var i = 0; i < homes.length; i++) {
             var hr = homes[i].getBoundingClientRect();
             if (cx >= hr.left && cx <= hr.right && cy >= hr.top && cy <= hr.bottom) {
-              // Snap to inside the home: center horizontally, ~40% down
-              var snapX = ((hr.left - scRect.left + hr.width  * 0.28) / scRect.width  * 100);
-              var snapY = ((hr.top  - scRect.top  + hr.height * 0.38) / scRect.height * 100);
-              snapX = Math.max(0, Math.min(88, snapX));
-              snapY = Math.max(0, Math.min(80, snapY));
-              droppedEl.style.left = snapX + '%';
-              droppedEl.style.top  = snapY + '%';
-              attach[droppedId] = homes[i].dataset.itemId;
-              saveAttach(attach);
-              // Visual feedback
-              droppedEl.style.transition = 'left 0.2s, top 0.2s';
-              setTimeout(function() { droppedEl.style.transition = ''; }, 250);
-              return { x: snapX, y: snapY };
+              var snapX = (hr.left - scRect.left + hr.width  * 0.28) / scRect.width  * 100;
+              var snapY = (hr.top  - scRect.top  + hr.height * 0.38) / scRect.height * 100;
+              return doSnap(snapX, snapY, homes[i].dataset.itemId);
             }
           }
-          // Not over any home — detach
+
+          // Not over any target — detach
           delete attach[droppedId];
           saveAttach(attach);
           return null;
@@ -1080,7 +1100,7 @@
           _prevX = x; _prevY = y;
           _dragEl.style.left = x + '%';
           _dragEl.style.top  = y + '%';
-          if (_dragEl.dataset.layer === 'home') moveAttached(_dragId, dx, dy);
+          if (_dragEl.dataset.layer === 'home' || _dragEl.dataset.layer === 'pet') moveAttached(_dragId, dx, dy);
         }
         function onMouseUp(e) {
           if (!_dragEl) return;
@@ -1093,8 +1113,8 @@
           if (snapped) { x = snapped.x; y = snapped.y; }
           var savedPos = loadPositions();
           savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
-          // Also save positions of any attached children if this was a home
-          if (_dragEl.dataset.layer === 'home') {
+          // Save positions of attached children when a home or pet is moved
+          if (_dragEl.dataset.layer === 'home' || _dragEl.dataset.layer === 'pet') {
             var attach = loadAttach();
             Object.keys(attach).forEach(function(childId) {
               if (attach[childId] !== _dragId) return;
@@ -1119,7 +1139,7 @@
           _prevX = x; _prevY = y;
           _dragEl.style.left = x + '%';
           _dragEl.style.top  = y + '%';
-          if (_dragEl.dataset.layer === 'home') moveAttached(_dragId, dx, dy);
+          if (_dragEl.dataset.layer === 'home' || _dragEl.dataset.layer === 'pet') moveAttached(_dragId, dx, dy);
           e.preventDefault();
         }
         function onTouchEnd(e) {
@@ -1134,7 +1154,7 @@
           if (snapped) { x = snapped.x; y = snapped.y; }
           var savedPos = loadPositions();
           savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
-          if (_dragEl.dataset.layer === 'home') {
+          if (_dragEl.dataset.layer === 'home' || _dragEl.dataset.layer === 'pet') {
             var attach = loadAttach();
             Object.keys(attach).forEach(function(childId) {
               if (attach[childId] !== _dragId) return;
