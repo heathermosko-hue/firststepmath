@@ -65,6 +65,13 @@
       padding:10px 28px; cursor:pointer; transition:background 0.15s;
     }
     .entrance-collection-btn:hover { background:#ede9fe; }
+    .world-shortcut-btn {
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#fff;
+      background:linear-gradient(135deg,#34d399,#10b981); border:none; border-radius:50px;
+      padding:10px 22px; cursor:pointer; white-space:nowrap;
+      box-shadow:0 4px 12px rgba(16,185,129,0.35); transition:transform 0.15s, box-shadow 0.15s;
+    }
+    .world-shortcut-btn:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(16,185,129,0.45); }
 
     /* ── Back button ── */
     .back-to-store {
@@ -468,17 +475,23 @@
 
     <!-- ══════════ PETS ══════════ -->
     <div class="store-section active" id="tab-pets">
-      <div class="section-title">🐾 Adopt a Pet!</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:6px;">
+        <div class="section-title" style="margin:0">🐾 Adopt a Pet!</div>
+        <button class="world-shortcut-btn" onclick="enterStore('collection')">🌿 My Pet World →</button>
+      </div>
       <div class="store-grid" id="petsGrid"></div>
     </div>
 
     <!-- ══════════ PET CARE ══════════ -->
     <div class="store-section" id="tab-pet-care">
-      <div class="owned-pets-row">
-        <h3>🐾 Your Pets</h3>
-        <div class="owned-pets-chips" id="ownedPetsRow">
-          <span class="no-pets-msg">Adopt a pet first to buy food and accessories!</span>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
+        <div class="owned-pets-row" style="margin:0;flex:1;">
+          <h3 style="margin:0 0 6px">🐾 Your Pets</h3>
+          <div class="owned-pets-chips" id="ownedPetsRow">
+            <span class="no-pets-msg">Adopt a pet first to buy food and accessories!</span>
+          </div>
         </div>
+        <button class="world-shortcut-btn" onclick="enterStore('collection')">🌿 My Pet World →</button>
       </div>
 
       <div class="pet-care-tabs">
@@ -824,7 +837,7 @@
 
     // ── PET WORLD ────────────────────────────────────
     (function() {
-      var _dragId = null, _dragEl = null, _dragOffX = 0, _dragOffY = 0;
+      var _dragId = null, _dragEl = null, _dragOffX = 0, _dragOffY = 0, _dragLayer = 1;
 
       function loadPositions() {
         try { return JSON.parse(localStorage.getItem('fsm_pet_positions') || '{}'); } catch(e) { return {}; }
@@ -851,13 +864,16 @@
           return;
         }
 
-        // All owned items go on the meadow
+        // Layer order: homes behind, food next, pets in front, accessories on top
         var allItems = [].concat(
-          ownedBeds.map(function(b){ return { id:'bed_'+b.id,  item:b }; }),
-          ownedPets.map(function(p){ return { id:'pet_'+p.id,  item:p }; }),
-          ownedAccess.map(function(a){ return { id:'acc_'+a.id, item:a }; }),
-          ownedFood.map(function(f){ return { id:'food_'+f.id, item:f }; })
+          ownedBeds.map(function(b)  { return { id:'bed_'+b.id,   item:b, layer:'home' }; }),
+          ownedFood.map(function(f)  { return { id:'food_'+f.id,  item:f, layer:'food' }; }),
+          ownedPets.map(function(p)  { return { id:'pet_'+p.id,   item:p, layer:'pet'  }; }),
+          ownedAccess.map(function(a){ return { id:'acc_'+a.id,   item:a, layer:'acc'  }; })
         );
+
+        var LAYER_Z   = { home:1, food:2, pet:3, acc:10 };
+        var LAYER_SIZE = { home:130, food:70, pet:90, acc:60 }; // px
 
         // Clear & rebuild scene
         scene.innerHTML = '';
@@ -865,24 +881,27 @@
         var pos = loadPositions();
         var sceneW = scene.offsetWidth || 360;
 
-        var cols = Math.max(2, Math.floor(sceneW / 110));
+        var cols = Math.max(2, Math.floor(sceneW / 130));
         allItems.forEach(function(entry, i) {
-          var item = entry.item;
-          var uid  = entry.id;
-          var col  = i % cols, row = Math.floor(i / cols);
-          var defaultX = (col / cols * 80 + 4);
-          var defaultY = (row * 22 + 5);
+          var item  = entry.item;
+          var uid   = entry.id;
+          var layer = entry.layer;
+          var sz    = LAYER_SIZE[layer];
+          var col   = i % cols, row = Math.floor(i / cols);
+          var defaultX = (col / cols * 78 + 2);
+          var defaultY = (row * 26 + 4);
           var p = pos[uid] || { x: defaultX, y: defaultY };
 
           var sticker = document.createElement('div');
           sticker.className = 'world-sticker';
           sticker.dataset.itemId = uid;
-          sticker.style.left = p.x + '%';
-          sticker.style.top  = p.y + '%';
+          sticker.style.left    = p.x + '%';
+          sticker.style.top     = p.y + '%';
+          sticker.style.zIndex  = LAYER_Z[layer];
           sticker.style.animationDelay = (i * 0.05) + 's';
 
           var imgHtml = item.img
-            ? '<div class="img-clip"><img src="' + item.img + '" alt="' + item.name + '" onerror="this.parentNode.innerHTML=\'<span class=sticker-emoji>' + (item.emoji||'🐾') + '</span>\'"></div>'
+            ? '<div class="img-clip" style="width:'+sz+'px;height:'+sz+'px"><img src="' + item.img + '" alt="' + item.name + '" onerror="this.parentNode.innerHTML=\'<span class=sticker-emoji>' + (item.emoji||'🐾') + '</span>\'"></div>'
             : '<span class="sticker-emoji">' + (item.emoji||'🐾') + '</span>';
           sticker.innerHTML = imgHtml;
 
@@ -892,8 +911,9 @@
             var rect = sticker.getBoundingClientRect();
             _dragOffX = e.clientX - rect.left;
             _dragOffY = e.clientY - rect.top;
-            _dragId = uid;
+            _dragId = uid; _dragLayer = LAYER_Z[layer];
             _dragEl = sticker;
+            sticker.style.zIndex = 100;
             sticker.classList.add('dragging');
             e.preventDefault();
           });
@@ -904,8 +924,9 @@
             var rect = sticker.getBoundingClientRect();
             _dragOffX = t.clientX - rect.left;
             _dragOffY = t.clientY - rect.top;
-            _dragId = uid;
+            _dragId = uid; _dragLayer = LAYER_Z[layer];
             _dragEl = sticker;
+            sticker.style.zIndex = 100;
             sticker.classList.add('dragging');
             e.preventDefault();
           }, { passive: false });
@@ -934,6 +955,7 @@
           var savedPos = loadPositions();
           savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
           savePositions(savedPos);
+          _dragEl.style.zIndex = _dragLayer;
           _dragEl.classList.remove('dragging');
           _dragEl = null; _dragId = null;
         }
@@ -960,6 +982,7 @@
           var savedPos = loadPositions();
           savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
           savePositions(savedPos);
+          _dragEl.style.zIndex = _dragLayer;
           _dragEl.classList.remove('dragging');
           _dragEl = null; _dragId = null;
         }
