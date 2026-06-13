@@ -790,6 +790,7 @@ function showStorePrompt() {
     'cow':      { emoji:'🐮', name:'Cow',       food:'cow-food',      bed:'pastel-stable'     },
     'goat':     { emoji:'🐐', name:'Goat',      food:'goat-food',     bed:'pastel-stable'     },
     'gator':    { emoji:'🐊', name:'Gator',     food:'gator-food',    bed:'swamp-terrarium'   },
+    'frog':     { emoji:'🐸', name:'Froggy',    food:'frog-food',     bed:'swamp-terrarium'   },
   };
   var ownedPetIds = Object.keys(PET_INFO).filter(owns);
   var hasBed    = ['pet-bed','pet-carrier','doghouse','cat-tree','fish-tank','space-pod'].some(owns);
