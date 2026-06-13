@@ -854,18 +854,15 @@
       [...PETS, ...ACCESSORIES, ...BEDS, ...FOOD].forEach(item => { allIds[item.id] = 1; });
       localStorage.setItem(PURCH_KEY, JSON.stringify(allIds));
       localStorage.setItem(MONEY_KEY, '999.99');
-      // Enforce scene limits: hide anything beyond 3 pets / 3 homes / 6 accessories
+      // Enforce scene limits every load — rebuild hidden so only first N are visible
       const LIMITS = { pet: 3, home: 3, acc: 6 };
-      let h;
-      try { h = JSON.parse(localStorage.getItem('fsm_scene_hidden') || '{}'); } catch(e) { h = {}; }
+      const freshH = {};
       [['pet', PETS], ['home', BEDS], ['acc', ACCESSORIES]].forEach(([cat, arr]) => {
-        if (!h[cat]) h[cat] = [];
-        const visible = arr.filter(x => h[cat].indexOf(x.id) < 0);
-        if (visible.length > LIMITS[cat]) {
-          visible.slice(LIMITS[cat]).forEach(x => { if (h[cat].indexOf(x.id) < 0) h[cat].push(x.id); });
+        if (arr.length > LIMITS[cat]) {
+          freshH[cat] = arr.slice(LIMITS[cat]).map(x => x.id);
         }
       });
-      localStorage.setItem('fsm_scene_hidden', JSON.stringify(h));
+      localStorage.setItem('fsm_scene_hidden', JSON.stringify(freshH));
     }
 
     // ── STATE ──────────────────────────────────────────
