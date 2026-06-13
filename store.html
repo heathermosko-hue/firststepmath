@@ -190,20 +190,68 @@
     .buy-btn:disabled { background:#9ca3af; cursor:default; color:#e5e7eb; font-size:0.75rem; }
     .buy-btn.owned-btn { background:#16a34a; }
 
-    /* ── Collection ── */
-    .my-collection { margin-top:48px; }
-    .collection-grid { display:flex; flex-wrap:wrap; gap:12px; }
-    .collection-chip {
-      background:#f5f3ff; border-radius:14px; padding:10px 14px;
-      border:2px solid #ddd6fe; box-shadow:0 3px 10px rgba(0,0,0,0.07);
-      transition:transform 0.1s; cursor:default; text-align:center; min-width:56px;
-      display:flex; flex-direction:column; align-items:center; gap:4px;
-    }
-    .collection-chip img { width:36px; height:36px; object-fit:contain; }
-    .collection-chip .chip-emoji { font-size:1.8rem; }
-    .collection-chip:hover { transform:scale(1.1) rotate(-2deg); }
-    .collection-chip .chip-name { font-size:0.6rem; font-weight:800; color:#7c3aed; display:block; }
+    /* ── Pet World ── */
     .no-items { color:#aaa; font-size:0.9rem; padding:16px 0; text-align:center; width:100%; }
+    .pet-world-wrap { border-radius:24px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.18); }
+    .pet-world-scene {
+      width:100%; min-height:420px; position:relative; overflow:hidden;
+      background: url('img/pet-world-bg.png') center top / cover no-repeat;
+      background-color:#b7e8a0;
+    }
+    .pet-world-scene.drag-over { outline: 4px dashed rgba(255,255,255,0.7); }
+    .pet-world-empty {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      min-height:400px; text-align:center; padding:24px;
+    }
+    .pet-world-empty-title {
+      font-family:'Fredoka One',cursive; font-size:1.4rem; color:#fff;
+      text-shadow:0 2px 8px rgba(0,0,0,0.45); margin-top:12px;
+    }
+    .world-sticker {
+      position:absolute; cursor:grab; user-select:none;
+      display:flex; flex-direction:column; align-items:center; gap:3px;
+      background:rgba(255,255,255,0.88); border-radius:18px;
+      padding:10px 10px 7px; min-width:76px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.18), 0 0 0 3px rgba(255,255,255,0.55);
+      transition:transform 0.15s, box-shadow 0.15s;
+      touch-action:none;
+    }
+    .world-sticker:hover { transform:scale(1.08) rotate(-2deg); box-shadow:0 10px 28px rgba(0,0,0,0.22); }
+    .world-sticker.dragging { opacity:0.55; cursor:grabbing; transform:scale(1.12) rotate(3deg); }
+    .world-sticker img { width:58px; height:58px; object-fit:contain; display:block; }
+    .world-sticker .sticker-emoji { font-size:2.8rem; line-height:1; display:block; }
+    .world-sticker .sticker-name {
+      font-family:'Fredoka One',cursive; font-size:0.68rem; color:#5b21b6;
+      text-align:center; line-height:1.1;
+    }
+    .world-sticker .sticker-badge { font-size:0.72rem; }
+    @keyframes petPopIn {
+      0%   { transform:scale(0) rotate(-15deg); opacity:0; }
+      70%  { transform:scale(1.15) rotate(3deg); opacity:1; }
+      100% { transform:scale(1) rotate(0); opacity:1; }
+    }
+    .world-sticker { animation:petPopIn 0.45s cubic-bezier(0.175,0.885,0.32,1.275) backwards; }
+
+    .pet-world-shelf {
+      background:rgba(255,255,255,0.93); padding:14px 18px 18px;
+      border-top:3px dashed #ddd6fe;
+    }
+    .pet-world-shelf-title {
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#7c3aed; margin-bottom:10px;
+    }
+    .shelf-chips { display:flex; flex-wrap:wrap; gap:9px; }
+    .shelf-chip {
+      display:flex; align-items:center; gap:6px;
+      background:#f5f3ff; border-radius:50px; padding:7px 14px 7px 10px;
+      border:2px solid #ddd6fe;
+      font-family:'Fredoka One',cursive; font-size:0.82rem; color:#5b21b6;
+    }
+    .shelf-chip img { width:28px; height:28px; object-fit:contain; }
+    .shelf-chip .chip-emoji { font-size:1.3rem; }
+    .shelf-chip .chip-count {
+      background:#ddd6fe; color:#7c3aed; border-radius:50px;
+      padding:1px 8px; font-size:0.72rem; margin-left:2px;
+    }
 
     /* ── Toast ── */
     .toast {
@@ -397,14 +445,14 @@
         <span class="entrance-desc">Food &amp; beds!</span>
       </div>
     </div>
-    <button class="entrance-collection-btn" onclick="enterStore('collection')">🎒 View My Collection</button>
+    <button class="entrance-collection-btn" onclick="enterStore('collection')">🌿 My Pet World</button>
   </div>
 
   <!-- TABS (hidden — used internally) -->
   <div class="store-tabs">
     <button class="store-tab active" data-tab="pets">🐾 Pets</button>
     <button class="store-tab" data-tab="pet-care">🍖 Pet Food &amp; Accessories</button>
-    <button class="store-tab" data-tab="collection">🎒 My Collection</button>
+    <button class="store-tab" data-tab="collection">🌿 My Pet World</button>
   </div>
 
   <div class="store-main" id="storeMain" style="display:none">
@@ -448,11 +496,17 @@
       </div>
     </div>
 
-    <!-- ══════════ COLLECTION ══════════ -->
+    <!-- ══════════ PET WORLD ══════════ -->
     <div class="store-section" id="tab-collection">
-      <div class="section-title">🎒 My Collection</div>
-      <div class="collection-grid" id="collectionGrid">
-        <div class="no-items">Nothing yet — earn money and start shopping!</div>
+      <div class="section-title">🌿 My Pet World</div>
+      <div class="pet-world-wrap">
+        <div class="pet-world-scene" id="petWorldScene">
+          <!-- pets rendered here by JS -->
+        </div>
+        <div class="pet-world-shelf" id="petWorldShelf" style="display:none">
+          <div class="pet-world-shelf-title">🏠 Homes &amp; Accessories</div>
+          <div class="shelf-chips" id="petWorldShelfChips"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -700,27 +754,170 @@
       });
     }
 
-    // ── COLLECTION ────────────────────────────────────
-    function renderCollection() {
-      const grid = document.getElementById('collectionGrid');
-      const allItems = [...PETS, ...FOOD, ...ACCESSORIES, ...BEDS];
-      const owned = allItems.filter(i => owns(i.id));
-      if (!owned.length) {
-        grid.innerHTML = '<div class="no-items">Nothing yet — earn money and start shopping!</div>';
-        return;
+    // ── PET WORLD ────────────────────────────────────
+    (function() {
+      var _dragId = null, _dragEl = null, _dragOffX = 0, _dragOffY = 0;
+
+      function loadPositions() {
+        try { return JSON.parse(localStorage.getItem('fsm_pet_positions') || '{}'); } catch(e) { return {}; }
       }
-      grid.innerHTML = '';
-      owned.forEach(item => {
-        const chip = document.createElement('div');
-        chip.className = 'collection-chip';
-        chip.title = item.name;
-        const cnt = count(item.id);
-        chip.innerHTML = item.img
-          ? `<img src="${item.img}" alt="${item.name}"><span class="chip-name">${item.name}${cnt > 1 ? ' x'+cnt : ''}</span>`
-          : `<span class="chip-emoji">${item.emoji}</span><span class="chip-name">${item.name}${cnt > 1 ? ' x'+cnt : ''}</span>`;
-        grid.appendChild(chip);
-      });
-    }
+      function savePositions(pos) {
+        localStorage.setItem('fsm_pet_positions', JSON.stringify(pos));
+      }
+
+      window.renderCollection = function() {
+        var scene    = document.getElementById('petWorldScene');
+        var shelf    = document.getElementById('petWorldShelf');
+        var shelfEl  = document.getElementById('petWorldShelfChips');
+        if (!scene) return;
+
+        var ownedPets   = PETS.filter(function(p){ return owns(p.id); });
+        var ownedBeds   = BEDS.filter(function(b){ return owns(b.id); });
+        var ownedAccess = ACCESSORIES.filter(function(a){ return owns(a.id); });
+        var ownedFood   = FOOD.filter(function(f){ return owns(f.id); });
+
+        // Empty state
+        if (!ownedPets.length && !ownedBeds.length && !ownedAccess.length) {
+          scene.innerHTML = '<div class="pet-world-empty"><div style="font-size:4rem">🐾</div><div class="pet-world-empty-title">Adopt a pet to fill your world!</div></div>';
+          shelf.style.display = 'none';
+          return;
+        }
+
+        // Clear & rebuild scene
+        scene.innerHTML = '';
+        var pos = loadPositions();
+        var sceneW = scene.offsetWidth || 360;
+        var sceneH = scene.offsetHeight || 420;
+
+        // Default grid positions spread across upper 65% of scene
+        var cols = Math.max(2, Math.floor(sceneW / 110));
+        ownedPets.forEach(function(pet, i) {
+          var col = i % cols, row = Math.floor(i / cols);
+          var defaultX = (col / cols * 80 + 4);
+          var defaultY = (row * 28 + 6);
+          var p = pos[pet.id] || { x: defaultX, y: defaultY };
+
+          var sticker = document.createElement('div');
+          sticker.className = 'world-sticker';
+          sticker.dataset.petId = pet.id;
+          sticker.style.left = p.x + '%';
+          sticker.style.top  = p.y + '%';
+          sticker.style.animationDelay = (i * 0.07) + 's';
+
+          var imgHtml = pet.img
+            ? '<img src="' + pet.img + '" alt="' + pet.name + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'"><span class="sticker-emoji" style="display:none">' + pet.emoji + '</span>'
+            : '<span class="sticker-emoji">' + pet.emoji + '</span>';
+          sticker.innerHTML = imgHtml + '<span class="sticker-name">' + pet.name + '</span>';
+
+          // Desktop drag
+          sticker.addEventListener('mousedown', function(e) {
+            if (e.button !== 0) return;
+            var rect = sticker.getBoundingClientRect();
+            var scRect = scene.getBoundingClientRect();
+            _dragOffX = e.clientX - rect.left;
+            _dragOffY = e.clientY - rect.top;
+            _dragId = pet.id;
+            _dragEl = sticker;
+            sticker.classList.add('dragging');
+            e.preventDefault();
+          });
+
+          // Touch drag
+          sticker.addEventListener('touchstart', function(e) {
+            var t = e.touches[0];
+            var rect = sticker.getBoundingClientRect();
+            _dragOffX = t.clientX - rect.left;
+            _dragOffY = t.clientY - rect.top;
+            _dragId = pet.id;
+            _dragEl = sticker;
+            sticker.classList.add('dragging');
+            e.preventDefault();
+          }, { passive: false });
+
+          scene.appendChild(sticker);
+        });
+
+        // Mouse move / up on document (once, not per pet)
+        function onMouseMove(e) {
+          if (!_dragEl) return;
+          var scRect = scene.getBoundingClientRect();
+          var x = ((e.clientX - scRect.left - _dragOffX) / scRect.width  * 100);
+          var y = ((e.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
+          x = Math.max(0, Math.min(88, x));
+          y = Math.max(0, Math.min(80, y));
+          _dragEl.style.left = x + '%';
+          _dragEl.style.top  = y + '%';
+        }
+        function onMouseUp(e) {
+          if (!_dragEl) return;
+          var scRect = scene.getBoundingClientRect();
+          var x = ((e.clientX - scRect.left - _dragOffX) / scRect.width  * 100);
+          var y = ((e.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
+          x = Math.max(0, Math.min(88, x));
+          y = Math.max(0, Math.min(80, y));
+          var savedPos = loadPositions();
+          savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
+          savePositions(savedPos);
+          _dragEl.classList.remove('dragging');
+          _dragEl = null; _dragId = null;
+        }
+        function onTouchMove(e) {
+          if (!_dragEl) return;
+          var t = e.touches[0];
+          var scRect = scene.getBoundingClientRect();
+          var x = ((t.clientX - scRect.left - _dragOffX) / scRect.width  * 100);
+          var y = ((t.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
+          x = Math.max(0, Math.min(88, x));
+          y = Math.max(0, Math.min(80, y));
+          _dragEl.style.left = x + '%';
+          _dragEl.style.top  = y + '%';
+          e.preventDefault();
+        }
+        function onTouchEnd(e) {
+          if (!_dragEl) return;
+          var t = e.changedTouches[0];
+          var scRect = scene.getBoundingClientRect();
+          var x = ((t.clientX - scRect.left - _dragOffX) / scRect.width  * 100);
+          var y = ((t.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
+          x = Math.max(0, Math.min(88, x));
+          y = Math.max(0, Math.min(80, y));
+          var savedPos = loadPositions();
+          savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
+          savePositions(savedPos);
+          _dragEl.classList.remove('dragging');
+          _dragEl = null; _dragId = null;
+        }
+
+        // Remove old listeners before re-adding (avoid duplicates)
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup',   onMouseUp);
+        document.removeEventListener('touchmove', onTouchMove);
+        document.removeEventListener('touchend',  onTouchEnd);
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup',   onMouseUp);
+        document.addEventListener('touchmove', onTouchMove, { passive:false });
+        document.addEventListener('touchend',  onTouchEnd);
+
+        // Shelf: beds + accessories + food
+        var shelfItems = [...ownedBeds, ...ownedAccess, ...ownedFood];
+        if (shelfItems.length) {
+          shelf.style.display = 'block';
+          shelfEl.innerHTML = '';
+          shelfItems.forEach(function(item) {
+            var chip = document.createElement('div');
+            chip.className = 'shelf-chip';
+            var cnt = count(item.id);
+            var imgHtml = item.img
+              ? '<img src="' + item.img + '" alt="' + item.name + '" onerror="this.style.display=\'none\'"><span class="chip-emoji" style="display:none">' + item.emoji + '</span>'
+              : '<span class="chip-emoji">' + item.emoji + '</span>';
+            chip.innerHTML = imgHtml + item.name + (cnt > 1 ? '<span class="chip-count">x' + cnt + '</span>' : '');
+            shelfEl.appendChild(chip);
+          });
+        } else {
+          shelf.style.display = 'none';
+        }
+      };
+    })();
 
     function renderAll() {
       fillGrid('petsGrid',   PETS,        false);
