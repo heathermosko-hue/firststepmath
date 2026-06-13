@@ -164,8 +164,37 @@ function renderVisual(visual) {
     case 'equation':
     case 'text':           return `<div class="equation-display">${visual.text || visual.content}</div>`;
     case 'emoji':          return `<span class="visual-emoji">${visual.content}</span>`;
+    case 'shape':          return renderShape(visual.name);
     default: return null;
   }
+}
+
+function renderShape(name) {
+  const size = 160;
+  const cx = size / 2, cy = size / 2, r = 68;
+  function poly(n, rotate) {
+    rotate = rotate || 0;
+    let pts = [];
+    for (let i = 0; i < n; i++) {
+      const a = (Math.PI * 2 * i / n) - Math.PI / 2 + (rotate * Math.PI / 180);
+      pts.push((cx + r * Math.cos(a)).toFixed(1) + ',' + (cy + r * Math.sin(a)).toFixed(1));
+    }
+    return pts.join(' ');
+  }
+  const fill = '#a78bfa', stroke = '#6d28d9', sw = 4;
+  let inner = '';
+  switch (name) {
+    case 'circle':    inner = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    case 'triangle':  inner = `<polygon points="${poly(3)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    case 'square':    inner = `<rect x="${cx-r}" y="${cy-r}" width="${r*2}" height="${r*2}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    case 'rectangle': inner = `<rect x="${cx-r}" y="${cy-r*0.6}" width="${r*2}" height="${r*1.2}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    case 'hexagon':   inner = `<polygon points="${poly(6)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    case 'octagon':   inner = `<polygon points="${poly(8)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    case 'rhombus':   inner = `<polygon points="${cx},${cy-r} ${cx+r*0.65},${cy} ${cx},${cy+r} ${cx-r*0.65},${cy}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    case 'pentagon':  inner = `<polygon points="${poly(5)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    default: return null;
+  }
+  return `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
 }
 
 /* ============================================================
