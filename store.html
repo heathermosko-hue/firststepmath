@@ -1036,7 +1036,8 @@
               renderCollection();
             }
             // Flash the sticker in the scene
-            var prefix = _pwCat === 'pet' ? 'pet_' : _pwCat === 'acc' ? 'acc_' : 'bed_';
+            var isFood  = FOOD.find(function(f){ return f.id === item.id; });
+            var prefix  = _pwCat === 'pet' ? 'pet_' : _pwCat === 'acc' ? (isFood ? 'food_' : 'acc_') : 'bed_';
             var sticker = document.querySelector('[data-item-id="' + prefix + item.id + '"]');
             if (sticker) {
               sticker.classList.remove('pw-highlight');
