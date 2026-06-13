@@ -170,21 +170,24 @@ const QUESTIONS = {
       standard: "PK.AF.1",
       questions: [
         // Sort by Size
-        { q: "Which is the BIG apple?",   visual: { type:"compare", compare:"big", items:[{emoji:"🍎", label:"Big",   size:"large"},{emoji:"🍎", label:"Small", size:"small"}] }, answers: ["Big","Small"],           correct: "Big",         standard:"PK.M.1" },
-        { q: "Which is the SMALL bear?",  visual: { type:"compare", compare:"big", items:[{emoji:"🐻", label:"Big",   size:"large"},{emoji:"🐻", label:"Small", size:"small"}] }, answers: ["Big","Small"],           correct: "Small",       standard:"PK.M.1" },
-        { q: "Which is BIGGER?",          visual: { type:"compare", compare:"big", items:[{emoji:"🌳", label:"Tree",  size:"large"},{emoji:"🍄", label:"Mushroom",size:"small"}] }, answers: ["Tree","Mushroom"],     correct: "Tree",        standard:"PK.M.1" },
-        // Sort by Shape  — row: 🟢🟨🔺🔵🟥🟢🔺🟨🔵 → circles:4, squares:3, triangles:2
-        { q: "How many circles do you see?",   visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["2","3","4","5"],            correct: "4",           standard:"PK.G.1" },
-        { q: "Which shape appears the MOST?",  visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["Circles","Squares","Triangles"], correct: "Circles",    standard:"PK.G.1" },
-        { q: "How many triangles do you see?", visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["1","2","3","4"],            correct: "2",           standard:"PK.G.1" },
-        // Sort by Color — row: 🍎🍎⭐🍎🔵⭐🍎🔵🔵 → red:4, blue:3, yellow:2
-        { q: "How many yellow stars do you see?", visual: { type:"emoji_row", items:["🍎","🍎","⭐","🍎","🔵","⭐","🍎","🔵","🔵"] }, answers: ["1","2","3","4"],          correct: "2",           standard:"PK.NS.1" },
-        { q: "Which color has the MOST?",         visual: { type:"emoji_row", items:["🍎","🍎","⭐","🍎","🔵","⭐","🍎","🔵","🔵"] }, answers: ["Red","Blue","Yellow"],    correct: "Red",         standard:"PK.NS.1" },
-        // Sort by Type — row: 🐕🐱🐟🍎🍌🍪⚽🚗 → animals:3, food:3, toys:2
-        { q: "How many animals do you see?",         visual: { type:"emoji_row", items:["🐕","🐱","🐟","🍎","🍌","🍪","⚽","🚗"] }, answers: ["2","3","4","5"],           correct: "3",           standard:"PK.AF.1" },
-        { q: "Which one does NOT belong with the animals?", visual: { type:"emoji_row", items:["🐕","🐱","🐟","🚗"] }, answers: ["🐕","🐱","🐟","🚗"],             correct: "🚗",          standard:"PK.AF.1" },
-        { q: "Which belongs with 🍎🍊🍋?",          visual: null, answers: ["🚗","🍇","🐶","🌳"],                                                                            correct: "🍇",          standard:"PK.AF.1" },
-        { q: "Which does NOT belong: 🐶🐱🐦🚗?",    visual: null, answers: ["🐶","🐱","🐦","🚗"],                                                                            correct: "🚗",          standard:"PK.AF.1" },
+        { q: "Sort by Size: Which is the BIG apple?",    visual: { type:"compare", compare:"big", items:[{emoji:"🍎", label:"Big",  size:"large"},{emoji:"🍎", label:"Small",size:"small"}] }, answers: ["Big","Small"],              correct: "Big",     standard:"PK.M.1" },
+        { q: "Sort by Size: Which is the SMALL bear?",   visual: { type:"compare", compare:"big", items:[{emoji:"🐻", label:"Big",  size:"large"},{emoji:"🐻", label:"Small",size:"small"}] }, answers: ["Big","Small"],              correct: "Small",   standard:"PK.M.1" },
+        { q: "Sort by Size: Which is BIGGER?",           visual: { type:"compare", compare:"big", items:[{emoji:"🌳", label:"Tree", size:"large"},{emoji:"🍄", label:"Mushroom",size:"small"}] }, answers: ["Tree","Mushroom"],       correct: "Tree",    standard:"PK.M.1" },
+        { q: "Sort by Size: Which is SMALLER?",          visual: { type:"compare", compare:"big", items:[{emoji:"🐘", label:"Elephant",size:"large"},{emoji:"🐦", label:"Bird",size:"small"}] }, answers: ["Elephant","Bird"],       correct: "Bird",    standard:"PK.M.1" },
+        // Sort by Shape — 🟢🟨🔺🔵🟥🟢🔺🟨🔵 → circles:4, squares:3, triangles:2
+        { q: "Sort by Shape: How many circles?",         visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["2","3","4","5"],                             correct: "4",        standard:"PK.G.1" },
+        { q: "Sort by Shape: Which shape has the MOST?", visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["Circles","Squares","Triangles"],             correct: "Circles",  standard:"PK.G.1" },
+        { q: "Sort by Shape: How many triangles?",       visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["1","2","3","4"],                             correct: "2",        standard:"PK.G.1" },
+        { q: "Sort by Shape: How many squares?",         visual: { type:"emoji_row", items:["🟢","🟨","🔺","🔵","🟥","🟢","🔺","🟨","🔵"] }, answers: ["2","3","4","5"],                             correct: "3",        standard:"PK.G.1" },
+        // Sort by Color — 🍎🍎⭐🍎🔵⭐🍎🔵🔵 → red:4, blue:3, yellow:2
+        { q: "Sort by Colour: How many yellow stars?",   visual: { type:"emoji_row", items:["🍎","🍎","⭐","🍎","🔵","⭐","🍎","🔵","🔵"] }, answers: ["1","2","3","4"],                             correct: "2",        standard:"PK.NS.1" },
+        { q: "Sort by Colour: Which colour has MOST?",   visual: { type:"emoji_row", items:["🍎","🍎","⭐","🍎","🔵","⭐","🍎","🔵","🔵"] }, answers: ["Red","Blue","Yellow"],                       correct: "Red",      standard:"PK.NS.1" },
+        { q: "Sort by Colour: How many blue circles?",   visual: { type:"emoji_row", items:["🍎","🍎","⭐","🍎","🔵","⭐","🍎","🔵","🔵"] }, answers: ["1","2","3","4"],                             correct: "3",        standard:"PK.NS.1" },
+        // Sort by Type — 🐕🐱🐟🍎🍌🍪⚽🚗 → animals:3, food:3, toys:2
+        { q: "Sort by Type: How many animals?",          visual: { type:"emoji_row", items:["🐕","🐱","🐟","🍎","🍌","🍪","⚽","🚗"] }, answers: ["2","3","4","5"],                                 correct: "3",        standard:"PK.AF.1" },
+        { q: "Sort by Type: Which does NOT belong with the animals?", visual: { type:"emoji_row", items:["🐕","🐱","🐟","🚗"] },        answers: ["🐕","🐱","🐟","🚗"],                            correct: "🚗",       standard:"PK.AF.1" },
+        { q: "Sort by Type: Which belongs with 🍎🍊🍋?", visual: null, answers: ["🚗","🍇","🐶","🌳"],                                                                                                correct: "🍇",       standard:"PK.AF.1" },
+        { q: "Sort by Type: Which does NOT belong: 🐶🐱🐦🚗?", visual: null, answers: ["🐶","🐱","🐦","🚗"],                                                                                         correct: "🚗",       standard:"PK.AF.1" },
       ]
     },
 
