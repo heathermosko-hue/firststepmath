@@ -217,22 +217,37 @@
     }
     .pw-items-list {
       display:flex; flex-direction:column; gap:5px;
-      max-height:340px; overflow-y:auto;
+      max-height:238px; overflow-y:auto; padding-right:2px;
+      scrollbar-width:thin; scrollbar-color:#ddd6fe #f5f3ff;
     }
     .pw-chip {
       display:flex; flex-direction:column; align-items:center; gap:2px;
       background:#fff; border:2px solid #e5e7eb; border-radius:10px;
       padding:5px 3px; cursor:pointer; transition:all 0.15s;
       font-family:'Fredoka One',cursive; font-size:0.6rem; color:#374151;
-      text-align:center; line-height:1.2;
+      text-align:center; line-height:1.2; position:relative; flex-shrink:0;
     }
     .pw-chip img { width:52px; height:52px; object-fit:contain; display:block; }
     .pw-chip.on { background:#dcfce7; border-color:#4ade80; }
-    .pw-chip.maxed { opacity:0.45; cursor:default; }
+    .pw-chip-x {
+      position:absolute; top:2px; right:2px; width:15px; height:15px;
+      border-radius:50%; border:none; cursor:pointer; font-size:0.65rem;
+      display:flex; align-items:center; justify-content:center; padding:0; line-height:1;
+      background:#fca5a5; color:#7f1d1d;
+    }
+    .pw-chip.on .pw-chip-x { background:#fca5a5; color:#7f1d1d; }
+    .pw-chip:not(.on) .pw-chip-x { background:#86efac; color:#14532d; }
+    @keyframes pwHighlight {
+      0%,100% { transform:scale(1) rotate(0); filter:none; }
+      25%  { transform:scale(1.45) rotate(-6deg); filter:drop-shadow(0 0 12px gold); }
+      55%  { transform:scale(1.3) rotate(4deg);  filter:drop-shadow(0 0 8px gold); }
+    }
+    .pw-highlight { animation:pwHighlight 0.75s ease-out !important; }
     @media(max-width:500px) {
       .pw-sidebar { width:72px; }
       .pw-chip img { width:40px; height:40px; }
       .pw-cat-icon { font-size:1.1rem; }
+      .pw-items-list { max-height:190px; }
     }
 
     /* ── Pet World ── */
@@ -771,7 +786,6 @@
       { id:'cozy-sweater',    num:11, name:'Cozy Sweater',     emoji:'🧶', img:'img/store/acc-cozy-sweater.png',   price:0.45, desc:'Warm • Cozy • Cute!',         bg:'#fce7f3' },
       { id:'grooming-kit',      num:12, name:'Grooming Kit',        emoji:'✨', img:'img/store/acc-grooming-kit.png',      price:0.35, desc:'Brush • Fluff • Shine!',      bg:'#dcfce7' },
       { id:'bubble-wand',       num:13, name:'Bubble Wand Set',     emoji:'🫧', img:'img/store/acc-bubble-wand.png',       price:0.30, desc:'Blow • Pop • Play!',          bg:'#e0f2fe' },
-      { id:'astronaut-helmet',  num:20, name:'Astronaut Helmet',    emoji:'🚀', img:'img/store/acc-astronaut-helmet.png',  price:0.50, desc:'Blast • Orbit • Zoom!',       bg:'#e0f2fe' },
       { id:'rain-boots',        num:24, name:'Rain Boots',          emoji:'🥾', img:'img/store/acc-rain-boots.png',        price:0.30, desc:'Splash • Jump • Fun!',         bg:'#fef9c3' },
       { id:'bandana',           num:25, name:'Paw Bandana',         emoji:'🐾', img:'img/store/acc-bandana.png',           price:0.25, desc:'Cool • Paw • Style!',          bg:'#fee2e2' },
       { id:'hero-mask',         num:26, name:'Hero Mask',           emoji:'🦸', img:'img/store/acc-mask.png',              price:0.30, desc:'Zoom • Hero • Go!',            bg:'#ede9fe' },
@@ -968,16 +982,51 @@
           chip.innerHTML = item.img
             ? '<img src="' + item.img + '" alt="' + item.name + '"><span>' + item.name + '</span>'
             : '<span style="font-size:1.3rem">' + (item.emoji||'🐾') + '</span><span>' + item.name + '</span>';
-          chip.addEventListener('click', function() {
+
+          // × / + button to toggle visibility
+          var xBtn = document.createElement('button');
+          xBtn.className = 'pw-chip-x';
+          xBtn.textContent = on ? '×' : '+';
+          xBtn.title = on ? 'Hide' : 'Show';
+          xBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
             var h = loadHidden();
             if (!h[_pwCat]) h[_pwCat] = [];
             var idx = h[_pwCat].indexOf(item.id);
-            if (idx >= 0) { h[_pwCat].splice(idx, 1); }  // was hidden → show
-            else          { h[_pwCat].push(item.id); }    // was showing → hide
+            if (idx >= 0) { h[_pwCat].splice(idx, 1); }
+            else          { h[_pwCat].push(item.id); }
             saveHidden(h);
             renderSidebar();
             renderCollection();
           });
+          chip.appendChild(xBtn);
+
+          // Main chip click: show the item if hidden, then flash it in scene
+          chip.addEventListener('click', function() {
+            var h = loadHidden();
+            if (!h[_pwCat]) h[_pwCat] = [];
+            var idx = h[_pwCat].indexOf(item.id);
+            if (idx >= 0) {
+              // was hidden — show it first
+              h[_pwCat].splice(idx, 1);
+              saveHidden(h);
+              renderSidebar();
+              renderCollection();
+            }
+            // Flash the sticker in the scene
+            var prefix = _pwCat === 'pet' ? 'pet_' : _pwCat === 'acc' ? 'acc_' : 'bed_';
+            var sticker = document.querySelector('[data-item-id="' + prefix + item.id + '"]');
+            if (sticker) {
+              sticker.classList.remove('pw-highlight');
+              void sticker.offsetWidth;
+              sticker.classList.add('pw-highlight');
+              sticker.scrollIntoView({ behavior:'smooth', block:'nearest' });
+              sticker.addEventListener('animationend', function() {
+                sticker.classList.remove('pw-highlight');
+              }, { once:true });
+            }
+          });
+
           list.appendChild(chip);
         });
       }
@@ -1232,7 +1281,6 @@
         // yFrac=1   → center of acc at bottom of pet (feet).
         var ACC_SNAP = {
           'pet-crown':        [0.5,  -0.05],
-          'astronaut-helmet': [0.5,   0.05],
           'bow-headband':     [0.5,  -0.02],
           'hero-mask':        [0.5,   0.25],
           'pet-sunglasses':   [0.5,   0.25],
@@ -1258,6 +1306,7 @@
 
         function trySnap(droppedId, droppedEl, droppedLayer, scRect) {
           if (droppedLayer === 'home') return;
+          if (droppedLayer === 'food') return; // food stays wherever dropped
           var dr = droppedEl.getBoundingClientRect();
           var cx = dr.left + dr.width  / 2;
           var cy = dr.top  + dr.height / 2;
