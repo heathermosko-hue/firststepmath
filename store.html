@@ -959,6 +959,8 @@
       }
       function saveHidden(h) { localStorage.setItem('fsm_scene_hidden', JSON.stringify(h)); }
 
+      var CAT_LIMIT = { pet: 3, acc: 6, home: 3 };
+
       function renderSidebar() {
         var list  = document.getElementById('pwItemsList');
         var badge = document.getElementById('pwLimit');
@@ -969,8 +971,9 @@
         if      (_pwCat === 'pet')  items = PETS.filter(function(p){ return owns(p.id); });
         else if (_pwCat === 'acc')  items = ACCESSORIES.filter(function(a){ return owns(a.id); });
         else                        items = BEDS.filter(function(b){ return owns(b.id); });
+        var limit   = CAT_LIMIT[_pwCat] || 99;
         var onCount = items.filter(function(x){ return hiddenIds.indexOf(x.id) < 0; }).length;
-        if (badge) badge.textContent = onCount + ' showing';
+        if (badge) badge.textContent = onCount + ' / ' + limit + ' showing';
         list.innerHTML = '';
         if (!items.length) {
           list.innerHTML = '<div style="font-size:0.65rem;color:#aaa;text-align:center;padding:8px">None yet!</div>';
@@ -978,6 +981,7 @@
         }
         items.forEach(function(item) {
           var on   = hiddenIds.indexOf(item.id) < 0;
+          var atLimit = !on && onCount >= limit;
           var chip = document.createElement('div');
           chip.className = 'pw-chip' + (on ? ' on' : '');
           chip.innerHTML = item.img
@@ -988,9 +992,11 @@
           var xBtn = document.createElement('button');
           xBtn.className = 'pw-chip-x';
           xBtn.textContent = on ? '×' : '+';
-          xBtn.title = on ? 'Hide' : 'Show';
+          xBtn.title = on ? 'Hide' : (atLimit ? 'Limit reached' : 'Show');
+          if (atLimit) { xBtn.disabled = true; xBtn.style.opacity = '0.35'; xBtn.style.cursor = 'not-allowed'; }
           xBtn.addEventListener('click', function(e) {
             e.stopPropagation();
+            if (atLimit) return;
             var h = loadHidden();
             if (!h[_pwCat]) h[_pwCat] = [];
             var idx = h[_pwCat].indexOf(item.id);
@@ -1002,13 +1008,15 @@
           });
           chip.appendChild(xBtn);
 
-          // Main chip click: show the item if hidden, then flash it in scene
+          // Main chip click: show the item if hidden (if under limit), then flash it in scene
           chip.addEventListener('click', function() {
             var h = loadHidden();
             if (!h[_pwCat]) h[_pwCat] = [];
             var idx = h[_pwCat].indexOf(item.id);
             if (idx >= 0) {
-              // was hidden — show it first
+              // was hidden — only show if under limit
+              var curOn = items.filter(function(x){ return (h[_pwCat]||[]).indexOf(x.id) < 0; }).length;
+              if (curOn >= limit) return;
               h[_pwCat].splice(idx, 1);
               saveHidden(h);
               renderSidebar();
@@ -1065,7 +1073,7 @@
         var ownedAccess = ACCESSORIES.filter(function(a){ return owns(a.id); });
         var ownedFood   = FOOD.filter(function(f){ return owns(f.id); });
 
-        // Filter out hidden items (sidebar toggle)
+        // Filter out hidden items (sidebar toggle), then enforce per-category limits
         var hidden = loadHidden();
         var hiddenPets  = hidden.pet  || [];
         var hiddenHomes = hidden.home || [];
@@ -1073,6 +1081,23 @@
         ownedPets   = ownedPets.filter(function(p){ return hiddenPets.indexOf(p.id)  < 0; });
         ownedBeds   = ownedBeds.filter(function(b){ return hiddenHomes.indexOf(b.id) < 0; });
         ownedAccess = ownedAccess.filter(function(a){ return hiddenAcc.indexOf(a.id) < 0; });
+        // Enforce limits — auto-hide overflowing items and persist
+        (function enforceLimits() {
+          var changed = false;
+          function trim(arr, catKey, lim) {
+            if (arr.length <= lim) return arr;
+            var h = loadHidden();
+            if (!h[catKey]) h[catKey] = [];
+            var extra = arr.slice(lim);
+            extra.forEach(function(x){ if (h[catKey].indexOf(x.id) < 0) { h[catKey].push(x.id); changed = true; } });
+            if (changed) saveHidden(h);
+            return arr.slice(0, lim);
+          }
+          ownedPets   = trim(ownedPets,   'pet',  CAT_LIMIT.pet);
+          ownedBeds   = trim(ownedBeds,   'home', CAT_LIMIT.home);
+          ownedAccess = trim(ownedAccess, 'acc',  CAT_LIMIT.acc);
+          if (changed) renderSidebar();
+        })();
 
         // Empty state
         if (!ownedPets.length && !ownedBeds.length && !ownedAccess.length && !ownedFood.length) {
