@@ -831,8 +831,8 @@
       });
       localStorage.setItem(PURCH_KEY, JSON.stringify(allIds));
       localStorage.setItem(MONEY_KEY, '999.99');
-      // Reset visible set so Pet World auto-fills with first 3 pets, 3 homes, 6 accessories
       localStorage.removeItem('fsm_scene_visible');
+      localStorage.removeItem('fsm_scene_hidden');
       localStorage.removeItem('fsm_pet_positions');
     }
 
@@ -942,13 +942,18 @@
 
     // ── PET WORLD ────────────────────────────────────
     (function() {
-      var SCENE_MAX = { pet:3, home:3, acc:6 };
       var _pwCat = 'pet';
 
       function loadVisible() {
         try { return JSON.parse(localStorage.getItem('fsm_scene_visible') || '{}'); } catch(e) { return {}; }
       }
       function saveVisible(v) { localStorage.setItem('fsm_scene_visible', JSON.stringify(v)); }
+
+      // Returns set of hidden ids for a category (visible = not in hidden set)
+      function loadHidden() {
+        try { return JSON.parse(localStorage.getItem('fsm_scene_hidden') || '{}'); } catch(e) { return {}; }
+      }
+      function saveHidden(h) { localStorage.setItem('fsm_scene_hidden', JSON.stringify(h)); }
 
       window.pwSetCat = function(cat) {
         _pwCat = cat;
@@ -962,39 +967,36 @@
         var list  = document.getElementById('pwItemsList');
         var badge = document.getElementById('pwLimit');
         if (!list) return;
-        var vis = loadVisible();
-        var visIds = vis[_pwCat] || [];
+        var hidden = loadHidden();
+        var hiddenIds = hidden[_pwCat] || [];
         var items;
         if      (_pwCat === 'pet')  items = PETS.filter(function(p){ return owns(p.id); });
         else if (_pwCat === 'acc')  items = ACCESSORIES.filter(function(a){ return owns(a.id); });
         else                        items = BEDS.filter(function(b){ return owns(b.id); });
-        var max = SCENE_MAX[_pwCat];
-        if (badge) badge.textContent = visIds.length + ' / ' + max;
+        var onCount = items.filter(function(x){ return hiddenIds.indexOf(x.id) < 0; }).length;
+        if (badge) badge.textContent = onCount + ' showing';
         list.innerHTML = '';
         if (!items.length) {
           list.innerHTML = '<div style="font-size:0.65rem;color:#aaa;text-align:center;padding:8px">None yet!</div>';
           return;
         }
         items.forEach(function(item) {
-          var on    = visIds.indexOf(item.id) >= 0;
-          var maxed = !on && visIds.length >= max;
-          var chip  = document.createElement('div');
-          chip.className = 'pw-chip' + (on ? ' on' : '') + (maxed ? ' maxed' : '');
+          var on   = hiddenIds.indexOf(item.id) < 0;
+          var chip = document.createElement('div');
+          chip.className = 'pw-chip' + (on ? ' on' : '');
           chip.innerHTML = item.img
             ? '<img src="' + item.img + '" alt="' + item.name + '"><span>' + item.name + '</span>'
             : '<span style="font-size:1.3rem">' + (item.emoji||'🐾') + '</span><span>' + item.name + '</span>';
-          if (!maxed) {
-            chip.addEventListener('click', function() {
-              var v = loadVisible();
-              if (!v[_pwCat]) v[_pwCat] = [];
-              var idx = v[_pwCat].indexOf(item.id);
-              if (idx >= 0) { v[_pwCat].splice(idx, 1); }
-              else if (v[_pwCat].length < max) { v[_pwCat].push(item.id); }
-              saveVisible(v);
-              renderSidebar();
-              renderCollection();
-            });
-          }
+          chip.addEventListener('click', function() {
+            var h = loadHidden();
+            if (!h[_pwCat]) h[_pwCat] = [];
+            var idx = h[_pwCat].indexOf(item.id);
+            if (idx >= 0) { h[_pwCat].splice(idx, 1); }  // was hidden → show
+            else          { h[_pwCat].push(item.id); }    // was showing → hide
+            saveHidden(h);
+            renderSidebar();
+            renderCollection();
+          });
           list.appendChild(chip);
         });
       }
@@ -1023,19 +1025,14 @@
         var ownedAccess = ACCESSORIES.filter(function(a){ return owns(a.id); });
         var ownedFood   = FOOD.filter(function(f){ return owns(f.id); });
 
-        // Auto-initialize visible set for any category that hasn't been set yet
-        var vis = loadVisible();
-        var changed = false;
-        [['pet', ownedPets, SCENE_MAX.pet], ['home', ownedBeds, SCENE_MAX.home], ['acc', ownedAccess, SCENE_MAX.acc]].forEach(function(triple) {
-          var cat = triple[0], owned = triple[1], max = triple[2];
-          if (!vis[cat]) { vis[cat] = owned.slice(0, max).map(function(x){ return x.id; }); changed = true; }
-        });
-        if (changed) saveVisible(vis);
-
-        // Filter to visible items only
-        ownedPets   = ownedPets.filter(function(p){ return vis.pet.indexOf(p.id) >= 0; });
-        ownedBeds   = ownedBeds.filter(function(b){ return vis.home.indexOf(b.id) >= 0; });
-        ownedAccess = ownedAccess.filter(function(a){ return vis.acc.indexOf(a.id) >= 0; });
+        // Filter out hidden items (sidebar toggle)
+        var hidden = loadHidden();
+        var hiddenPets  = hidden.pet  || [];
+        var hiddenHomes = hidden.home || [];
+        var hiddenAcc   = hidden.acc  || [];
+        ownedPets   = ownedPets.filter(function(p){ return hiddenPets.indexOf(p.id)  < 0; });
+        ownedBeds   = ownedBeds.filter(function(b){ return hiddenHomes.indexOf(b.id) < 0; });
+        ownedAccess = ownedAccess.filter(function(a){ return hiddenAcc.indexOf(a.id) < 0; });
 
         // Empty state
         if (!ownedPets.length && !ownedBeds.length && !ownedAccess.length && !ownedFood.length) {
