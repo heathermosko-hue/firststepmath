@@ -1082,7 +1082,12 @@
     document.getElementById('regPayFlow').style.display = 'none';
     const ding = document.getElementById('regDing');
     ding.style.display = 'flex';
-    document.getElementById('dingEmoji').textContent  = regItem.emoji || '🎉';
+    const dingEmojiEl = document.getElementById('dingEmoji');
+    if (regItem.img) {
+      dingEmojiEl.innerHTML = '<img src="' + regItem.img + '" alt="' + regItem.name + '" style="width:120px;height:120px;object-fit:contain;border-radius:16px;display:block;">';
+    } else {
+      dingEmojiEl.textContent = regItem.emoji || '🎉';
+    }
     document.getElementById('dingItemName').textContent = 'You got ' + regItem.name + '!';
 
     speakText('Ding! You paid! You got ' + regItem.name + '! Amazing job!');
@@ -1108,6 +1113,7 @@
     document.querySelectorAll('.store-section').forEach(s => s.classList.remove('active'));
     document.getElementById('tab-' + tab).classList.add('active');
     window.scrollTo(0, 0);
+    if (tab === 'collection') renderCollection();
   };
   window.backToEntrance = function() {
     document.getElementById('storeMain').style.display = 'none';
