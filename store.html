@@ -198,6 +198,43 @@
     .buy-btn:disabled { background:#9ca3af; cursor:default; color:#e5e7eb; font-size:0.75rem; }
     .buy-btn.owned-btn { background:#16a34a; }
 
+    /* ── Pet World Sidebar ── */
+    .pw-outer { display:flex; align-items:flex-start; gap:10px; }
+    .pw-sidebar {
+      width:96px; flex-shrink:0; display:flex; flex-direction:column; gap:6px;
+    }
+    .pw-cat-btn {
+      width:100%; background:#f5f3ff; border:2px solid #ddd6fe; border-radius:14px;
+      padding:8px 4px 6px; font-family:'Fredoka One',cursive; font-size:0.72rem;
+      color:#7c3aed; cursor:pointer; display:flex; flex-direction:column;
+      align-items:center; gap:3px; transition:all 0.15s;
+    }
+    .pw-cat-btn.active { background:#7c3aed; color:#fff; border-color:#5b21b6; }
+    .pw-cat-icon { font-size:1.3rem; line-height:1; }
+    .pw-limit {
+      font-family:'Fredoka One',cursive; font-size:0.68rem; color:#7c3aed;
+      text-align:center; padding:2px 0;
+    }
+    .pw-items-list {
+      display:flex; flex-direction:column; gap:5px;
+      max-height:340px; overflow-y:auto;
+    }
+    .pw-chip {
+      display:flex; flex-direction:column; align-items:center; gap:2px;
+      background:#fff; border:2px solid #e5e7eb; border-radius:10px;
+      padding:5px 3px; cursor:pointer; transition:all 0.15s;
+      font-family:'Fredoka One',cursive; font-size:0.6rem; color:#374151;
+      text-align:center; line-height:1.2;
+    }
+    .pw-chip img { width:52px; height:52px; object-fit:contain; display:block; }
+    .pw-chip.on { background:#dcfce7; border-color:#4ade80; }
+    .pw-chip.maxed { opacity:0.45; cursor:default; }
+    @media(max-width:500px) {
+      .pw-sidebar { width:72px; }
+      .pw-chip img { width:40px; height:40px; }
+      .pw-cat-icon { font-size:1.1rem; }
+    }
+
     /* ── Pet World ── */
     .no-items { color:#aaa; font-size:0.9rem; padding:16px 0; text-align:center; width:100%; }
     .pet-world-wrap { border-radius:24px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.18); }
@@ -532,13 +569,24 @@
     <!-- ══════════ PET WORLD ══════════ -->
     <div class="store-section" id="tab-collection">
       <div class="section-title">🌿 My Pet World</div>
-      <div class="pet-world-wrap">
-        <div class="pet-world-scene" id="petWorldScene">
-          <!-- pets rendered here by JS -->
+      <div class="pw-outer">
+        <!-- Sidebar -->
+        <div class="pw-sidebar" id="pwSidebar">
+          <button class="pw-cat-btn active" data-cat="pet" onclick="pwSetCat('pet')"><span class="pw-cat-icon">🐾</span><span>Pets</span></button>
+          <button class="pw-cat-btn" data-cat="acc" onclick="pwSetCat('acc')"><span class="pw-cat-icon">✨</span><span>Access.</span></button>
+          <button class="pw-cat-btn" data-cat="home" onclick="pwSetCat('home')"><span class="pw-cat-icon">🏠</span><span>Homes</span></button>
+          <div class="pw-limit" id="pwLimit"></div>
+          <div class="pw-items-list" id="pwItemsList"></div>
         </div>
-        <div class="pet-world-shelf" id="petWorldShelf" style="display:none">
-          <div class="pet-world-shelf-title">🏠 Homes &amp; Accessories</div>
-          <div class="shelf-chips" id="petWorldShelfChips"></div>
+        <!-- Scene -->
+        <div class="pet-world-wrap" style="flex:1;min-width:0">
+          <div class="pet-world-scene" id="petWorldScene">
+            <!-- pets rendered here by JS -->
+          </div>
+          <div class="pet-world-shelf" id="petWorldShelf" style="display:none">
+            <div class="pet-world-shelf-title">🏠 Homes &amp; Accessories</div>
+            <div class="shelf-chips" id="petWorldShelfChips"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -876,6 +924,63 @@
 
     // ── PET WORLD ────────────────────────────────────
     (function() {
+      var SCENE_MAX = { pet:3, home:3, acc:6 };
+      var _pwCat = 'pet';
+
+      function loadVisible() {
+        try { return JSON.parse(localStorage.getItem('fsm_scene_visible') || '{}'); } catch(e) { return {}; }
+      }
+      function saveVisible(v) { localStorage.setItem('fsm_scene_visible', JSON.stringify(v)); }
+
+      window.pwSetCat = function(cat) {
+        _pwCat = cat;
+        document.querySelectorAll('.pw-cat-btn').forEach(function(b) {
+          b.classList.toggle('active', b.dataset.cat === cat);
+        });
+        renderSidebar();
+      };
+
+      function renderSidebar() {
+        var list  = document.getElementById('pwItemsList');
+        var badge = document.getElementById('pwLimit');
+        if (!list) return;
+        var vis = loadVisible();
+        var visIds = vis[_pwCat] || [];
+        var items;
+        if      (_pwCat === 'pet')  items = PETS.filter(function(p){ return owns(p.id); });
+        else if (_pwCat === 'acc')  items = ACCESSORIES.filter(function(a){ return owns(a.id); });
+        else                        items = BEDS.filter(function(b){ return owns(b.id); });
+        var max = SCENE_MAX[_pwCat];
+        if (badge) badge.textContent = visIds.length + ' / ' + max;
+        list.innerHTML = '';
+        if (!items.length) {
+          list.innerHTML = '<div style="font-size:0.65rem;color:#aaa;text-align:center;padding:8px">None yet!</div>';
+          return;
+        }
+        items.forEach(function(item) {
+          var on    = visIds.indexOf(item.id) >= 0;
+          var maxed = !on && visIds.length >= max;
+          var chip  = document.createElement('div');
+          chip.className = 'pw-chip' + (on ? ' on' : '') + (maxed ? ' maxed' : '');
+          chip.innerHTML = item.img
+            ? '<img src="' + item.img + '" alt="' + item.name + '"><span>' + item.name + '</span>'
+            : '<span style="font-size:1.3rem">' + (item.emoji||'🐾') + '</span><span>' + item.name + '</span>';
+          if (!maxed) {
+            chip.addEventListener('click', function() {
+              var v = loadVisible();
+              if (!v[_pwCat]) v[_pwCat] = [];
+              var idx = v[_pwCat].indexOf(item.id);
+              if (idx >= 0) { v[_pwCat].splice(idx, 1); }
+              else if (v[_pwCat].length < max) { v[_pwCat].push(item.id); }
+              saveVisible(v);
+              renderSidebar();
+              renderCollection();
+            });
+          }
+          list.appendChild(chip);
+        });
+      }
+
       var _dragId = null, _dragEl = null, _dragOffX = 0, _dragOffY = 0, _dragLayer = 1;
 
       function loadPositions() {
@@ -899,6 +1004,20 @@
         var ownedBeds   = BEDS.filter(function(b){ return owns(b.id); });
         var ownedAccess = ACCESSORIES.filter(function(a){ return owns(a.id); });
         var ownedFood   = FOOD.filter(function(f){ return owns(f.id); });
+
+        // Auto-initialize visible set for any category that hasn't been set yet
+        var vis = loadVisible();
+        var changed = false;
+        [['pet', ownedPets, SCENE_MAX.pet], ['home', ownedBeds, SCENE_MAX.home], ['acc', ownedAccess, SCENE_MAX.acc]].forEach(function(triple) {
+          var cat = triple[0], owned = triple[1], max = triple[2];
+          if (!vis[cat]) { vis[cat] = owned.slice(0, max).map(function(x){ return x.id; }); changed = true; }
+        });
+        if (changed) saveVisible(vis);
+
+        // Filter to visible items only
+        ownedPets   = ownedPets.filter(function(p){ return vis.pet.indexOf(p.id) >= 0; });
+        ownedBeds   = ownedBeds.filter(function(b){ return vis.home.indexOf(b.id) >= 0; });
+        ownedAccess = ownedAccess.filter(function(a){ return vis.acc.indexOf(a.id) >= 0; });
 
         // Empty state
         if (!ownedPets.length && !ownedBeds.length && !ownedAccess.length && !ownedFood.length) {
@@ -1212,6 +1331,7 @@
       fillGrid('bedsGrid',   BEDS,        false);
       renderOwnedPets();
       renderCollection();
+      renderSidebar();
     }
 
     // ── PET CARE TABS ─────────────────────────────────
@@ -1341,7 +1461,7 @@
     document.querySelectorAll('.store-section').forEach(s => s.classList.remove('active'));
     document.getElementById('tab-' + tab).classList.add('active');
     window.scrollTo(0, 0);
-    if (tab === 'collection') renderCollection();
+    if (tab === 'collection') { renderCollection(); renderSidebar(); }
   };
   window.backToEntrance = function() {
     document.getElementById('storeMain').style.display = 'none';
