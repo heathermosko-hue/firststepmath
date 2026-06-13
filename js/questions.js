@@ -108,6 +108,10 @@ const QUESTIONS = {
         { q: "What is this shape called?",           visual: { type:"shape", name:"octagon"   }, answers: ["Hexagon","Rhombus","Octagon","Pentagon"], correct: "Octagon",  standard:"PK.G.1" },
         { q: "How many sides does an octagon have?", visual: { type:"shape", name:"octagon"   }, answers: ["6","7","8","9"],  correct: "8", standard:"PK.G.1" },
         { q: "What is this shape called?",           visual: { type:"shape", name:"rhombus"   }, answers: ["Square","Rectangle","Rhombus","Circle"],  correct: "Rhombus",  standard:"PK.G.1" },
+        { q: "A rhombus has 4 equal sides — true or false?", visual: { type:"shape", name:"rhombus" }, answers: ["True","False"],  correct: "True", standard:"PK.G.1" },
+        { q: "What is this shape called?",           visual: { type:"shape", name:"oval"      }, answers: ["Circle","Oval","Rectangle","Square"],     correct: "Oval",     standard:"PK.G.1" },
+        { q: "How is an oval different from a circle?", visual: { type:"shape", name:"oval"   }, answers: ["It has corners","It is stretched out","It has 4 sides","It is flat"], correct: "It is stretched out", standard:"PK.G.1" },
+        { q: "What shape is an egg? 🥚",             visual: { type:"emoji",  content:"🥚"    }, answers: ["Circle","Square","Oval","Triangle"],       correct: "Oval",     standard:"PK.G.1" },
         { q: "What shape is a door? 🚪",             visual: { type:"emoji",  content:"🚪"    }, answers: ["Circle","Triangle","Rectangle","Square"],  correct: "Rectangle",standard:"PK.G.3" },
         { q: "What shape is the sun? ☀️",            visual: { type:"emoji",  content:"☀️"    }, answers: ["Square","Circle","Triangle","Star"],       correct: "Circle",   standard:"PK.G.3" },
       ]

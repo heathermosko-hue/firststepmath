@@ -191,6 +191,7 @@ function renderShape(name) {
     case 'hexagon':   inner = `<polygon points="${poly(6)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
     case 'octagon':   inner = `<polygon points="${poly(8)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
     case 'rhombus':   inner = `<polygon points="${cx},${cy-r} ${cx+r*0.65},${cy} ${cx},${cy+r} ${cx-r*0.65},${cy}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
+    case 'oval':      inner = `<ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="${r*0.6}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
     case 'pentagon':  inner = `<polygon points="${poly(5)}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`; break;
     default: return null;
   }
