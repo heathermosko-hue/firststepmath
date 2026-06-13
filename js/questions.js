@@ -580,103 +580,6 @@ const QUESTIONS = {
     }
   },
 
-  /* ======================= GRADE 2 ======================= */
-  grade2: {
-
-    addition100: {
-      title: "Add within 100", icon: "➕", difficulty: 2,
-      standard: "2.NBT.5",
-      questions: [
-        { q: "36 + 25 = ?",   visual: { type:"base10", tens:5, ones:11 }, answers: ["59","60","61","62"],   correct: "61", standard:"2.NBT.5" },
-        { q: "47 + 38 = ?",   visual: null, answers: ["74","83","85","87"],   correct: "85", standard:"2.NBT.5" },
-        { q: "54 + 29 = ?",   visual: null, answers: ["73","82","83","84"],   correct: "83", standard:"2.NBT.5" },
-        { q: "65 + 27 = ?",   visual: null, answers: ["82","91","92","93"],   correct: "92", standard:"2.NBT.5" },
-        { q: "48 + 34 = ?",   visual: null, answers: ["72","81","82","83"],   correct: "82", standard:"2.NBT.5" },
-        { q: "What is 10 more than 67?",    visual: { type:"numberline", min:60, max:85, mark:77 }, answers: ["57","68","77","78"], correct: "77", standard:"2.NBT.8" },
-        { q: "35 + ? = 60", visual: { type:"equation", text:"35 + ? = 60" }, answers: ["20","25","30","35"], correct: "25", standard:"2.NBT.5" },
-        { q: "What is 23 + 40?", visual: null, answers: ["53","62","63","73"], correct: "63", standard:"2.NBT.5" },
-        { q: "Tia has 34 crayons. Sam gives her 28 more. How many in all?", visual: null, answers: ["52","62","63","72"], correct: "62", standard:"2.OA.1" },
-        { q: "56 + 44 = ?",   visual: null, answers: ["90","99","100","110"], correct: "100", standard:"2.NBT.5" },
-      ]
-    },
-
-    sub100: {
-      title: "Subtract within 100", icon: "➖", difficulty: 2,
-      standard: "2.NBT.5",
-      questions: [
-        { q: "75 − 38 = ?",   visual: null, answers: ["27","36","37","47"],  correct: "37", standard:"2.NBT.5" },
-        { q: "62 − 25 = ?",   visual: null, answers: ["27","36","37","47"],  correct: "37", standard:"2.NBT.5" },
-        { q: "90 − 47 = ?",   visual: null, answers: ["40","43","47","53"],  correct: "43", standard:"2.NBT.5" },
-        { q: "81 − 36 = ?",   visual: null, answers: ["44","45","46","55"],  correct: "45", standard:"2.NBT.5" },
-        { q: "54 − 28 = ?",   visual: null, answers: ["24","25","26","36"],  correct: "26", standard:"2.NBT.5" },
-        { q: "What is 10 LESS than 83?",  visual: { type:"numberline", min:65, max:90, mark:73 }, answers: ["63","73","74","93"], correct: "73", standard:"2.NBT.8" },
-        { q: "70 − ? = 30", visual: { type:"equation", text:"70 − ? = 30" }, answers: ["30","40","50","60"], correct: "40", standard:"2.NBT.5" },
-        { q: "100 − 55 = ?",  visual: null, answers: ["35","44","45","55"],  correct: "45", standard:"2.NBT.5" },
-        { q: "Jake had 60 cards. He gave away 23. How many left?", visual: null, answers: ["27","36","37","47"], correct: "37", standard:"2.OA.1" },
-        { q: "80 − 40 = ?",   visual: null, answers: ["20","30","40","50"],  correct: "40", standard:"2.NBT.6" },
-      ]
-    },
-
-    placevalue: {
-      title: "Place Value to 1000", icon: "🏛️", difficulty: 3,
-      standard: "2.NBT.1",
-      questions: [
-        { q: "What is the value of the 5 in 534?",  visual: null, answers: ["5","50","500","5000"],   correct: "500", standard:"2.NBT.1" },
-        { q: "What is the value of the 7 in 274?",  visual: null, answers: ["7","70","700","7000"],   correct: "70",  standard:"2.NBT.1" },
-        { q: "3 hundreds + 6 tens + 2 ones = ?",  visual: null, answers: ["326","362","623","632"], correct: "362", standard:"2.NBT.1" },
-        { q: "How many hundreds are in 850?",        visual: null, answers: ["5","8","50","85"],       correct: "8",   standard:"2.NBT.1" },
-        { q: "What is 4 hundreds + 0 tens + 9 ones?", visual: null, answers: ["409","490","904","940"],correct: "409", standard:"2.NBT.1" },
-        { q: "Which digit is in the TENS place of 726?", visual: null, answers: ["7","2","6","72"],   correct: "2",   standard:"2.NBT.1" },
-        { q: "600 + 30 + 5 = ?",                  visual: null, answers: ["635","653","365","356"], correct: "635", standard:"2.NBT.3" },
-        { q: "What is 100 more than 450?",           visual: null, answers: ["451","460","540","550"], correct: "550", standard:"2.NBT.8" },
-      ]
-    },
-
-    evenodd: {
-      title: "Even & Odd Numbers", icon: "🔢", difficulty: 1,
-      standard: "2.OA.3",
-      questions: [
-        { q: "Is 6 even or odd?",   visual: { type:"tenframe_add", a:3, b:3 }, answers: ["Even","Odd"], correct: "Even", standard:"2.OA.3" },
-        { q: "Is 7 even or odd?",   visual: { type:"tenframe", filled:7 }, answers: ["Even","Odd"], correct: "Odd",  standard:"2.OA.3" },
-        { q: "Is 14 even or odd?",  visual: null, answers: ["Even","Odd"], correct: "Even", standard:"2.OA.3" },
-        { q: "Is 23 even or odd?",  visual: null, answers: ["Even","Odd"], correct: "Odd",  standard:"2.OA.3" },
-        { q: "Is 40 even or odd?",  visual: null, answers: ["Even","Odd"], correct: "Even", standard:"2.OA.3" },
-        { q: "Which set of numbers are ALL even?", visual: null, answers: ["2, 4, 6, 8","1, 3, 5, 7","2, 4, 5, 8","1, 2, 3, 4"], correct: "2, 4, 6, 8", standard:"2.OA.3" },
-        { q: "Even numbers always end in ?",     visual: null, answers: ["1, 3, 5, 7, 9","0, 2, 4, 6, 8","0, 1, 2, 3, 4","5, 6, 7, 8, 9"], correct: "0, 2, 4, 6, 8", standard:"2.OA.3" },
-        { q: "Is 99 even or odd?",  visual: null, answers: ["Even","Odd"], correct: "Odd",  standard:"2.OA.3" },
-      ]
-    },
-
-    time: {
-      title: "Time to 5 Minutes", icon: "⏰", difficulty: 3,
-      standard: "2.MD.7",
-      questions: [
-        { q: "What time does 🕔 show?",   visual: { type:"emoji", content:"🕔" }, answers: ["3:00","4:00","5:00","4:30"],   correct: "4:00",  standard:"2.MD.7" },
-        { q: "What time does 🕟 show?",   visual: { type:"emoji", content:"🕟" }, answers: ["4:00","4:30","5:00","3:30"],   correct: "4:30",  standard:"2.MD.7" },
-        { q: "The minute hand points to 3. How many minutes past the hour?", visual: null, answers: ["3","10","15","20"],  correct: "15", standard:"2.MD.7" },
-        { q: "The minute hand points to 6. How many minutes past the hour?", visual: null, answers: ["6","20","30","60"],  correct: "30", standard:"2.MD.7" },
-        { q: "The minute hand points to 9. How many minutes past the hour?", visual: null, answers: ["9","35","40","45"], correct: "45", standard:"2.MD.7" },
-        { q: "It is 2:15. What time was it 30 minutes ago?",    visual: null, answers: ["1:45","1:55","2:45","3:15"], correct: "1:45", standard:"2.MD.7" },
-        { q: "It is 9:30. What time will it be in 1 hour?",     visual: { type:"emoji", content:"🕤" }, answers: ["9:00","10:00","10:30","11:00"], correct: "10:30", standard:"2.MD.7" },
-        { q: "Each number on a clock face equals ? minutes.", visual: null, answers: ["1","4","5","10"], correct: "5", standard:"2.MD.7" },
-      ]
-    },
-
-    measurement: {
-      title: "Measure Length", icon: "📏", difficulty: 2,
-      standard: "2.MD.1",
-      questions: [
-        { q: "A pencil is measured with paper clips and is 5 paper clips long. Each clip is 1 inch. How long is the pencil?", visual: null, answers: ["4 inches","5 inches","6 inches","10 inches"], correct: "5 inches", standard:"2.MD.2" },
-        { q: "Which unit is best for measuring the length of a classroom?", visual: null, answers: ["Inches","Feet","Miles","Yards"],  correct: "Feet",   standard:"2.MD.1" },
-        { q: "Which unit is best for measuring the length of your thumb?",  visual: null, answers: ["Miles","Yards","Feet","Inches"], correct: "Inches", standard:"2.MD.1" },
-        { q: "A book is 8 inches long. A pencil is 6 inches long. How much longer is the book?", visual: null, answers: ["1 inch","2 inches","3 inches","14 inches"], correct: "2 inches", standard:"2.MD.4" },
-        { q: "To measure something, you must start at ?",     visual: null, answers: ["the middle","any mark","the end","the zero mark"],    correct: "the zero mark", standard:"2.MD.1" },
-        { q: "A desk is 3 feet wide. How many inches is that? (1 foot = 12 inches)", visual: null, answers: ["3","12","36","48"], correct: "36", standard:"2.MD.1" },
-        { q: "Which is LONGER — 14 inches or 2 feet? (1 foot = 12 inches)",          visual: null, answers: ["14 inches","2 feet","They're equal","Can't tell"], correct: "2 feet", standard:"2.MD.4" },
-        { q: "Using the same ruler to measure twice gives ? result.",               visual: null, answers: ["a different","the same","a longer","a shorter"],   correct: "the same", standard:"2.MD.1" },
-      ]
-    }
-  }
 };
 
 /* ---- Grade / topic metadata ---- */
@@ -696,9 +599,4 @@ const GRADE_INFO = {
     desc: "Addition and subtraction to 20, place value, time, and geometry.",
     topics: ["addition20","missingnum","equalSign","placevalue","compare2d","tenmore","time","fractions","wordproblems","money","measurement","factfamilies","numberlinejumps","graphs"]
   },
-  grade2: {
-    label: "2nd Grade", icon: "🎯", color: "#E67E22", ages: "Ages 7–8",
-    desc: "Addition and subtraction to 100, place value, time, and measurement.",
-    topics: ["addition100","sub100","placevalue","evenodd","time","measurement"]
-  }
 };

@@ -12,7 +12,6 @@
   --prek:     #FF6B9D;
   --kinder:   #4A90E2;
   --grade1:   #7B5EA7;
-  --grade2:   #E67E22;
   --white:    #ffffff;
   --bg:       #f5f7ff;
   --gray:     #6c757d;
@@ -128,7 +127,6 @@ button, a { touch-action: manipulation; }
 .grade-tab.active[data-grade="prek"]         { background: var(--prek);   border-color: var(--prek);   box-shadow: 0 6px 20px rgba(255,107,157,0.45); }
 .grade-tab.active[data-grade="kindergarten"] { background: var(--kinder); border-color: var(--kinder); box-shadow: 0 6px 20px rgba(74,144,226,0.45); }
 .grade-tab.active[data-grade="grade1"]       { background: var(--grade1); border-color: var(--grade1); box-shadow: 0 6px 20px rgba(123,94,167,0.45); }
-.grade-tab.active[data-grade="grade2"]       { background: var(--grade2); border-color: var(--grade2); box-shadow: 0 6px 20px rgba(230,126,34,0.45); }
 .grade-tab.active .grade-tab-label,
 .grade-tab.active .grade-tab-desc { color: #fff; }
 
@@ -155,8 +153,6 @@ button, a { touch-action: manipulation; }
 .card-kindergarten .topic-standard { background: var(--kinder); }
 .card-grade1       .topic-card-top { background: linear-gradient(135deg,#d8b4fe,#e0aaff); }
 .card-grade1       .topic-standard { background: var(--grade1); }
-.card-grade2       .topic-card-top { background: linear-gradient(135deg,#fde68a,#fca5a5); }
-.card-grade2       .topic-standard { background: var(--grade2); }
 
 /* ============================================ FOOTER */
 .footer { background: var(--dark); color: rgba(255,255,255,0.8); padding: 60px 0 0; }
