@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <style>
     /* ── Page styles ── */
     .ws-hero {
@@ -173,7 +174,10 @@
   <!-- HERO -->
   <div class="ws-hero">
     <h1>📄 Free Printable Worksheets</h1>
-    <p>Download and print homework-ready worksheets for every topic — Common Core aligned, Pre-K through 2nd Grade.</p>
+    <p>Download and print homework-ready worksheets for every topic — Common Core aligned, Pre-K through Grade 1.</p>
+    <button onclick="downloadAllWS(this)" style="margin-top:20px;font-family:'Fredoka One',cursive;font-size:1.1rem;background:#fff;color:#FF6B35;border:none;border-radius:50px;padding:14px 32px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.18);transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+      📦 Download All Worksheets (ZIP)
+    </button>
   </div>
 
   <!-- MAIN -->
@@ -822,6 +826,65 @@
   document.getElementById('wsModalBg').addEventListener('click', e => {
     if (e.target === document.getElementById('wsModalBg')) document.getElementById('wsModalBg').classList.remove('open');
   });
+
+  // ── DOWNLOAD ALL AS ZIP ───────────────────────────
+  window.downloadAllWS = async function(btn) {
+    const orig = btn.textContent;
+    btn.textContent = '⏳ Building ZIP…';
+    btn.disabled = true;
+
+    const css = document.querySelector('style').textContent;
+    const fonts = '<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">';
+
+    function makeHTML(key) {
+      const ws = WS_DATA[key];
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>${ws.title} – FirstStepMath</title>
+${fonts}
+<style>
+body{margin:0;padding:0;}
+${css}
+@media print{body>*:not(.worksheet){display:none!important;}.worksheet{display:block!important;}@page{margin:14mm 12mm;}}
+</style>
+</head>
+<body>
+<div style="text-align:center;padding:6px;background:#f8f8f8;font-size:0.8rem;color:#888;font-family:sans-serif;">
+  Open in browser · Press <strong>Ctrl+P</strong> (or ⌘+P on Mac) to print or save as PDF
+</div>
+${buildWS(key)}
+</body>
+</html>`;
+    }
+
+    const zip = new JSZip();
+    const folders = {
+      'Pre-K':        zip.folder('Pre-K'),
+      'Kindergarten': zip.folder('Kindergarten'),
+      'Grade 1':      zip.folder('Grade 1'),
+    };
+
+    Object.keys(WS_DATA).forEach(key => {
+      const ws = WS_DATA[key];
+      const folder = folders[ws.grade] || zip;
+      const safe = ws.title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/\s+/g, '-');
+      folder.file(safe + '.html', makeHTML(key));
+    });
+
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'FirstStepMath-Worksheets.zip';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    btn.textContent = '✅ Downloaded!';
+    setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 3000);
+  };
   </script>
 
   <!-- Footer -->
