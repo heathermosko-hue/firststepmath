@@ -144,9 +144,9 @@ const QUESTIONS = {
         { q: "Which is BIGGER?",  visual: { type:"compare", compare:"big",  items:[{emoji:"🐘", label:"Elephant",size:"large"},{emoji:"🐭", label:"Mouse",  size:"small"}] }, answers: ["Elephant","Mouse"], correct: "Elephant",standard:"PK.M.1" },
         { q: "Which is SMALLER?", visual: { type:"compare", compare:"big",  items:[{emoji:"🌳", label:"Tree",    size:"large"},{emoji:"🍎", label:"Apple",  size:"small"}] }, answers: ["Tree","Apple"],     correct: "Apple",   standard:"PK.M.1" },
         { q: "Which is BIGGER?",  visual: { type:"compare", compare:"big",  items:[{emoji:"🐋", label:"Whale",   size:"large"},{emoji:"🐟", label:"Fish",   size:"small"}] }, answers: ["Whale","Fish"],     correct: "Whale",   standard:"PK.M.1" },
-        { q: "A giraffe is ? than a cat",  visual: null, answers: ["taller","shorter","same"],  correct: "taller",  standard:"PK.M.3" },
-        { q: "A pencil is ? than a crayon",visual: null, answers: ["shorter","longer","same"],  correct: "longer",  standard:"PK.M.3" },
-        { q: "An elephant is ? than a mouse",visual: null, answers: ["smaller","bigger","same"],correct: "bigger",  standard:"PK.M.3" },
+        { q: "A giraffe is ? than a cat",    visual: { type:"compare", compare:"tall", items:[{emoji:"🦒", label:"Giraffe", size:"large"},{emoji:"🐱", label:"Cat",   size:"small"}] }, answers: ["taller","shorter"],  correct: "taller",  standard:"PK.M.3" },
+        { q: "A pencil is ? than a crayon",  visual: { type:"compare", compare:"long", items:[{emoji:"✏️", label:"Pencil",  size:"large"},{emoji:"🖍️", label:"Crayon",size:"small"}] }, answers: ["longer","shorter"],  correct: "longer",  standard:"PK.M.3" },
+        { q: "An elephant is ? than a mouse",visual: { type:"compare", compare:"big",  items:[{emoji:"🐘", label:"Elephant",size:"large"},{emoji:"🐭", label:"Mouse", size:"small"}] }, answers: ["bigger","smaller"],  correct: "bigger",  standard:"PK.M.3" },
       ]
     },
 
