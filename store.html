@@ -823,17 +823,12 @@
       { id:'snake-den',         num:22, name:'Snake Den',            emoji:'🐍', img:'img/store/home-snake-den.png',         price:0.60, desc:'Coil • Hide • Home!',            bg:'#d1fae5' },
     ];
 
-    // ── ADMIN UNLOCK (?unlock=heather) ────────────────
-    if (new URLSearchParams(location.search).get('unlock') === 'heather') {
-      var allIds = {};
-      [...PETS, ...ACCESSORIES, ...BEDS, ...FOOD].forEach(function(item) {
-        allIds[item.id] = 1;
-      });
+    // ── ADMIN UNLOCK — always give all items ────────────
+    {
+      const allIds = {};
+      [...PETS, ...ACCESSORIES, ...BEDS, ...FOOD].forEach(item => { allIds[item.id] = 1; });
       localStorage.setItem(PURCH_KEY, JSON.stringify(allIds));
       localStorage.setItem(MONEY_KEY, '999.99');
-      localStorage.removeItem('fsm_scene_visible');
-      localStorage.removeItem('fsm_scene_hidden');
-      localStorage.removeItem('fsm_pet_positions');
     }
 
     // ── STATE ──────────────────────────────────────────
@@ -944,26 +939,12 @@
     (function() {
       var _pwCat = 'pet';
 
-      function loadVisible() {
-        try { return JSON.parse(localStorage.getItem('fsm_scene_visible') || '{}'); } catch(e) { return {}; }
-      }
-      function saveVisible(v) { localStorage.setItem('fsm_scene_visible', JSON.stringify(v)); }
-
-      // Returns set of hidden ids for a category (visible = not in hidden set)
       function loadHidden() {
         try { return JSON.parse(localStorage.getItem('fsm_scene_hidden') || '{}'); } catch(e) { return {}; }
       }
       function saveHidden(h) { localStorage.setItem('fsm_scene_hidden', JSON.stringify(h)); }
 
-      window.pwSetCat = function(cat) {
-        _pwCat = cat;
-        document.querySelectorAll('.pw-cat-btn').forEach(function(b) {
-          b.classList.toggle('active', b.dataset.cat === cat);
-        });
-        renderSidebar();
-      };
-
-      window.renderSidebar = function renderSidebar() {
+      function renderSidebar() {
         var list  = document.getElementById('pwItemsList');
         var badge = document.getElementById('pwLimit');
         if (!list) return;
@@ -1000,6 +981,15 @@
           list.appendChild(chip);
         });
       }
+
+      window.renderSidebar = renderSidebar;
+      window.pwSetCat = function(cat) {
+        _pwCat = cat;
+        document.querySelectorAll('.pw-cat-btn').forEach(function(b) {
+          b.classList.toggle('active', b.dataset.cat === cat);
+        });
+        renderSidebar();
+      };
 
       var _dragId = null, _dragEl = null, _dragOffX = 0, _dragOffY = 0, _dragLayer = 1;
 
