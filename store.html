@@ -1278,32 +1278,44 @@
             });
           }
 
-          // Fish: continuous swim + all pets: click-to-animate
+          // Fish: continuous swim + all pets: click/tap-to-animate
           if (layer === 'pet') {
             if (item.id === 'fishpet') sticker.classList.add('fish-swimming');
             var PET_ANIM = {
-              'fishpet':'swim','turtle':'waddle','duck':'waddle','hamster':'scurry',
-              'owl':'flutter','hedgehog':'roll','lamb':'hop','bunny':'hop',
-              'ferret':'slither','monkey':'swing','piggy':'waddle','parrot':'flutter',
-              'robo-dog':'march','robo-cat':'march','puppy-pet':'gallop',
-              'kitty-pet':'prowl','pony':'gallop','alien':'float','dino':'stomp',
-              'chicken':'peck','snake':'slither','lizard':'scurry','cow':'stomp',
-              'goat':'hop','gator':'stomp','frog':'hop'
+              'fishpet':'swim',   'turtle':'waddle',  'duck':'waddle',    'hamster':'scurry',
+              'owl':'flutter',    'hedgehog':'roll',   'lamb':'hop',       'bunny':'hop',
+              'ferret':'slither', 'monkey':'swing',    'piggy':'waddle',   'parrot':'flutter',
+              'robo-dog':'march', 'robo-cat':'march',  'puppy-pet':'gallop','kitty-pet':'prowl',
+              'pony':'gallop',    'alien':'float',     'dino':'stomp',     'chicken':'peck',
+              'snake':'slither',  'lizard':'scurry',   'cow':'stomp',      'goat':'hop',
+              'gator':'stomp',    'frog':'hop'
             };
-            var _petMoved = false;
-            sticker.addEventListener('mousedown', function(){ _petMoved = false; }, true);
-            sticker.addEventListener('mousemove', function(){ _petMoved = true; }, true);
-            sticker.addEventListener('touchstart', function(){ _petMoved = false; }, { passive:true, capture:true });
-            sticker.addEventListener('touchmove',  function(){ _petMoved = true;  }, { passive:true, capture:true });
-            sticker.addEventListener('click', function() {
-              if (_petMoved) return;
+            function playPetAnim() {
               var anim = PET_ANIM[item.id];
               if (!anim || sticker.classList.contains('pet-clicking')) return;
+              sticker.classList.remove('fish-swimming');
               sticker.classList.add('pet-clicking', 'pa-' + anim);
               sticker.addEventListener('animationend', function() {
                 sticker.classList.remove('pet-clicking', 'pa-' + anim);
+                if (item.id === 'fishpet') sticker.classList.add('fish-swimming');
               }, { once: true });
-            });
+            }
+            var _petMoved = false, _ptx = 0, _pty = 0;
+            sticker.addEventListener('mousedown', function(){ _petMoved = false; }, true);
+            sticker.addEventListener('mousemove', function(){ _petMoved = true; }, true);
+            sticker.addEventListener('click', function(){ if (!_petMoved) playPetAnim(); });
+            // Touch: touchstart preventDefault blocks click on mobile — use touchend instead
+            sticker.addEventListener('touchstart', function(e){
+              _petMoved = false;
+              _ptx = e.touches[0].clientX; _pty = e.touches[0].clientY;
+            }, { passive:true, capture:true });
+            sticker.addEventListener('touchmove', function(){ _petMoved = true; }, { passive:true, capture:true });
+            sticker.addEventListener('touchend', function(e){
+              if (_petMoved) return;
+              var dx = e.changedTouches[0].clientX - _ptx;
+              var dy = e.changedTouches[0].clientY - _pty;
+              if (Math.sqrt(dx*dx + dy*dy) < 10) playPetAnim();
+            }, { passive:true });
           }
 
           // Toy tap: bounce animation
