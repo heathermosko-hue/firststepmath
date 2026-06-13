@@ -266,9 +266,9 @@
       const users = getUsers();
       const hi = users.findIndex(u => u.email === 'heathermosko@gmail.com');
       if (hi < 0) {
-        users.push({ email:'heathermosko@gmail.com', password:'Ross1101', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
+        users.push({ email:'heathermosko@gmail.com', password:'Ross1101', name:'Heather', type:'parent' });
       } else {
-        users[hi].password = 'Ross1101';
+        users[hi].password = 'Ross1101'; users[hi].type = 'parent';
       }
       saveUsers(users);
       localStorage.setItem('fsm_dollars', '9999.99');
