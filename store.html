@@ -985,7 +985,7 @@
         var hiddenIds = hidden[_pwCat] || [];
         var items;
         if      (_pwCat === 'pet')  items = PETS.filter(function(p){ return owns(p.id); });
-        else if (_pwCat === 'acc')  items = ACCESSORIES.filter(function(a){ return owns(a.id); });
+        else if (_pwCat === 'acc')  items = [...ACCESSORIES, ...FOOD].filter(function(a){ return owns(a.id); });
         else                        items = BEDS.filter(function(b){ return owns(b.id); });
         var limit   = CAT_LIMIT[_pwCat] || 99;
         var onCount = items.filter(function(x){ return hiddenIds.indexOf(x.id) < 0; }).length;
@@ -1097,6 +1097,7 @@
         ownedPets   = ownedPets.filter(function(p){ return hiddenPets.indexOf(p.id)  < 0; });
         ownedBeds   = ownedBeds.filter(function(b){ return hiddenHomes.indexOf(b.id) < 0; });
         ownedAccess = ownedAccess.filter(function(a){ return hiddenAcc.indexOf(a.id) < 0; });
+        ownedFood   = ownedFood.filter(function(f){ return hiddenAcc.indexOf(f.id)   < 0; });
         // Enforce limits — auto-hide overflowing items and persist
         (function enforceLimits() {
           var changed = false;
@@ -1109,9 +1110,13 @@
             if (changed) saveHidden(h);
             return arr.slice(0, lim);
           }
-          ownedPets   = trim(ownedPets,   'pet',  CAT_LIMIT.pet);
-          ownedBeds   = trim(ownedBeds,   'home', CAT_LIMIT.home);
-          ownedAccess = trim(ownedAccess, 'acc',  CAT_LIMIT.acc);
+          ownedPets  = trim(ownedPets,  'pet',  CAT_LIMIT.pet);
+          ownedBeds  = trim(ownedBeds,  'home', CAT_LIMIT.home);
+          // Food + accessories share the 6-slot acc budget
+          var accAll = [].concat(ownedAccess, ownedFood);
+          accAll     = trim(accAll, 'acc', CAT_LIMIT.acc);
+          ownedAccess = accAll.filter(function(x){ return ACCESSORIES.find(function(a){ return a.id === x.id; }); });
+          ownedFood   = accAll.filter(function(x){ return FOOD.find(function(f){ return f.id === x.id; }); });
           if (changed) renderSidebar();
         })();
 
