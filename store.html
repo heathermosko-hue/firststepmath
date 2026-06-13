@@ -1069,6 +1069,8 @@
           var defaultY = zone[2] + (idx % 2) * ((zone[3] - zone[2]) / 2);
           layerCount[layer]++;
           var p = pos[uid] || { x: defaultX, y: defaultY };
+          // Clamp any saved-off-screen positions back into view
+          if (p.x < 0 || p.x > 90 || p.y < 0 || p.y > 88) p = { x: defaultX, y: defaultY };
 
           var sticker = document.createElement('div');
           sticker.className = 'world-sticker';
