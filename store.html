@@ -919,11 +919,8 @@
           sticker.style.zIndex  = LAYER_Z[layer];
           sticker.style.animationDelay = (i * 0.05) + 's';
 
-          var clipH = (layer === 'home') ? Math.round(sz * 0.62) : sz;
-          var imgFit = (layer === 'home') ? 'cover' : 'contain';
-          var imgPos = (layer === 'home') ? 'top' : 'center';
           var imgHtml = item.img
-            ? '<div class="img-clip" style="width:'+sz+'px;height:'+clipH+'px"><img src="' + item.img + '" alt="' + item.name + '" style="object-fit:'+imgFit+';object-position:'+imgPos+'" onerror="this.parentNode.innerHTML=\'<span class=sticker-emoji>' + (item.emoji||'🐾') + '</span>\'"></div>'
+            ? '<div class="img-clip" style="width:'+sz+'px;height:'+sz+'px"><img src="' + item.img + '" alt="' + item.name + '" onerror="this.parentNode.innerHTML=\'<span class=sticker-emoji>' + (item.emoji||'🐾') + '</span>\'"></div>'
             : '<span class="sticker-emoji">' + (item.emoji||'🐾') + '</span>';
           if (layer === 'food') imgHtml += '<span class="feed-hint">👆 Tap to feed!</span>';
           sticker.innerHTML = imgHtml;
