@@ -337,10 +337,11 @@
       e.preventDefault();
       const email = document.getElementById('pEmail').value.trim();
       const pass  = document.getElementById('pPass').value;
-      const user  = getUsers().find(u => u.email === email && u.password === pass && u.type === 'parent');
+      const user  = getUsers().find(u => u.email === email && u.password === pass);
       if (!user) { document.getElementById('pLoginErr').textContent = 'Email or password is incorrect.'; return; }
       setSession(user);
       localStorage.setItem('fsm_q_count', '0');
+      if (user.type === 'teacher') { showTeacherDash(user); return; }
       window.location.href = 'index.html';
     });
 
