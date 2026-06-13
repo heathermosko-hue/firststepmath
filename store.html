@@ -816,6 +816,9 @@
       });
       localStorage.setItem(PURCH_KEY, JSON.stringify(allIds));
       localStorage.setItem(MONEY_KEY, '999.99');
+      // Reset visible set so Pet World auto-fills with first 3 pets, 3 homes, 6 accessories
+      localStorage.removeItem('fsm_scene_visible');
+      localStorage.removeItem('fsm_pet_positions');
     }
 
     // ── STATE ──────────────────────────────────────────
@@ -1034,24 +1037,37 @@
           ownedAccess.map(function(a){ return { id:'acc_'+a.id,   item:a, layer:'acc'  }; })
         );
 
-        var LAYER_Z   = { home:1, pet:2, food:4, acc:10 };
+        var LAYER_Z    = { home:1, pet:2, food:4, acc:10 };
         var LAYER_SIZE = { home:280, food:70, pet:90, acc:60 }; // px
+        // Default zones per layer: [xMin, xMax, yMin, yMax] as % of scene
+        var LAYER_ZONES = {
+          home: [2,  58, 5,  42],
+          pet:  [4,  68, 38, 60],
+          food: [4,  80, 72, 84],
+          acc:  [2,  72, 4,  28],
+        };
 
         // Clear & rebuild scene
         scene.innerHTML = '';
         shelf.style.display = 'none';
         var pos = loadPositions();
-        var sceneW = scene.offsetWidth || 360;
 
-        var cols = Math.max(2, Math.floor(sceneW / 130));
+        var layerCount = { home:0, pet:0, food:0, acc:0 };
+        var layerTotal = { home:0, pet:0, food:0, acc:0 };
+        allItems.forEach(function(e){ layerTotal[e.layer]++; });
+
         allItems.forEach(function(entry, i) {
           var item  = entry.item;
           var uid   = entry.id;
           var layer = entry.layer;
           var sz    = LAYER_SIZE[layer];
-          var col   = i % cols, row = Math.floor(i / cols);
-          var defaultX = (col / cols * 78 + 2);
-          var defaultY = (row * 26 + 4);
+          var zone  = LAYER_ZONES[layer];
+          var idx   = layerCount[layer];
+          var tot   = layerTotal[layer] || 1;
+          var t     = tot <= 1 ? 0.5 : idx / (tot - 1);
+          var defaultX = zone[0] + t * (zone[1] - zone[0]);
+          var defaultY = zone[2] + (idx % 2) * ((zone[3] - zone[2]) / 2);
+          layerCount[layer]++;
           var p = pos[uid] || { x: defaultX, y: defaultY };
 
           var sticker = document.createElement('div');
