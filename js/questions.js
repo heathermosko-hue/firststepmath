@@ -58,10 +58,10 @@ const QUESTIONS = {
       title: "More & Fewer", icon: "⚖️", difficulty: 1,
       standard: "PK.NS.4",
       questions: [
-        { q: "Which group has MORE?",  visual: null, answers: ["🍎🍎","🍎🍎🍎🍎"],                     correct: "🍎🍎🍎🍎", standard:"PK.NS.4" },
-        { q: "Which group has FEWER?", visual: null, answers: ["⭐⭐⭐","⭐⭐"],                          correct: "⭐⭐",      standard:"PK.NS.4" },
-        { q: "Which group has MORE?",  visual: null, answers: ["🐸","🐸🐸🐸"],                           correct: "🐸🐸🐸",   standard:"PK.NS.4" },
-        { q: "Which group has FEWER?", visual: null, answers: ["🍭🍭🍭🍭","🍭🍭"],                       correct: "🍭🍭",     standard:"PK.NS.4" },
+        { q: "Which group has MOST?",  visual: null, answers: ["🍎🍎","🍎🍎🍎🍎"],                     correct: "🍎🍎🍎🍎", standard:"PK.NS.4" },
+        { q: "Which group has LEAST?", visual: null, answers: ["⭐⭐⭐","⭐⭐"],                          correct: "⭐⭐",      standard:"PK.NS.4" },
+        { q: "Which group has MOST?",  visual: null, answers: ["🐸","🐸🐸🐸"],                           correct: "🐸🐸🐸",   standard:"PK.NS.4" },
+        { q: "Which group has LEAST?", visual: null, answers: ["🍭🍭🍭🍭","🍭🍭"],                       correct: "🍭🍭",     standard:"PK.NS.4" },
         { q: "Which group has MOST?",  visual: null, answers: ["🌟🌟","🌟🌟🌟🌟🌟","🌟🌟🌟","🌟"],       correct: "🌟🌟🌟🌟🌟", standard:"PK.NS.4" },
         { q: "Which group has LEAST?", visual: null, answers: ["🐣🐣🐣","🐣","🐣🐣🐣🐣","🐣🐣"],         correct: "🐣",       standard:"PK.NS.4" },
         { q: "Which number is the LARGEST?",  visual: null, answers: ["2","5","3","4"],    correct: "5",       standard:"PK.NS.4" },
@@ -211,7 +211,7 @@ const QUESTIONS = {
         { q: "Which number is GREATEST?",            visual: null, answers: ["6","3","9","7"],                       correct: "9",       standard:"K.CC.6" },
         { q: "5 ○ 5 — which symbol goes in the circle?", visual: { type:"equation", text:"5 ○ 5" }, answers: [">","<","=","≠"],          correct: "=",  standard:"K.CC.7" },
         { q: "8 ○ 6 — which symbol goes in the circle?", visual: { type:"equation", text:"8 ○ 6" }, answers: [">","<","=","≠"],          correct: ">",  standard:"K.CC.7" },
-        { q: "Which group has FEWER?",               visual: null, answers: ["🔴🔴🔴🔴🔴 (5)","🔴🔴🔴 (3)","🔴🔴🔴🔴 (4)","🔴🔴🔴🔴🔴🔴 (6)"], correct: "🔴🔴🔴 (3)", standard:"K.CC.6" },
+        { q: "Which group has LEAST?",               visual: null, answers: ["🔴🔴🔴🔴🔴 (5)","🔴🔴🔴 (3)","🔴🔴🔴🔴 (4)","🔴🔴🔴🔴🔴🔴 (6)"], correct: "🔴🔴🔴 (3)", standard:"K.CC.6" },
         { q: "Which is GREATER — 3 or 8?",  visual: { type:"numberline", min:0, max:10, mark:8 }, answers: ["3","5","7","8"], correct: "8", standard:"K.CC.7" },
         { q: "Hop forward 3 from 5. Where do you land?", visual: { type:"numberline_add", min:0, max:10, start:5, jump:3 }, answers: ["6","7","8","9"], correct: "8", standard:"K.CC.2" },
       ]
