@@ -733,16 +733,40 @@
     },
     'g1-money': {
       title:'Money', grade:'1st Grade', standard:'1.MD.4',
-      instructions:'Identify coins and count amounts.',
+      instructions:'Look at the American coins. Circle how much they are worth.',
       problems:[
-        { type:'fill', eq:'A penny is worth ___¢.', label:'' },
-        { type:'fill', eq:'A nickel is worth ___¢.', label:'' },
-        { type:'fill', eq:'A dime is worth ___¢.', label:'' },
-        { type:'fill', eq:'A quarter is worth ___¢.', label:'' },
-        { type:'fill', eq:'1 dime + 2 pennies = ___¢', label:'' },
-        { type:'fill', eq:'2 nickels = ___¢', label:'' },
-        { type:'fill', eq:'1 quarter + 1 penny = ___¢', label:'' },
+        { type:'circle-choice', q:'What is this coin worth? <svg viewBox="0 0 48 48" width="42" height="42" style="vertical-align:middle;display:inline-block;margin-left:4px"><circle cx="24" cy="24" r="22" fill="#C8934A" stroke="#8B6225" stroke-width="2.5"/><circle cx="24" cy="24" r="15" fill="none" stroke="#8B6225" stroke-width="1.5"/><text x="24" y="28" font-size="8" fill="#FFE0B2" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">PENNY</text></svg>', choices:[
+          {v:'<b style="font-size:1.4rem">1¢</b>', n:'1 cent'},
+          {v:'<b style="font-size:1.4rem">5¢</b>', n:'5 cents'},
+          {v:'<b style="font-size:1.4rem">10¢</b>', n:'10 cents'},
+        ]},
+        { type:'circle-choice', q:'What is this coin worth? <svg viewBox="0 0 52 52" width="48" height="48" style="vertical-align:middle;display:inline-block;margin-left:4px"><circle cx="26" cy="26" r="24" fill="#D0D0D0" stroke="#AAA" stroke-width="2.5"/><circle cx="26" cy="26" r="17" fill="none" stroke="#AAA" stroke-width="1.5"/><text x="26" y="30" font-size="7" fill="#444" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">QUARTER</text></svg>', choices:[
+          {v:'<b style="font-size:1.4rem">1¢</b>', n:'1 cent'},
+          {v:'<b style="font-size:1.4rem">5¢</b>', n:'5 cents'},
+          {v:'<b style="font-size:1.4rem">25¢</b>', n:'25 cents'},
+        ]},
+        { type:'circle-choice', q:'What is this coin worth? <svg viewBox="0 0 44 44" width="36" height="36" style="vertical-align:middle;display:inline-block;margin-left:4px"><circle cx="22" cy="22" r="20" fill="#A8A9AD" stroke="#777" stroke-width="2.5"/><circle cx="22" cy="22" r="14" fill="none" stroke="#777" stroke-width="1.5"/><text x="22" y="26" font-size="8" fill="#fff" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">DIME</text></svg>', choices:[
+          {v:'<b style="font-size:1.4rem">1¢</b>', n:'1 cent'},
+          {v:'<b style="font-size:1.4rem">5¢</b>', n:'5 cents'},
+          {v:'<b style="font-size:1.4rem">10¢</b>', n:'10 cents'},
+        ]},
+        { type:'circle-choice', q:'What is this coin worth? <svg viewBox="0 0 48 48" width="44" height="44" style="vertical-align:middle;display:inline-block;margin-left:4px"><circle cx="24" cy="24" r="22" fill="#C0C0C0" stroke="#999" stroke-width="2.5"/><circle cx="24" cy="24" r="15" fill="none" stroke="#999" stroke-width="1.5"/><text x="24" y="28" font-size="8" fill="#444" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">NICKEL</text></svg>', choices:[
+          {v:'<b style="font-size:1.4rem">5¢</b>', n:'5 cents'},
+          {v:'<b style="font-size:1.4rem">10¢</b>', n:'10 cents'},
+          {v:'<b style="font-size:1.4rem">25¢</b>', n:'25 cents'},
+        ]},
+        { type:'circle-choice', q:'How much are these coins worth? <svg viewBox="0 0 100 48" width="90" height="44" style="vertical-align:middle;display:inline-block;margin-left:4px"><circle cx="24" cy="24" r="22" fill="#C0C0C0" stroke="#999" stroke-width="2"/><text x="24" y="28" font-size="8" fill="#444" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">NICKEL</text><circle cx="76" cy="24" r="22" fill="#C0C0C0" stroke="#999" stroke-width="2"/><text x="76" y="28" font-size="8" fill="#444" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">NICKEL</text></svg>', choices:[
+          {v:'<b style="font-size:1.4rem">5¢</b>', n:'5 cents'},
+          {v:'<b style="font-size:1.4rem">10¢</b>', n:'10 cents'},
+          {v:'<b style="font-size:1.4rem">15¢</b>', n:'15 cents'},
+        ]},
+        { type:'circle-choice', q:'How much are these coins worth? <svg viewBox="0 0 92 44" width="84" height="40" style="vertical-align:middle;display:inline-block;margin-left:4px"><circle cx="22" cy="22" r="20" fill="#A8A9AD" stroke="#777" stroke-width="2"/><text x="22" y="26" font-size="8" fill="#fff" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">DIME</text><circle cx="70" cy="22" r="20" fill="#A8A9AD" stroke="#777" stroke-width="2"/><text x="70" y="26" font-size="8" fill="#fff" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold">DIME</text></svg>', choices:[
+          {v:'<b style="font-size:1.4rem">10¢</b>', n:'10 cents'},
+          {v:'<b style="font-size:1.4rem">15¢</b>', n:'15 cents'},
+          {v:'<b style="font-size:1.4rem">20¢</b>', n:'20 cents'},
+        ]},
         { type:'fill', eq:'How many pennies equal 1 nickel? ___', label:'' },
+        { type:'fill', eq:'1 dime + 1 nickel = ___¢', label:'' },
       ]
     },
     'g1-time': {
@@ -761,16 +785,36 @@
     },
     'g1-measurement': {
       title:'Measurement', grade:'1st Grade', standard:'1.MD.1–2',
-      instructions:'Measure and compare lengths.',
+      instructions:'Circle the right answer.',
       problems:[
-        { type:'fill', eq:'A pencil is 6 cubes long. A pen is 9 cubes long.\nHow much LONGER is the pen? ___ cubes', label:'' },
-        { type:'fill', eq:'A book is 8 cubes long. A pencil is 5 cubes long.\nWhich is shorter? ___', label:'' },
-        { type:'fill', eq:'Order from shortest to longest:\n3 cubes,  7 cubes,  5 cubes\n___ , ___ , ___', label:'' },
-        { type:'fill', eq:'The crayon is 4 cubes. The marker is 2 cubes LONGER.\nHow long is the marker? ___ cubes', label:'' },
-        { type:'fill', eq:'The correct way to measure is to:\n(line cubes end to end) or (skip spaces between cubes)', label:'Circle one.' },
-        { type:'fill', eq:'A desk is measured with paper clips. It takes 12 paper clips.\nAbout how many cubes long is it? ___', label:'' },
-        { type:'fill', eq:'Two objects that are the SAME length are called ___.\n(taller / equal / shorter)', label:'Circle one.' },
-        { type:'fill', eq:'Which unit would you use to measure a classroom?\n(paper clips / cubes / steps)', label:'Circle one.' },
+        { type:'circle-choice', q:'Circle the LONGER pencil.', choices:[
+          {v:'<svg viewBox="0 0 60 22" width="58" height="22"><rect x="2" y="6" width="26" height="10" rx="2" fill="#FFD700"/><polygon points="28,6 34,11 28,16" fill="#E65100"/><rect x="2" y="6" width="7" height="10" rx="1" fill="#F8BBD9"/></svg>', n:'A'},
+          {v:'<svg viewBox="0 0 60 22" width="58" height="22"><rect x="2" y="6" width="48" height="10" rx="2" fill="#FFD700"/><polygon points="50,6 56,11 50,16" fill="#E65100"/><rect x="2" y="6" width="7" height="10" rx="1" fill="#F8BBD9"/></svg>', n:'B'},
+        ]},
+        { type:'circle-choice', q:'Circle the SHORTER train.', choices:[
+          {v:'<svg viewBox="0 0 72 26" width="68" height="26"><rect x="1" y="5" width="68" height="13" rx="3" fill="#E53935"/><rect x="5" y="5" width="14" height="13" rx="2" fill="#1565C0"/><rect x="23" y="5" width="14" height="13" rx="2" fill="#2E7D32"/><rect x="41" y="5" width="14" height="13" rx="2" fill="#F57F17"/><circle cx="12" cy="21" r="4" fill="#333"/><circle cx="60" cy="21" r="4" fill="#333"/></svg>', n:'A'},
+          {v:'<svg viewBox="0 0 42 26" width="40" height="26"><rect x="1" y="5" width="38" height="13" rx="3" fill="#1565C0"/><rect x="5" y="5" width="14" height="13" rx="2" fill="#E53935"/><circle cx="10" cy="21" r="4" fill="#333"/><circle cx="32" cy="21" r="4" fill="#333"/></svg>', n:'B'},
+        ]},
+        { type:'circle-choice', q:'How many cubes long is the crayon? 🖍️', choices:[
+          {v:'<b style="font-size:1.5rem;font-weight:bold">5</b>', n:'cubes'},
+          {v:'<b style="font-size:1.5rem;font-weight:bold">6</b>', n:'cubes'},
+          {v:'<b style="font-size:1.5rem;font-weight:bold">7</b>', n:'cubes'},
+        ]},
+        { type:'circle-choice', q:'Which object is HEAVIER?', choices:[
+          {v:'<span style="font-size:2rem">🪨</span>', n:'A (rock)'},
+          {v:'<span style="font-size:2rem">🪶</span>', n:'B (feather)'},
+        ]},
+        { type:'circle-choice', q:'How many cubes long is the shoe? 👟', choices:[
+          {v:'<b style="font-size:1.5rem;font-weight:bold">4</b>', n:'cubes'},
+          {v:'<b style="font-size:1.5rem;font-weight:bold">5</b>', n:'cubes'},
+          {v:'<b style="font-size:1.5rem;font-weight:bold">6</b>', n:'cubes'},
+        ]},
+        { type:'circle-choice', q:'Circle the LIGHTER object.', choices:[
+          {v:'<span style="font-size:2rem">📕</span>', n:'A (book)'},
+          {v:'<span style="font-size:2rem">🎈</span>', n:'B (balloon)'},
+        ]},
+        { type:'fill', eq:'A pencil is 6 cubes. A pen is 9 cubes.\nHow much LONGER is the pen? ___ cubes', label:'' },
+        { type:'fill', eq:'Order shortest to longest:\n3 cubes,  7 cubes,  5 cubes\n___, ___, ___', label:'' },
       ]
     },
     'g1-graphs': {
@@ -789,16 +833,40 @@
     },
     'g1-fractions': {
       title:'Halves & Fourths', grade:'1st Grade', standard:'1.G.3',
-      instructions:'Answer the questions about equal parts.',
+      instructions:'Look for equal parts. Circle the right answer.',
       problems:[
-        { type:'fill', eq:'A shape split into 2 EQUAL parts —\neach part is called a ___________.', label:'' },
-        { type:'fill', eq:'A shape split into 4 EQUAL parts —\neach part is called a ___________.', label:'' },
-        { type:'fill', eq:'Another word for one-fourth is ___________.', label:'' },
-        { type:'fill', eq:'A pizza 🍕 is cut into 4 equal slices.\nYou eat 1 slice. You ate ___ of the pizza.\n(1/2 / 1/3 / 1/4)', label:'Circle one.' },
-        { type:'fill', eq:'Splitting a circle into MORE equal parts\nmakes each part _________.\n(bigger / smaller / same)', label:'Circle one.' },
-        { type:'fill', eq:'A rectangle split into 2 equal parts —\neach part is ___.\n(1/4 / 1/2 / 2/3)', label:'Circle one.' },
-        { type:'fill', eq:'How many fourths make 1 whole? ___', label:'' },
+        { type:'circle-choice', q:'Which shape shows halves?', choices:[
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/></svg>', n:'A'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/></svg>', n:'B'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="10" y1="10" x2="42" y2="42" stroke="#333" stroke-width="2.5"/></svg>', n:'C'},
+        ]},
+        { type:'circle-choice', q:'Which shape shows fourths?', choices:[
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/></svg>', n:'A'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/></svg>', n:'B'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/></svg>', n:'C'},
+        ]},
+        { type:'circle-choice', q:'Which circle is NOT equal parts?', choices:[
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/></svg>', n:'A'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/></svg>', n:'B'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="3" y1="18" x2="49" y2="18" stroke="#333" stroke-width="2.5"/></svg>', n:'C'},
+        ]},
+        { type:'circle-choice', q:'Circle the shape cut into 2 equal parts.', choices:[
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/></svg>', n:'A'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/></svg>', n:'B'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="8" y1="8" x2="44" y2="44" stroke="#333" stroke-width="2.5"/></svg>', n:'C'},
+        ]},
+        { type:'circle-choice', q:'Circle the shape cut into 4 equal parts.', choices:[
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/></svg>', n:'A'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/></svg>', n:'B'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><line x1="10" y1="10" x2="42" y2="42" stroke="#333" stroke-width="2.5"/></svg>', n:'C'},
+        ]},
+        { type:'circle-choice', q:'Which shows one fourth shaded?', choices:[
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><path d="M26,26 L26,3 A23,23 0 0,1 26,49 Z" fill="#FFD700"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/><circle cx="26" cy="26" r="23" fill="none" stroke="#333" stroke-width="2.5"/></svg>', n:'A'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="white" stroke="#333" stroke-width="2.5"/><path d="M26,26 L49,26 A23,23 0 0,1 26,49 Z" fill="#FFD700"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/><circle cx="26" cy="26" r="23" fill="none" stroke="#333" stroke-width="2.5"/></svg>', n:'B'},
+          {v:'<svg viewBox="0 0 52 52" width="44" height="44"><circle cx="26" cy="26" r="23" fill="#FFD700" stroke="#333" stroke-width="2.5"/><path d="M26,26 L26,3 A23,23 0 0,1 49,26 Z" fill="white"/><line x1="26" y1="3" x2="26" y2="49" stroke="#333" stroke-width="2.5"/><line x1="3" y1="26" x2="49" y2="26" stroke="#333" stroke-width="2.5"/><circle cx="26" cy="26" r="23" fill="none" stroke="#333" stroke-width="2.5"/></svg>', n:'C'},
+        ]},
         { type:'fill', eq:'How many halves make 1 whole? ___', label:'' },
+        { type:'fill', eq:'How many fourths make 1 whole? ___', label:'' },
       ]
     },
     'g1-equalsign': {
