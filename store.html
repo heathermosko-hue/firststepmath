@@ -565,16 +565,30 @@
 
     // ── PETS ──────────────────────────────────────────
     const PETS = [
-      { id:'fishpet',     num:1,  name:'Goldfish Pal',  emoji:'🐟', img:'img/store/fishpet.png',     price:1.00,  desc:'Swim • Splash • Shine!'  },
-      { id:'turtle',      num:2,  name:'Turtle Pal',    emoji:'🐢',                                  price:5.00,  desc:'Swim • Slow • Steady!'   },
-      { id:'hamster',     num:3,  name:'Hamster Pal',   emoji:'🐹', img:'img/store/hamster.png',     price:10.00, desc:'Scurry • Nibble • Play!' },
-      { id:'bunny',       num:4,  name:'Bunny Pal',     emoji:'🐰', img:'img/store/bunny.png',       price:15.00, desc:'Hop • Snuggle • Nibble!' },
-      { id:'robo-dog',    num:5,  name:'Robo Dog',      emoji:'🤖', img:'img/store/robo-dog.png',    price:15.00, desc:'Fetch • Beep • Play!'    },
-      { id:'robo-cat',    num:6,  name:'Robo Cat',      emoji:'🐱', img:'img/store/robo-cat.png',    price:15.00, desc:'Purr • Beep • Play!'     },
-      { id:'puppy-pet',   num:7,  name:'Puppy Pal',     emoji:'🐶', img:'img/store/puppy-pet.png',   price:20.00, desc:'Woof • Play • Cuddle!'   },
-      { id:'kitty-pet',   num:8,  name:'Kitty Pal',     emoji:'🐱', img:'img/store/kitty-pet.png',   price:20.00, desc:'Meow • Purr • Play!'     },
-      { id:'alien',       num:9,  name:'Alien Pal',     emoji:'👽', img:'img/store/alien.png',       price:25.00, desc:'Glow • Wave • Play!'     },
-      { id:'dino',        num:10, name:'Dino Pal',      emoji:'🦕', img:'img/store/dino.png',        price:25.00, desc:'Roar • Stomp • Play!'    },
+      // $1
+      { id:'fishpet',   num:1,  name:'Goldfish Pal', emoji:'🐟', img:'img/store/fishpet.png',  price:1.00,  desc:'Swim • Splash • Shine!'   },
+      // $5
+      { id:'turtle',    num:2,  name:'Turtle Pal',   emoji:'🐢', img:'img/store/turtle.png',   price:5.00,  desc:'Slow • Steady • Cool!'    },
+      { id:'duck',      num:3,  name:'Ducky Pal',    emoji:'🐥', img:'img/store/duck.png',     price:5.00,  desc:'Waddle • Quack • Play!'   },
+      // $10
+      { id:'hamster',   num:4,  name:'Hamster Pal',  emoji:'🐹', img:'img/store/hamster.png',  price:10.00, desc:'Scurry • Nibble • Play!'  },
+      { id:'owl',       num:5,  name:'Owl Pal',      emoji:'🦉', img:'img/store/owl.png',      price:10.00, desc:'Hoot • Play • Learn!'     },
+      { id:'hedgehog',  num:6,  name:'Hedgehog Pal', emoji:'🦔', img:'img/store/hedgehog.png', price:10.00, desc:'Roll • Play • Cuddle!'    },
+      { id:'lamb',      num:7,  name:'Lamb Pal',     emoji:'🐑', img:'img/store/lamb.png',     price:10.00, desc:'Baa • Play • Cuddle!'     },
+      // $15
+      { id:'bunny',     num:8,  name:'Bunny Pal',    emoji:'🐰', img:'img/store/bunny.png',    price:15.00, desc:'Hop • Cuddle • Play!'     },
+      { id:'ferret',    num:9,  name:'Ferret Pal',   emoji:'🐾', img:'img/store/ferret.png',   price:15.00, desc:'Scoot • Play • Snuggle!'  },
+      { id:'monkey',    num:10, name:'Monkey Pal',   emoji:'🐵', img:'img/store/monkey.png',   price:15.00, desc:'Swing • Play • Smile!'    },
+      { id:'piggy',     num:11, name:'Piggy Pal',    emoji:'🐷', img:'img/store/piggy.png',    price:15.00, desc:'Oink • Play • Love!'      },
+      { id:'robo-dog',  num:12, name:'Robo Dog',     emoji:'🤖', img:'img/store/robo-dog.png', price:15.00, desc:'Fetch • Beep • Play!'     },
+      { id:'robo-cat',  num:13, name:'Robo Cat',     emoji:'🐱', img:'img/store/robo-cat.png', price:15.00, desc:'Purr • Beep • Play!'      },
+      // $20
+      { id:'puppy-pet', num:14, name:'Puppy Pal',    emoji:'🐶', img:'img/store/puppy-pet.png',price:20.00, desc:'Woof • Play • Cuddle!'    },
+      { id:'kitty-pet', num:15, name:'Kitty Pal',    emoji:'🐱', img:'img/store/kitty-pet.png',price:20.00, desc:'Meow • Purr • Play!'      },
+      { id:'pony',      num:16, name:'Pony Pal',     emoji:'🐴', img:'img/store/pony.png',     price:20.00, desc:'Trot • Play • Love!'      },
+      // $25
+      { id:'alien',     num:17, name:'Alien Pal',    emoji:'👽', img:'img/store/alien.png',    price:25.00, desc:'Glow • Wave • Play!'      },
+      { id:'dino',      num:18, name:'Dino Pal',     emoji:'🦕', img:'img/store/dino.png',     price:25.00, desc:'Roar • Stomp • Play!'     },
     ];
 
     // ── FOOD ──────────────────────────────────────────
@@ -584,9 +598,18 @@
       { id:'bunny-food',   num:3, name:'Bunny Treats',     emoji:'🥕', img:'img/store/food-bunny.png',   price:0.15, desc:'Munch • Hop • Yum!',          bg:'#dcfce7', repeatable:true },
       { id:'hamster-food', num:4, name:'Hamster Snack Mix',emoji:'🌾', img:'img/store/food-hamster.png', price:0.15, desc:'Nibble • Crunch • Fun!',       bg:'#fef3c7', repeatable:true },
       { id:'fish-food',    num:5, name:'Goldfish Flakes',  emoji:'🫙', img:'img/store/food-fish.png',    price:0.15, desc:'Sprinkle • Swim • Smile!',     bg:'#dbeafe', repeatable:true },
-      { id:'alien-food',   num:6, name:'Star Dust Snack',  emoji:'✨', price:0.25, desc:'Out-of-this-world food!',      bg:'#ede9fe', repeatable:true },
-      { id:'dino-food',    num:7, name:'Dino Berries',     emoji:'🫐', price:0.25, desc:'Big berries for big dinos!',   bg:'#dcfce7', repeatable:true },
-      { id:'robot-fuel',   num:8, name:'Robot Fuel',       emoji:'⚡', price:0.20, desc:'Power up your robo pet!',      bg:'#e0f2fe', repeatable:true },
+      { id:'alien-food',    num:6,  name:'Star Dust Snack',   emoji:'✨', price:0.25, desc:'Out-of-this-world food!',     bg:'#ede9fe', repeatable:true },
+      { id:'dino-food',     num:7,  name:'Dino Berries',      emoji:'🫐', price:0.25, desc:'Big berries for big dinos!',  bg:'#dcfce7', repeatable:true },
+      { id:'robot-fuel',    num:8,  name:'Robot Fuel',         emoji:'⚡', price:0.20, desc:'Power up your robo pet!',     bg:'#e0f2fe', repeatable:true },
+      { id:'duck-food',     num:9,  name:'Duck Treats',        emoji:'🌾', price:0.15, desc:'Quack • Munch • Yum!',        bg:'#fef9c3', repeatable:true },
+      { id:'owl-food',      num:10, name:'Owl Pellets',        emoji:'🦉', price:0.15, desc:'Hoot • Crunch • Yum!',        bg:'#fff7ed', repeatable:true },
+      { id:'hedgehog-food', num:11, name:'Hedgehog Nibbles',   emoji:'🐛', price:0.15, desc:'Roll • Nibble • Fun!',        bg:'#d1fae5', repeatable:true },
+      { id:'lamb-food',     num:12, name:'Lamb Hay & Clover',  emoji:'🌿', price:0.15, desc:'Baa • Munch • Happy!',        bg:'#f0fdf4', repeatable:true },
+      { id:'ferret-food',   num:13, name:'Ferret Bites',       emoji:'🥩', price:0.20, desc:'Scoot • Chomp • Play!',       bg:'#fce7f3', repeatable:true },
+      { id:'monkey-food',   num:14, name:'Banana Bites',       emoji:'🍌', price:0.20, desc:'Swing • Munch • Smile!',      bg:'#fef3c7', repeatable:true },
+      { id:'piggy-food',    num:15, name:'Piggy Slop Mix',     emoji:'🌽', price:0.15, desc:'Oink • Munch • Yum!',         bg:'#fce7f3', repeatable:true },
+      { id:'pony-food',     num:16, name:'Hay & Carrots',      emoji:'🥕', price:0.25, desc:'Trot • Munch • Love!',        bg:'#ffedd5', repeatable:true },
+      { id:'turtle-food',   num:17, name:'Turtle Greens',      emoji:'🥬', price:0.15, desc:'Swim • Munch • Happy!',       bg:'#dcfce7', repeatable:true },
     ];
 
     // ── ACCESSORIES ───────────────────────────────────
