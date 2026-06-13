@@ -831,12 +831,52 @@
   });
 
   // ── DOWNLOAD ALL AS ZIP ───────────────────────────
+  const WS_PRINT_CSS = `
+body{margin:0;padding:0;font-family:'Nunito',sans-serif;}
+.worksheet{font-family:'Nunito',sans-serif;background:#fff;}
+.ws-top-banner{padding:22px 32px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:5px solid;}
+.ws-top-banner.prek{background:#fff9e6;border-color:#FF6B9D;}
+.ws-top-banner.kinder{background:#eef4ff;border-color:#4A90E2;}
+.ws-top-banner.grade1{background:#f3eeff;border-color:#7B5EA7;}
+.ws-brand{font-family:'Fredoka One',cursive;font-size:1.05rem;}
+.ws-brand span:first-child{color:#4A90E2;}
+.ws-brand span:last-child{color:#FF6B9D;}
+.ws-title-area{text-align:center;}
+.ws-title-area .ws-grade-badge{display:inline-block;padding:3px 14px;border-radius:50px;font-family:'Fredoka One',cursive;font-size:0.78rem;color:#fff;margin-bottom:4px;}
+.prek .ws-grade-badge{background:#FF6B9D;}
+.kinder .ws-grade-badge{background:#4A90E2;}
+.grade1 .ws-grade-badge{background:#7B5EA7;}
+.ws-title-area h2{font-family:'Fredoka One',cursive;font-size:1.6rem;margin:0;color:#1a1a2e;}
+.ws-title-area .ws-standard{font-size:0.75rem;color:#999;margin-top:2px;}
+.ws-name-block{text-align:right;font-size:0.82rem;color:#555;line-height:2.2;}
+.ws-name-block span{border-bottom:2px solid #aaa;display:inline-block;width:110px;}
+.ws-instructions-bar{background:#f8f8f8;border-left:5px solid #fbbf24;padding:8px 20px;font-size:0.88rem;font-style:italic;color:#555;margin:0;}
+.ws-problems-grid{padding:18px 24px 12px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.ws-prob-card{border:2px solid #eee;border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;background:#fafafa;}
+.ws-num-circle{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:0.88rem;color:#fff;}
+.prek-num{background:#FF6B9D;}
+.kinder-num{background:#4A90E2;}
+.grade1-num{background:#7B5EA7;}
+.ws-prob-inner{flex:1;}
+.ws-prob-label{font-size:0.75rem;color:#888;margin-bottom:4px;}
+.ws-eq2{font-family:'Fredoka One',cursive;font-size:1.25rem;color:#1a1a2e;line-height:1.5;}
+.ws-blank-ans{border-bottom:3px solid #555;min-width:44px;display:inline-block;min-height:22px;margin:0 3px;}
+.ws-visual-row{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0;}
+.ws-tf{display:inline-grid;grid-template-columns:repeat(5,22px);grid-template-rows:repeat(2,22px);gap:2px;border:2px solid #555;padding:3px;border-radius:5px;}
+.ws-tf-dot{width:22px;height:22px;border-radius:50%;border:2px solid #999;}
+.ws-tf-dot.filled{background:#FF6B35;border-color:#c94f1a;}
+.ws-pattern-row{font-size:1.3rem;letter-spacing:1px;line-height:1.8;}
+.ws-compare-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px;font-family:'Fredoka One',cursive;}
+.ws-compare-pill{background:#eef4ff;border:2px solid #bbd3f7;border-radius:8px;padding:3px 10px;font-size:0.95rem;}
+.ws-footer2{margin:4px 24px 16px;padding-top:10px;border-top:1px dashed #ddd;text-align:center;font-size:0.7rem;color:#bbb;}
+.print-hint{text-align:center;padding:6px;background:#f8f8f8;font-size:0.8rem;color:#888;font-family:sans-serif;}
+@media print{.print-hint{display:none;}@page{margin:14mm 12mm;}}`;
+
   window.downloadAllWS = async function(btn) {
     const orig = btn.textContent;
     btn.textContent = '⏳ Building ZIP…';
     btn.disabled = true;
 
-    const css = document.querySelector('style').textContent;
     const fonts = '<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">';
 
     function makeHTML(key) {
@@ -848,16 +888,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>${ws.title} – FirstStepMath</title>
 ${fonts}
-<style>
-body{margin:0;padding:0;}
-${css}
-@media print{body>*:not(.worksheet){display:none!important;}.worksheet{display:block!important;}@page{margin:14mm 12mm;}}
-</style>
+<style>${WS_PRINT_CSS}</style>
 </head>
 <body>
-<div style="text-align:center;padding:6px;background:#f8f8f8;font-size:0.8rem;color:#888;font-family:sans-serif;">
-  Open in browser · Press <strong>Ctrl+P</strong> (or ⌘+P on Mac) to print or save as PDF
-</div>
+<div class="print-hint">Open in browser · Press <strong>Ctrl+P</strong> (or ⌘+P on Mac) to print or save as PDF</div>
 ${buildWS(key)}
 </body>
 </html>`;
