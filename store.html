@@ -845,46 +845,54 @@
         var ownedFood   = FOOD.filter(function(f){ return owns(f.id); });
 
         // Empty state
-        if (!ownedPets.length && !ownedBeds.length && !ownedAccess.length) {
+        if (!ownedPets.length && !ownedBeds.length && !ownedAccess.length && !ownedFood.length) {
           scene.innerHTML = '<div class="pet-world-empty"><div style="font-size:4rem">🐾</div><div class="pet-world-empty-title">Adopt a pet to fill your world!</div></div>';
           shelf.style.display = 'none';
           return;
         }
 
+        // All owned items go on the meadow
+        var allItems = [].concat(
+          ownedBeds.map(function(b){ return { id:'bed_'+b.id,  item:b }; }),
+          ownedPets.map(function(p){ return { id:'pet_'+p.id,  item:p }; }),
+          ownedAccess.map(function(a){ return { id:'acc_'+a.id, item:a }; }),
+          ownedFood.map(function(f){ return { id:'food_'+f.id, item:f }; })
+        );
+
         // Clear & rebuild scene
         scene.innerHTML = '';
+        shelf.style.display = 'none';
         var pos = loadPositions();
         var sceneW = scene.offsetWidth || 360;
-        var sceneH = scene.offsetHeight || 420;
 
-        // Default grid positions spread across upper 65% of scene
         var cols = Math.max(2, Math.floor(sceneW / 110));
-        ownedPets.forEach(function(pet, i) {
-          var col = i % cols, row = Math.floor(i / cols);
+        allItems.forEach(function(entry, i) {
+          var item = entry.item;
+          var uid  = entry.id;
+          var col  = i % cols, row = Math.floor(i / cols);
           var defaultX = (col / cols * 80 + 4);
-          var defaultY = (row * 28 + 6);
-          var p = pos[pet.id] || { x: defaultX, y: defaultY };
+          var defaultY = (row * 22 + 5);
+          var p = pos[uid] || { x: defaultX, y: defaultY };
 
           var sticker = document.createElement('div');
           sticker.className = 'world-sticker';
-          sticker.dataset.petId = pet.id;
+          sticker.dataset.itemId = uid;
           sticker.style.left = p.x + '%';
           sticker.style.top  = p.y + '%';
-          sticker.style.animationDelay = (i * 0.07) + 's';
+          sticker.style.animationDelay = (i * 0.05) + 's';
 
-          var imgHtml = pet.img
-            ? '<div class="img-clip"><img src="' + pet.img + '" alt="' + pet.name + '" onerror="this.parentNode.innerHTML=\'<span class=sticker-emoji>' + pet.emoji + '</span>\'"></div>'
-            : '<span class="sticker-emoji">' + pet.emoji + '</span>';
+          var imgHtml = item.img
+            ? '<div class="img-clip"><img src="' + item.img + '" alt="' + item.name + '" onerror="this.parentNode.innerHTML=\'<span class=sticker-emoji>' + (item.emoji||'🐾') + '</span>\'"></div>'
+            : '<span class="sticker-emoji">' + (item.emoji||'🐾') + '</span>';
           sticker.innerHTML = imgHtml;
 
           // Desktop drag
           sticker.addEventListener('mousedown', function(e) {
             if (e.button !== 0) return;
             var rect = sticker.getBoundingClientRect();
-            var scRect = scene.getBoundingClientRect();
             _dragOffX = e.clientX - rect.left;
             _dragOffY = e.clientY - rect.top;
-            _dragId = pet.id;
+            _dragId = uid;
             _dragEl = sticker;
             sticker.classList.add('dragging');
             e.preventDefault();
@@ -896,7 +904,7 @@
             var rect = sticker.getBoundingClientRect();
             _dragOffX = t.clientX - rect.left;
             _dragOffY = t.clientY - rect.top;
-            _dragId = pet.id;
+            _dragId = uid;
             _dragEl = sticker;
             sticker.classList.add('dragging');
             e.preventDefault();
@@ -966,24 +974,7 @@
         document.addEventListener('touchmove', onTouchMove, { passive:false });
         document.addEventListener('touchend',  onTouchEnd);
 
-        // Shelf: beds + accessories + food
-        var shelfItems = [...ownedBeds, ...ownedAccess, ...ownedFood];
-        if (shelfItems.length) {
-          shelf.style.display = 'block';
-          shelfEl.innerHTML = '';
-          shelfItems.forEach(function(item) {
-            var chip = document.createElement('div');
-            chip.className = 'shelf-chip';
-            var cnt = count(item.id);
-            var imgHtml = item.img
-              ? '<img src="' + item.img + '" alt="' + item.name + '" onerror="this.style.display=\'none\'"><span class="chip-emoji" style="display:none">' + item.emoji + '</span>'
-              : '<span class="chip-emoji">' + item.emoji + '</span>';
-            chip.innerHTML = imgHtml + item.name + (cnt > 1 ? '<span class="chip-count">x' + cnt + '</span>' : '');
-            shelfEl.appendChild(chip);
-          });
-        } else {
-          shelf.style.display = 'none';
-        }
+        // All items now live on the meadow — shelf hidden
       };
     })();
 
