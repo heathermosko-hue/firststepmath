@@ -187,6 +187,7 @@ function renderVisual(visual) {
     case 'shape':          return renderShape(visual.name);
     case 'compare':        return renderCompare(visual.compare, visual.items);
     case 'emoji_row':      return renderEmojiRow(visual.items);
+    case 'img':            return '<img src="' + visual.src + '" style="max-width:100%;border-radius:12px;" alt="">';
     default: return null;
   }
 }
