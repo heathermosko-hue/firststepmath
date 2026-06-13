@@ -19,6 +19,7 @@
     }
     .speak-btn:hover  { background: #e0e8ff; }
     .speak-btn:active { transform: scale(0.9); background: #c8d5ff; }
+    .question-btns { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
     .answer-btn.selected { outline: 4px solid #7c3aed; background: #ede9fe; transform: scale(1.03); }
   </style>
 </head>
@@ -55,7 +56,10 @@
     <div class="question-card" id="questionCard">
       <div class="question-row">
         <p class="question-text" id="questionText"></p>
-        <button class="speak-btn" id="speakBtn" aria-label="Read question aloud" title="Hear question">🔊</button>
+        <div class="question-btns">
+          <button class="speak-btn" id="speakBtn" aria-label="Read question aloud" title="Hear question">🔊</button>
+          <button class="speak-btn tools-inline-btn" id="toolsBtn" aria-label="Open math tools" title="Math Tools">🧮</button>
+        </div>
       </div>
       <!-- MC visuals + answers (shown for multiple-choice questions) -->
       <div class="visual-box" id="visualDisplay" data-empty="true"></div>
@@ -91,10 +95,7 @@
 
   </main>
 
-  <!-- ── Floating Tools Button ── -->
-  <button class="tools-fab" id="toolsBtn" aria-label="Open math tools">
-    🧮 <span class="tools-fab-label">Tools</span>
-  </button>
+
 
   <!-- ── Tools Panel ── -->
   <div class="tools-panel" id="toolsPanel" aria-hidden="true">
