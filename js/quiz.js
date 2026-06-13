@@ -784,25 +784,13 @@ function showStorePrompt() {
     'alien':    { emoji:'👽', name:'Alien',     food:'alien-food',    bed:'space-pod'  },
     'dino':     { emoji:'🦕', name:'Dino',      food:'dino-food',     bed:'pet-bed'    },
   };
-  var TOY_TEASER = [
-    { id:'bubbles',    emoji:'🫧', name:'Bubble Wand'     },
-    { id:'puzzle',     emoji:'🧩', name:'Puzzle Box'      },
-    { id:'racecar',    emoji:'🏎️', name:'Race Car'        },
-    { id:'train',      emoji:'🚂', name:'Toy Train'       },
-    { id:'robot',      emoji:'🤖', name:'Robot Pal'       },
-    { id:'playground', emoji:'🛝', name:'Mini Playground' },
-    { id:'puppy-plush',emoji:'🐶', name:'Puppy Stuffy'   },
-    { id:'kitty-plush',emoji:'🐱', name:'Kitty Stuffy'   },
-  ];
-
   var ownedPetIds = Object.keys(PET_INFO).filter(owns);
-  var hasBed = ['pet-bed','pet-carrier','doghouse','cat-tree','fish-tank','space-pod'].some(owns);
+  var hasBed    = ['pet-bed','pet-carrier','doghouse','cat-tree','fish-tank','space-pod'].some(owns);
   var hasAccess = ['collar-leash','squeaky-toy','blue-bow','party-hat','sunglasses','star-tag','pet-ball','robo-charger'].some(owns);
 
   var emoji, title, body, href;
 
   if (ownedPetIds.length > 0) {
-    // Check for a hungry pet first
     var hungryId = ownedPetIds.find(function(id) {
       return PET_INFO[id].food && !owns(PET_INFO[id].food);
     });
@@ -818,29 +806,23 @@ function showStorePrompt() {
       href  = 'store.html';
     } else if (!hasAccess) {
       var p3 = PET_INFO[ownedPetIds[0]];
-      emoji = p3.emoji; title = p3.name + ' wants to play! 🎀';
-      body  = 'Keep playing to earn money for accessories!';
+      emoji = p3.emoji; title = p3.name + ' wants accessories! 🎀';
+      body  = 'Keep playing to earn money for collars, bows, and more!';
       href  = 'store.html';
     } else {
-      // Pet is well cared-for — nudge toward toys
-      var missing = TOY_TEASER.find(function(t) { return !owns(t.id); });
-      if (!missing) return;
-      emoji = missing.emoji; title = missing.name + ' is waiting for you! 🚀';
-      body  = 'Keep playing to earn money and grab it at the Toy Store!';
+      // Fully cared-for — nudge toward adopting another pet
+      var allPetIds = Object.keys(PET_INFO);
+      var unadopted = allPetIds.find(function(id) { return !owns(id); });
+      if (!unadopted) return;
+      var up = PET_INFO[unadopted];
+      emoji = up.emoji; title = up.name + ' wants to be adopted! 🐾';
+      body  = 'Keep playing to earn money and give ' + up.name + ' a home!';
       href  = 'store.html';
     }
   } else {
-    // No pets yet — pick a missing toy or nudge toward the pet shop
-    var missingToy = TOY_TEASER.find(function(t) { return !owns(t.id); });
-    if (missingToy && Object.keys(purchases).length > 0) {
-      emoji = missingToy.emoji; title = missingToy.name + ' is in the store! 🚀';
-      body  = 'Keep playing to earn money and add it to your collection!';
-      href  = 'store.html';
-    } else {
-      emoji = '🐾'; title = 'Adopt your first pet! 🐾';
-      body  = 'Answer questions, earn money, and visit the Pet Shop!';
-      href  = 'store.html';
-    }
+    emoji = '🐾'; title = 'Adopt your first pet! 🐾';
+    body  = 'Answer questions, earn money, and visit the Pet Shop!';
+    href  = 'store.html';
   }
 
   var prompt = document.getElementById('storePrompt');

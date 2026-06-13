@@ -366,7 +366,7 @@
       <nav class="main-nav" id="mainNav">
         <a href="about.html" class="nav-link">About</a>
         <a href="worksheets.html" class="nav-link">📄 Worksheets</a>
-        <a href="store.html" class="nav-link" style="color:var(--orange);font-weight:800">🛒 Toy Store</a>
+        <a href="store.html" class="nav-link" style="color:var(--orange);font-weight:800">🐾 Pet Store</a>
         <a href="login.html" class="btn btn-outline">Sign In</a>
         <a href="index.html#grades" class="btn btn-primary">Play Now</a>
       </nav>
@@ -375,7 +375,7 @@
   </header>
 
   <div class="store-hero">
-    <h1>🏪 Pet &amp; Toy Store</h1>
+    <h1>🐾 Pet Store</h1>
     <p>Answer questions correctly to earn pretend money — then spend it here!</p>
     <div class="balance-pill">
       💵 $<span id="balanceAmt">0.00</span> <span style="font-size:1rem;opacity:0.8">saved up</span>
@@ -391,15 +391,10 @@
         <span class="entrance-name">Pet Shop</span>
         <span class="entrance-desc">Adopt a furry friend!</span>
       </div>
-      <div class="entrance-card toys-card" onclick="enterStore('toys')">
-        <span class="entrance-icon">🚀</span>
-        <span class="entrance-name">Toy Store</span>
-        <span class="entrance-desc">Fun toys &amp; games!</span>
-      </div>
       <div class="entrance-card access-card" onclick="enterStore('pet-care')">
         <span class="entrance-icon">🎀</span>
         <span class="entrance-name">Pet Accessories</span>
-        <span class="entrance-desc">Food, toys &amp; beds!</span>
+        <span class="entrance-desc">Food &amp; beds!</span>
       </div>
     </div>
     <button class="entrance-collection-btn" onclick="enterStore('collection')">🎒 View My Collection</button>
@@ -409,7 +404,6 @@
   <div class="store-tabs">
     <button class="store-tab active" data-tab="pets">🐾 Pets</button>
     <button class="store-tab" data-tab="pet-care">🍖 Pet Food &amp; Accessories</button>
-    <button class="store-tab" data-tab="toys">🚀 Toys</button>
     <button class="store-tab" data-tab="collection">🎒 My Collection</button>
   </div>
 
@@ -451,40 +445,6 @@
       <div class="pet-care-section" id="care-beds">
         <div class="section-title" style="font-size:1.3rem">🛏️ Beds &amp; Homes</div>
         <div class="store-grid" id="bedsGrid"></div>
-      </div>
-    </div>
-
-    <!-- ══════════ TOYS ══════════ -->
-    <div class="store-section" id="tab-toys">
-      <div class="section-title">🚀 Toys &amp; Games</div>
-
-      <div class="pet-care-tabs" id="toyCatTabs">
-        <button class="pet-care-tab active" data-toy-cat="active">🫧 Active</button>
-        <button class="pet-care-tab" data-toy-cat="games">🧩 Games</button>
-        <button class="pet-care-tab" data-toy-cat="vehicles">🚗 Vehicles</button>
-        <button class="pet-care-tab" data-toy-cat="bigtoys">🤖 Big Toys</button>
-        <button class="pet-care-tab" data-toy-cat="stuffies">🧸 Stuffies</button>
-      </div>
-
-      <div class="pet-care-section active" id="toy-active">
-        <div class="section-title" style="font-size:1.3rem">🫧 Active Toys</div>
-        <div class="store-grid" id="toysActiveGrid"></div>
-      </div>
-      <div class="pet-care-section" id="toy-games">
-        <div class="section-title" style="font-size:1.3rem">🧩 Games &amp; Puzzles</div>
-        <div class="store-grid" id="toysGamesGrid"></div>
-      </div>
-      <div class="pet-care-section" id="toy-vehicles">
-        <div class="section-title" style="font-size:1.3rem">🚗 Vehicles</div>
-        <div class="store-grid" id="toysVehiclesGrid"></div>
-      </div>
-      <div class="pet-care-section" id="toy-bigtoys">
-        <div class="section-title" style="font-size:1.3rem">🤖 Big Toys</div>
-        <div class="store-grid" id="toysBigGrid"></div>
-      </div>
-      <div class="pet-care-section" id="toy-stuffies">
-        <div class="section-title" style="font-size:1.3rem">🧸 Stuffies</div>
-        <div class="store-grid" id="toysStuffiesGrid"></div>
       </div>
     </div>
 
@@ -636,26 +596,6 @@
       { id:'space-pod',    num:6, name:'Space Pod',        emoji:'🚀', price:0.70, desc:'For your alien friend!',      bg:'#ede9fe' },
     ];
 
-    // ── TOYS ──────────────────────────────────────────
-    const TOYS = [
-      // Active ($1–$2)
-      { id:'bubbles',     num:1,  cat:'active',   name:'Bubble Wand',     emoji:'🫧', img:'img/store/bubbles.png',     price:1.00, desc:'Blow • Pop • Play!'        },
-      { id:'yoyo',        num:2,  cat:'active',   name:'Light-Up Yo-Yo',  emoji:'🪀', img:'img/store/yoyo.png',        price:2.00, desc:'Spin • Swing • Fun!'       },
-      { id:'bnet',        num:3,  cat:'active',   name:'Butterfly Net',   emoji:'🦋', img:'img/store/bnet.png',        price:2.00, desc:'Swish • Catch • Play!'     },
-      // Games ($3)
-      { id:'puzzle',      num:4,  cat:'games',    name:'Puzzle Box',      emoji:'🧩', img:'img/store/puzzle.png',      price:3.00, desc:'Match • Solve • Play!'     },
-      { id:'fishbowl',    num:5,  cat:'games',    name:'Fish Bowl Game',  emoji:'🐠', img:'img/store/fishbowl.png',    price:3.00, desc:'Splash • Swim • Smile!'    },
-      // Vehicles ($3–$4)
-      { id:'racecar',     num:6,  cat:'vehicles', name:'Race Car',        emoji:'🏎️', img:'img/store/racecar.png',     price:3.00, desc:'Zoom • Play • Go!'         },
-      { id:'train',       num:7,  cat:'vehicles', name:'Toy Train',       emoji:'🚂', img:'img/store/train.png',       price:4.00, desc:'Choo • Choo • Play!'       },
-      // Big Toys ($4–$5)
-      { id:'robot',       num:8,  cat:'bigtoys',  name:'Robot Pal',       emoji:'🤖', img:'img/store/robot.png',       price:4.00, desc:'Beep • Glow • Play!'       },
-      { id:'playground',  num:9,  cat:'bigtoys',  name:'Mini Playground', emoji:'🛝', img:'img/store/playground.png',  price:5.00, desc:'Slide • Climb • Play!'     },
-      // Stuffies ($5)
-      { id:'puppy-plush', num:10, cat:'stuffies', name:'Puppy Stuffy',    emoji:'🐶', img:'img/store/puppy-plush.png', price:5.00, desc:'Soft • Cuddly • Fun!'      },
-      { id:'kitty-plush', num:11, cat:'stuffies', name:'Kitty Stuffy',    emoji:'🐱', img:'img/store/kitty-plush.png', price:5.00, desc:'Soft • Sweet • Fun!'       },
-    ];
-
     // ── STATE ──────────────────────────────────────────
     let balance   = parseFloat(localStorage.getItem(MONEY_KEY) || '0');
     // purchases is now {id: count} — repeatable items can be bought multiple times
@@ -763,7 +703,7 @@
     // ── COLLECTION ────────────────────────────────────
     function renderCollection() {
       const grid = document.getElementById('collectionGrid');
-      const allItems = [...PETS, ...TOYS, ...FOOD, ...ACCESSORIES, ...BEDS];
+      const allItems = [...PETS, ...FOOD, ...ACCESSORIES, ...BEDS];
       const owned = allItems.filter(i => owns(i.id));
       if (!owned.length) {
         grid.innerHTML = '<div class="no-items">Nothing yet — earn money and start shopping!</div>';
@@ -783,15 +723,10 @@
     }
 
     function renderAll() {
-      fillGrid('petsGrid',        PETS,                          false);
-      fillGrid('toysActiveGrid',  TOYS.filter(t=>t.cat==='active'),   false);
-      fillGrid('toysGamesGrid',   TOYS.filter(t=>t.cat==='games'),    false);
-      fillGrid('toysVehiclesGrid',TOYS.filter(t=>t.cat==='vehicles'), false);
-      fillGrid('toysBigGrid',     TOYS.filter(t=>t.cat==='bigtoys'),  false);
-      fillGrid('toysStuffiesGrid',TOYS.filter(t=>t.cat==='stuffies'), false);
-      fillGrid('foodGrid',        FOOD,                          true);
-      fillGrid('accessGrid',      ACCESSORIES,                   false);
-      fillGrid('bedsGrid',        BEDS,                          false);
+      fillGrid('petsGrid',   PETS,        false);
+      fillGrid('foodGrid',   FOOD,        true);
+      fillGrid('accessGrid', ACCESSORIES, false);
+      fillGrid('bedsGrid',   BEDS,        false);
       renderOwnedPets();
       renderCollection();
     }
@@ -803,16 +738,6 @@
         document.querySelectorAll('#tab-pet-care .pet-care-section').forEach(s => s.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById('care-' + btn.dataset.care).classList.add('active');
-      });
-    });
-
-    // ── TOY CATEGORY TABS ─────────────────────────────
-    document.querySelectorAll('#toyCatTabs .pet-care-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#toyCatTabs .pet-care-tab').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('#tab-toys .pet-care-section').forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('toy-' + btn.dataset.toyCat).classList.add('active');
       });
     });
 
