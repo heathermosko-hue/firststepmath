@@ -500,9 +500,8 @@
         document.querySelector('[data-tab="teacher"]').click();
         const user = getUsers().find(u => u.email === session.email);
         if (user) showTeacherDash(user);
-      } else {
-        window.location.href = 'index.html';
       }
+      /* non-teacher sessions: just show the form so they can sign out or switch accounts */
     }
 
     /* ── Handle ?class= QR scan ── */

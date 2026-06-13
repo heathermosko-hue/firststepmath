@@ -20,7 +20,7 @@
         <a href="about.html" class="nav-link">About</a>
         <a href="worksheets.html" class="nav-link">📄 Worksheets</a>
         <a href="store.html" class="nav-link nav-link-store">🛒 Toy Store</a>
-        <a href="login.html" class="btn btn-outline">Sign In</a>
+        <a href="login.html" class="btn btn-outline" id="desktopSignBtn">Sign In</a>
         <a href="#grades" class="btn btn-primary">Get Started Free</a>
       </nav>
       <a href="login.html" class="mobile-signin-btn" id="mobileSignBtn">Sign In</a>
@@ -142,15 +142,19 @@
   (function() {
     var session = null;
     try { session = JSON.parse(sessionStorage.getItem('fsm_session')); } catch(e) {}
-    var btn = document.getElementById('mobileSignBtn');
+    function doSignOut(e) {
+      e.preventDefault();
+      sessionStorage.removeItem('fsm_session');
+      window.location.href = 'login.html';
+    }
+    var mobileBtn = document.getElementById('mobileSignBtn');
+    var desktopBtn = document.getElementById('desktopSignBtn');
     if (session) {
-      btn.textContent = 'Sign Out';
-      btn.classList.add('signout');
-      btn.href = '#';
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        sessionStorage.removeItem('fsm_session');
-        window.location.reload();
+      [mobileBtn, desktopBtn].forEach(function(btn) {
+        btn.textContent = 'Sign Out';
+        btn.classList.add('signout');
+        btn.href = '#';
+        btn.addEventListener('click', doSignOut);
       });
     }
   })();
