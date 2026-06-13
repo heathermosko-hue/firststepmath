@@ -106,6 +106,25 @@ function renderNumberLine(min, max, mark) {
   return svg;
 }
 
+function renderNumberLineCompare(min, max, a, b) {
+  const steps = max - min;
+  const W = 380, H = 72, mx = 28, lineY = 36;
+  const stepW = (W - mx * 2) / steps;
+  let svg = `<div class="numberline-wrap"><svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  svg += `<line x1="${mx}" y1="${lineY}" x2="${W-mx+8}" y2="${lineY}" stroke="#333" stroke-width="2.5"/>`;
+  svg += `<polygon points="${W-mx+8},${lineY} ${W-mx},${lineY-5} ${W-mx},${lineY+5}" fill="#333"/>`;
+  for (let i = 0; i <= steps; i++) {
+    const x = mx + i * stepW;
+    const n = min + i;
+    svg += `<line x1="${x}" y1="${lineY-6}" x2="${x}" y2="${lineY+6}" stroke="#333" stroke-width="1.5"/>`;
+    svg += `<text x="${x}" y="${lineY+21}" text-anchor="middle" font-size="11" fill="#333" font-family="Nunito,sans-serif">${n}</text>`;
+    if (n === a) svg += `<circle cx="${x}" cy="${lineY}" r="11" fill="#FF6B35" stroke="#fff" stroke-width="2"/>`;
+    if (n === b) svg += `<circle cx="${x}" cy="${lineY}" r="11" fill="#4ECDC4" stroke="#fff" stroke-width="2"/>`;
+  }
+  svg += '</svg></div>';
+  return svg;
+}
+
 function renderNumberLineAdd(min, max, start, jump) {
   const steps = max - min;
   const W = 380, H = 88, mx = 28, lineY = 58;
@@ -159,6 +178,7 @@ function renderVisual(visual) {
     case 'tenframe':       return renderTenFrame(visual.filled, visual.max || 10);
     case 'tenframe_add':   return renderTenFrameAdd(visual.a, visual.b);
     case 'numberline':     return renderNumberLine(visual.min, visual.max, visual.mark);
+    case 'numberline_compare': return renderNumberLineCompare(visual.min, visual.max, visual.a, visual.b);
     case 'numberline_add': return renderNumberLineAdd(visual.min, visual.max, visual.start, visual.jump);
     case 'base10':         return renderBase10(visual.tens, visual.ones);
     case 'equation':

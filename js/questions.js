@@ -68,10 +68,10 @@ const QUESTIONS = {
         { q: "Which number is the SMALLEST?", visual: null, answers: ["8","6","9","7"],    correct: "6",       standard:"PK.NS.4" },
         { q: "Which number is the BIGGEST?",  visual: null, answers: ["1","4","2","3"],    correct: "4",       standard:"PK.NS.4" },
         { q: "Which number is the SMALLEST?", visual: null, answers: ["5","3","7","1"],    correct: "1",       standard:"PK.NS.4" },
-        { q: "5 is ? than 3",          visual: null, answers: ["greater","equal","less","none"],       correct: "greater",   standard:"PK.NS.4" },
-        { q: "2 is ? than 4",          visual: null, answers: ["greater","equal","less","none"],       correct: "less",      standard:"PK.NS.4" },
-        { q: "3 is ? than 3",          visual: null, answers: ["greater","equal","less","none"],       correct: "equal",     standard:"PK.NS.4" },
-        { q: "7 is ? than 9",          visual: null, answers: ["greater","equal","less","none"],       correct: "less",      standard:"PK.NS.4" },
+        { q: "5 is ? than 3", visual: { type:"numberline_compare", min:0, max:10, a:5, b:3 }, answers: ["greater","equal","less","none"], correct: "greater", standard:"PK.NS.4" },
+        { q: "2 is ? than 4", visual: { type:"numberline_compare", min:0, max:10, a:2, b:4 }, answers: ["greater","equal","less","none"], correct: "less",    standard:"PK.NS.4" },
+        { q: "3 is ? than 3", visual: { type:"numberline_compare", min:0, max:10, a:3, b:3 }, answers: ["greater","equal","less","none"], correct: "equal",   standard:"PK.NS.4" },
+        { q: "7 is ? than 9", visual: { type:"numberline_compare", min:0, max:10, a:7, b:9 }, answers: ["greater","equal","less","none"], correct: "less",    standard:"PK.NS.4" },
       ]
     },
 
