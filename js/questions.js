@@ -58,13 +58,14 @@ const QUESTIONS = {
       title: "More & Fewer", icon: "⚖️", difficulty: 1,
       standard: "PK.NS.4",
       questions: [
-        { q: "Which group has MORE?",    visual: null, answers: ["🍎🍎 (2)","🍎🍎🍎🍎 (4)","🍎🍎🍎 (3)","🍎 (1)"],  correct: "🍎🍎🍎🍎 (4)", standard:"PK.NS.4" },
-        { q: "Which group has FEWER?",   visual: null, answers: ["⭐⭐⭐ (3)","⭐⭐⭐⭐ (4)","⭐⭐ (2)","⭐⭐⭐⭐⭐ (5)"], correct: "⭐⭐ (2)", standard:"PK.NS.4" },
-        { q: "5 is ? than 3",          visual: null, answers: ["less","equal to","more","smaller"],  correct: "more",     standard:"PK.NS.4" },
-        { q: "2 is ? than 4",          visual: null, answers: ["more","equal to","less","greater"],  correct: "less",     standard:"PK.NS.4" },
-        { q: "3 and 3 are ?",          visual: null, answers: ["more","equal","fewer","different"],  correct: "equal",    standard:"PK.NS.4" },
-        { q: "Which number is MORE?",    visual: null, answers: ["2","5","3","4"],                     correct: "5",        standard:"PK.NS.4" },
-        { q: "Which number is FEWER?",   visual: null, answers: ["8","6","9","7"],                     correct: "6",        standard:"PK.NS.4" },
+        { q: "Which group has MORE?",  visual: null, answers: ["🍎🍎","🍎🍎🍎🍎","🍎🍎🍎","🍎"],       correct: "🍎🍎🍎🍎", standard:"PK.NS.4" },
+        { q: "Which group has FEWER?", visual: null, answers: ["⭐⭐⭐","⭐⭐⭐⭐","⭐⭐","⭐⭐⭐⭐⭐"],     correct: "⭐⭐",      standard:"PK.NS.4" },
+        { q: "Which group has MORE?",  visual: null, answers: ["🐸🐸🐸","🐸","🐸🐸🐸🐸","🐸🐸"],        correct: "🐸🐸🐸🐸",  standard:"PK.NS.4" },
+        { q: "Which group has FEWER?", visual: null, answers: ["🍭🍭🍭","🍭🍭🍭🍭","🍭","🍭🍭"],         correct: "🍭",        standard:"PK.NS.4" },
+        { q: "5 is ? than 3",          visual: null, answers: ["greater","equal","less","none"],       correct: "greater",   standard:"PK.NS.4" },
+        { q: "2 is ? than 4",          visual: null, answers: ["greater","equal","less","none"],       correct: "less",      standard:"PK.NS.4" },
+        { q: "3 is ? than 3",          visual: null, answers: ["greater","equal","less","none"],       correct: "equal",     standard:"PK.NS.4" },
+        { q: "7 is ? than 9",          visual: null, answers: ["greater","equal","less","none"],       correct: "less",      standard:"PK.NS.4" },
       ]
     },
 
