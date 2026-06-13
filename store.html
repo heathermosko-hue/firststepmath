@@ -1237,6 +1237,38 @@
 
         // Snap pet/acc/food onto a home if dropped inside it;
         // also snap accessories onto pets (dress-up)
+
+        // xFrac/yFrac: where the CENTER of the 60px accessory img aligns on the pet.
+        // xFrac=0.5 → horizontal center of acc at horizontal center of pet.
+        // yFrac=0   → center of acc at top edge of pet (head).
+        // yFrac=0.5 → center of acc at mid-pet (body).
+        // yFrac=1   → center of acc at bottom of pet (feet).
+        var ACC_SNAP = {
+          'pet-crown':        [0.5,  -0.05],
+          'astronaut-helmet': [0.5,   0.05],
+          'bow-headband':     [0.5,  -0.02],
+          'hero-mask':        [0.5,   0.25],
+          'pet-sunglasses':   [0.5,   0.25],
+          'heart-sunglasses': [0.5,   0.25],
+          'superhero-cape':   [0.2,   0.3 ],
+          'butterfly-wings':  [-0.05, 0.2 ],
+          'cozy-sweater':     [0.3,   0.35],
+          'pet-raincoat':     [0.3,   0.3 ],
+          'tutu':             [0.3,   0.55],
+          'bandana':          [0.5,   0.32],
+          'pearl-collar':     [0.5,   0.32],
+          'collar-leash':     [0.5,   0.35],
+          'tiny-backpack':    [0.7,   0.25],
+          'treat-pouch':      [0.7,   0.4 ],
+          'purse':            [0.75,  0.35],
+          'grooming-kit':     [0.65,  0.15],
+          'bubble-wand':      [0.75,  0.35],
+          'squeaky-toy':      [0.7,   0.3 ],
+          'robo-charger':     [0.7,   0.25],
+          'rain-boots':       [0.35,  0.75],
+          'roller-skates':    [0.3,   0.78],
+        };
+
         function trySnap(droppedId, droppedEl, droppedLayer, scRect) {
           if (droppedLayer === 'home') return;
           var dr = droppedEl.getBoundingClientRect();
@@ -1251,20 +1283,34 @@
             droppedEl.style.top  = snapY + '%';
             attach[droppedId] = parentId;
             saveAttach(attach);
-            droppedEl.style.transition = 'left 0.2s, top 0.2s';
-            setTimeout(function() { droppedEl.style.transition = ''; }, 250);
+            droppedEl.style.transition = 'left 0.25s, top 0.25s';
+            setTimeout(function() { droppedEl.style.transition = ''; }, 300);
             return { x: snapX, y: snapY };
           }
 
-          // Snap accessory onto a pet (dress-up) — keep wherever dropped
+          // Snap accessory onto a pet — snap to correct body part
           if (droppedLayer === 'acc') {
+            var itemId   = droppedId.substring(4); // strip 'acc_'
+            var isToy    = itemId.indexOf('toy-') === 0;
+            var frac     = ACC_SNAP[itemId] || [0.35, 0.3]; // default: upper-body
             var pets = scene.querySelectorAll('[data-layer="pet"]');
             for (var j = 0; j < pets.length; j++) {
               var pr = pets[j].getBoundingClientRect();
               if (cx >= pr.left && cx <= pr.right && cy >= pr.top && cy <= pr.bottom) {
-                var sx = parseFloat(droppedEl.style.left);
-                var sy = parseFloat(droppedEl.style.top);
-                return doSnap(sx, sy, pets[j].dataset.itemId);
+                var petId = pets[j].dataset.itemId;
+                if (isToy) {
+                  // toys just stay wherever the child drops them near the pet
+                  var sx = parseFloat(droppedEl.style.left);
+                  var sy = parseFloat(droppedEl.style.top);
+                  return doSnap(sx, sy, petId);
+                }
+                // place acc so its center lands at (frac[0], frac[1]) of the pet rect
+                var accHalf = 30; // half of 60px acc image
+                var snapXpx = (pr.left - scRect.left) + pr.width  * frac[0] - accHalf;
+                var snapYpx = (pr.top  - scRect.top)  + pr.height * frac[1] - accHalf;
+                var snapX   = snapXpx / scRect.width  * 100;
+                var snapY   = snapYpx / scRect.height * 100;
+                return doSnap(snapX, snapY, petId);
               }
             }
           }
