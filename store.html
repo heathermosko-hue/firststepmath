@@ -567,9 +567,28 @@
   <div class="toast" id="toast"></div>
   <script src="js/tts.js"></script>
   <script>
+  /* Hamburger nav for mobile */
+  (function(){
+    const hb = document.getElementById('hamburger');
+    const mn = document.getElementById('mainNav');
+    if (hb && mn) {
+      hb.addEventListener('click', function(){
+        const open = mn.style.display === 'flex';
+        if (open) { mn.removeAttribute('style'); }
+        else { Object.assign(mn.style, {display:'flex',flexDirection:'column',position:'absolute',top:'68px',left:'0',right:'0',background:'#fff',padding:'16px 24px',boxShadow:'0 8px 20px rgba(0,0,0,0.1)',zIndex:'99'}); }
+      });
+    }
+  })();
+  </script>
+  <script>
   (() => {
     const MONEY_KEY = 'fsm_dollars';
     const PURCH_KEY = 'fsm_purchases';
+
+    /* ?money=1 in URL → load $99.99 for testing */
+    if (new URLSearchParams(location.search).get('money') === '1') {
+      localStorage.setItem(MONEY_KEY, '99.99');
+    }
 
     const BG = [
       '#fef9c3','#ede9fe','#dbeafe','#dcfce7','#fce7f3',
