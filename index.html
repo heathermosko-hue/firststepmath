@@ -20,10 +20,10 @@
         <a href="about.html" class="nav-link">About</a>
         <a href="worksheets.html" class="nav-link">📄 Worksheets</a>
         <a href="store.html" class="nav-link nav-link-store">🛒 Toy Store</a>
-        <a href="login.html" class="btn btn-outline" id="desktopSignBtn">Sign In</a>
+        <a href="#" class="btn btn-outline" id="desktopSignBtn" onclick="window._openLoginModal(event)">Sign In</a>
         <a href="#grades" class="btn btn-primary">Get Started Free</a>
       </nav>
-      <a href="login.html" class="mobile-signin-btn" id="mobileSignBtn">Sign In</a>
+      <a href="#" class="mobile-signin-btn" id="mobileSignBtn" onclick="window._openLoginModal(event)">Sign In</a>
       <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
     </div>
   </header>
@@ -261,6 +261,7 @@
     var modal = document.getElementById('loginModal');
     function openModal() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
     function closeModal() { modal.style.display = 'none'; document.body.style.overflow = ''; }
+    window._openLoginModal = function(e) { if (e) e.preventDefault(); openModal(); };
     document.getElementById('loginModalClose').addEventListener('click', closeModal);
     modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
 
