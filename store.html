@@ -457,7 +457,35 @@
     <!-- ══════════ TOYS ══════════ -->
     <div class="store-section" id="tab-toys">
       <div class="section-title">🚀 Toys &amp; Games</div>
-      <div class="store-grid" id="toysGrid"></div>
+
+      <div class="pet-care-tabs" id="toyCatTabs">
+        <button class="pet-care-tab active" data-toy-cat="active">🫧 Active</button>
+        <button class="pet-care-tab" data-toy-cat="games">🧩 Games</button>
+        <button class="pet-care-tab" data-toy-cat="vehicles">🚗 Vehicles</button>
+        <button class="pet-care-tab" data-toy-cat="bigtoys">🤖 Big Toys</button>
+        <button class="pet-care-tab" data-toy-cat="stuffies">🧸 Stuffies</button>
+      </div>
+
+      <div class="pet-care-section active" id="toy-active">
+        <div class="section-title" style="font-size:1.3rem">🫧 Active Toys</div>
+        <div class="store-grid" id="toysActiveGrid"></div>
+      </div>
+      <div class="pet-care-section" id="toy-games">
+        <div class="section-title" style="font-size:1.3rem">🧩 Games &amp; Puzzles</div>
+        <div class="store-grid" id="toysGamesGrid"></div>
+      </div>
+      <div class="pet-care-section" id="toy-vehicles">
+        <div class="section-title" style="font-size:1.3rem">🚗 Vehicles</div>
+        <div class="store-grid" id="toysVehiclesGrid"></div>
+      </div>
+      <div class="pet-care-section" id="toy-bigtoys">
+        <div class="section-title" style="font-size:1.3rem">🤖 Big Toys</div>
+        <div class="store-grid" id="toysBigGrid"></div>
+      </div>
+      <div class="pet-care-section" id="toy-stuffies">
+        <div class="section-title" style="font-size:1.3rem">🧸 Stuffies</div>
+        <div class="store-grid" id="toysStuffiesGrid"></div>
+      </div>
     </div>
 
     <!-- ══════════ COLLECTION ══════════ -->
@@ -537,17 +565,16 @@
 
     // ── PETS ──────────────────────────────────────────
     const PETS = [
-      { id:'puppy-plush', num:1,  name:'Puppy Plush',   emoji:'🐶', img:'img/store/puppy-plush.png', price:0.50, desc:'Soft • Cuddly • Fun!'    },
-      { id:'kitty-plush', num:2,  name:'Kitty Plush',   emoji:'🐱', img:'img/store/kitty-plush.png', price:0.50, desc:'Soft • Sweet • Fun!'     },
-      { id:'puppy-pet',   num:3,  name:'Puppy Pal',     emoji:'🐶', img:'img/store/puppy-pet.png',   price:0.55, desc:'Woof • Play • Cuddle!'   },
-      { id:'kitty-pet',   num:4,  name:'Kitty Pal',     emoji:'🐱', img:'img/store/kitty-pet.png',   price:0.55, desc:'Meow • Purr • Play!'     },
-      { id:'robo-dog',    num:5,  name:'Robo Dog',      emoji:'🤖', img:'img/store/robo-dog.png',    price:0.70, desc:'Fetch • Beep • Play!'    },
-      { id:'robo-cat',    num:6,  name:'Robo Cat',      emoji:'🐱', img:'img/store/robo-cat.png',    price:0.70, desc:'Purr • Beep • Play!'     },
-      { id:'hamster',     num:7,  name:'Hamster Pal',   emoji:'🐹', img:'img/store/hamster.png',     price:0.55, desc:'Scurry • Nibble • Play!' },
-      { id:'bunny',       num:8,  name:'Bunny Pal',     emoji:'🐰', img:'img/store/bunny.png',       price:0.60, desc:'Hop • Snuggle • Nibble!' },
-      { id:'fishpet',     num:9,  name:'Goldfish Pal',  emoji:'🐟', img:'img/store/fishpet.png',     price:0.65, desc:'Swim • Splash • Shine!'  },
-      { id:'alien',       num:10, name:'Alien Pal',     emoji:'👽', img:'img/store/alien.png',       price:0.80, desc:'Glow • Wave • Play!'     },
-      { id:'dino',        num:11, name:'Dino Pal',      emoji:'🦕', img:'img/store/dino.png',        price:0.90, desc:'Roar • Stomp • Play!'    },
+      { id:'fishpet',     num:1,  name:'Goldfish Pal',  emoji:'🐟', img:'img/store/fishpet.png',     price:1.00,  desc:'Swim • Splash • Shine!'  },
+      { id:'turtle',      num:2,  name:'Turtle Pal',    emoji:'🐢',                                  price:5.00,  desc:'Swim • Slow • Steady!'   },
+      { id:'hamster',     num:3,  name:'Hamster Pal',   emoji:'🐹', img:'img/store/hamster.png',     price:10.00, desc:'Scurry • Nibble • Play!' },
+      { id:'bunny',       num:4,  name:'Bunny Pal',     emoji:'🐰', img:'img/store/bunny.png',       price:15.00, desc:'Hop • Snuggle • Nibble!' },
+      { id:'robo-dog',    num:5,  name:'Robo Dog',      emoji:'🤖', img:'img/store/robo-dog.png',    price:15.00, desc:'Fetch • Beep • Play!'    },
+      { id:'robo-cat',    num:6,  name:'Robo Cat',      emoji:'🐱', img:'img/store/robo-cat.png',    price:15.00, desc:'Purr • Beep • Play!'     },
+      { id:'puppy-pet',   num:7,  name:'Puppy Pal',     emoji:'🐶', img:'img/store/puppy-pet.png',   price:20.00, desc:'Woof • Play • Cuddle!'   },
+      { id:'kitty-pet',   num:8,  name:'Kitty Pal',     emoji:'🐱', img:'img/store/kitty-pet.png',   price:20.00, desc:'Meow • Purr • Play!'     },
+      { id:'alien',       num:9,  name:'Alien Pal',     emoji:'👽', img:'img/store/alien.png',       price:25.00, desc:'Glow • Wave • Play!'     },
+      { id:'dino',        num:10, name:'Dino Pal',      emoji:'🦕', img:'img/store/dino.png',        price:25.00, desc:'Roar • Stomp • Play!'    },
     ];
 
     // ── FOOD ──────────────────────────────────────────
@@ -586,15 +613,22 @@
 
     // ── TOYS ──────────────────────────────────────────
     const TOYS = [
-      { id:'racecar',     num:1,  name:'Race Car',        emoji:'🏎️', img:'img/store/racecar.png',    price:0.60, desc:'Zoom • Play • Go!'        },
-      { id:'playground',  num:2,  name:'Mini Playground', emoji:'🛝', img:'img/store/playground.png', price:0.80, desc:'Slide • Climb • Play!'     },
-      { id:'puzzle',      num:3,  name:'Puzzle Box',      emoji:'🧩', img:'img/store/puzzle.png',     price:0.65, desc:'Match • Solve • Play!'     },
-      { id:'yoyo',        num:4,  name:'Light-Up Yo-Yo',  emoji:'🪀', img:'img/store/yoyo.png',       price:0.45, desc:'Spin • Swing • Fun!'       },
-      { id:'bubbles',     num:5,  name:'Bubble Wand',     emoji:'🫧', img:'img/store/bubbles.png',    price:0.40, desc:'Blow • Pop • Play!'        },
-      { id:'bnet',        num:6,  name:'Butterfly Net',   emoji:'🦋', img:'img/store/bnet.png',       price:0.50, desc:'Swish • Catch • Play!'     },
-      { id:'fishbowl',    num:7,  name:'Fish Bowl',       emoji:'🐠', img:'img/store/fishbowl.png',   price:0.70, desc:'Splash • Swim • Smile!'    },
-      { id:'train',       num:8,  name:'Toy Train',       emoji:'🚂', img:'img/store/train.png',      price:0.90, desc:'Choo • Choo • Play!'       },
-      { id:'robot',       num:9,  name:'Robot Pal',        emoji:'🤖', img:'img/store/robot.png',      price:0.75, desc:'Beep • Glow • Play!'       },
+      // Active ($1–$2)
+      { id:'bubbles',     num:1,  cat:'active',   name:'Bubble Wand',     emoji:'🫧', img:'img/store/bubbles.png',     price:1.00, desc:'Blow • Pop • Play!'        },
+      { id:'yoyo',        num:2,  cat:'active',   name:'Light-Up Yo-Yo',  emoji:'🪀', img:'img/store/yoyo.png',        price:2.00, desc:'Spin • Swing • Fun!'       },
+      { id:'bnet',        num:3,  cat:'active',   name:'Butterfly Net',   emoji:'🦋', img:'img/store/bnet.png',        price:2.00, desc:'Swish • Catch • Play!'     },
+      // Games ($3)
+      { id:'puzzle',      num:4,  cat:'games',    name:'Puzzle Box',      emoji:'🧩', img:'img/store/puzzle.png',      price:3.00, desc:'Match • Solve • Play!'     },
+      { id:'fishbowl',    num:5,  cat:'games',    name:'Fish Bowl Game',  emoji:'🐠', img:'img/store/fishbowl.png',    price:3.00, desc:'Splash • Swim • Smile!'    },
+      // Vehicles ($3–$4)
+      { id:'racecar',     num:6,  cat:'vehicles', name:'Race Car',        emoji:'🏎️', img:'img/store/racecar.png',     price:3.00, desc:'Zoom • Play • Go!'         },
+      { id:'train',       num:7,  cat:'vehicles', name:'Toy Train',       emoji:'🚂', img:'img/store/train.png',       price:4.00, desc:'Choo • Choo • Play!'       },
+      // Big Toys ($4–$5)
+      { id:'robot',       num:8,  cat:'bigtoys',  name:'Robot Pal',       emoji:'🤖', img:'img/store/robot.png',       price:4.00, desc:'Beep • Glow • Play!'       },
+      { id:'playground',  num:9,  cat:'bigtoys',  name:'Mini Playground', emoji:'🛝', img:'img/store/playground.png',  price:5.00, desc:'Slide • Climb • Play!'     },
+      // Stuffies ($5)
+      { id:'puppy-plush', num:10, cat:'stuffies', name:'Puppy Stuffy',    emoji:'🐶', img:'img/store/puppy-plush.png', price:5.00, desc:'Soft • Cuddly • Fun!'      },
+      { id:'kitty-plush', num:11, cat:'stuffies', name:'Kitty Stuffy',    emoji:'🐱', img:'img/store/kitty-plush.png', price:5.00, desc:'Soft • Sweet • Fun!'       },
     ];
 
     // ── STATE ──────────────────────────────────────────
@@ -724,22 +758,36 @@
     }
 
     function renderAll() {
-      fillGrid('petsGrid',  PETS,        false);
-      fillGrid('toysGrid',  TOYS,        false);
-      fillGrid('foodGrid',  FOOD,        true);
-      fillGrid('accessGrid',ACCESSORIES, false);
-      fillGrid('bedsGrid',  BEDS,        false);
+      fillGrid('petsGrid',        PETS,                          false);
+      fillGrid('toysActiveGrid',  TOYS.filter(t=>t.cat==='active'),   false);
+      fillGrid('toysGamesGrid',   TOYS.filter(t=>t.cat==='games'),    false);
+      fillGrid('toysVehiclesGrid',TOYS.filter(t=>t.cat==='vehicles'), false);
+      fillGrid('toysBigGrid',     TOYS.filter(t=>t.cat==='bigtoys'),  false);
+      fillGrid('toysStuffiesGrid',TOYS.filter(t=>t.cat==='stuffies'), false);
+      fillGrid('foodGrid',        FOOD,                          true);
+      fillGrid('accessGrid',      ACCESSORIES,                   false);
+      fillGrid('bedsGrid',        BEDS,                          false);
       renderOwnedPets();
       renderCollection();
     }
 
     // ── PET CARE TABS ─────────────────────────────────
-    document.querySelectorAll('.pet-care-tab').forEach(btn => {
+    document.querySelectorAll('#tab-pet-care .pet-care-tab').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.pet-care-tab').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.pet-care-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('#tab-pet-care .pet-care-tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#tab-pet-care .pet-care-section').forEach(s => s.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById('care-' + btn.dataset.care).classList.add('active');
+      });
+    });
+
+    // ── TOY CATEGORY TABS ─────────────────────────────
+    document.querySelectorAll('#toyCatTabs .pet-care-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#toyCatTabs .pet-care-tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#tab-toys .pet-care-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('toy-' + btn.dataset.toyCat).classList.add('active');
       });
     });
 
