@@ -261,17 +261,17 @@
     const clearSession = () => sessionStorage.removeItem(SESSION_KEY);
     const genCode = () => 'FSM-' + Math.random().toString(36).substr(2,5).toUpperCase();
 
-    /* Ensure Heather's admin account always exists */
+    /* Ensure Heather's admin account always exists with correct password */
     (function seedAdmin() {
       const users = getUsers();
-      if (!users.find(u => u.email === 'heathermosko@gmail.com')) {
-        users.push({ email:'heathermosko@gmail.com', password:'FirstStep1!', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
-        saveUsers(users);
+      const hi = users.findIndex(u => u.email === 'heathermosko@gmail.com');
+      if (hi < 0) {
+        users.push({ email:'heathermosko@gmail.com', password:'Ross1101', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
+      } else {
+        users[hi].password = 'Ross1101';
       }
-      /* Give store $99.99 for testing if balance is $0 */
-      if (!localStorage.getItem('fsm_dollars') || parseFloat(localStorage.getItem('fsm_dollars')) < 1) {
-        localStorage.setItem('fsm_dollars', '99.99');
-      }
+      saveUsers(users);
+      localStorage.setItem('fsm_dollars', '9999.99');
     })();
 
     /* ── Tab switching ── */
