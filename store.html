@@ -323,6 +323,40 @@
       75%     { transform:translateX(-7px) rotate(-6deg); }
     }
     .fish-swimming { animation:fishSwim 2.4s ease-in-out infinite; }
+
+    /* ── Pet click animations ── */
+    .world-sticker.pet-clicking { pointer-events:none; }
+    @keyframes pa-swim    { 0%{transform:translateX(0) rotate(0)} 20%{transform:translateX(28px) rotate(10deg)} 50%{transform:translateX(-30px) rotate(-10deg)} 80%{transform:translateX(20px) rotate(6deg)} 100%{transform:translateX(0) rotate(0)} }
+    @keyframes pa-hop     { 0%{transform:translateY(0) scaleX(1)} 25%{transform:translateY(-38px) scaleX(0.88)} 50%{transform:translateY(5px) scaleX(1.15)} 65%{transform:translateY(-18px) scaleX(0.93)} 82%{transform:translateY(3px) scaleX(1.06)} 100%{transform:translateY(0) scaleX(1)} }
+    @keyframes pa-waddle  { 0%{transform:rotate(0) translateY(0)} 18%{transform:rotate(-12deg) translateY(-6px)} 36%{transform:rotate(12deg) translateY(-6px)} 54%{transform:rotate(-12deg) translateY(-6px)} 72%{transform:rotate(12deg) translateY(-6px)} 100%{transform:rotate(0) translateY(0)} }
+    @keyframes pa-swing   { 0%{transform:rotate(0);transform-origin:top center} 25%{transform:rotate(28deg);transform-origin:top center} 75%{transform:rotate(-28deg);transform-origin:top center} 100%{transform:rotate(0);transform-origin:top center} }
+    @keyframes pa-slither { 0%{transform:translateX(0) rotate(0)} 15%{transform:translateX(22px) rotate(15deg)} 35%{transform:translateX(-22px) rotate(-15deg)} 55%{transform:translateX(22px) rotate(15deg)} 75%{transform:translateX(-15px) rotate(-8deg)} 100%{transform:translateX(0) rotate(0)} }
+    @keyframes pa-stomp   { 0%{transform:translateY(0) scaleY(1)} 18%{transform:translateY(-24px) scaleY(1.06)} 34%{transform:translateY(6px) scaleY(0.88)} 50%{transform:translateY(-14px) scaleY(1.03)} 66%{transform:translateY(4px) scaleY(0.94)} 84%{transform:translateY(-5px)} 100%{transform:translateY(0) scaleY(1)} }
+    @keyframes pa-scurry  { 0%{transform:translate(0,0)} 10%{transform:translate(12px,-7px)} 20%{transform:translate(-12px,-7px)} 30%{transform:translate(16px,-9px)} 40%{transform:translate(-16px,-9px)} 55%{transform:translate(12px,-6px)} 70%{transform:translate(-12px,-6px)} 85%{transform:translate(6px,-2px)} 100%{transform:translate(0,0)} }
+    @keyframes pa-flutter { 0%{transform:translateY(0) scaleX(1)} 18%{transform:translateY(-18px) scaleX(0.78)} 36%{transform:translateY(-28px) scaleX(1.05)} 54%{transform:translateY(-18px) scaleX(0.78)} 72%{transform:translateY(-7px) scaleX(1)} 100%{transform:translateY(0) scaleX(1)} }
+    @keyframes pa-gallop  { 0%{transform:translateY(0) rotate(0)} 15%{transform:translateY(-24px) rotate(-7deg)} 30%{transform:translateY(5px) rotate(7deg)} 45%{transform:translateY(-16px) rotate(-5deg)} 60%{transform:translateY(3px) rotate(5deg)} 75%{transform:translateY(-8px) rotate(-2deg)} 100%{transform:translateY(0) rotate(0)} }
+    @keyframes pa-float   { 0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} 25%{transform:translateY(-20px) scale(1.1);filter:drop-shadow(0 0 14px #a78bfa)} 55%{transform:translateY(-32px) scale(1.05);filter:drop-shadow(0 0 20px #7c3aed)} 80%{transform:translateY(-18px) scale(0.96);filter:drop-shadow(0 0 10px #a78bfa)} 100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} }
+    @keyframes pa-march   { 0%{transform:translateY(0) rotate(0)} 12%{transform:translateY(-11px) rotate(-5deg)} 25%{transform:translateY(0) rotate(5deg)} 37%{transform:translateY(-11px) rotate(-5deg)} 50%{transform:translateY(0) rotate(5deg)} 62%{transform:translateY(-11px) rotate(-5deg)} 75%{transform:translateY(0) rotate(5deg)} 88%{transform:translateY(-5px) rotate(-2deg)} 100%{transform:translateY(0) rotate(0)} }
+    @keyframes pa-roll    { 0%{transform:rotate(0) translateX(0)} 40%{transform:rotate(360deg) translateX(26px)} 70%{transform:rotate(540deg) translateX(10px)} 100%{transform:rotate(720deg) translateX(0)} }
+    @keyframes pa-prowl   { 0%{transform:translateX(0) scaleY(1)} 28%{transform:translateX(30px) scaleY(0.91)} 52%{transform:translateX(46px) scaleY(1)} 74%{transform:translateX(20px) scaleY(0.91)} 100%{transform:translateX(0) scaleY(1)} }
+    @keyframes pa-peck    { 0%{transform:rotate(0) translateY(0)} 14%{transform:rotate(20deg) translateY(7px)} 28%{transform:rotate(0) translateY(0)} 42%{transform:rotate(20deg) translateY(7px)} 56%{transform:rotate(0) translateY(0)} 70%{transform:rotate(20deg) translateY(7px)} 100%{transform:rotate(0) translateY(0)} }
+    @keyframes pa-sneak   { 0%{transform:translateX(0) scaleY(1)} 20%{transform:translateX(14px) scaleY(0.85)} 40%{transform:translateX(30px) scaleY(0.85)} 60%{transform:translateX(16px) scaleY(0.85)} 80%{transform:translateX(0) scaleY(1)} 90%{transform:translateX(-8px) scaleY(1.05)} 100%{transform:translateX(0) scaleY(1)} }
+    .pa-swim    { animation:pa-swim    1.3s ease-in-out !important; }
+    .pa-hop     { animation:pa-hop     0.9s ease-in-out !important; }
+    .pa-waddle  { animation:pa-waddle  1.0s ease-in-out !important; }
+    .pa-swing   { animation:pa-swing   1.1s ease-in-out !important; }
+    .pa-slither { animation:pa-slither 1.3s ease-in-out !important; }
+    .pa-stomp   { animation:pa-stomp   0.85s ease-in-out !important; }
+    .pa-scurry  { animation:pa-scurry  0.75s ease-in-out !important; }
+    .pa-flutter { animation:pa-flutter 1.0s ease-in-out !important; }
+    .pa-gallop  { animation:pa-gallop  0.85s ease-in-out !important; }
+    .pa-float   { animation:pa-float   1.6s ease-in-out !important; }
+    .pa-march   { animation:pa-march   0.95s ease-in-out !important; }
+    .pa-roll    { animation:pa-roll    1.1s ease-in-out !important; }
+    .pa-prowl   { animation:pa-prowl   1.25s ease-in-out !important; }
+    .pa-peck    { animation:pa-peck    1.0s ease-in-out !important; }
+    .pa-sneak   { animation:pa-sneak   1.2s ease-in-out !important; }
+
     @keyframes petPopIn {
       0%   { transform:scale(0) rotate(-15deg); opacity:0; }
       70%  { transform:scale(1.15) rotate(3deg); opacity:1; }
@@ -1244,9 +1278,32 @@
             });
           }
 
-          // Fish pet: gentle swim animation
-          if (layer === 'pet' && item.id === 'fishpet') {
-            sticker.classList.add('fish-swimming');
+          // Fish: continuous swim + all pets: click-to-animate
+          if (layer === 'pet') {
+            if (item.id === 'fishpet') sticker.classList.add('fish-swimming');
+            var PET_ANIM = {
+              'fishpet':'swim','turtle':'waddle','duck':'waddle','hamster':'scurry',
+              'owl':'flutter','hedgehog':'roll','lamb':'hop','bunny':'hop',
+              'ferret':'slither','monkey':'swing','piggy':'waddle','parrot':'flutter',
+              'robo-dog':'march','robo-cat':'march','puppy-pet':'gallop',
+              'kitty-pet':'prowl','pony':'gallop','alien':'float','dino':'stomp',
+              'chicken':'peck','snake':'slither','lizard':'scurry','cow':'stomp',
+              'goat':'hop','gator':'stomp','frog':'hop'
+            };
+            var _petMoved = false;
+            sticker.addEventListener('mousedown', function(){ _petMoved = false; }, true);
+            sticker.addEventListener('mousemove', function(){ _petMoved = true; }, true);
+            sticker.addEventListener('touchstart', function(){ _petMoved = false; }, { passive:true, capture:true });
+            sticker.addEventListener('touchmove',  function(){ _petMoved = true;  }, { passive:true, capture:true });
+            sticker.addEventListener('click', function() {
+              if (_petMoved) return;
+              var anim = PET_ANIM[item.id];
+              if (!anim || sticker.classList.contains('pet-clicking')) return;
+              sticker.classList.add('pet-clicking', 'pa-' + anim);
+              sticker.addEventListener('animationend', function() {
+                sticker.classList.remove('pet-clicking', 'pa-' + anim);
+              }, { once: true });
+            });
           }
 
           // Toy tap: bounce animation
