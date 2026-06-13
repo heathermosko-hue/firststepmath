@@ -784,6 +784,101 @@ function showEndScreen() {
   document.getElementById('endScore').textContent  = `You got ${score} out of ${total} correct! (${pct}%) — Earned $${earned}!`;
   document.getElementById('endScreen').style.display = 'flex';
   speakText(title.replace(/[^\w\s!]/g, ''));
+  setTimeout(showStorePrompt, 1800);
+}
+
+function showStorePrompt() {
+  var raw = localStorage.getItem('fsm_purchases');
+  var purchases = {};
+  try {
+    var parsed = JSON.parse(raw || '{}');
+    if (Array.isArray(parsed)) { parsed.forEach(function(id) { purchases[id] = 1; }); }
+    else { purchases = parsed; }
+  } catch(e) {}
+  function owns(id) { return (purchases[id] || 0) > 0; }
+
+  var PET_INFO = {
+    'fishpet':  { emoji:'🐟', name:'Goldfish', food:'fish-food',    bed:'fish-tank'  },
+    'turtle':   { emoji:'🐢', name:'Turtle',   food:null,           bed:null         },
+    'hamster':  { emoji:'🐹', name:'Hamster',  food:'hamster-food', bed:'pet-bed'    },
+    'bunny':    { emoji:'🐰', name:'Bunny',     food:'bunny-food',   bed:'pet-bed'    },
+    'robo-dog': { emoji:'🤖', name:'Robo Dog', food:'robot-fuel',   bed:'doghouse'   },
+    'robo-cat': { emoji:'🐱', name:'Robo Cat', food:'robot-fuel',   bed:'cat-tree'   },
+    'puppy-pet':{ emoji:'🐶', name:'Puppy',    food:'dog-food',     bed:'doghouse'   },
+    'kitty-pet':{ emoji:'🐱', name:'Kitty',    food:'cat-food',     bed:'cat-tree'   },
+    'alien':    { emoji:'👽', name:'Alien',     food:'alien-food',   bed:'space-pod'  },
+    'dino':     { emoji:'🦕', name:'Dino',      food:'dino-food',    bed:'pet-bed'    },
+  };
+  var TOY_TEASER = [
+    { id:'bubbles',    emoji:'🫧', name:'Bubble Wand'     },
+    { id:'puzzle',     emoji:'🧩', name:'Puzzle Box'      },
+    { id:'racecar',    emoji:'🏎️', name:'Race Car'        },
+    { id:'train',      emoji:'🚂', name:'Toy Train'       },
+    { id:'robot',      emoji:'🤖', name:'Robot Pal'       },
+    { id:'playground', emoji:'🛝', name:'Mini Playground' },
+    { id:'puppy-plush',emoji:'🐶', name:'Puppy Stuffy'   },
+    { id:'kitty-plush',emoji:'🐱', name:'Kitty Stuffy'   },
+  ];
+
+  var ownedPetIds = Object.keys(PET_INFO).filter(owns);
+  var hasBed = ['pet-bed','pet-carrier','doghouse','cat-tree','fish-tank','space-pod'].some(owns);
+  var hasAccess = ['collar-leash','squeaky-toy','blue-bow','party-hat','sunglasses','star-tag','pet-ball','robo-charger'].some(owns);
+
+  var emoji, title, body, href;
+
+  if (ownedPetIds.length > 0) {
+    // Check for a hungry pet first
+    var hungryId = ownedPetIds.find(function(id) {
+      return PET_INFO[id].food && !owns(PET_INFO[id].food);
+    });
+    if (hungryId) {
+      var p = PET_INFO[hungryId];
+      emoji = p.emoji; title = p.name + ' is hungry! 🍖';
+      body  = 'Keep playing to earn money and buy ' + p.name + ' some food!';
+      href  = 'store.html';
+    } else if (!hasBed) {
+      var p2 = PET_INFO[ownedPetIds[0]];
+      emoji = p2.emoji; title = p2.name + ' needs a home! 🏠';
+      body  = 'Keep playing to earn money and get ' + p2.name + ' a cozy place!';
+      href  = 'store.html';
+    } else if (!hasAccess) {
+      var p3 = PET_INFO[ownedPetIds[0]];
+      emoji = p3.emoji; title = p3.name + ' wants to play! 🎀';
+      body  = 'Keep playing to earn money for accessories!';
+      href  = 'store.html';
+    } else {
+      // Pet is well cared-for — nudge toward toys
+      var missing = TOY_TEASER.find(function(t) { return !owns(t.id); });
+      if (!missing) return;
+      emoji = missing.emoji; title = missing.name + ' is waiting for you! 🚀';
+      body  = 'Keep playing to earn money and grab it at the Toy Store!';
+      href  = 'store.html';
+    }
+  } else {
+    // No pets yet — pick a missing toy or nudge toward the pet shop
+    var missingToy = TOY_TEASER.find(function(t) { return !owns(t.id); });
+    if (missingToy && Object.keys(purchases).length > 0) {
+      emoji = missingToy.emoji; title = missingToy.name + ' is in the store! 🚀';
+      body  = 'Keep playing to earn money and add it to your collection!';
+      href  = 'store.html';
+    } else {
+      emoji = '🐾'; title = 'Adopt your first pet! 🐾';
+      body  = 'Answer questions, earn money, and visit the Pet Shop!';
+      href  = 'store.html';
+    }
+  }
+
+  var prompt = document.getElementById('storePrompt');
+  if (!prompt) return;
+  document.getElementById('storePromptEmoji').textContent = emoji;
+  document.getElementById('storePromptTitle').textContent = title;
+  document.getElementById('storePromptBody').textContent  = body;
+  document.getElementById('storePromptBtn').href = href;
+
+  prompt.style.display = 'flex';
+  setTimeout(function() {
+    document.getElementById('storePromptCard').style.transform = 'translateY(0)';
+  }, 30);
 }
 
 function retry() {
