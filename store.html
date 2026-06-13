@@ -989,6 +989,39 @@
             });
           }
 
+          // Bubble wand tap: spawn rising bubbles
+          if (layer === 'acc' && item.id === 'bubble-wand') {
+            var _bubbleMoved = false;
+            sticker.addEventListener('mousedown', function() { _bubbleMoved = false; }, true);
+            sticker.addEventListener('mousemove', function() { _bubbleMoved = true; }, true);
+            sticker.addEventListener('touchstart', function() { _bubbleMoved = false; }, { passive:true, capture:true });
+            sticker.addEventListener('touchmove', function() { _bubbleMoved = true; }, { passive:true, capture:true });
+            sticker.addEventListener('click', function(e) {
+              if (_bubbleMoved) return;
+              var rect = sticker.getBoundingClientRect();
+              var scRect = scene.getBoundingClientRect();
+              var cx = rect.left - scRect.left + rect.width / 2;
+              var cy = rect.top  - scRect.top  + rect.height / 2;
+              var BUBBLES = ['🫧','🫧','🫧','⭕','🔵','🟣','🟤'];
+              for (var b = 0; b < 8; b++) {
+                var el = document.createElement('span');
+                el.className = 'food-particle';
+                el.style.fontSize = (0.9 + Math.random() * 0.9) + 'rem';
+                var spread = (Math.random() - 0.5) * 80;
+                var rise = 60 + Math.random() * 80;
+                el.style.left = (cx - 10 + spread * 0.3) + 'px';
+                el.style.top  = (cy - 10) + 'px';
+                el.style.setProperty('--fx', spread + 'px');
+                el.style.setProperty('--fy', '-' + rise + 'px');
+                el.style.animationDuration = (1.2 + Math.random() * 0.8) + 's';
+                el.style.animationDelay = (b * 0.09) + 's';
+                el.textContent = BUBBLES[Math.floor(Math.random() * BUBBLES.length)];
+                scene.appendChild(el);
+                setTimeout(function(e){ if (e.parentNode) e.parentNode.removeChild(e); }, 2200, el);
+              }
+            });
+          }
+
           scene.appendChild(sticker);
         });
 
