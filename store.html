@@ -519,9 +519,10 @@
 
     /* Coin colors */
     .coin-dollar  { background:radial-gradient(circle at 35% 35%, #4ade80, #15803d); border:3px solid #166534; }
-    .coin-quarter { background:radial-gradient(circle at 35% 35%, #fde68a, #b45309); border:3px solid #92400e; }
+    .coin-quarter { background:radial-gradient(circle at 35% 35%, #e2e8f0, #94a3b8); border:3px solid #64748b; }
     .coin-dime    { background:radial-gradient(circle at 35% 35%, #e2e8f0, #64748b); border:3px solid #475569; width:58px; height:58px; }
     .coin-nickel  { background:radial-gradient(circle at 35% 35%, #d4d4d4, #737373); border:3px solid #525252; }
+    .coin-penny   { background:radial-gradient(circle at 35% 35%, #fde68a, #b45309); border:3px solid #92400e; }
 
     /* Progress bar */
     .register-progress-wrap {
@@ -773,6 +774,19 @@
       }
       saveUsers(users);
       localStorage.setItem(MONEY_KEY, '9999.99');
+      // Pre-own all new items for admin account
+      var rawP = localStorage.getItem(PURCH_KEY);
+      var p = {}; try { var tmp = JSON.parse(rawP||'{}'); if(Array.isArray(tmp)){tmp.forEach(function(id){p[id]=1;});}else{p=tmp;} } catch(e){}
+      var newIds = ['bear','cheetah','tiger','lion','robo-dog',
+        'dino-bowl','bear-food','lion-food','tiger-food','cheetah-food',
+        'spaceship',
+        'acc-soccer-ball','acc-basketball','acc-football','acc-baseball','acc-tennis',
+        'acc-hockey','acc-golf','acc-dumbbells','acc-trophy','acc-pet-trophy',
+        'race-car','paw-race-car','monster-truck','bulldozer','fire-truck',
+        'train-engine','paw-plane','jet-plane','propeller-plane',
+        'rocket-ship','spaceship-acc','ufo'];
+      newIds.forEach(function(id){ if(!p[id]) p[id]=1; });
+      localStorage.setItem(PURCH_KEY, JSON.stringify(p));
     })();
 
     /* ?money=1 in URL → load $99.99 for testing */
@@ -1891,14 +1905,18 @@
     } else {
       dingEmojiEl.textContent = regItem.emoji || '🎉';
     }
-    document.getElementById('dingItemName').textContent = 'You got ' + regItem.name + '!';
+    var VEHICLE_IDS_MSG = ['race-car','paw-race-car','monster-truck','bulldozer','fire-truck','train-engine','paw-plane','jet-plane','propeller-plane','rocket-ship','spaceship-acc','ufo'];
+    var isPet     = PETS.some(function(p){ return p.id === regItem.id; });
+    var isVehicle = VEHICLE_IDS_MSG.indexOf(regItem.id) >= 0;
+    var action    = isPet ? 'You adopted ' : isVehicle ? 'You bought a ' : 'You got ';
+    var dingMsg   = isPet ? 'You adopted ' + regItem.name + '!' : isVehicle ? 'You bought a ' + regItem.name + '!' : 'You got ' + regItem.name + '!';
+    document.getElementById('dingItemName').textContent = dingMsg;
 
-    speakText('Ding! You paid! You got ' + regItem.name + '! Amazing job!');
-    showToast('🎉 You got ' + regItem.name + '!');
+    speakText('Ding! You paid! ' + dingMsg + ' Amazing job!');
+    showToast('🎉 ' + dingMsg);
 
     setTimeout(function() {
-      closeRegister();
-      window.location.reload();
+      window.location.reload(true);
     }, 2200);
   }
 
