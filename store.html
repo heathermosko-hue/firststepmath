@@ -416,7 +416,9 @@
     .register-modal {
       background:#1a3a2a; border-radius:28px; width:100%; max-width:440px;
       box-shadow:0 24px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
-      overflow:hidden; animation:slideUp 0.25s cubic-bezier(0.175,0.885,0.32,1.275);
+      overflow-y:auto; overflow-x:hidden; max-height:calc(100vh - 40px);
+      -webkit-overflow-scrolling:touch;
+      animation:slideUp 0.25s cubic-bezier(0.175,0.885,0.32,1.275);
       border:3px solid #2d5a3e;
     }
     @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
@@ -506,6 +508,14 @@
     }
     .coin-btn .coin-value { font-size:1rem; color:#fff; text-shadow:1px 1px 0 rgba(0,0,0,0.3); }
     .coin-btn .coin-name  { font-size:0.55rem; color:rgba(255,255,255,0.85); text-shadow:1px 1px 0 rgba(0,0,0,0.3); }
+
+    /* Bill style (rectangular) */
+    .coin-btn.bill {
+      width:86px; height:52px; border-radius:10px;
+      font-size:1.1rem;
+    }
+    .coin-btn.bill .coin-value { font-size:1.2rem; }
+    .coin-btn.bill .coin-name  { font-size:0.5rem; }
 
     /* Coin colors */
     .coin-dollar  { background:radial-gradient(circle at 35% 35%, #4ade80, #15803d); border:3px solid #166534; }
@@ -1794,11 +1804,14 @@
 
   function getCoins(cents) {
     const denoms = [
-      { v:100, name:'Dollar',  label:'$1.00', cls:'coin-dollar'  },
-      { v:25,  name:'Quarter', label:'25¢',   cls:'coin-quarter' },
-      { v:10,  name:'Dime',    label:'10¢',   cls:'coin-dime'    },
-      { v:5,   name:'Nickel',  label:'5¢',    cls:'coin-nickel'  },
-      { v:1,   name:'Penny',   label:'1¢',    cls:'coin-penny'   },
+      { v:2000, name:'$20 Bill',  label:'$20',   cls:'coin-dollar',  bill:true },
+      { v:1000, name:'$10 Bill',  label:'$10',   cls:'coin-dollar',  bill:true },
+      { v:500,  name:'$5 Bill',   label:'$5',    cls:'coin-dollar',  bill:true },
+      { v:100,  name:'Dollar',    label:'$1.00', cls:'coin-dollar'  },
+      { v:25,   name:'Quarter',   label:'25¢',   cls:'coin-quarter' },
+      { v:10,   name:'Dime',      label:'10¢',   cls:'coin-dime'    },
+      { v:5,    name:'Nickel',    label:'5¢',    cls:'coin-nickel'  },
+      { v:1,    name:'Penny',     label:'1¢',    cls:'coin-penny'   },
     ];
     const result = [];
     let rem = cents;
@@ -1838,7 +1851,7 @@
     coinsEl.innerHTML = '';
     coins.forEach((coin, idx) => {
       const btn = document.createElement('button');
-      btn.className = 'coin-btn ' + coin.cls;
+      btn.className = 'coin-btn ' + coin.cls + (coin.bill ? ' bill' : '');
       btn.innerHTML = `<span class="coin-value">${coin.label}</span><span class="coin-name">${coin.name}</span>`;
       btn.dataset.value = coin.v;
       btn.addEventListener('click', function() {
