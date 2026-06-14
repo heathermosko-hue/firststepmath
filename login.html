@@ -276,6 +276,14 @@
       localStorage.setItem('fsm_dollars', '9999.99');
     })();
 
+    /* Auto-fill teacher tab with admin credentials so Heather never has to type them */
+    window.addEventListener('DOMContentLoaded', function() {
+      const tEmail = document.getElementById('tEmail');
+      const tPass  = document.getElementById('tPass');
+      if (tEmail) tEmail.value = 'heathermosko@gmail.com';
+      if (tPass)  tPass.value  = 'admin';
+    });
+
     /* ── Tab switching ── */
     document.querySelectorAll('.login-tab').forEach(tab => {
       tab.addEventListener('click', () => {
