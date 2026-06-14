@@ -1275,10 +1275,9 @@
         // Clear & rebuild scene
         scene.innerHTML = '';
         shelf.style.display = 'none';
-        // One-time reset of saved positions so new side-by-side layout takes effect
-        if (!localStorage.getItem('fsm_layout_v3')) {
+        if (!localStorage.getItem('fsm_layout_v4')) {
           localStorage.removeItem('fsm_pet_positions');
-          localStorage.setItem('fsm_layout_v3', '1');
+          localStorage.setItem('fsm_layout_v4', '1');
         }
         var pos = loadPositions();
         var sceneW = scene.offsetWidth  || 700;
@@ -1336,8 +1335,8 @@
             defaultY = zone[2] + (idx % 2) * ((zone[3] - zone[2]) / 2);
           }
           layerCount[layer]++;
-          var p = pos[uid] || { x: defaultX, y: defaultY };
-          // Clamp any saved-off-screen positions back into view
+          // Pets always use calculated positions so they never stack in houses
+          var p = (layer === 'pet') ? { x: defaultX, y: defaultY } : (pos[uid] || { x: defaultX, y: defaultY });
           if (p.x < 0 || p.x > 90 || p.y < 0 || p.y > 88) p = { x: defaultX, y: defaultY };
 
           var sticker = document.createElement('div');
