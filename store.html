@@ -1275,7 +1275,14 @@
         // Clear & rebuild scene
         scene.innerHTML = '';
         shelf.style.display = 'none';
+        // One-time reset of saved positions so new side-by-side layout takes effect
+        if (!localStorage.getItem('fsm_layout_v3')) {
+          localStorage.removeItem('fsm_pet_positions');
+          localStorage.setItem('fsm_layout_v3', '1');
+        }
         var pos = loadPositions();
+        var sceneW = scene.offsetWidth  || 700;
+        var sceneH = scene.offsetHeight || 420;
 
         var layerCount = { home:0, pet:0, food:0, acc:0 };
         var layerTotal = { home:0, pet:0, food:0, acc:0 };
@@ -1302,13 +1309,20 @@
           var tot   = layerTotal[layer] || 1;
           var defaultX, defaultY;
           if (layer === 'pet') {
-            // Pair 2 pets per home, clearly side by side in front of the house
+            // Pair 2 pets per home — pixel-accurate side-by-side placement
             var homeIdx = Math.floor(idx / 2);
             var slot    = idx % 2; // 0 = left, 1 = right
             if (homeIdx < homeEffPos.length) {
-              var hp = homeEffPos[homeIdx];
-              defaultX = hp.x + (slot === 0 ? 1 : 16); // 15% apart so they don't overlap
-              defaultY = hp.y + 38;                     // below the house roof
+              var hp     = homeEffPos[homeIdx];
+              var homePx = hp.x / 100 * sceneW;           // home left edge in px
+              var homeW  = LAYER_SIZE.home;                // 280px
+              var petW   = LAYER_SIZE.pet;                 // 90px
+              var gap    = 12;                             // px between pets
+              var totalW = petW * 2 + gap;                 // 192px
+              var startPx = homePx + (homeW - totalW) / 2; // centered under house
+              var petPx  = startPx + slot * (petW + gap);
+              defaultX   = (petPx / sceneW) * 100;
+              defaultY   = hp.y + 40;                      // below the roofline
             } else {
               // overflow pets beyond paired homes — spread freely
               var xi = idx - homeEffPos.length * 2;
