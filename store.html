@@ -780,6 +780,7 @@
       var newIds = ['bear','cheetah','tiger','lion','robo-dog',
         'alien-wave','alien-mint','alien-peace','alien-orange','alien-rainbow','alien-ref',
         'dino-bowl','bear-food','lion-food','tiger-food','cheetah-food',
+        'lamb-food','parrot-food','goat-food','cow-food','pony-food','chicken-food',
         'spaceship',
         'acc-soccer-ball','acc-basketball','acc-football','acc-baseball','acc-tennis',
         'acc-hockey','acc-golf','acc-dumbbells','acc-trophy','acc-pet-trophy',
@@ -1301,15 +1302,15 @@
           var tot   = layerTotal[layer] || 1;
           var defaultX, defaultY;
           if (layer === 'pet') {
-            // Pair 2 pets per home, side by side in front of the house
+            // Pair 2 pets per home, clearly side by side in front of the house
             var homeIdx = Math.floor(idx / 2);
             var slot    = idx % 2; // 0 = left, 1 = right
             if (homeIdx < homeEffPos.length) {
               var hp = homeEffPos[homeIdx];
-              defaultX = hp.x + (slot === 0 ? -7 : 7);
-              defaultY = hp.y + 22;
+              defaultX = hp.x + (slot === 0 ? 1 : 16); // 15% apart so they don't overlap
+              defaultY = hp.y + 38;                     // below the house roof
             } else {
-              // overflow pets beyond paired homes
+              // overflow pets beyond paired homes — spread freely
               var xi = idx - homeEffPos.length * 2;
               var xt = Math.max(1, tot - homeEffPos.length * 2 - 1);
               defaultX = zone[0] + (xt <= 0 ? 0.5 : xi / xt) * (zone[1] - zone[0]);
