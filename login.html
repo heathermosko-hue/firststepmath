@@ -63,6 +63,35 @@
     .switch-link a { color: var(--purple); font-weight: 700; text-decoration: none; }
 
     .err { color: #dc3545; font-size: 0.83rem; text-align: center; min-height: 18px; margin: 4px 0; }
+    .forgot-link { display:block; text-align:center; font-size:0.83rem; color:#888; margin-top:8px; cursor:pointer; text-decoration:underline; }
+    .forgot-link:hover { color:var(--purple); }
+
+    /* ── Reset Password Modal ── */
+    .reset-overlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45);
+      z-index:999; align-items:center; justify-content:center;
+    }
+    .reset-overlay.open { display:flex; }
+    .reset-card {
+      background:#fff; border-radius:24px; padding:32px 28px; width:100%;
+      max-width:400px; box-shadow:0 20px 60px rgba(0,0,0,0.22); text-align:center;
+      margin:16px;
+    }
+    .reset-card h2 { font-family:'Fredoka One',cursive; font-size:1.5rem; color:var(--dark); margin-bottom:6px; }
+    .reset-card p  { color:#777; font-size:0.88rem; margin-bottom:18px; }
+    .reset-card input {
+      width:100%; box-sizing:border-box; padding:12px 16px; border-radius:12px;
+      border:2px solid #dde3ff; font-family:'Nunito',sans-serif; font-size:0.95rem;
+      margin-bottom:12px;
+    }
+    .reset-card input:focus { outline:none; border-color:var(--purple); }
+    .reset-actions { display:flex; gap:10px; justify-content:center; margin-top:4px; }
+    .reset-actions button { flex:1; padding:12px; border-radius:12px; border:none; font-family:'Fredoka One',cursive; font-size:1rem; cursor:pointer; }
+    .btn-send   { background:var(--purple); color:#fff; }
+    .btn-cancel { background:#f0f2ff; color:#888; }
+    .reset-success { display:none; }
+    .reset-success .big-icon { font-size:3rem; margin-bottom:8px; }
+    .reset-success p { color:#444; }
 
     /* ── STUDENT: class code big input ── */
     .class-code-input-wrap { position: relative; }
@@ -178,6 +207,7 @@
           <div class="form-group"><label>Password</label><input type="password" id="pPass" placeholder="••••••••" autocomplete="current-password"></div>
           <div class="err" id="pLoginErr"></div>
           <button type="submit" class="submit-btn orange">Sign In 👪</button>
+          <span class="forgot-link" onclick="openReset()">Forgot password?</span>
         </form>
         <div class="divider">or</div>
         <form id="parentRegForm" style="display:none">
@@ -203,6 +233,7 @@
           <div class="form-group"><label>Password</label><input type="password" id="tPass" placeholder="••••••••" autocomplete="current-password"></div>
           <div class="err" id="tLoginErr"></div>
           <button type="submit" class="submit-btn purple">Teacher Sign In 🍎</button>
+          <span class="forgot-link" onclick="openReset()">Forgot password?</span>
         </form>
         <div class="divider">or</div>
         <form id="teacherRegForm" style="display:none">
@@ -536,6 +567,148 @@
       });
     }
   })();
+  </script>
+
+  <!-- ══ RESET PASSWORD OVERLAY ══ -->
+  <div class="reset-overlay" id="resetOverlay">
+    <div class="reset-card">
+      <!-- Step 1: enter email -->
+      <div id="resetStep1">
+        <h2>Forgot Password? 🔑</h2>
+        <p>Enter your email and we'll send you a link to reset your password.</p>
+        <input type="email" id="resetEmail" placeholder="your@email.com" autocomplete="email">
+        <div class="err" id="resetErr"></div>
+        <div class="reset-actions">
+          <button class="btn-cancel" onclick="closeReset()">Cancel</button>
+          <button class="btn-send" onclick="sendReset()">Send Link</button>
+        </div>
+      </div>
+      <!-- Step 2: success -->
+      <div id="resetStep2" class="reset-success">
+        <div class="big-icon">📧</div>
+        <h2>Check your email!</h2>
+        <p id="resetSuccessMsg">We've sent a password reset link to your email. Click the link in the email to set a new password.</p>
+        <div class="reset-actions" style="margin-top:16px">
+          <button class="btn-send" onclick="closeReset()">Got it!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ NEW PASSWORD OVERLAY ══ -->
+  <div class="reset-overlay" id="newPassOverlay">
+    <div class="reset-card">
+      <div id="newPassStep1">
+        <h2>Set New Password 🔒</h2>
+        <p>Choose a new password for your account.</p>
+        <input type="password" id="newPass1" placeholder="New password" autocomplete="new-password">
+        <input type="password" id="newPass2" placeholder="Confirm password" autocomplete="new-password">
+        <div class="err" id="newPassErr"></div>
+        <div class="reset-actions">
+          <button class="btn-send" onclick="submitNewPass()">Save Password</button>
+        </div>
+      </div>
+      <div id="newPassStep2" class="reset-success">
+        <div class="big-icon">✅</div>
+        <h2>Password Updated!</h2>
+        <p>Your password has been changed. You can now sign in.</p>
+        <div class="reset-actions" style="margin-top:16px">
+          <button class="btn-send" onclick="document.getElementById('newPassOverlay').classList.remove('open')">Sign In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  /* ── Password Reset ── */
+  function openReset() {
+    document.getElementById('resetEmail').value = '';
+    document.getElementById('resetErr').textContent = '';
+    document.getElementById('resetStep1').style.display = '';
+    document.getElementById('resetStep2').style.display = 'none';
+    document.getElementById('resetOverlay').classList.add('open');
+  }
+  function closeReset() {
+    document.getElementById('resetOverlay').classList.remove('open');
+  }
+  function sendReset() {
+    const email = document.getElementById('resetEmail').value.trim().toLowerCase();
+    const errEl = document.getElementById('resetErr');
+    if (!email) { errEl.textContent = 'Please enter your email.'; return; }
+
+    const users = JSON.parse(localStorage.getItem('fsm_users') || '[]');
+    const user  = users.find(u => u.email.toLowerCase() === email);
+    if (!user) { errEl.textContent = 'No account found with that email.'; return; }
+
+    // Generate token and store with 1-hour expiry
+    const token   = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+    const expires = Date.now() + 60 * 60 * 1000;
+    const resets  = JSON.parse(localStorage.getItem('fsm_resets') || '{}');
+    resets[token] = { email: user.email, expires };
+    localStorage.setItem('fsm_resets', JSON.stringify(resets));
+
+    // Build reset URL and mailto link
+    const resetUrl = location.origin + location.pathname + '?reset=' + token;
+    const subject  = encodeURIComponent('First Step Math – Password Reset');
+    const body     = encodeURIComponent(
+      'Hi ' + (user.name || 'there') + ',\n\n' +
+      'Click the link below to reset your password (valid for 1 hour):\n\n' +
+      resetUrl + '\n\n' +
+      'If you did not request this, you can ignore this email.\n\n' +
+      '– First Step Math'
+    );
+    window.location.href = 'mailto:' + user.email + '?subject=' + subject + '&body=' + body;
+
+    document.getElementById('resetSuccessMsg').textContent =
+      'A reset link has been prepared for ' + user.email + '. Your email app should open — just send it!';
+    document.getElementById('resetStep1').style.display = 'none';
+    document.getElementById('resetStep2').style.display = '';
+  }
+
+  /* ── Handle ?reset=TOKEN in URL ── */
+  (function checkResetToken() {
+    const token = new URLSearchParams(location.search).get('reset');
+    if (!token) return;
+    const resets = JSON.parse(localStorage.getItem('fsm_resets') || '{}');
+    const entry  = resets[token];
+    if (!entry || Date.now() > entry.expires) {
+      alert('This password reset link has expired or is invalid. Please request a new one.');
+      // Remove expired token from URL
+      history.replaceState({}, '', location.pathname);
+      return;
+    }
+    // Show new password overlay
+    document.getElementById('newPassStep1').style.display = '';
+    document.getElementById('newPassStep2').style.display = 'none';
+    document.getElementById('newPassErr').textContent = '';
+    document.getElementById('newPassOverlay').classList.add('open');
+    window._resetToken = token;
+    window._resetEmail = entry.email;
+    history.replaceState({}, '', location.pathname);
+  })();
+
+  function submitNewPass() {
+    const p1 = document.getElementById('newPass1').value;
+    const p2 = document.getElementById('newPass2').value;
+    const errEl = document.getElementById('newPassErr');
+    if (!p1) { errEl.textContent = 'Please enter a password.'; return; }
+    if (p1 !== p2) { errEl.textContent = 'Passwords do not match.'; return; }
+    if (p1.length < 4) { errEl.textContent = 'Password must be at least 4 characters.'; return; }
+
+    const users = JSON.parse(localStorage.getItem('fsm_users') || '[]');
+    const idx   = users.findIndex(u => u.email.toLowerCase() === (window._resetEmail || '').toLowerCase());
+    if (idx < 0) { errEl.textContent = 'Account not found.'; return; }
+    users[idx].password = p1;
+    localStorage.setItem('fsm_users', JSON.stringify(users));
+
+    // Remove used token
+    const resets = JSON.parse(localStorage.getItem('fsm_resets') || '{}');
+    delete resets[window._resetToken];
+    localStorage.setItem('fsm_resets', JSON.stringify(resets));
+
+    document.getElementById('newPassStep1').style.display = 'none';
+    document.getElementById('newPassStep2').style.display = '';
+  }
   </script>
 </body>
 </html>
