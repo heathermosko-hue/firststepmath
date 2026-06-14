@@ -266,9 +266,9 @@
       const users = getUsers();
       const hi = users.findIndex(u => u.email === 'heathermosko@gmail.com');
       if (hi < 0) {
-        users.push({ email:'heathermosko@gmail.com', password:'Ross1101', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
+        users.push({ email:'heathermosko@gmail.com', password:'admin', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
       } else {
-        users[hi].password = 'Ross1101'; users[hi].type = 'teacher';
+        users[hi].password = 'admin'; users[hi].type = 'teacher';
         if (!users[hi].classCode) users[hi].classCode = 'FSM-ADMIN';
         if (!users[hi].students) users[hi].students = [];
       }

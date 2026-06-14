@@ -738,6 +738,24 @@
   (() => {
     const MONEY_KEY = 'fsm_dollars';
     const PURCH_KEY = 'fsm_purchases';
+    const USERS_KEY = 'fsm_users';
+    const getUsers  = () => { try { return JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); } catch(e) { return []; } };
+    const saveUsers = u => localStorage.setItem(USERS_KEY, JSON.stringify(u));
+
+    /* Ensure admin account always exists */
+    (function seedAdmin() {
+      const users = getUsers();
+      const hi = users.findIndex(u => u.email === 'heathermosko@gmail.com');
+      if (hi < 0) {
+        users.push({ email:'heathermosko@gmail.com', password:'admin', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
+      } else {
+        users[hi].password = 'admin'; users[hi].type = 'teacher';
+        if (!users[hi].classCode) users[hi].classCode = 'FSM-ADMIN';
+        if (!users[hi].students)  users[hi].students  = [];
+      }
+      saveUsers(users);
+      localStorage.setItem(MONEY_KEY, '9999.99');
+    })();
 
     /* ?money=1 in URL → load $99.99 for testing */
     if (new URLSearchParams(location.search).get('money') === '1') {
