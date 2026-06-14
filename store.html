@@ -784,6 +784,11 @@
       { id:'goat',      num:24, name:'Goat Pal',     emoji:'🐐', img:'img/store/goat.png',     price:15.00, desc:'Bleat • Play • Climb!'    },
       { id:'gator',     num:25, name:'Gator Pal',    emoji:'🐊', img:'img/store/gator.png',    price:20.00, desc:'Splash • Play • Snap!'    },
       { id:'frog',      num:26, name:'Froggy Pal',   emoji:'🐸', img:'img/store/frog.png',     price:10.00, desc:'Hop • Splash • Play!'     },
+      // $20-30
+      { id:'bear',      num:27, name:'Bear Pal',     emoji:'🐻', img:'img/store/bear.png',     price:20.00, desc:'Roar • Wave • Play!'      },
+      { id:'cheetah',   num:28, name:'Cheetah Pal',  emoji:'🐆', img:'img/store/cheetah.png',  price:25.00, desc:'Zoom • Spot • Play!'      },
+      { id:'tiger',     num:29, name:'Tiger Pal',    emoji:'🐯', img:'img/store/tiger.png',    price:25.00, desc:'Roar • Stripe • Play!'    },
+      { id:'lion',      num:30, name:'Lion Pal',     emoji:'🦁', img:'img/store/lion.png',     price:30.00, desc:'Roar • Mane • Rule!'      },
     ];
 
     // ── FOOD ──────────────────────────────────────────
@@ -814,6 +819,11 @@
       { id:'goat-food',     num:23, name:'Goat Food',            emoji:'🌿', img:'img/store/food-goat.png',    price:0.15, desc:'Munch • Chew • Eat!',           bg:'#fef3c7', repeatable:true },
       { id:'gator-food',    num:24, name:'Gator Food',          emoji:'🐟', img:'img/store/food-gator.png',   price:0.25, desc:'Chomp • Snap • Eat!',          bg:'#e0f2fe', repeatable:true },
       { id:'frog-food',     num:26, name:'Frog Food',           emoji:'🐸', img:'img/store/food-frog.png',    price:0.15, desc:'Hop • Munch • Eat!',           bg:'#dcfce7', repeatable:true },
+      { id:'dino-bowl',     num:27, name:'Dino Food Bowl',      emoji:'🦕', img:'img/store/food-dino-bowl.png', price:0.30, desc:'Chomp • Roar • Eat!',          bg:'#dcfce7', repeatable:true },
+      { id:'bear-food',     num:28, name:'Bear Snack Berries',  emoji:'🍓', img:'img/store/food-dino-bowl.png', price:0.25, desc:'Munch • Growl • Eat!',          bg:'#fce7f3', repeatable:true },
+      { id:'lion-food',     num:29, name:'Lion Feast',          emoji:'🥩', img:'img/store/food-dino-bowl.png', price:0.30, desc:'Roar • Chomp • Eat!',           bg:'#fef3c7', repeatable:true },
+      { id:'tiger-food',    num:30, name:'Tiger Feast',         emoji:'🥩', img:'img/store/food-dino-bowl.png', price:0.30, desc:'Growl • Chomp • Eat!',          bg:'#ffedd5', repeatable:true },
+      { id:'cheetah-food',  num:31, name:'Cheetah Snack',       emoji:'🍖', img:'img/store/food-dino-bowl.png', price:0.25, desc:'Zoom • Munch • Eat!',           bg:'#fef9c3', repeatable:true },
     ];
 
     // ── ACCESSORIES ───────────────────────────────────
@@ -879,6 +889,7 @@
       { id:'farm-barn',         num:20, name:'Farm Barn',            emoji:'🐄', img:'img/store/home-farm-barn.png',         price:0.60, desc:'Moo • Oink • Baa!',             bg:'#fef9c3' },
       { id:'frog-pond',         num:21, name:'Frog Pond',            emoji:'🐸', img:'img/store/home-frog-pond.png',         price:0.55, desc:'Hop • Splash • Home!',           bg:'#dcfce7' },
       { id:'snake-den',         num:22, name:'Snake Den',            emoji:'🐍', img:'img/store/home-snake-den.png',         price:0.60, desc:'Coil • Hide • Home!',            bg:'#d1fae5' },
+      { id:'spaceship',         num:23, name:'Spaceship Home',       emoji:'🚀', img:'img/store/home-spaceship.png',         price:0.75, desc:'Blast • Orbit • Home!',          bg:'#dbeafe' },
     ];
 
     // ── STATE ──────────────────────────────────────────
@@ -1290,7 +1301,8 @@
               'robo-dog':'robot', 'robo-cat':'march',  'puppy-pet':'gallop','kitty-pet':'prowl',
               'pony':'gallop',    'alien':'float',     'dino':'stomp',     'chicken':'peck',
               'snake':'slither',  'lizard':'scurry',   'cow':'stomp',      'goat':'hop',
-              'gator':'stomp',    'frog':'hop'
+              'gator':'stomp',    'frog':'hop',
+               'bear':'stomp',     'cheetah':'gallop', 'tiger':'prowl',    'lion':'stomp'
             };
             function playPetAnim() {
               var anim = PET_ANIM[item.id];
