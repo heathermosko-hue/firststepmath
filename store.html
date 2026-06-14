@@ -1086,9 +1086,9 @@
       }
       function saveHidden(h) { localStorage.setItem('fsm_scene_hidden', JSON.stringify(h)); }
 
-      var CAT_LIMIT = { pet: 3, acc: 6, home: 3 };
+      var CAT_LIMIT = { pet: 6, acc: 6, home: 3 };
       var CAT_MSG = {
-        pet:  'Sorry, you can only play with 3 pets at a time!',
+        pet:  'Sorry, you can only play with 6 pets at a time!',
         home: 'Sorry, you can only have 3 houses open at a time!',
         acc:  'Sorry, you can only have 6 accessories open at a time!'
       };
@@ -1280,6 +1280,17 @@
         var layerTotal = { home:0, pet:0, food:0, acc:0 };
         allItems.forEach(function(e){ layerTotal[e.layer]++; });
 
+        // Pre-calculate effective home positions so pets can be paired 2-per-home side by side
+        var homeEffPos = ownedBeds.map(function(b, hi) {
+          var uid = 'bed_' + b.id;
+          var tot = ownedBeds.length;
+          var t   = tot <= 1 ? 0.5 : hi / (tot - 1);
+          var hz  = LAYER_ZONES.home;
+          var def = { x: hz[0] + t * (hz[1] - hz[0]), y: hz[2] };
+          var p   = pos[uid];
+          return (p && p.x >= 0 && p.x <= 90 && p.y >= 0 && p.y <= 88) ? p : def;
+        });
+
         allItems.forEach(function(entry, i) {
           var item  = entry.item;
           var uid   = entry.id;
@@ -1288,9 +1299,27 @@
           var zone  = LAYER_ZONES[layer];
           var idx   = layerCount[layer];
           var tot   = layerTotal[layer] || 1;
-          var t     = tot <= 1 ? 0.5 : idx / (tot - 1);
-          var defaultX = zone[0] + t * (zone[1] - zone[0]);
-          var defaultY = zone[2] + (idx % 2) * ((zone[3] - zone[2]) / 2);
+          var defaultX, defaultY;
+          if (layer === 'pet') {
+            // Pair 2 pets per home, side by side in front of the house
+            var homeIdx = Math.floor(idx / 2);
+            var slot    = idx % 2; // 0 = left, 1 = right
+            if (homeIdx < homeEffPos.length) {
+              var hp = homeEffPos[homeIdx];
+              defaultX = hp.x + (slot === 0 ? -7 : 7);
+              defaultY = hp.y + 22;
+            } else {
+              // overflow pets beyond paired homes
+              var xi = idx - homeEffPos.length * 2;
+              var xt = Math.max(1, tot - homeEffPos.length * 2 - 1);
+              defaultX = zone[0] + (xt <= 0 ? 0.5 : xi / xt) * (zone[1] - zone[0]);
+              defaultY = zone[2];
+            }
+          } else {
+            var t    = tot <= 1 ? 0.5 : idx / (tot - 1);
+            defaultX = zone[0] + t * (zone[1] - zone[0]);
+            defaultY = zone[2] + (idx % 2) * ((zone[3] - zone[2]) / 2);
+          }
           layerCount[layer]++;
           var p = pos[uid] || { x: defaultX, y: defaultY };
           // Clamp any saved-off-screen positions back into view
