@@ -1895,9 +1895,11 @@
 
     speakText('Ding! You paid! You got ' + regItem.name + '! Amazing job!');
     showToast('🎉 You got ' + regItem.name + '!');
-    renderAll();
 
-    setTimeout(closeRegister, 2200);
+    setTimeout(function() {
+      closeRegister();
+      window.location.reload();
+    }, 2200);
   }
 
   window.closeRegister = function() {
