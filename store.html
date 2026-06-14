@@ -778,6 +778,7 @@
       var rawP = localStorage.getItem(PURCH_KEY);
       var p = {}; try { var tmp = JSON.parse(rawP||'{}'); if(Array.isArray(tmp)){tmp.forEach(function(id){p[id]=1;});}else{p=tmp;} } catch(e){}
       var newIds = ['bear','cheetah','tiger','lion','robo-dog',
+        'alien-wave','alien-mint','alien-peace','alien-orange','alien-rainbow','alien-ref',
         'dino-bowl','bear-food','lion-food','tiger-food','cheetah-food',
         'spaceship',
         'acc-soccer-ball','acc-basketball','acc-football','acc-baseball','acc-tennis',
@@ -838,7 +839,13 @@
       { id:'bear',      num:27, name:'Bear Pal',     emoji:'🐻', img:'img/store/bear.png',     price:20.00, desc:'Roar • Wave • Play!'      },
       { id:'cheetah',   num:28, name:'Cheetah Pal',  emoji:'🐆', img:'img/store/cheetah.png',  price:25.00, desc:'Zoom • Spot • Play!'      },
       { id:'tiger',     num:29, name:'Tiger Pal',    emoji:'🐯', img:'img/store/tiger.png',    price:25.00, desc:'Roar • Stripe • Play!'    },
-      { id:'lion',      num:30, name:'Lion Pal',     emoji:'🦁', img:'img/store/lion.png',     price:30.00, desc:'Roar • Mane • Rule!'      },
+      { id:'lion',       num:30, name:'Lion Pal',          emoji:'🦁', img:'img/store/lion.png',          price:30.00, desc:'Roar • Mane • Rule!'        },
+      { id:'alien-wave', num:31, name:'Waving Alien',      emoji:'👽', img:'img/store/alien-wave.png',    price:25.00, desc:'Wave • Glow • Play!'         },
+      { id:'alien-mint', num:32, name:'Mint Alien',        emoji:'👽', img:'img/store/alien-mint.png',    price:25.00, desc:'Float • Zoom • Play!'        },
+      { id:'alien-peace',num:33, name:'Peace Alien',       emoji:'☮️', img:'img/store/alien-peace.png',   price:25.00, desc:'Peace • Glow • Float!'       },
+      { id:'alien-orange',num:34,name:'Orange Alien',      emoji:'🟠', img:'img/store/alien-orange.png',  price:25.00, desc:'Glow • Bounce • Play!'       },
+      { id:'alien-rainbow',num:35,name:'Rainbow Alien',    emoji:'🌈', img:'img/store/alien-rainbow.png', price:25.00, desc:'Spark • Zoom • Shine!'       },
+      { id:'alien-ref',  num:36, name:'Classic Alien',     emoji:'👽', img:'img/store/alien-ref.png',     price:20.00, desc:'Float • Beam • Play!'        },
     ];
 
     // ── FOOD ──────────────────────────────────────────
@@ -1377,6 +1384,7 @@
               'snake':'slither',  'lizard':'scurry',   'cow':'stomp',      'goat':'hop',
               'gator':'stomp',    'frog':'hop',
                'bear':'stomp',     'cheetah':'gallop', 'tiger':'prowl',    'lion':'stomp',
+               'alien-wave':'float','alien-mint':'float','alien-peace':'float','alien-orange':'float','alien-rainbow':'float','alien-ref':'float',
                'race-car':'zoom',       'paw-race-car':'zoom',    'monster-truck':'bounce',
                'bulldozer':'chug',      'fire-truck':'zoom',      'train-engine':'chug',
                'paw-plane':'flutter',   'jet-plane':'flutter',    'propeller-plane':'flutter',
@@ -1813,6 +1821,29 @@
     updateBalance();
     renderAll();
 
+    // After purchase reload: jump to the right tab and highlight the card
+    (function() {
+      var justBought = localStorage.getItem('fsm_just_bought');
+      if (!justBought) return;
+      localStorage.removeItem('fsm_just_bought');
+      var isPet = PETS.some(function(p){ return p.id === justBought; });
+      var targetTab = isPet ? 'pets' : 'pet-care';
+      var tabBtn = document.querySelector('[data-tab="' + targetTab + '"]');
+      if (tabBtn) tabBtn.click();
+      setTimeout(function() {
+        var cards = document.querySelectorAll('.store-card');
+        for (var i = 0; i < cards.length; i++) {
+          if (cards[i].dataset.id === justBought) {
+            cards[i].scrollIntoView({ behavior:'smooth', block:'center' });
+            cards[i].style.outline = '4px solid gold';
+            cards[i].style.transition = 'outline 1s';
+            setTimeout(function(c){ c.style.outline = ''; }(cards[i]), 2000);
+            break;
+          }
+        }
+      }, 300);
+    })();
+
   // ── CASH REGISTER ────────────────────────────────
   let regItem = null, regRepeatable = false, regPaidCents = 0, regTotalCents = 0;
 
@@ -1915,6 +1946,7 @@
     speakText('Ding! You paid! ' + dingMsg + ' Amazing job!');
     showToast('🎉 ' + dingMsg);
 
+    localStorage.setItem('fsm_just_bought', regItem.id);
     setTimeout(function() {
       window.location.reload(true);
     }, 2200);
