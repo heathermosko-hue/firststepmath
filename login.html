@@ -287,9 +287,9 @@
 
     const getUsers  = () => JSON.parse(localStorage.getItem(USERS_KEY)   || '[]');
     const saveUsers = u => localStorage.setItem(USERS_KEY, JSON.stringify(u));
-    const getSession= () => JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
-    const setSession= u => sessionStorage.setItem(SESSION_KEY, JSON.stringify(u));
-    const clearSession = () => sessionStorage.removeItem(SESSION_KEY);
+    const getSession= () => JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+    const setSession= u => localStorage.setItem(SESSION_KEY, JSON.stringify(u));
+    const clearSession = () => localStorage.removeItem(SESSION_KEY);
     const genCode = () => 'FSM-' + Math.random().toString(36).substr(2,5).toUpperCase();
 
     /* Ensure Heather's admin account always exists with correct password */

@@ -723,7 +723,7 @@ function saveMoney(earned) {
 
 function checkQuestionGate() {
   const count = parseInt(localStorage.getItem('fsm_q_count') || '0');
-  const loggedIn = sessionStorage.getItem('fsm_session');
+  const loggedIn = localStorage.getItem('fsm_session');
   if (count >= 30 && !loggedIn) {
     document.getElementById('loginGate').style.display = 'flex';
     return true;
