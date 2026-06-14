@@ -337,6 +337,7 @@
     @keyframes pa-gallop  { 0%{transform:translateY(0) rotate(0)} 15%{transform:translateY(-24px) rotate(-7deg)} 30%{transform:translateY(5px) rotate(7deg)} 45%{transform:translateY(-16px) rotate(-5deg)} 60%{transform:translateY(3px) rotate(5deg)} 75%{transform:translateY(-8px) rotate(-2deg)} 100%{transform:translateY(0) rotate(0)} }
     @keyframes pa-float   { 0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} 25%{transform:translateY(-20px) scale(1.1);filter:drop-shadow(0 0 14px #a78bfa)} 55%{transform:translateY(-32px) scale(1.05);filter:drop-shadow(0 0 20px #7c3aed)} 80%{transform:translateY(-18px) scale(0.96);filter:drop-shadow(0 0 10px #a78bfa)} 100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} }
     @keyframes pa-march   { 0%{transform:translateY(0) rotate(0)} 12%{transform:translateY(-11px) rotate(-5deg)} 25%{transform:translateY(0) rotate(5deg)} 37%{transform:translateY(-11px) rotate(-5deg)} 50%{transform:translateY(0) rotate(5deg)} 62%{transform:translateY(-11px) rotate(-5deg)} 75%{transform:translateY(0) rotate(5deg)} 88%{transform:translateY(-5px) rotate(-2deg)} 100%{transform:translateY(0) rotate(0)} }
+    @keyframes pa-bounce  { 0%{transform:translateY(0) scale(1)} 20%{transform:translateY(-28px) scale(1.1)} 40%{transform:translateY(6px) scale(0.92)} 60%{transform:translateY(-14px) scale(1.05)} 80%{transform:translateY(3px) scale(0.97)} 100%{transform:translateY(0) scale(1)} }
     @keyframes pa-zoom    { 0%{transform:translateX(0) scaleX(1)} 15%{transform:translateX(60px) scaleX(1.15)} 30%{transform:translateX(80px) scaleX(1)} 50%{transform:translateX(-80px) scaleX(0.9)} 70%{transform:translateX(-40px) scaleX(0.95)} 85%{transform:translateX(-10px) scaleX(1)} 100%{transform:translateX(0) scaleX(1)} }
     @keyframes pa-chug    { 0%{transform:translateX(0) rotate(0)} 12%{transform:translateX(18px) rotate(2deg)} 24%{transform:translateX(0) rotate(0)} 36%{transform:translateX(18px) rotate(2deg)} 48%{transform:translateX(0) rotate(0)} 60%{transform:translateX(18px) rotate(2deg)} 72%{transform:translateX(0) rotate(0)} 86%{transform:translateX(8px) rotate(1deg)} 100%{transform:translateX(0) rotate(0)} }
     @keyframes pa-launch  { 0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} 20%{transform:translateY(8px) scale(0.95)} 40%{transform:translateY(-50px) scale(1.1);filter:drop-shadow(0 0 16px #38bdf8)} 60%{transform:translateY(-70px) scale(0.95);filter:drop-shadow(0 0 24px #7dd3fc)} 80%{transform:translateY(-30px) scale(1);filter:drop-shadow(0 0 10px #38bdf8)} 100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} }
@@ -360,6 +361,7 @@
     .pa-zoom    { animation:pa-zoom    0.9s ease-in-out !important; }
     .pa-chug    { animation:pa-chug    1.1s ease-in-out !important; }
     .pa-launch  { animation:pa-launch  1.2s ease-in-out !important; }
+    .pa-bounce  { animation:pa-bounce  0.85s ease-in-out !important; }
     .pa-roll    { animation:pa-roll    1.1s ease-in-out !important; }
     .pa-prowl   { animation:pa-prowl   1.25s ease-in-out !important; }
     .pa-peck    { animation:pa-peck    1.0s ease-in-out !important; }
@@ -814,9 +816,18 @@
       { id:'tiger',     num:29, name:'Tiger Pal',    emoji:'🐯', img:'img/store/tiger.png',    price:25.00, desc:'Roar • Stripe • Play!'    },
       { id:'lion',      num:30, name:'Lion Pal',     emoji:'🦁', img:'img/store/lion.png',     price:30.00, desc:'Roar • Mane • Rule!'      },
       // Vehicles
-      { id:'racecar',   num:31, name:'Race Car',     emoji:'🏎️', img:'img/store/racecar.png',  price:20.00, desc:'Zoom • Vroom • Race!'     },
-      { id:'train',     num:32, name:'Train Pal',    emoji:'🚂', img:'img/store/train.png',    price:20.00, desc:'Chug • Choo • Go!'        },
-      { id:'spaceship-pet', num:33, name:'Spaceship', emoji:'🚀', img:'img/store/home-spaceship.png', price:25.00, desc:'Blast • Zoom • Space!' },
+      { id:'race-car',       num:31, name:'Race Car',          emoji:'🏎️', img:'img/store/pet-race_car.png',         price:15.00, desc:'Zoom • Vroom • Race!'        },
+      { id:'paw-race-car',   num:32, name:'Paw Race Car',      emoji:'🏎️', img:'img/store/pet-raacecar.png',         price:15.00, desc:'Paw • Zoom • Win!'           },
+      { id:'monster-truck',  num:33, name:'Monster Truck',     emoji:'🚛', img:'img/store/pet-monster_truck.png',    price:20.00, desc:'Crush • Bounce • Roar!'      },
+      { id:'bulldozer',      num:34, name:'Bulldozer',         emoji:'🚜', img:'img/store/pet-bulldozer.png',        price:15.00, desc:'Push • Dig • Build!'         },
+      { id:'fire-truck',     num:35, name:'Fire Truck',        emoji:'🚒', img:'img/store/pet-fire_truck.png',       price:15.00, desc:'Wee-Woo • Zoom • Save!'      },
+      { id:'train-engine',   num:36, name:'Train Engine',      emoji:'🚂', img:'img/store/pet-train_engine.png',     price:15.00, desc:'Chug • Choo • Go!'           },
+      { id:'paw-plane',      num:37, name:'Paw Plane',         emoji:'✈️', img:'img/store/pet-plane.png',            price:15.00, desc:'Paw • Fly • Soar!'           },
+      { id:'jet-plane',      num:38, name:'Jet Airplane',      emoji:'✈️', img:'img/store/pet-jet_airplane.png',     price:20.00, desc:'Whoosh • Zoom • Fly!'        },
+      { id:'propeller-plane',num:39, name:'Propeller Plane',   emoji:'🛩️', img:'img/store/pet-propeller_airplane.png',price:15.00, desc:'Spin • Buzz • Fly!'         },
+      { id:'rocket-ship',    num:40, name:'Rocket Ship',       emoji:'🚀', img:'img/store/pet-rocket_ship.png',      price:20.00, desc:'3-2-1 • Blast • Space!'      },
+      { id:'spaceship-pet',  num:41, name:'Spaceship',         emoji:'🛸', img:'img/store/pet-spaceship.png',        price:20.00, desc:'Blast • Orbit • Zoom!'       },
+      { id:'ufo',            num:42, name:'UFO',               emoji:'🛸', img:'img/store/pet-ufo_spaceship.png',    price:20.00, desc:'Hover • Beam • Spin!'        },
     ];
 
     // ── FOOD ──────────────────────────────────────────
@@ -1342,7 +1353,10 @@
               'snake':'slither',  'lizard':'scurry',   'cow':'stomp',      'goat':'hop',
               'gator':'stomp',    'frog':'hop',
                'bear':'stomp',     'cheetah':'gallop', 'tiger':'prowl',    'lion':'stomp',
-               'racecar':'zoom',   'train':'chug',     'spaceship-pet':'launch'
+               'race-car':'zoom',       'paw-race-car':'zoom',    'monster-truck':'bounce',
+               'bulldozer':'chug',      'fire-truck':'zoom',      'train-engine':'chug',
+               'paw-plane':'flutter',   'jet-plane':'flutter',    'propeller-plane':'flutter',
+               'rocket-ship':'launch',  'spaceship-pet':'launch', 'ufo':'float'
             };
             function playPetAnim() {
               var anim = PET_ANIM[item.id];
