@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toy Store – FirstStepMath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Hero ── */
+    .store-hero {
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #f59e0b 100%);
+      padding: 56px 24px 36px; text-align: center; color: #fff;
+      position: relative; overflow: hidden;
+    }
+    .store-hero::before {
+      content: '⭐ 🌟 💫 ✨ ⭐ 🌟 💫 ✨ ⭐ 🌟';
+      position: absolute; top: 8px; left: 0; right: 0;
+      font-size: 1.1rem; opacity: 0.2; letter-spacing: 6px;
+    }
+    .store-hero h1 { font-family:'Fredoka One',cursive; font-size:3rem; margin-bottom:6px; text-shadow:3px 4px 0 rgba(0,0,0,0.15); }
+    .store-hero p  { font-size:1.05rem; font-weight:700; opacity:0.95; }
+    .balance-pill {
+      display:inline-flex; align-items:center; gap:10px;
+      background:rgba(255,255,255,0.22); border:3px solid rgba(255,255,255,0.5);
+      border-radius:60px; padding:12px 28px; margin-top:18px;
+      font-family:'Fredoka One',cursive; font-size:1.6rem; color:#fff;
+    }
+
+    /* ── Store Entrance ── */
+    .store-entrance {
+      max-width:900px; margin:0 auto; padding:36px 20px 16px;
+    }
+    .entrance-title {
+      font-family:'Fredoka One',cursive; font-size:1.5rem; color:#3b0764;
+      text-align:center; margin-bottom:28px;
+    }
+    .entrance-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+    }
+    @media(max-width:600px){ .entrance-grid{ grid-template-columns:1fr; gap:14px; } }
+    .entrance-card {
+      border-radius:24px; padding:32px 16px 24px; text-align:center;
+      cursor:pointer; border:4px solid transparent;
+      transition:transform 0.15s, box-shadow 0.15s;
+      text-decoration:none; display:block;
+    }
+    .entrance-card:hover { transform:translateY(-6px) scale(1.03); box-shadow:0 16px 40px rgba(0,0,0,0.18); }
+    .entrance-card:active { transform:scale(0.97); }
+    .entrance-card.pets-card { background:linear-gradient(135deg,#fde68a,#fbbf24); border-color:#f59e0b; }
+    .entrance-card.toys-card { background:linear-gradient(135deg,#a5f3fc,#38bdf8); border-color:#0ea5e9; }
+    .entrance-card.access-card { background:linear-gradient(135deg,#fbcfe8,#f472b6); border-color:#ec4899; }
+    .entrance-card.world-card  { background:linear-gradient(135deg,#bbf7d0,#34d399); border-color:#10b981; }
+    .entrance-icon { font-size:4rem; display:block; margin-bottom:12px; }
+    .entrance-name {
+      font-family:'Fredoka One',cursive; font-size:1.6rem; color:#1e1b4b;
+      display:block; margin-bottom:6px;
+    }
+    .entrance-desc { font-size:0.85rem; font-weight:700; color:rgba(30,27,75,0.7); }
+    .entrance-collection-btn {
+      display:block; width:fit-content; margin:20px auto 0;
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#7c3aed;
+      background:#f5f3ff; border:2px solid #ddd6fe; border-radius:50px;
+      padding:10px 28px; cursor:pointer; transition:background 0.15s;
+    }
+    .entrance-collection-btn:hover { background:#ede9fe; }
+    .world-shortcut-btn {
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#fff;
+      background:linear-gradient(135deg,#34d399,#10b981); border:none; border-radius:50px;
+      padding:10px 22px; cursor:pointer; white-space:nowrap;
+      box-shadow:0 4px 12px rgba(16,185,129,0.35); transition:transform 0.15s, box-shadow 0.15s;
+    }
+    .world-shortcut-btn:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(16,185,129,0.45); }
+
+    /* ── Back button ── */
+    .back-to-store {
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#7c3aed;
+      background:#f5f3ff; border:2px solid #ddd6fe; border-radius:50px;
+      padding:10px 24px; cursor:pointer; margin-bottom:24px;
+      display:inline-flex; align-items:center; gap:8px; transition:background 0.15s;
+    }
+    .back-to-store:hover { background:#ede9fe; }
+
+    /* ── Tabs (hidden, used for internal nav) ── */
+    .store-tabs { display:none; }
+
+    /* ── Main layout ── */
+    .store-main  { max-width:1100px; margin:0 auto; padding:28px 18px 80px; }
+    .store-banner {
+      background:#fffbeb; border:3px dashed #f59e0b; border-radius:18px;
+      padding:14px 24px; text-align:center; margin-bottom:28px;
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#92400e;
+    }
+
+    /* ── Section ── */
+    .store-section { display:none; }
+    .store-section.active { display:block; }
+    .section-title {
+      font-family:'Fredoka One',cursive; font-size:1.8rem; color:#3b0764;
+      margin:0 0 20px; display:flex; align-items:center; gap:10px;
+    }
+
+    /* ── Pet care subsections ── */
+    .pet-care-tabs {
+      display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;
+    }
+    .pet-care-tab {
+      font-family:'Fredoka One',cursive; font-size:0.95rem;
+      padding:8px 20px; border-radius:50px; border:2px solid #e0d7ff;
+      background:#faf5ff; color:#7c3aed; cursor:pointer; transition:all 0.15s;
+    }
+    .pet-care-tab.active { background:#7c3aed; color:#fff; border-color:#7c3aed; }
+    .pet-care-section { display:none; }
+    .pet-care-section.active { display:block; }
+
+    /* ── Owned pets row ── */
+    .owned-pets-row {
+      background:#f5f3ff; border-radius:18px; padding:16px 20px; margin-bottom:24px;
+      border:2px solid #ddd6fe;
+    }
+    .owned-pets-row h3 { font-family:'Fredoka One',cursive; font-size:1rem; color:#7c3aed; margin-bottom:10px; }
+    .owned-pets-chips { display:flex; flex-wrap:wrap; gap:10px; }
+    .owned-pet-chip {
+      display:flex; align-items:center; gap:6px;
+      background:#fff; border:2px solid #ddd6fe; border-radius:50px;
+      padding:6px 14px; font-family:'Fredoka One',cursive; font-size:0.85rem; color:#5b21b6;
+    }
+    .owned-pet-chip img { width:28px; height:28px; object-fit:contain; border-radius:50%; }
+    .no-pets-msg { color:#aaa; font-size:0.9rem; font-style:italic; }
+
+    /* ── Grid ── */
+    .store-grid {
+      display:grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap:16px;
+    }
+    @media(max-width:1000px){ .store-grid{ grid-template-columns:repeat(4,1fr); } }
+    @media(max-width:760px) { .store-grid{ grid-template-columns:repeat(3,1fr); gap:12px; } }
+    @media(max-width:520px) { .store-grid{ grid-template-columns:repeat(2,1fr); gap:10px; } }
+
+    /* ── Cards ── */
+    .store-card {
+      border-radius:22px; overflow:hidden; border:3px solid transparent;
+      box-shadow:0 6px 20px rgba(0,0,0,0.10);
+      display:flex; flex-direction:column;
+      cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;
+      position:relative;
+    }
+    .store-card:hover { transform:translateY(-6px); box-shadow:0 14px 32px rgba(0,0,0,0.18); }
+    .store-card.owned::after {
+      content:'✓'; position:absolute; top:8px; right:10px;
+      background:#16a34a; color:#fff; font-size:0.75rem; font-weight:900;
+      width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      z-index:5; line-height:22px; text-align:center;
+    }
+
+    .card-img-area {
+      width:100%; aspect-ratio:1/1;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .card-img-area img {
+      width:100%; height:100%; object-fit:contain; padding:6px;
+    }
+    .card-img-area .emoji-fallback {
+      font-size:4.5rem; filter:drop-shadow(2px 6px 8px rgba(0,0,0,0.15));
+    }
+
+    .card-label {
+      background:#5b21b6; padding:8px 10px 10px;
+      display:flex; align-items:center; gap:7px;
+    }
+    .card-num-badge {
+      width:26px; height:26px; border-radius:50%; flex-shrink:0;
+      background:#fff; color:#5b21b6; font-family:'Fredoka One',cursive;
+      font-size:0.75rem; display:flex; align-items:center; justify-content:center;
+    }
+    .card-name-price { flex:1; min-width:0; }
+    .card-name {
+      font-family:'Fredoka One',cursive; font-size:0.85rem; color:#fff;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.2;
+    }
+    .card-price {
+      display:flex; align-items:center; gap:3px; margin-top:2px;
+    }
+    .price-text { font-family:'Fredoka One',cursive; font-size:0.8rem; color:#fde68a; }
+
+    .card-buy-row { background:#4c1d95; padding:0 8px 10px; }
+    .buy-btn {
+      width:100%; padding:8px; border-radius:10px; border:none;
+      background:#f59e0b; color:#fff; font-family:'Fredoka One',cursive;
+      font-size:0.9rem; cursor:pointer; transition:background 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .buy-btn:hover:not(:disabled) { background:#d97706; }
+    .buy-btn:active:not(:disabled){ transform:scale(0.95); }
+    .buy-btn:disabled { background:#9ca3af; cursor:default; color:#e5e7eb; font-size:0.75rem; }
+    .buy-btn.owned-btn { background:#16a34a; }
+
+    /* ── Pet World Sidebar ── */
+    .pw-outer { display:flex; align-items:flex-start; gap:10px; }
+    .pw-sidebar {
+      width:96px; flex-shrink:0; display:flex; flex-direction:column; gap:6px;
+    }
+    .pw-cat-btn {
+      width:100%; background:#f5f3ff; border:2px solid #ddd6fe; border-radius:14px;
+      padding:8px 4px 6px; font-family:'Fredoka One',cursive; font-size:0.72rem;
+      color:#7c3aed; cursor:pointer; display:flex; flex-direction:column;
+      align-items:center; gap:3px; transition:all 0.15s;
+    }
+    .pw-cat-btn.active { background:#7c3aed; color:#fff; border-color:#5b21b6; }
+    .pw-cat-icon { font-size:1.3rem; line-height:1; }
+    .pw-limit {
+      font-family:'Fredoka One',cursive; font-size:0.68rem; color:#7c3aed;
+      text-align:center; padding:2px 0;
+    }
+    .pw-items-list {
+      display:flex; flex-direction:column; gap:5px;
+      max-height:238px; overflow-y:auto; padding-right:2px;
+      scrollbar-width:thin; scrollbar-color:#ddd6fe #f5f3ff;
+    }
+    .pw-chip {
+      display:flex; flex-direction:column; align-items:center; gap:2px;
+      background:#fff; border:2px solid #e5e7eb; border-radius:10px;
+      padding:5px 3px; cursor:pointer; transition:all 0.15s;
+      font-family:'Fredoka One',cursive; font-size:0.6rem; color:#374151;
+      text-align:center; line-height:1.2; position:relative; flex-shrink:0;
+    }
+    .pw-chip img { width:52px; height:52px; object-fit:contain; display:block; }
+    .pw-chip.on { background:#dcfce7; border-color:#4ade80; }
+    .pw-chip-x {
+      position:absolute; top:2px; right:2px; width:15px; height:15px;
+      border-radius:50%; border:none; cursor:pointer; font-size:0.65rem;
+      display:flex; align-items:center; justify-content:center; padding:0; line-height:1;
+      background:#fca5a5; color:#7f1d1d;
+    }
+    .pw-chip.on .pw-chip-x { background:#fca5a5; color:#7f1d1d; }
+    .pw-chip:not(.on) .pw-chip-x { background:#86efac; color:#14532d; }
+    @keyframes pwHighlight {
+      0%,100% { transform:scale(1) rotate(0); filter:none; }
+      25%  { transform:scale(1.45) rotate(-6deg); filter:drop-shadow(0 0 12px gold); }
+      55%  { transform:scale(1.3) rotate(4deg);  filter:drop-shadow(0 0 8px gold); }
+    }
+    .pw-highlight { animation:pwHighlight 0.75s ease-out !important; }
+    #pwLimitToast {
+      position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px);
+      background:#7c3aed; color:#fff; font-family:'Fredoka One',cursive;
+      font-size:1.05rem; padding:12px 22px; border-radius:999px;
+      box-shadow:0 4px 18px rgba(0,0,0,0.22); pointer-events:none;
+      opacity:0; transition:opacity 0.25s, transform 0.25s; z-index:9999;
+      text-align:center; max-width:88vw;
+    }
+    #pwLimitToast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+    @media(max-width:500px) {
+      .pw-sidebar { width:72px; }
+      .pw-chip img { width:40px; height:40px; }
+      .pw-cat-icon { font-size:1.1rem; }
+      .pw-items-list { max-height:190px; }
+    }
+
+    /* ── Pet World ── */
+    .no-items { color:#aaa; font-size:0.9rem; padding:16px 0; text-align:center; width:100%; }
+    .pet-world-wrap { border-radius:24px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.18); }
+    .pet-world-scene {
+      width:100%; min-height:420px; position:relative; overflow:hidden;
+      background: url('img/pet-world-bg.png') center top / cover no-repeat;
+      background-color:#b7e8a0;
+    }
+    .pet-world-scene.drag-over { outline: 4px dashed rgba(255,255,255,0.7); }
+    .pet-world-empty {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      min-height:400px; text-align:center; padding:24px;
+    }
+    .pet-world-empty-title {
+      font-family:'Fredoka One',cursive; font-size:1.4rem; color:#fff;
+      text-shadow:0 2px 8px rgba(0,0,0,0.45); margin-top:12px;
+    }
+    .world-sticker {
+      position:absolute; cursor:grab; user-select:none;
+      display:flex; flex-direction:column; align-items:center;
+      background:none; border:none; padding:0; min-width:0;
+      box-shadow:none; transition:transform 0.15s;
+      touch-action:none;
+    }
+    .world-sticker:hover { transform:scale(1.12) rotate(-2deg); }
+    .world-sticker.dragging { opacity:0.7; cursor:grabbing; transform:scale(1.15) rotate(3deg); }
+    .world-sticker .img-clip {
+      width:90px; height:90px; overflow:hidden; display:block;
+    }
+    .world-sticker img {
+      width:100%; height:100%; object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+    }
+    .world-sticker .sticker-emoji { font-size:3rem; line-height:1; display:block; filter:drop-shadow(0 3px 6px rgba(0,0,0,0.3)); }
+    .feed-hint {
+      display:block; font-family:'Fredoka One',cursive; font-size:0.62rem;
+      color:#fff; background:rgba(0,0,0,0.45); border-radius:20px;
+      padding:2px 7px; margin-top:4px; white-space:nowrap; text-align:center;
+      pointer-events:none;
+    }
+    @keyframes foodFloat {
+      0%   { transform:translate(0,0) scale(1); opacity:1; }
+      100% { transform:translate(var(--fx),var(--fy)) scale(0.4); opacity:0; }
+    }
+    .food-particle {
+      position:absolute; pointer-events:none; font-size:1.4rem; z-index:999;
+      animation:foodFloat 1.1s ease-out forwards;
+    }
+    @keyframes toyBounce {
+      0%   { transform:scale(1) rotate(0deg) translateY(0); }
+      15%  { transform:scale(1.35) rotate(-18deg) translateY(-14px); }
+      35%  { transform:scale(1.25) rotate(14deg) translateY(-20px); }
+      55%  { transform:scale(1.15) rotate(-8deg) translateY(-10px); }
+      75%  { transform:scale(1.08) rotate(5deg) translateY(-4px); }
+      100% { transform:scale(1) rotate(0deg) translateY(0); }
+    }
+    .toy-bouncing { animation:toyBounce 0.65s ease-out !important; }
+    @keyframes fishSwim {
+      0%,100% { transform:translateX(0) rotate(0deg); }
+      25%     { transform:translateX(7px) rotate(6deg); }
+      75%     { transform:translateX(-7px) rotate(-6deg); }
+    }
+    .fish-swimming { animation:fishSwim 2.4s ease-in-out infinite; }
+
+    /* ── Pet click animations ── */
+    .world-sticker.pet-clicking { pointer-events:none; }
+    @keyframes pa-swim    { 0%{transform:translateX(0) rotate(0)} 20%{transform:translateX(28px) rotate(10deg)} 50%{transform:translateX(-30px) rotate(-10deg)} 80%{transform:translateX(20px) rotate(6deg)} 100%{transform:translateX(0) rotate(0)} }
+    @keyframes pa-hop     { 0%{transform:translateY(0) scaleX(1)} 25%{transform:translateY(-38px) scaleX(0.88)} 50%{transform:translateY(5px) scaleX(1.15)} 65%{transform:translateY(-18px) scaleX(0.93)} 82%{transform:translateY(3px) scaleX(1.06)} 100%{transform:translateY(0) scaleX(1)} }
+    @keyframes pa-waddle  { 0%{transform:rotate(0) translateY(0)} 18%{transform:rotate(-12deg) translateY(-6px)} 36%{transform:rotate(12deg) translateY(-6px)} 54%{transform:rotate(-12deg) translateY(-6px)} 72%{transform:rotate(12deg) translateY(-6px)} 100%{transform:rotate(0) translateY(0)} }
+    @keyframes pa-swing   { 0%{transform:rotate(0);transform-origin:top center} 25%{transform:rotate(28deg);transform-origin:top center} 75%{transform:rotate(-28deg);transform-origin:top center} 100%{transform:rotate(0);transform-origin:top center} }
+    @keyframes pa-slither { 0%{transform:translateX(0) rotate(0)} 15%{transform:translateX(22px) rotate(15deg)} 35%{transform:translateX(-22px) rotate(-15deg)} 55%{transform:translateX(22px) rotate(15deg)} 75%{transform:translateX(-15px) rotate(-8deg)} 100%{transform:translateX(0) rotate(0)} }
+    @keyframes pa-stomp   { 0%{transform:translateY(0) scaleY(1)} 18%{transform:translateY(-24px) scaleY(1.06)} 34%{transform:translateY(6px) scaleY(0.88)} 50%{transform:translateY(-14px) scaleY(1.03)} 66%{transform:translateY(4px) scaleY(0.94)} 84%{transform:translateY(-5px)} 100%{transform:translateY(0) scaleY(1)} }
+    @keyframes pa-scurry  { 0%{transform:translate(0,0)} 10%{transform:translate(12px,-7px)} 20%{transform:translate(-12px,-7px)} 30%{transform:translate(16px,-9px)} 40%{transform:translate(-16px,-9px)} 55%{transform:translate(12px,-6px)} 70%{transform:translate(-12px,-6px)} 85%{transform:translate(6px,-2px)} 100%{transform:translate(0,0)} }
+    @keyframes pa-flutter { 0%{transform:translateY(0) scaleX(1)} 18%{transform:translateY(-18px) scaleX(0.78)} 36%{transform:translateY(-28px) scaleX(1.05)} 54%{transform:translateY(-18px) scaleX(0.78)} 72%{transform:translateY(-7px) scaleX(1)} 100%{transform:translateY(0) scaleX(1)} }
+    @keyframes pa-gallop  { 0%{transform:translateY(0) rotate(0)} 15%{transform:translateY(-24px) rotate(-7deg)} 30%{transform:translateY(5px) rotate(7deg)} 45%{transform:translateY(-16px) rotate(-5deg)} 60%{transform:translateY(3px) rotate(5deg)} 75%{transform:translateY(-8px) rotate(-2deg)} 100%{transform:translateY(0) rotate(0)} }
+    @keyframes pa-float   { 0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} 25%{transform:translateY(-20px) scale(1.1);filter:drop-shadow(0 0 14px #a78bfa)} 55%{transform:translateY(-32px) scale(1.05);filter:drop-shadow(0 0 20px #7c3aed)} 80%{transform:translateY(-18px) scale(0.96);filter:drop-shadow(0 0 10px #a78bfa)} 100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} }
+    @keyframes pa-march   { 0%{transform:translateY(0) rotate(0)} 12%{transform:translateY(-11px) rotate(-5deg)} 25%{transform:translateY(0) rotate(5deg)} 37%{transform:translateY(-11px) rotate(-5deg)} 50%{transform:translateY(0) rotate(5deg)} 62%{transform:translateY(-11px) rotate(-5deg)} 75%{transform:translateY(0) rotate(5deg)} 88%{transform:translateY(-5px) rotate(-2deg)} 100%{transform:translateY(0) rotate(0)} }
+    @keyframes pa-bounce  { 0%{transform:translateY(0) scale(1)} 20%{transform:translateY(-28px) scale(1.1)} 40%{transform:translateY(6px) scale(0.92)} 60%{transform:translateY(-14px) scale(1.05)} 80%{transform:translateY(3px) scale(0.97)} 100%{transform:translateY(0) scale(1)} }
+    @keyframes pa-zoom    { 0%{transform:translateX(0) scaleX(1)} 15%{transform:translateX(60px) scaleX(1.15)} 30%{transform:translateX(80px) scaleX(1)} 50%{transform:translateX(-80px) scaleX(0.9)} 70%{transform:translateX(-40px) scaleX(0.95)} 85%{transform:translateX(-10px) scaleX(1)} 100%{transform:translateX(0) scaleX(1)} }
+    @keyframes pa-chug    { 0%{transform:translateX(0) rotate(0)} 12%{transform:translateX(18px) rotate(2deg)} 24%{transform:translateX(0) rotate(0)} 36%{transform:translateX(18px) rotate(2deg)} 48%{transform:translateX(0) rotate(0)} 60%{transform:translateX(18px) rotate(2deg)} 72%{transform:translateX(0) rotate(0)} 86%{transform:translateX(8px) rotate(1deg)} 100%{transform:translateX(0) rotate(0)} }
+    @keyframes pa-launch  { 0%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} 20%{transform:translateY(8px) scale(0.95)} 40%{transform:translateY(-50px) scale(1.1);filter:drop-shadow(0 0 16px #38bdf8)} 60%{transform:translateY(-70px) scale(0.95);filter:drop-shadow(0 0 24px #7dd3fc)} 80%{transform:translateY(-30px) scale(1);filter:drop-shadow(0 0 10px #38bdf8)} 100%{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0px transparent)} }
+    @keyframes pa-robot   { 0%{transform:translateY(0) rotate(0);filter:drop-shadow(0 0 0px transparent)} 10%{transform:translateY(-14px) rotate(0);filter:drop-shadow(0 0 8px #38bdf8)} 20%{transform:translateY(-14px) rotate(0)} 30%{transform:translateY(0) rotate(0);filter:drop-shadow(0 0 14px #38bdf8)} 40%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-14px) rotate(0);filter:drop-shadow(0 0 8px #38bdf8)} 60%{transform:translateY(-14px) rotate(0)} 70%{transform:translateY(0) rotate(0);filter:drop-shadow(0 0 18px #7dd3fc)} 80%{transform:translateY(-6px) rotate(0);filter:drop-shadow(0 0 10px #38bdf8)} 90%{transform:translateY(0) rotate(0)} 100%{transform:translateY(0) rotate(0);filter:drop-shadow(0 0 0px transparent)} }
+    @keyframes pa-roll    { 0%{transform:rotate(0) translateX(0)} 40%{transform:rotate(360deg) translateX(26px)} 70%{transform:rotate(540deg) translateX(10px)} 100%{transform:rotate(720deg) translateX(0)} }
+    @keyframes pa-prowl   { 0%{transform:translateX(0) scaleY(1)} 28%{transform:translateX(30px) scaleY(0.91)} 52%{transform:translateX(46px) scaleY(1)} 74%{transform:translateX(20px) scaleY(0.91)} 100%{transform:translateX(0) scaleY(1)} }
+    @keyframes pa-peck    { 0%{transform:rotate(0) translateY(0)} 14%{transform:rotate(20deg) translateY(7px)} 28%{transform:rotate(0) translateY(0)} 42%{transform:rotate(20deg) translateY(7px)} 56%{transform:rotate(0) translateY(0)} 70%{transform:rotate(20deg) translateY(7px)} 100%{transform:rotate(0) translateY(0)} }
+    @keyframes pa-sneak   { 0%{transform:translateX(0) scaleY(1)} 20%{transform:translateX(14px) scaleY(0.85)} 40%{transform:translateX(30px) scaleY(0.85)} 60%{transform:translateX(16px) scaleY(0.85)} 80%{transform:translateX(0) scaleY(1)} 90%{transform:translateX(-8px) scaleY(1.05)} 100%{transform:translateX(0) scaleY(1)} }
+    .pa-swim    { animation:pa-swim    1.3s ease-in-out !important; }
+    .pa-hop     { animation:pa-hop     0.9s ease-in-out !important; }
+    .pa-waddle  { animation:pa-waddle  1.0s ease-in-out !important; }
+    .pa-swing   { animation:pa-swing   1.1s ease-in-out !important; }
+    .pa-slither { animation:pa-slither 1.3s ease-in-out !important; }
+    .pa-stomp   { animation:pa-stomp   0.85s ease-in-out !important; }
+    .pa-scurry  { animation:pa-scurry  0.75s ease-in-out !important; }
+    .pa-flutter { animation:pa-flutter 1.0s ease-in-out !important; }
+    .pa-gallop  { animation:pa-gallop  0.85s ease-in-out !important; }
+    .pa-float   { animation:pa-float   1.6s ease-in-out !important; }
+    .pa-march   { animation:pa-march   0.95s ease-in-out !important; }
+    .pa-robot   { animation:pa-robot   1.1s steps(1) !important; }
+    .pa-zoom    { animation:pa-zoom    0.9s ease-in-out !important; }
+    .pa-chug    { animation:pa-chug    1.1s ease-in-out !important; }
+    .pa-launch  { animation:pa-launch  1.2s ease-in-out !important; }
+    .pa-bounce  { animation:pa-bounce  0.85s ease-in-out !important; }
+    .pa-roll    { animation:pa-roll    1.1s ease-in-out !important; }
+    .pa-prowl   { animation:pa-prowl   1.25s ease-in-out !important; }
+    .pa-peck    { animation:pa-peck    1.0s ease-in-out !important; }
+    .pa-sneak   { animation:pa-sneak   1.2s ease-in-out !important; }
+
+    @keyframes petPopIn {
+      0%   { transform:scale(0) rotate(-15deg); opacity:0; }
+      70%  { transform:scale(1.15) rotate(3deg); opacity:1; }
+      100% { transform:scale(1) rotate(0); opacity:1; }
+    }
+    .world-sticker { animation:petPopIn 0.45s cubic-bezier(0.175,0.885,0.32,1.275) backwards; }
+
+    .pet-world-shelf {
+      background:rgba(255,255,255,0.93); padding:14px 18px 18px;
+      border-top:3px dashed #ddd6fe;
+    }
+    .pet-world-shelf-title {
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#7c3aed; margin-bottom:10px;
+    }
+    .shelf-chips { display:flex; flex-wrap:wrap; gap:9px; }
+    .shelf-chip {
+      display:flex; align-items:center; gap:6px;
+      background:#f5f3ff; border-radius:50px; padding:7px 14px 7px 10px;
+      border:2px solid #ddd6fe;
+      font-family:'Fredoka One',cursive; font-size:0.82rem; color:#5b21b6;
+    }
+    .shelf-chip img { width:28px; height:28px; object-fit:contain; }
+    .shelf-chip .chip-emoji { font-size:1.3rem; }
+    .shelf-chip .chip-count {
+      background:#ddd6fe; color:#7c3aed; border-radius:50px;
+      padding:1px 8px; font-size:0.72rem; margin-left:2px;
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position:fixed; bottom:32px; left:50%; transform:translateX(-50%) translateY(80px);
+      background:#16a34a; color:#fff; font-family:'Fredoka One',cursive; font-size:1.1rem;
+      padding:14px 28px; border-radius:50px; box-shadow:0 8px 24px rgba(0,0,0,0.18);
+      transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); z-index:9999; pointer-events:none;
+    }
+    .toast.show { transform:translateX(-50%) translateY(0); }
+
+    /* ══════════ CASH REGISTER MODAL ══════════ */
+    .register-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:10000;
+      display:flex; align-items:flex-start; justify-content:center;
+      padding:16px; overflow-y:auto; -webkit-overflow-scrolling:touch;
+      animation:fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    .register-modal {
+      background:#1a3a2a; border-radius:28px; width:100%; max-width:440px;
+      box-shadow:0 24px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08);
+      overflow-y:auto; overflow-x:hidden; max-height:calc(100vh - 40px);
+      -webkit-overflow-scrolling:touch;
+      animation:slideUp 0.25s cubic-bezier(0.175,0.885,0.32,1.275);
+      border:3px solid #2d5a3e;
+    }
+    @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+
+    .register-top {
+      background:linear-gradient(135deg,#0f4c2a,#1e6b3e);
+      padding:16px 20px; display:flex; align-items:center; justify-content:space-between;
+      border-bottom:2px solid #2d7a4a;
+    }
+    .register-title {
+      font-family:'Fredoka One',cursive; font-size:1.4rem; color:#7fffa0;
+      letter-spacing:1px; text-shadow:0 0 12px rgba(100,255,150,0.4);
+    }
+    .register-close {
+      background:rgba(255,255,255,0.12); border:none; color:#fff; font-size:1rem;
+      width:32px; height:32px; border-radius:50%; cursor:pointer; transition:background 0.15s;
+      font-family:'Fredoka One',cursive; line-height:32px; text-align:center; padding:0;
+    }
+    .register-close:hover { background:rgba(255,80,80,0.5); }
+
+    /* Item row */
+    .register-item {
+      background:#0f2a1a; padding:14px 20px;
+      display:flex; align-items:center; gap:14px; border-bottom:1px solid #2d4a35;
+    }
+    .reg-item-emoji { font-size:2.4rem; line-height:1; }
+    .reg-item-name  { font-family:'Fredoka One',cursive; font-size:1.1rem; color:#e2fce8; }
+    .reg-item-price { font-family:'Fredoka One',cursive; font-size:0.9rem; color:#7fffa0; margin-top:2px; }
+
+    /* LED Display */
+    .register-display {
+      background:#0a1f12; margin:14px 16px; border-radius:14px; padding:12px 18px;
+      border:2px solid #1a4a28; font-family:'Courier New',monospace;
+      box-shadow:inset 0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(50,255,100,0.08);
+    }
+    .display-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:4px 0; font-size:1rem; color:#3a5a42;
+    }
+    .display-row .display-val {
+      font-size:1.4rem; color:#00ff66; text-shadow:0 0 8px rgba(0,255,100,0.6);
+      letter-spacing:2px;
+    }
+    .display-row.paid-row .display-val { color:#ffdd00; text-shadow:0 0 8px rgba(255,200,0,0.5); }
+
+    /* Breakdown hint */
+    .register-hint {
+      margin:0 16px 4px; background:rgba(255,255,255,0.06); border-radius:12px;
+      padding:12px 16px; border:1px solid rgba(255,255,255,0.1);
+    }
+    .hint-label {
+      font-family:'Fredoka One',cursive; font-size:0.85rem; color:#aaffcc; margin-bottom:8px;
+    }
+    .hint-coins { display:flex; gap:10px; flex-wrap:wrap; }
+    .hint-chip {
+      font-family:'Fredoka One',cursive; font-size:0.8rem; color:#fff;
+      background:rgba(255,255,255,0.12); border-radius:50px; padding:4px 12px;
+      border:1px solid rgba(255,255,255,0.2);
+    }
+
+    /* Coins */
+    .reg-coins-label {
+      font-family:'Fredoka One',cursive; font-size:0.9rem; color:#aaffcc;
+      padding:10px 20px 6px; text-align:center;
+    }
+    .register-coins {
+      display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
+      padding:10px 16px 14px;
+    }
+    .coin-btn {
+      width:68px; height:68px; border-radius:50%; border:none; cursor:pointer;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-family:'Fredoka One',cursive; line-height:1.2;
+      box-shadow:0 4px 12px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.3);
+      transition:transform 0.1s, opacity 0.3s, box-shadow 0.1s;
+      position:relative; overflow:hidden;
+    }
+    .coin-btn:active { transform:scale(0.9); }
+    .coin-btn.used {
+      opacity:0.25; cursor:default; transform:translateY(6px);
+      box-shadow:none;
+    }
+    .coin-btn.used::after {
+      content:'✓'; position:absolute; inset:0; background:rgba(0,0,0,0.4);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem; color:#fff;
+    }
+    .coin-btn .coin-value { font-size:1rem; color:#fff; text-shadow:1px 1px 0 rgba(0,0,0,0.3); }
+    .coin-btn .coin-name  { font-size:0.55rem; color:rgba(255,255,255,0.85); text-shadow:1px 1px 0 rgba(0,0,0,0.3); }
+
+    /* Bill style (rectangular) */
+    .coin-btn.bill {
+      width:86px; height:52px; border-radius:10px;
+      font-size:1.1rem;
+    }
+    .coin-btn.bill .coin-value { font-size:1.2rem; }
+    .coin-btn.bill .coin-name  { font-size:0.5rem; }
+
+    /* Coin colors */
+    .coin-dollar  { background:radial-gradient(circle at 35% 35%, #4ade80, #15803d); border:3px solid #166534; }
+    .coin-quarter { background:radial-gradient(circle at 35% 35%, #e2e8f0, #94a3b8); border:3px solid #64748b; }
+    .coin-dime    { background:radial-gradient(circle at 35% 35%, #e2e8f0, #64748b); border:3px solid #475569; width:58px; height:58px; }
+    .coin-nickel  { background:radial-gradient(circle at 35% 35%, #d4d4d4, #737373); border:3px solid #525252; }
+    .coin-penny   { background:radial-gradient(circle at 35% 35%, #fde68a, #b45309); border:3px solid #92400e; }
+
+    /* Progress bar */
+    .register-progress-wrap {
+      margin:0 16px 14px; height:14px; background:rgba(255,255,255,0.1);
+      border-radius:99px; overflow:hidden; border:1px solid rgba(255,255,255,0.15);
+    }
+    .register-progress-bar {
+      height:100%; background:linear-gradient(90deg,#00cc44,#00ff66);
+      border-radius:99px; transition:width 0.35s ease;
+      box-shadow:0 0 8px rgba(0,255,100,0.5);
+    }
+
+    /* Ding screen */
+    .register-ding {
+      display:none; flex-direction:column; align-items:center; justify-content:center;
+      padding:36px 20px; text-align:center;
+    }
+    .ding-emoji { font-size:4rem; animation:bounce 0.5s ease infinite alternate; display:block; }
+    @keyframes bounce { from{transform:translateY(0)} to{transform:translateY(-12px)} }
+    .ding-text {
+      font-family:'Fredoka One',cursive; font-size:1.8rem; color:#7fffa0;
+      text-shadow:0 0 20px rgba(100,255,150,0.6); margin:12px 0 6px;
+    }
+    .ding-sub { font-family:'Fredoka One',cursive; font-size:1rem; color:#aaffcc; }
+
+    /* Cancel btn */
+    .register-cancel {
+      display:block; width:calc(100% - 32px); margin:0 16px 16px;
+      font-family:'Fredoka One',cursive; font-size:1rem; color:#aaa;
+      background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+      border-radius:50px; padding:10px; cursor:pointer; transition:background 0.15s;
+    }
+    .register-cancel:hover { background:rgba(255,80,80,0.2); color:#ff9999; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="img/fsm-logo.png" alt="FirstStepMath" class="logo-img">
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="about.html" class="nav-link">About</a>
+        <a href="worksheets.html" class="nav-link">📄 Worksheets</a>
+        <a href="store.html" class="nav-link" style="color:var(--orange);font-weight:800">🐾 Pet Store</a>
+        <a href="login.html" class="btn btn-outline">Sign In</a>
+        <a href="index.html#grades" class="btn btn-primary">Play Now</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <div class="store-hero">
+    <h1>🐾 Pet Store</h1>
+    <p>Answer questions correctly to earn pretend money — then spend it here!</p>
+    <div class="balance-pill">
+      💵 $<span id="balanceAmt">0.00</span> <span style="font-size:1rem;opacity:0.8">saved up</span>
+    </div>
+  </div>
+
+  <!-- STORE ENTRANCE -->
+  <div class="store-entrance" id="storeEntrance">
+    <div class="entrance-title">✨ Where would you like to shop? ✨</div>
+    <div class="entrance-grid">
+      <div class="entrance-card pets-card" onclick="enterStore('pets')">
+        <span class="entrance-icon">🐾</span>
+        <span class="entrance-name">Pet Shop</span>
+        <span class="entrance-desc">Adopt a furry friend!</span>
+      </div>
+      <div class="entrance-card access-card" onclick="enterStore('pet-care')">
+        <span class="entrance-icon">🎀</span>
+        <span class="entrance-name">Pet Accessories</span>
+        <span class="entrance-desc">Food &amp; beds!</span>
+      </div>
+      <div class="entrance-card world-card" onclick="enterStore('collection')">
+        <span class="entrance-icon">🌿</span>
+        <span class="entrance-name">My Pet World</span>
+        <span class="entrance-desc">Arrange your pets!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS (hidden — used internally) -->
+  <div class="store-tabs">
+    <button class="store-tab active" data-tab="pets">🐾 Pets</button>
+    <button class="store-tab" data-tab="pet-care">🍖 Pet Food &amp; Accessories</button>
+    <button class="store-tab" data-tab="collection">🌿 My Pet World</button>
+  </div>
+
+  <div class="store-main" id="storeMain" style="display:none">
+    <button class="back-to-store" onclick="backToEntrance()">← Back to Store</button>
+    <div class="store-banner">
+      💡 Each correct answer earns you <strong>5¢</strong> — save up and buy something fun!
+    </div>
+
+    <!-- ══════════ PETS ══════════ -->
+    <div class="store-section active" id="tab-pets">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:6px;">
+        <div class="section-title" style="margin:0">🐾 Adopt a Pet!</div>
+        <button class="world-shortcut-btn" onclick="enterStore('collection')">🌿 My Pet World →</button>
+      </div>
+      <div class="store-grid" id="petsGrid"></div>
+    </div>
+
+    <!-- ══════════ PET CARE ══════════ -->
+    <div class="store-section" id="tab-pet-care">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
+        <div class="owned-pets-row" style="margin:0;flex:1;">
+          <h3 style="margin:0 0 6px">🐾 Your Pets</h3>
+          <div class="owned-pets-chips" id="ownedPetsRow">
+            <span class="no-pets-msg">Adopt a pet first to buy food and accessories!</span>
+          </div>
+        </div>
+        <button class="world-shortcut-btn" onclick="enterStore('collection')">🌿 My Pet World →</button>
+      </div>
+
+      <div class="pet-care-tabs">
+        <button class="pet-care-tab active" data-care="accessories">🎀 Accessories</button>
+        <button class="pet-care-tab" data-care="beds">🛏️ Beds &amp; Homes</button>
+      </div>
+
+      <div class="pet-care-section active" id="care-accessories">
+        <div class="section-title" style="font-size:1.3rem">🍖 Food</div>
+        <div class="store-grid" id="foodGrid"></div>
+        <div class="section-title" style="font-size:1.3rem;margin-top:28px">🎀 Accessories</div>
+        <div class="store-grid" id="accessGrid"></div>
+      </div>
+      <div class="pet-care-section" id="care-beds">
+        <div class="section-title" style="font-size:1.3rem">🛏️ Beds &amp; Homes</div>
+        <div class="store-grid" id="bedsGrid"></div>
+      </div>
+    </div>
+
+    <!-- ══════════ PET WORLD ══════════ -->
+    <div class="store-section" id="tab-collection">
+      <div class="section-title">🌿 My Pet World</div>
+      <div class="pw-outer">
+        <div id="pwLimitToast"></div>
+        <!-- Sidebar -->
+        <div class="pw-sidebar" id="pwSidebar">
+          <button class="pw-cat-btn active" data-cat="pet" onclick="pwSetCat('pet')"><span class="pw-cat-icon">🐾</span><span>My Pets</span></button>
+          <button class="pw-cat-btn" data-cat="acc" onclick="pwSetCat('acc')"><span class="pw-cat-icon">✨</span><span>My Access.</span></button>
+          <button class="pw-cat-btn" data-cat="home" onclick="pwSetCat('home')"><span class="pw-cat-icon">🏠</span><span>My Homes</span></button>
+          <div class="pw-limit" id="pwLimit"></div>
+          <div class="pw-items-list" id="pwItemsList"></div>
+        </div>
+        <!-- Scene -->
+        <div class="pet-world-wrap" style="flex:1;min-width:0">
+          <div class="pet-world-scene" id="petWorldScene">
+            <!-- pets rendered here by JS -->
+          </div>
+          <div class="pet-world-shelf" id="petWorldShelf" style="display:none">
+            <div class="pet-world-shelf-title">🏠 Homes &amp; Accessories</div>
+            <div class="shelf-chips" id="petWorldShelfChips"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASH REGISTER MODAL -->
+  <div id="registerOverlay" class="register-overlay" style="display:none" onclick="overlayClick(event)">
+    <div class="register-modal" id="registerModal">
+      <div class="register-top">
+        <div class="register-title">🏧 Cash Register</div>
+        <button class="register-close" onclick="closeRegister()">✕</button>
+      </div>
+
+      <!-- Pay flow -->
+      <div id="regPayFlow">
+        <div class="register-item">
+          <span class="reg-item-emoji" id="regItemEmoji"></span>
+          <div>
+            <div class="reg-item-name" id="regItemName"></div>
+            <div class="reg-item-price" id="regItemPrice"></div>
+          </div>
+        </div>
+
+        <div class="register-display">
+          <div class="display-row">
+            <span>TOTAL</span>
+            <span class="display-val" id="regTotal">$0.00</span>
+          </div>
+          <div class="display-row paid-row">
+            <span>PAID &nbsp;</span>
+            <span class="display-val" id="regPaid">$0.00</span>
+          </div>
+        </div>
+
+        <div class="register-hint">
+          <div class="hint-label">💡 You need these coins:</div>
+          <div class="hint-coins" id="regBreakdown"></div>
+        </div>
+
+        <div class="reg-coins-label">👆 Click each coin to put it in the register!</div>
+        <div id="regCoins" class="register-coins"></div>
+
+        <div class="register-progress-wrap">
+          <div class="register-progress-bar" id="regProgressBar" style="width:0%"></div>
+        </div>
+
+        <button class="register-cancel" onclick="closeRegister()">Cancel</button>
+      </div>
+
+      <!-- Ding screen -->
+      <div class="register-ding" id="regDing">
+        <span class="ding-emoji" id="dingEmoji">🎉</span>
+        <div class="ding-text">DING! You paid!</div>
+        <div class="ding-sub" id="dingItemName"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="js/tts.js"></script>
+  <script>
+  /* Hamburger nav for mobile */
+  (function(){
+    const hb = document.getElementById('hamburger');
+    const mn = document.getElementById('mainNav');
+    if (hb && mn) {
+      hb.addEventListener('click', function(){
+        const open = mn.style.display === 'flex';
+        if (open) { mn.removeAttribute('style'); }
+        else { Object.assign(mn.style, {display:'flex',flexDirection:'column',position:'absolute',top:'68px',left:'0',right:'0',background:'#fff',padding:'16px 24px',boxShadow:'0 8px 20px rgba(0,0,0,0.1)',zIndex:'99'}); }
+      });
+    }
+  })();
+  </script>
+  <script>
+  (() => {
+    const MONEY_KEY = 'fsm_dollars';
+    const PURCH_KEY = 'fsm_purchases';
+    const USERS_KEY = 'fsm_users';
+    const getUsers  = () => { try { return JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); } catch(e) { return []; } };
+    const saveUsers = u => localStorage.setItem(USERS_KEY, JSON.stringify(u));
+
+    /* Ensure admin account always exists */
+    (function seedAdmin() {
+      const users = getUsers();
+      const hi = users.findIndex(u => u.email === 'heathermosko@gmail.com');
+      if (hi < 0) {
+        users.push({ email:'heathermosko@gmail.com', password:'admin', name:'Heather', type:'teacher', classCode:'FSM-ADMIN', students:[] });
+      } else {
+        users[hi].password = 'admin'; users[hi].type = 'teacher';
+        if (!users[hi].classCode) users[hi].classCode = 'FSM-ADMIN';
+        if (!users[hi].students)  users[hi].students  = [];
+      }
+      saveUsers(users);
+      localStorage.setItem(MONEY_KEY, '9999.99');
+      // Pre-own all new items for admin account
+      var rawP = localStorage.getItem(PURCH_KEY);
+      var p = {}; try { var tmp = JSON.parse(rawP||'{}'); if(Array.isArray(tmp)){tmp.forEach(function(id){p[id]=1;});}else{p=tmp;} } catch(e){}
+      var newIds = ['bear','cheetah','tiger','lion','robo-dog',
+        'alien-wave','alien-mint','alien-peace','alien-orange','alien-rainbow','alien-ref',
+        'dino-bowl','bear-food','lion-food','tiger-food','cheetah-food',
+        'lamb-food','parrot-food','goat-food','cow-food','pony-food','chicken-food',
+        'spaceship',
+        'acc-soccer-ball','acc-basketball','acc-football','acc-baseball','acc-tennis',
+        'acc-hockey','acc-golf','acc-dumbbells','acc-trophy','acc-pet-trophy',
+        'race-car','paw-race-car','monster-truck','bulldozer','fire-truck',
+        'train-engine','paw-plane','jet-plane','propeller-plane',
+        'rocket-ship','spaceship-acc','ufo'];
+      newIds.forEach(function(id){ if(!p[id]) p[id]=1; });
+      localStorage.setItem(PURCH_KEY, JSON.stringify(p));
+    })();
+
+    /* ?money=1 in URL → load $99.99 for testing */
+    if (new URLSearchParams(location.search).get('money') === '1') {
+      localStorage.setItem(MONEY_KEY, '99.99');
+    }
+
+    const BG = [
+      '#fef9c3','#ede9fe','#dbeafe','#dcfce7','#fce7f3',
+      '#ffedd5','#e0f2fe','#f0fdf4','#fef3c7','#fdf4ff',
+      '#d1fae5','#fef2f2','#ecfdf5','#fff7ed','#eff6ff',
+    ];
+
+    // ── PETS ──────────────────────────────────────────
+    const PETS = [
+      // $1
+      { id:'fishpet',   num:1,  name:'Goldfish Pal', emoji:'🐟', img:'img/store/fishpet.png',  price:1.00,  desc:'Swim • Splash • Shine!'   },
+      // $5
+      { id:'turtle',    num:2,  name:'Turtle Pal',   emoji:'🐢', img:'img/store/turtle.png',   price:5.00,  desc:'Slow • Steady • Cool!'    },
+      { id:'duck',      num:3,  name:'Ducky Pal',    emoji:'🐥', img:'img/store/duck.png',     price:5.00,  desc:'Waddle • Quack • Play!'   },
+      // $10
+      { id:'hamster',   num:4,  name:'Hamster Pal',  emoji:'🐹', img:'img/store/hamster.png',  price:10.00, desc:'Scurry • Nibble • Play!'  },
+      { id:'owl',       num:5,  name:'Owl Pal',      emoji:'🦉', img:'img/store/owl.png',      price:10.00, desc:'Hoot • Play • Learn!'     },
+      { id:'hedgehog',  num:6,  name:'Hedgehog Pal', emoji:'🦔', img:'img/store/hedgehog.png', price:10.00, desc:'Roll • Play • Cuddle!'    },
+      { id:'lamb',      num:7,  name:'Lamb Pal',     emoji:'🐑', img:'img/store/lamb.png',     price:10.00, desc:'Baa • Play • Cuddle!'     },
+      // $15
+      { id:'bunny',     num:8,  name:'Bunny Pal',    emoji:'🐰', img:'img/store/bunny.png',    price:15.00, desc:'Hop • Cuddle • Play!'     },
+      { id:'ferret',    num:9,  name:'Ferret Pal',   emoji:'🐾', img:'img/store/ferret.png',   price:15.00, desc:'Scoot • Play • Snuggle!'  },
+      { id:'monkey',    num:10, name:'Monkey Pal',   emoji:'🐵', img:'img/store/monkey.png',   price:15.00, desc:'Swing • Play • Smile!'    },
+      { id:'piggy',     num:11, name:'Piggy Pal',    emoji:'🐷', img:'img/store/piggy.png',    price:15.00, desc:'Oink • Play • Love!'      },
+      { id:'parrot',    num:12, name:'Parrot Pal',   emoji:'🦜', img:'img/store/parrot.png',   price:15.00, desc:'Talk • Sing • Play!'      },
+      { id:'robo-dog',  num:13, name:'Robo Dog',     emoji:'🤖', img:'img/store/robo-dog.png', price:15.00, desc:'Fetch • Beep • Play!'     },
+      { id:'robo-cat',  num:14, name:'Robo Cat',     emoji:'🐱', img:'img/store/robo-cat.png', price:15.00, desc:'Purr • Beep • Play!'      },
+      // $20
+      { id:'puppy-pet', num:15, name:'Puppy Pal',    emoji:'🐶', img:'img/store/puppy-pet.png',price:20.00, desc:'Woof • Play • Cuddle!'    },
+      { id:'kitty-pet', num:16, name:'Kitty Pal',    emoji:'🐱', img:'img/store/kitty-pet.png',price:20.00, desc:'Meow • Purr • Play!'      },
+      { id:'pony',      num:17, name:'Pony Pal',     emoji:'🐴', img:'img/store/pony.png',     price:20.00, desc:'Trot • Play • Love!'      },
+      // $25
+      { id:'alien',     num:18, name:'Alien Pal',    emoji:'👽', img:'img/store/alien.png',    price:25.00, desc:'Glow • Wave • Play!'      },
+      { id:'dino',      num:19, name:'Dino Pal',     emoji:'🦕', img:'img/store/dino.png',     price:25.00, desc:'Roar • Stomp • Play!'     },
+      { id:'chicken',   num:20, name:'Chicken Pal',  emoji:'🐔', img:'img/store/chicken.png',  price:10.00, desc:'Cluck • Play • Peck!'     },
+      { id:'snake',     num:21, name:'Snake Pal',    emoji:'🐍', img:'img/store/snake.png',    price:15.00, desc:'Slide • Play • Hiss!'     },
+      { id:'lizard',    num:22, name:'Lizard Pal',   emoji:'🦎', img:'img/store/lizard.png',   price:15.00, desc:'Climb • Play • Sun!'      },
+      { id:'cow',       num:23, name:'Cow Pal',      emoji:'🐮', img:'img/store/cow.png',      price:20.00, desc:'Moo • Play • Cuddle!'     },
+      { id:'goat',      num:24, name:'Goat Pal',     emoji:'🐐', img:'img/store/goat.png',     price:15.00, desc:'Bleat • Play • Climb!'    },
+      { id:'gator',     num:25, name:'Gator Pal',    emoji:'🐊', img:'img/store/gator.png',    price:20.00, desc:'Splash • Play • Snap!'    },
+      { id:'frog',      num:26, name:'Froggy Pal',   emoji:'🐸', img:'img/store/frog.png',     price:10.00, desc:'Hop • Splash • Play!'     },
+      // $20-30
+      { id:'bear',      num:27, name:'Bear Pal',     emoji:'🐻', img:'img/store/bear.png',     price:20.00, desc:'Roar • Wave • Play!'      },
+      { id:'cheetah',   num:28, name:'Cheetah Pal',  emoji:'🐆', img:'img/store/cheetah.png',  price:25.00, desc:'Zoom • Spot • Play!'      },
+      { id:'tiger',     num:29, name:'Tiger Pal',    emoji:'🐯', img:'img/store/tiger.png',    price:25.00, desc:'Roar • Stripe • Play!'    },
+      { id:'lion',       num:30, name:'Lion Pal',          emoji:'🦁', img:'img/store/lion.png',          price:30.00, desc:'Roar • Mane • Rule!'        },
+      { id:'alien-wave', num:31, name:'Waving Alien',      emoji:'👽', img:'img/store/alien-wave.png',    price:25.00, desc:'Wave • Glow • Play!'         },
+      { id:'alien-mint', num:32, name:'Mint Alien',        emoji:'👽', img:'img/store/alien-mint.png',    price:25.00, desc:'Float • Zoom • Play!'        },
+      { id:'alien-peace',num:33, name:'Peace Alien',       emoji:'☮️', img:'img/store/alien-peace.png',   price:25.00, desc:'Peace • Glow • Float!'       },
+      { id:'alien-orange',num:34,name:'Orange Alien',      emoji:'🟠', img:'img/store/alien-orange.png',  price:25.00, desc:'Glow • Bounce • Play!'       },
+      { id:'alien-rainbow',num:35,name:'Rainbow Alien',    emoji:'🌈', img:'img/store/alien-rainbow.png', price:25.00, desc:'Spark • Zoom • Shine!'       },
+      { id:'alien-ref',  num:36, name:'Classic Alien',     emoji:'👽', img:'img/store/alien-ref.png',     price:20.00, desc:'Float • Beam • Play!'        },
+    ];
+
+    // ── FOOD ──────────────────────────────────────────
+    const FOOD = [
+      { id:'dog-food',     num:1, name:'Puppy Food',       emoji:'🦴', img:'img/store/food-puppy.png',   price:0.20, desc:'Crunch • Munch • Woof!',      bg:'#fef9c3', repeatable:true },
+      { id:'cat-food',     num:2, name:'Kitty Food',       emoji:'🐟', img:'img/store/food-kitty.png',   price:0.20, desc:'Crunch • Purr • Yum!',        bg:'#fce7f3', repeatable:true },
+      { id:'bunny-food',   num:3, name:'Bunny Food',        emoji:'🥕', img:'img/store/food-bunny.png',   price:0.15, desc:'Crunch • Nibble • Eat!',      bg:'#dcfce7', repeatable:true },
+      { id:'hamster-food', num:4, name:'Hamster Snack Mix',emoji:'🌾', img:'img/store/food-hamster.png', price:0.15, desc:'Nibble • Crunch • Fun!',       bg:'#fef3c7', repeatable:true },
+      { id:'fish-food',    num:5, name:'Goldfish Flakes',  emoji:'🫙', img:'img/store/food-fish.png',    price:0.15, desc:'Sprinkle • Swim • Smile!',     bg:'#dbeafe', repeatable:true },
+      { id:'alien-food',    num:6,  name:'Alien Food',         emoji:'✨', img:'img/store/food-alien.png',   price:0.25, desc:'Yummy • Glow • Eat!',          bg:'#ede9fe', repeatable:true },
+      { id:'dino-food',     num:7,  name:'Dinosaur Food',     emoji:'🦕', img:'img/store/food-dino.png',    price:0.25, desc:'Munch • Crunch • Eat!',        bg:'#dcfce7', repeatable:true },
+      { id:'robo-dog-fuel',  num:8,  name:'Robo Dog Fuel',       emoji:'⚡', img:'img/store/food-robo-dog.png', price:0.20, desc:'Charge • Beep • Play!',        bg:'#e0f2fe', repeatable:true },
+      { id:'robo-cat-fuel',  num:25, name:'Robo Cat Fuel',       emoji:'⚡', img:'img/store/food-robo-cat.png', price:0.20, desc:'Power • Purr • Play!',          bg:'#fce7f3', repeatable:true },
+      { id:'duck-food',     num:9,  name:'Duck Food',           emoji:'🌾', img:'img/store/food-duck.png',    price:0.15, desc:'Peck • Splash • Eat!',        bg:'#fef9c3', repeatable:true },
+      { id:'owl-food',      num:10, name:'Owl Pellets',         emoji:'🦉', img:'img/store/food-owl.png',      price:0.15, desc:'Hoot • Crunch • Eat!',         bg:'#fff7ed', repeatable:true },
+      { id:'hedgehog-food', num:11, name:'Hedgehog Nibbles',   emoji:'🦔', img:'img/store/food-hedgehog.png', price:0.15, desc:'Roll • Nibble • Eat!',         bg:'#d1fae5', repeatable:true },
+      { id:'lamb-food',     num:12, name:'Lamb Hay & Clover',  emoji:'🐑', img:'img/store/food-lamb.png',     price:0.15, desc:'Baa • Munch • Eat!',           bg:'#f0fdf4', repeatable:true },
+      { id:'ferret-food',   num:13, name:'Ferret Bites',       emoji:'🐾', img:'img/store/food-ferret.png',   price:0.20, desc:'Scoot • Chomp • Eat!',         bg:'#fce7f3', repeatable:true },
+      { id:'monkey-food',   num:14, name:'Banana Bites',       emoji:'🍌', img:'img/store/food-monkey.png',   price:0.20, desc:'Swing • Munch • Eat!',         bg:'#fef3c7', repeatable:true },
+      { id:'piggy-food',    num:15, name:'Pig Food',            emoji:'🌽', img:'img/store/food-piggy.png',   price:0.15, desc:'Snack • Munch • Eat!',         bg:'#fce7f3', repeatable:true },
+      { id:'pony-food',     num:16, name:'Pony Food',           emoji:'🥕', img:'img/store/food-pony.png',    price:0.25, desc:'Munch • Trot • Eat!',         bg:'#ffedd5', repeatable:true },
+      { id:'turtle-food',   num:17, name:'Turtle Food',         emoji:'🐢', img:'img/store/food-turtle.png',   price:0.15, desc:'Swim • Munch • Eat!',          bg:'#dcfce7', repeatable:true },
+      { id:'parrot-food',   num:18, name:'Parrot Seeds',       emoji:'🦜', img:'img/store/food-parrot.png',   price:0.20, desc:'Talk • Munch • Eat!',          bg:'#dcfce7', repeatable:true },
+      { id:'chicken-food',  num:19, name:'Chicken Feed',        emoji:'🌾', img:'img/store/food-chicken.png', price:0.15, desc:'Crunch • Peck • Eat!',          bg:'#fef9c3', repeatable:true },
+      { id:'snake-food',    num:20, name:'Snake Food',           emoji:'🥚', img:'img/store/food-snake.png',   price:0.25, desc:'Coil • Snack • Eat!',           bg:'#dcfce7', repeatable:true },
+      { id:'lizard-food',   num:21, name:'Lizard Food',         emoji:'🦗', img:'img/store/food-lizard.png',  price:0.20, desc:'Crunch • Hunt • Eat!',         bg:'#d1fae5', repeatable:true },
+      { id:'cow-food',      num:22, name:'Cow Food',             emoji:'🌿', img:'img/store/food-cow.png',     price:0.20, desc:'Graze • Chew • Eat!',           bg:'#f0fdf4', repeatable:true },
+      { id:'goat-food',     num:23, name:'Goat Food',            emoji:'🌿', img:'img/store/food-goat.png',    price:0.15, desc:'Munch • Chew • Eat!',           bg:'#fef3c7', repeatable:true },
+      { id:'gator-food',    num:24, name:'Gator Food',          emoji:'🐟', img:'img/store/food-gator.png',   price:0.25, desc:'Chomp • Snap • Eat!',          bg:'#e0f2fe', repeatable:true },
+      { id:'frog-food',     num:26, name:'Frog Food',           emoji:'🐸', img:'img/store/food-frog.png',    price:0.15, desc:'Hop • Munch • Eat!',           bg:'#dcfce7', repeatable:true },
+      { id:'dino-bowl',     num:27, name:'Dino Food Bowl',      emoji:'🦕', img:'img/store/food-dino-bowl.png',  price:0.30, desc:'Chomp • Roar • Eat!',          bg:'#dcfce7', repeatable:true },
+      { id:'bear-food',     num:28, name:'Bear Snack Berries',  emoji:'🍓', img:'img/store/food-bear.png',       price:0.25, desc:'Munch • Growl • Eat!',          bg:'#fce7f3', repeatable:true },
+      { id:'lion-food',     num:29, name:'Lion Feast',          emoji:'🥩', img:'img/store/food-lion.png',       price:0.30, desc:'Roar • Chomp • Eat!',           bg:'#fef3c7', repeatable:true },
+      { id:'tiger-food',    num:30, name:'Tiger Feast',         emoji:'🥩', img:'img/store/food-tiger.png',      price:0.30, desc:'Growl • Chomp • Eat!',          bg:'#ffedd5', repeatable:true },
+      { id:'cheetah-food',  num:31, name:'Cheetah Snack',       emoji:'🍖', img:'img/store/food-cheetah.png',    price:0.25, desc:'Zoom • Munch • Eat!',           bg:'#fef9c3', repeatable:true },
+    ];
+
+    // ── ACCESSORIES ───────────────────────────────────
+    const ACCESSORIES = [
+      { id:'collar-leash',    num:1,  name:'Collar & Leash',   emoji:'🐾', img:'img/store/collar-leash.png',       price:0.35, desc:'Clip • Walk • Play!',         bg:'#dbeafe' },
+      { id:'squeaky-toy',     num:2,  name:'Squeaky Toy',      emoji:'🦴', img:'img/store/squeaky-toy.png',        price:0.25, desc:'Squeak • Toss • Fun!',        bg:'#fef9c3' },
+      { id:'robo-charger',    num:3,  name:'Robo Charger',     emoji:'⚡', img:'img/store/robo-charger.png',       price:0.40, desc:'Charge • Beep • Play!',       bg:'#e0f2fe' },
+      { id:'pet-crown',       num:5,  name:'Pet Crown',        emoji:'👑', img:'img/store/acc-pet-crown.png',      price:0.50, desc:'Royal • Shine • Sparkle!',    bg:'#fef3c7' },
+      { id:'tiny-backpack',   num:7,  name:'Tiny Backpack',    emoji:'🎒', img:'img/store/acc-backpack.png',       price:0.35, desc:'Pack • Go • Explore!',        bg:'#ede9fe' },
+      { id:'pet-raincoat',    num:8,  name:'Pet Raincoat',     emoji:'🌧️', img:'img/store/acc-raincoat.png',       price:0.40, desc:'Splish • Splash • Dry!',      bg:'#dbeafe' },
+      { id:'pet-sunglasses',  num:9,  name:'Pet Sunglasses',   emoji:'🕶️', img:'img/store/acc-sunglasses.png',     price:0.30, desc:'Cool • Bright • Shine!',      bg:'#ede9fe' },
+      { id:'superhero-cape',  num:10, name:'Superhero Cape',   emoji:'🦸', img:'img/store/acc-superhero-cape.png', price:0.45, desc:'Fly • Brave • Hero!',         bg:'#ffedd5' },
+      { id:'cozy-sweater',    num:11, name:'Cozy Sweater',     emoji:'🧶', img:'img/store/acc-cozy-sweater.png',   price:0.45, desc:'Warm • Cozy • Cute!',         bg:'#fce7f3' },
+      { id:'grooming-kit',      num:12, name:'Grooming Kit',        emoji:'✨', img:'img/store/acc-grooming-kit.png',      price:0.35, desc:'Brush • Fluff • Shine!',      bg:'#dcfce7' },
+      { id:'bubble-wand',       num:13, name:'Bubble Wand Set',     emoji:'🫧', img:'img/store/acc-bubble-wand.png',       price:0.30, desc:'Blow • Pop • Play!',          bg:'#e0f2fe' },
+      { id:'rain-boots',        num:24, name:'Rain Boots',          emoji:'🥾', img:'img/store/acc-rain-boots.png',        price:0.30, desc:'Splash • Jump • Fun!',         bg:'#fef9c3' },
+      { id:'bandana',           num:25, name:'Paw Bandana',         emoji:'🐾', img:'img/store/acc-bandana.png',           price:0.25, desc:'Cool • Paw • Style!',          bg:'#fee2e2' },
+      { id:'hero-mask',         num:26, name:'Hero Mask',           emoji:'🦸', img:'img/store/acc-mask.png',              price:0.30, desc:'Zoom • Hero • Go!',            bg:'#ede9fe' },
+      { id:'roller-skates',     num:27, name:'Roller Skates',       emoji:'⛸️', img:'img/store/acc-roller-skates.png',     price:0.40, desc:'Roll • Spin • Glide!',         bg:'#dbeafe' },
+      { id:'collar-leash',      num:28, name:'Star Collar & Leash', emoji:'⭐', img:'img/store/acc-collar-leash.png',      price:0.35, desc:'Walk • Star • Go!',            bg:'#fef3c7' },
+      { id:'treat-pouch',       num:29, name:'Treat Pouch',         emoji:'🐾', img:'img/store/acc-treat-pouch.png',       price:0.30, desc:'Snack • Reward • Yum!',        bg:'#dcfce7' },
+      { id:'bow-headband',      num:30, name:'Glitter Bow Headband', emoji:'🎀', img:'img/store/acc-bow-headband.png',      price:0.35, desc:'Sparkle • Cute • Shine!',      bg:'#fce7f3' },
+      { id:'heart-sunglasses',  num:31, name:'Heart Sunglasses',     emoji:'🕶️', img:'img/store/acc-heart-sunglasses.png',  price:0.30, desc:'Cute • Cool • Rosy!',          bg:'#fce7f3' },
+      { id:'tutu',              num:32, name:'Pink Tutu',            emoji:'🩰', img:'img/store/acc-tutu.png',              price:0.40, desc:'Twirl • Dance • Poof!',        bg:'#fce7f3' },
+      { id:'purse',             num:33, name:'Heart Purse',          emoji:'👜', img:'img/store/acc-purse.png',             price:0.35, desc:'Fancy • Carry • Style!',       bg:'#ede9fe' },
+      { id:'butterfly-wings',   num:34, name:'Butterfly Wings',      emoji:'🦋', img:'img/store/acc-butterfly-wings.png',   price:0.45, desc:'Flutter • Magic • Fly!',       bg:'#fce7f3' },
+      { id:'pearl-collar',      num:35, name:'Pearl Collar',         emoji:'🌸', img:'img/store/acc-pearl-collar.png',      price:0.40, desc:'Fancy • Bow • Pearl!',         bg:'#fce7f3' },
+      { id:'astronaut-helmet',  num:20, name:'Astronaut Helmet',      emoji:'🚀', img:'img/store/acc-astronaut-helmet.png',  price:0.50, desc:'Blast • Orbit • Zoom!',        bg:'#e0f2fe' },
+      // Toys
+      { id:'toy-bone',         num:36, name:'Rainbow Bone',        emoji:'🦴', img:'img/store/toy-bone.png',         price:0.25, desc:'Chew • Toss • Play!',          bg:'#fef9c3' },
+      { id:'toy-rope',         num:37, name:'Rainbow Rope Ring',   emoji:'🌈', img:'img/store/toy-rope.png',         price:0.25, desc:'Tug • Twist • Fun!',           bg:'#ede9fe' },
+      { id:'toy-fish-plush',   num:38, name:'Fish Plush Toy',      emoji:'🐟', img:'img/store/toy-fish-plush.png',   price:0.30, desc:'Squish • Cuddle • Play!',      bg:'#dbeafe' },
+      { id:'toy-ball',         num:39, name:'Paw Play Ball',       emoji:'⚽', img:'img/store/toy-ball.png',         price:0.25, desc:'Roll • Pounce • Fun!',         bg:'#dcfce7' },
+      { id:'toy-feather-wand', num:40, name:'Feather Wand',        emoji:'🪶', img:'img/store/toy-feather-wand.png', price:0.30, desc:'Swish • Flutter • Play!',      bg:'#fce7f3' },
+      { id:'toy-mouse',        num:41, name:'Mouse Plush Toy',     emoji:'🐭', img:'img/store/toy-mouse.png',        price:0.25, desc:'Squeak • Chase • Fun!',        bg:'#fef9c3' },
+      { id:'toy-star-ring',    num:42, name:'Star Chew Ring',      emoji:'⭐', img:'img/store/toy-star-ring.png',    price:0.25, desc:'Bite • Chew • Play!',          bg:'#fef3c7' },
+      { id:'toy-donut',        num:43, name:'Donut Plush Toy',     emoji:'🍩', img:'img/store/toy-donut.png',        price:0.30, desc:'Squish • Cuddle • Sweet!',     bg:'#fce7f3' },
+      { id:'toy-rattle',       num:44, name:'Rattle Toy',          emoji:'🎵', img:'img/store/toy-rattle.png',       price:0.25, desc:'Shake • Rattle • Play!',       bg:'#dbeafe' },
+      { id:'toy-butterfly',    num:45, name:'Butterfly Plush',     emoji:'🦋', img:'img/store/toy-butterfly.png',    price:0.30, desc:'Flutter • Cuddle • Play!',     bg:'#ede9fe' },
+      // Vehicles
+      { id:'race-car',        num:56, name:'Race Car',          emoji:'🏎️', img:'img/store/pet-race_car.png',          price:0.50, desc:'Zoom • Vroom • Race!',         bg:'#fee2e2' },
+      { id:'paw-race-car',    num:57, name:'Paw Race Car',      emoji:'🏎️', img:'img/store/pet-raacecar.png',          price:0.50, desc:'Paw • Zoom • Win!',            bg:'#fef3c7' },
+      { id:'monster-truck',   num:58, name:'Monster Truck',     emoji:'🚛', img:'img/store/pet-monster_truck.png',     price:0.55, desc:'Crush • Bounce • Roar!',       bg:'#ffedd5' },
+      { id:'bulldozer',       num:59, name:'Bulldozer',         emoji:'🚜', img:'img/store/pet-bulldozer.png',         price:0.45, desc:'Push • Dig • Build!',          bg:'#fef9c3' },
+      { id:'fire-truck',      num:60, name:'Fire Truck',        emoji:'🚒', img:'img/store/pet-fire_truck.png',        price:0.50, desc:'Wee-Woo • Zoom • Save!',       bg:'#fee2e2' },
+      { id:'train-engine',    num:61, name:'Train Engine',      emoji:'🚂', img:'img/store/pet-train_engine.png',      price:0.45, desc:'Chug • Choo • Go!',            bg:'#dbeafe' },
+      { id:'paw-plane',       num:62, name:'Paw Plane',         emoji:'✈️', img:'img/store/pet-plane.png',             price:0.50, desc:'Paw • Fly • Soar!',            bg:'#e0f2fe' },
+      { id:'jet-plane',       num:63, name:'Jet Airplane',      emoji:'✈️', img:'img/store/pet-jet_airplane.png',      price:0.55, desc:'Whoosh • Zoom • Fly!',         bg:'#dbeafe' },
+      { id:'propeller-plane', num:64, name:'Propeller Plane',   emoji:'🛩️', img:'img/store/pet-propeller_airplane.png',price:0.50, desc:'Spin • Buzz • Fly!',           bg:'#ede9fe' },
+      { id:'rocket-ship',     num:65, name:'Rocket Ship',       emoji:'🚀', img:'img/store/pet-rocket_ship.png',       price:0.55, desc:'3-2-1 • Blast • Space!',       bg:'#e0f2fe' },
+      { id:'spaceship-acc',   num:66, name:'Spaceship',         emoji:'🛸', img:'img/store/pet-spaceship.png',         price:0.55, desc:'Blast • Orbit • Zoom!',        bg:'#ede9fe' },
+      { id:'ufo',             num:67, name:'UFO',               emoji:'🛸', img:'img/store/pet-ufo_spaceship.png',     price:0.55, desc:'Hover • Beam • Spin!',         bg:'#dbeafe' },
+      // Sports Equipment
+      { id:'acc-soccer-ball',       num:46, name:'Soccer Ball',           emoji:'⚽', img:'img/store/acc-soccer_ball.png',            price:0.35, desc:'Kick • Score • Play!',         bg:'#dcfce7' },
+      { id:'acc-basketball',        num:47, name:'Basketball',            emoji:'🏀', img:'img/store/acc-basketball.png',             price:0.35, desc:'Dribble • Shoot • Score!',     bg:'#ffedd5' },
+      { id:'acc-football',          num:48, name:'Football',              emoji:'🏈', img:'img/store/acc-football.png',              price:0.35, desc:'Throw • Catch • Touchdown!',   bg:'#fef3c7' },
+      { id:'acc-baseball',          num:49, name:'Baseball Bat & Ball',   emoji:'⚾', img:'img/store/acc-baseball_bat_and_ball.png',  price:0.35, desc:'Swing • Hit • Home Run!',      bg:'#dbeafe' },
+      { id:'acc-tennis',            num:50, name:'Tennis Racket & Ball',  emoji:'🎾', img:'img/store/acc-tennis_racket_and_ball.png', price:0.35, desc:'Serve • Rally • Win!',         bg:'#dcfce7' },
+      { id:'acc-hockey',            num:51, name:'Hockey Stick & Puck',   emoji:'🏒', img:'img/store/acc-hockey_stick_and_puck.png', price:0.35, desc:'Slap Shot • Skate • Score!',   bg:'#e0f2fe' },
+      { id:'acc-golf',              num:52, name:'Golf Club & Ball',      emoji:'⛳', img:'img/store/acc-golf_club_and_ball.png',    price:0.35, desc:'Swing • Putt • Birdie!',       bg:'#d1fae5' },
+      { id:'acc-dumbbells',         num:53, name:'Dumbbells',             emoji:'🏋️', img:'img/store/acc-dumbbells.png',             price:0.35, desc:'Lift • Strong • Flex!',        bg:'#fce7f3' },
+      { id:'acc-trophy',            num:54, name:'First Place Trophy',    emoji:'🏆', img:'img/store/acc-first_place_trophy.png',    price:0.50, desc:'Win • Champ • Celebrate!',     bg:'#fef9c3' },
+      { id:'acc-pet-trophy',        num:55, name:'Pet Championship Trophy',emoji:'🏆',img:'img/store/acc-pet_championship_trophy.png',price:0.55, desc:'Best Pet • Champion • Shine!', bg:'#fef3c7' },
+    ];
+
+    // ── BEDS & HOMES ──────────────────────────────────
+    const BEDS = [
+      { id:'pet-bed',           num:1,  name:'Pet Bed',              emoji:'🛏️', img:'img/store/pet-bed.png',              price:0.45, desc:'Rest • Cuddle • Dream!',        bg:'#fef9c3' },
+      { id:'pet-carrier',       num:2,  name:'Pet Carrier',          emoji:'🏡', img:'img/store/pet-carrier.png',          price:0.55, desc:'Travel • Safe • Go!',           bg:'#dbeafe' },
+      { id:'doghouse',          num:3,  name:'Puppy House',          emoji:'🏠', img:'img/store/home-doghouse.png',        price:0.60, desc:'Woof • Play • Home!',           bg:'#ffedd5' },
+      { id:'cat-castle',        num:4,  name:'Cat Castle',           emoji:'🏰', img:'img/store/home-cat-castle.png',      price:0.65, desc:'Purr • Reign • Play!',          bg:'#fce7f3' },
+      { id:'bunny-house',       num:5,  name:'Bunny House',          emoji:'🐰', img:'img/store/home-bunny-house.png',     price:0.55, desc:'Hop • Snuggle • Home!',         bg:'#dcfce7' },
+      { id:'hamster-habitat',   num:6,  name:'Hamster Habitat',      emoji:'🐹', img:'img/store/home-hamster-habitat.png', price:0.60, desc:'Nibble • Tube • Play!',         bg:'#fef9c3' },
+      { id:'fish-tank',         num:7,  name:'Fishbowl Castle',      emoji:'🐠', img:'img/store/home-fishbowl-castle.png', price:0.55, desc:'Swim • Splash • Shine!',        bg:'#e0f2fe' },
+      { id:'robot-station',     num:8,  name:'Robot Station',        emoji:'⚡', img:'img/store/home-robot-station.png',   price:0.65, desc:'Charge • Beep • Play!',         bg:'#e0f2fe' },
+      { id:'alien-pod',         num:9,  name:'Alien Space Pod',      emoji:'🛸', img:'img/store/home-alien-pod.png',       price:0.70, desc:'Glow • Orbit • Home!',          bg:'#ede9fe' },
+      { id:'dino-hideout',      num:10, name:'Dino Hideout',         emoji:'🦕', img:'img/store/home-dino-hideout.png',    price:0.65, desc:'Roar • Stomp • Home!',          bg:'#dcfce7' },
+      { id:'robo-doghouse',     num:11, name:'Robo Doghouse',        emoji:'🤖', img:'img/store/home-robo-doghouse.png',    price:0.70, desc:'Fetch • Beep • Home!',          bg:'#dbeafe' },
+      { id:'robo-cat-pod',      num:12, name:'Robo Cat Pod',         emoji:'🐱', img:'img/store/home-robo-cat-pod.png',     price:0.70, desc:'Purr • Beep • Home!',           bg:'#fce7f3' },
+      { id:'pastel-stable',     num:13, name:'Pastel Stable',        emoji:'🐴', img:'img/store/home-pastel-stable.png',    price:0.65, desc:'Trot • Rest • Munch!',          bg:'#ffedd5' },
+      { id:'chicken-coop',      num:14, name:'Chicken Coop',         emoji:'🐔', img:'img/store/home-chicken-coop.png',     price:0.55, desc:'Cluck • Nest • Lay!',           bg:'#fef9c3' },
+      { id:'swamp-terrarium',   num:15, name:'Swamp Terrarium',      emoji:'🐊', img:'img/store/home-swamp-terrarium.png',  price:0.65, desc:'Slither • Snap • Splash!',      bg:'#dcfce7' },
+      { id:'duck-pond',         num:16, name:'Duck Pond',            emoji:'🦆', img:'img/store/home-duck-pond.png',         price:0.55, desc:'Quack • Swim • Splash!',        bg:'#bfdbfe' },
+      { id:'bird-perch',        num:17, name:'Bird Perch House',     emoji:'🦉', img:'img/store/home-bird-perch.png',        price:0.55, desc:'Hoot • Perch • Squawk!',        bg:'#fef3c7' },
+      { id:'cozy-burrow',       num:18, name:'Cozy Burrow',          emoji:'🦔', img:'img/store/home-cozy-burrow.png',       price:0.55, desc:'Curl • Snuggle • Sleep!',       bg:'#fce7f3' },
+      { id:'jungle-treehouse',  num:19, name:'Jungle Treehouse',     emoji:'🐒', img:'img/store/home-jungle-treehouse.png',  price:0.65, desc:'Swing • Climb • Play!',         bg:'#d1fae5' },
+      { id:'farm-barn',         num:20, name:'Farm Barn',            emoji:'🐄', img:'img/store/home-farm-barn.png',         price:0.60, desc:'Moo • Oink • Baa!',             bg:'#fef9c3' },
+      { id:'frog-pond',         num:21, name:'Frog Pond',            emoji:'🐸', img:'img/store/home-frog-pond.png',         price:0.55, desc:'Hop • Splash • Home!',           bg:'#dcfce7' },
+      { id:'snake-den',         num:22, name:'Snake Den',            emoji:'🐍', img:'img/store/home-snake-den.png',         price:0.60, desc:'Coil • Hide • Home!',            bg:'#d1fae5' },
+      { id:'spaceship',         num:23, name:'Spaceship Home',       emoji:'🚀', img:'img/store/home-spaceship.png',         price:0.75, desc:'Blast • Orbit • Home!',          bg:'#dbeafe' },
+    ];
+
+    // ── STATE ──────────────────────────────────────────
+    let balance   = parseFloat(localStorage.getItem(MONEY_KEY) || '0');
+    // purchases is now {id: count} — repeatable items can be bought multiple times
+    let rawPurch  = localStorage.getItem(PURCH_KEY);
+    let purchases = {};
+    try {
+      const parsed = JSON.parse(rawPurch || '{}');
+      // Handle old array format
+      if (Array.isArray(parsed)) { parsed.forEach(id => { purchases[id] = 1; }); }
+      else { purchases = parsed; }
+    } catch(e) { purchases = {}; }
+
+    function saveState() {
+      localStorage.setItem(MONEY_KEY, balance.toFixed(2));
+      localStorage.setItem(PURCH_KEY, JSON.stringify(purchases));
+    }
+    function owns(id)  { return (purchases[id] || 0) > 0; }
+    function count(id) { return purchases[id] || 0; }
+
+    function updateBalance() {
+      document.getElementById('balanceAmt').textContent = balance.toFixed(2);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    // ── CARD BUILDER ─────────────────────────────────
+    function makeCard(item, repeatable) {
+      const owned  = owns(item.id);
+      const canBuy = balance >= item.price;
+      const bg     = item.bg || BG[item.num % BG.length];
+
+      const card = document.createElement('div');
+      card.className = 'store-card' + (owned && !repeatable ? ' owned' : '');
+      card.style.border = '3px solid ' + bg;
+
+      const imgHtml = item.img
+        ? `<img src="${item.img}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+           <span class="emoji-fallback" style="display:none">${item.emoji}</span>`
+        : `<span class="emoji-fallback">${item.emoji}</span>`;
+
+      let btnText, btnCls = 'buy-btn', btnDis = '';
+      if (owned && !repeatable) { btnCls += ' owned-btn'; btnText = '✓ Owned'; btnDis = 'disabled'; }
+      else if (!canBuy)         { btnText = 'Need $' + item.price.toFixed(2); btnDis = 'disabled'; }
+      else                      { btnText = (repeatable && owned) ? 'Buy Again 🛒' : 'Buy Now! 🛒'; }
+
+      const countBadge = repeatable && count(item.id) > 0
+        ? `<span style="position:absolute;top:7px;left:9px;background:#f59e0b;color:#fff;font-family:'Fredoka One',cursive;font-size:0.7rem;padding:2px 7px;border-radius:50px;z-index:3">x${count(item.id)}</span>`
+        : '';
+
+      card.innerHTML = `
+        <div class="card-img-area" style="background:${bg}">
+          ${imgHtml}${countBadge}
+        </div>
+        <div class="card-label">
+          <div class="card-num-badge">${item.num}</div>
+          <div class="card-name-price">
+            <div class="card-name">${item.name}</div>
+            <div class="card-price"><span style="font-size:0.8rem">🪙</span><span class="price-text">$${item.price.toFixed(2)}</span></div>
+          </div>
+        </div>
+        <div class="card-buy-row">
+          <button class="${btnCls}" ${btnDis}>${btnText}</button>
+        </div>`;
+
+      const btn = card.querySelector('.buy-btn');
+      if (!btnDis) {
+        btn.addEventListener('click', () => {
+          if (balance < item.price) return;
+          openRegister(item, repeatable);
+        });
+      }
+      return card;
+    }
+
+    function fillGrid(gridId, items, repeatable) {
+      const g = document.getElementById(gridId);
+      g.innerHTML = '';
+      items.forEach(item => g.appendChild(makeCard(item, repeatable || false)));
+    }
+
+    // ── OWNED PETS ROW ────────────────────────────────
+    function renderOwnedPets() {
+      const row = document.getElementById('ownedPetsRow');
+      const myPets = PETS.filter(p => owns(p.id));
+      if (!myPets.length) {
+        row.innerHTML = '<span class="no-pets-msg">Adopt a pet first to buy food and accessories!</span>';
+        return;
+      }
+      row.innerHTML = '';
+      myPets.forEach(p => {
+        const chip = document.createElement('div');
+        chip.className = 'owned-pet-chip';
+        chip.innerHTML = p.img
+          ? `<img src="${p.img}" alt="${p.name}">${p.name}`
+          : `<span style="font-size:1.2rem">${p.emoji}</span>${p.name}`;
+        row.appendChild(chip);
+      });
+    }
+
+    // ── PET WORLD ────────────────────────────────────
+    (function() {
+      var _pwCat = 'pet';
+
+      function loadHidden() {
+        try { return JSON.parse(localStorage.getItem('fsm_scene_hidden') || '{}'); } catch(e) { return {}; }
+      }
+      function saveHidden(h) { localStorage.setItem('fsm_scene_hidden', JSON.stringify(h)); }
+
+      var CAT_LIMIT = { pet: 6, acc: 6, home: 3 };
+      var CAT_MSG = {
+        pet:  'Sorry, you can only play with 6 pets at a time!',
+        home: 'Sorry, you can only have 3 houses open at a time!',
+        acc:  'Sorry, you can only have 6 accessories open at a time!'
+      };
+      var _toastTimer;
+      function showLimitToast(cat) {
+        var el = document.getElementById('pwLimitToast');
+        if (!el) return;
+        el.textContent = CAT_MSG[cat] || 'Limit reached!';
+        el.classList.add('show');
+        clearTimeout(_toastTimer);
+        _toastTimer = setTimeout(function(){ el.classList.remove('show'); }, 2800);
+      }
+
+      function renderSidebar() {
+        var list  = document.getElementById('pwItemsList');
+        var badge = document.getElementById('pwLimit');
+        if (!list) return;
+        var hidden = loadHidden();
+        var hiddenIds = hidden[_pwCat] || [];
+        var items;
+        if      (_pwCat === 'pet')  items = PETS.filter(function(p){ return owns(p.id); });
+        else if (_pwCat === 'acc')  items = [...ACCESSORIES, ...FOOD].filter(function(a){ return owns(a.id); });
+        else                        items = BEDS.filter(function(b){ return owns(b.id); });
+        var limit   = CAT_LIMIT[_pwCat] || 99;
+        var onCount = items.filter(function(x){ return hiddenIds.indexOf(x.id) < 0; }).length;
+        if (badge) badge.textContent = onCount + ' / ' + limit + ' showing';
+        list.innerHTML = '';
+        if (!items.length) {
+          list.innerHTML = '<div style="font-size:0.65rem;color:#aaa;text-align:center;padding:8px">None yet!</div>';
+          return;
+        }
+        items.forEach(function(item) {
+          var on   = hiddenIds.indexOf(item.id) < 0;
+          var atLimit = !on && onCount >= limit;
+          var chip = document.createElement('div');
+          chip.className = 'pw-chip' + (on ? ' on' : '');
+          chip.innerHTML = item.img
+            ? '<img src="' + item.img + '" alt="' + item.name + '"><span>' + item.name + '</span>'
+            : '<span style="font-size:1.3rem">' + (item.emoji||'🐾') + '</span><span>' + item.name + '</span>';
+
+          // × / + button to toggle visibility
+          var xBtn = document.createElement('button');
+          xBtn.className = 'pw-chip-x';
+          xBtn.textContent = on ? '×' : '+';
+          xBtn.title = on ? 'Hide' : (atLimit ? 'Limit reached' : 'Show');
+          if (atLimit) { xBtn.style.opacity = '0.35'; xBtn.style.cursor = 'not-allowed'; }
+          xBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (atLimit) { showLimitToast(_pwCat); return; }
+            var h = loadHidden();
+            if (!h[_pwCat]) h[_pwCat] = [];
+            var idx = h[_pwCat].indexOf(item.id);
+            if (idx >= 0) { h[_pwCat].splice(idx, 1); }
+            else          { h[_pwCat].push(item.id); }
+            saveHidden(h);
+            renderSidebar();
+            renderCollection();
+          });
+          chip.appendChild(xBtn);
+
+          // Main chip click: show the item if hidden (if under limit), then flash it in scene
+          chip.addEventListener('click', function() {
+            var h = loadHidden();
+            if (!h[_pwCat]) h[_pwCat] = [];
+            var idx = h[_pwCat].indexOf(item.id);
+            if (idx >= 0) {
+              // was hidden — only show if under limit
+              var curOn = items.filter(function(x){ return (h[_pwCat]||[]).indexOf(x.id) < 0; }).length;
+              if (curOn >= limit) { showLimitToast(_pwCat); return; }
+              h[_pwCat].splice(idx, 1);
+              saveHidden(h);
+              renderSidebar();
+              renderCollection();
+            }
+            // Flash the sticker in the scene
+            var isFood  = FOOD.find(function(f){ return f.id === item.id; });
+            var prefix  = _pwCat === 'pet' ? 'pet_' : _pwCat === 'acc' ? (isFood ? 'food_' : 'acc_') : 'bed_';
+            var sticker = document.querySelector('[data-item-id="' + prefix + item.id + '"]');
+            if (sticker) {
+              sticker.classList.remove('pw-highlight');
+              void sticker.offsetWidth;
+              sticker.classList.add('pw-highlight');
+              sticker.scrollIntoView({ behavior:'smooth', block:'nearest' });
+              sticker.addEventListener('animationend', function() {
+                sticker.classList.remove('pw-highlight');
+              }, { once:true });
+            }
+          });
+
+          list.appendChild(chip);
+        });
+      }
+
+      window.renderSidebar = renderSidebar;
+      window.pwSetCat = function(cat) {
+        _pwCat = cat;
+        document.querySelectorAll('.pw-cat-btn').forEach(function(b) {
+          b.classList.toggle('active', b.dataset.cat === cat);
+        });
+        renderSidebar();
+      };
+
+      var _dragId = null, _dragEl = null, _dragOffX = 0, _dragOffY = 0, _dragLayer = 1;
+
+      function loadPositions() {
+        try { return JSON.parse(localStorage.getItem('fsm_pet_positions') || '{}'); } catch(e) { return {}; }
+      }
+      function savePositions(pos) {
+        localStorage.setItem('fsm_pet_positions', JSON.stringify(pos));
+      }
+      function loadAttach() {
+        try { return JSON.parse(localStorage.getItem('fsm_pet_attach') || '{}'); } catch(e) { return {}; }
+      }
+      function saveAttach(a) { localStorage.setItem('fsm_pet_attach', JSON.stringify(a)); }
+
+      window.renderCollection = function() {
+        var scene    = document.getElementById('petWorldScene');
+        var shelf    = document.getElementById('petWorldShelf');
+        var shelfEl  = document.getElementById('petWorldShelfChips');
+        if (!scene) return;
+
+        var ownedPets   = PETS.filter(function(p){ return owns(p.id); });
+        var ownedBeds   = BEDS.filter(function(b){ return owns(b.id); });
+        var ownedAccess = ACCESSORIES.filter(function(a){ return owns(a.id); });
+        var ownedFood   = FOOD.filter(function(f){ return owns(f.id); });
+
+        // Filter out hidden items (sidebar toggle), then enforce per-category limits
+        var hidden = loadHidden();
+        var hiddenPets  = hidden.pet  || [];
+        var hiddenHomes = hidden.home || [];
+        var hiddenAcc   = hidden.acc  || [];
+        ownedPets   = ownedPets.filter(function(p){ return hiddenPets.indexOf(p.id)  < 0; });
+        ownedBeds   = ownedBeds.filter(function(b){ return hiddenHomes.indexOf(b.id) < 0; });
+        ownedAccess = ownedAccess.filter(function(a){ return hiddenAcc.indexOf(a.id) < 0; });
+        ownedFood   = ownedFood.filter(function(f){ return hiddenAcc.indexOf(f.id)   < 0; });
+        // Enforce limits — auto-hide overflowing items and persist
+        (function enforceLimits() {
+          var changed = false;
+          function trim(arr, catKey, lim) {
+            if (arr.length <= lim) return arr;
+            var h = loadHidden();
+            if (!h[catKey]) h[catKey] = [];
+            var extra = arr.slice(lim);
+            extra.forEach(function(x){ if (h[catKey].indexOf(x.id) < 0) { h[catKey].push(x.id); changed = true; } });
+            if (changed) saveHidden(h);
+            return arr.slice(0, lim);
+          }
+          ownedPets  = trim(ownedPets,  'pet',  CAT_LIMIT.pet);
+          ownedBeds  = trim(ownedBeds,  'home', CAT_LIMIT.home);
+          // Food + accessories share the 6-slot acc budget
+          var accAll = [].concat(ownedAccess, ownedFood);
+          accAll     = trim(accAll, 'acc', CAT_LIMIT.acc);
+          ownedAccess = accAll.filter(function(x){ return ACCESSORIES.find(function(a){ return a.id === x.id; }); });
+          ownedFood   = accAll.filter(function(x){ return FOOD.find(function(f){ return f.id === x.id; }); });
+          if (changed) renderSidebar();
+        })();
+
+        // Empty state
+        if (!ownedPets.length && !ownedBeds.length && !ownedAccess.length && !ownedFood.length) {
+          scene.innerHTML = '<div class="pet-world-empty"><div style="font-size:4rem">🐾</div><div class="pet-world-empty-title">Adopt a pet to fill your world!</div></div>';
+          shelf.style.display = 'none';
+          return;
+        }
+
+        // Layer order: homes behind, food next, pets in front, accessories on top
+        var allItems = [].concat(
+          ownedBeds.map(function(b)  { return { id:'bed_'+b.id,   item:b, layer:'home' }; }),
+          ownedFood.map(function(f)  { return { id:'food_'+f.id,  item:f, layer:'food' }; }),
+          ownedPets.map(function(p)  { return { id:'pet_'+p.id,   item:p, layer:'pet'  }; }),
+          ownedAccess.map(function(a){ return { id:'acc_'+a.id,   item:a, layer:'acc'  }; })
+        );
+
+        var LAYER_Z    = { home:1, pet:2, food:4, acc:10 };
+        var LAYER_SIZE = { home:280, food:70, pet:90, acc:60 }; // px
+        // Default zones per layer: [xMin, xMax, yMin, yMax] as % of scene
+        var LAYER_ZONES = {
+          home: [2,  58, 5,  42],
+          pet:  [4,  68, 38, 60],
+          food: [4,  80, 72, 84],
+          acc:  [2,  72, 4,  28],
+        };
+
+        // Clear & rebuild scene
+        scene.innerHTML = '';
+        shelf.style.display = 'none';
+        if (!localStorage.getItem('fsm_layout_v4')) {
+          localStorage.removeItem('fsm_pet_positions');
+          localStorage.setItem('fsm_layout_v4', '1');
+        }
+        var pos = loadPositions();
+        var sceneW = scene.offsetWidth  || 700;
+        var sceneH = scene.offsetHeight || 420;
+
+        var layerCount = { home:0, pet:0, food:0, acc:0 };
+        var layerTotal = { home:0, pet:0, food:0, acc:0 };
+        allItems.forEach(function(e){ layerTotal[e.layer]++; });
+
+        // Pre-calculate effective home positions so pets can be paired 2-per-home side by side
+        var homeEffPos = ownedBeds.map(function(b, hi) {
+          var uid = 'bed_' + b.id;
+          var tot = ownedBeds.length;
+          var t   = tot <= 1 ? 0.5 : hi / (tot - 1);
+          var hz  = LAYER_ZONES.home;
+          var def = { x: hz[0] + t * (hz[1] - hz[0]), y: hz[2] };
+          var p   = pos[uid];
+          return (p && p.x >= 0 && p.x <= 90 && p.y >= 0 && p.y <= 88) ? p : def;
+        });
+
+        allItems.forEach(function(entry, i) {
+          var item  = entry.item;
+          var uid   = entry.id;
+          var layer = entry.layer;
+          var sz    = LAYER_SIZE[layer];
+          var zone  = LAYER_ZONES[layer];
+          var idx   = layerCount[layer];
+          var tot   = layerTotal[layer] || 1;
+          var defaultX, defaultY;
+          if (layer === 'pet') {
+            // Pair 2 pets per home — pixel-accurate side-by-side placement
+            var homeIdx = Math.floor(idx / 2);
+            var slot    = idx % 2; // 0 = left, 1 = right
+            if (homeIdx < homeEffPos.length) {
+              var hp     = homeEffPos[homeIdx];
+              var homePx = hp.x / 100 * sceneW;           // home left edge in px
+              var homeW  = LAYER_SIZE.home;                // 280px
+              var petW   = LAYER_SIZE.pet;                 // 90px
+              var gap    = 12;                             // px between pets
+              var totalW = petW * 2 + gap;                 // 192px
+              var startPx = homePx + (homeW - totalW) / 2; // centered under house
+              var petPx  = startPx + slot * (petW + gap);
+              defaultX   = (petPx / sceneW) * 100;
+              defaultY   = hp.y + 40;                      // below the roofline
+            } else {
+              // overflow pets beyond paired homes — spread freely
+              var xi = idx - homeEffPos.length * 2;
+              var xt = Math.max(1, tot - homeEffPos.length * 2 - 1);
+              defaultX = zone[0] + (xt <= 0 ? 0.5 : xi / xt) * (zone[1] - zone[0]);
+              defaultY = zone[2];
+            }
+          } else {
+            var t    = tot <= 1 ? 0.5 : idx / (tot - 1);
+            defaultX = zone[0] + t * (zone[1] - zone[0]);
+            defaultY = zone[2] + (idx % 2) * ((zone[3] - zone[2]) / 2);
+          }
+          layerCount[layer]++;
+          // Pets always use calculated positions so they never stack in houses
+          var p = (layer === 'pet') ? { x: defaultX, y: defaultY } : (pos[uid] || { x: defaultX, y: defaultY });
+          if (p.x < 0 || p.x > 90 || p.y < 0 || p.y > 88) p = { x: defaultX, y: defaultY };
+
+          var sticker = document.createElement('div');
+          sticker.className = 'world-sticker';
+          sticker.dataset.itemId = uid;
+          sticker.dataset.layer  = layer;
+          sticker.style.left    = p.x + '%';
+          sticker.style.top     = p.y + '%';
+          sticker.style.zIndex  = LAYER_Z[layer];
+          sticker.style.animationDelay = (i * 0.05) + 's';
+
+          var imgHtml = item.img
+            ? '<div class="img-clip" style="width:'+sz+'px;height:'+sz+'px"><img src="' + item.img + '" alt="' + item.name + '" onerror="this.parentNode.innerHTML=\'<span class=sticker-emoji>' + (item.emoji||'🐾') + '</span>\'"></div>'
+            : '<span class="sticker-emoji">' + (item.emoji||'🐾') + '</span>';
+          if (layer === 'food') imgHtml += '<span class="feed-hint">👆 Tap to feed!</span>';
+          sticker.innerHTML = imgHtml;
+
+          // Desktop drag
+          sticker.addEventListener('mousedown', function(e) {
+            if (e.button !== 0) return;
+            var rect = sticker.getBoundingClientRect();
+            var scRect = scene.getBoundingClientRect();
+            _dragOffX = e.clientX - rect.left;
+            _dragOffY = e.clientY - rect.top;
+            _dragId = uid; _dragLayer = LAYER_Z[layer];
+            _dragEl = sticker;
+            _prevX = parseFloat(sticker.style.left);
+            _prevY = parseFloat(sticker.style.top);
+            sticker.style.zIndex = 100;
+            sticker.classList.add('dragging');
+            e.preventDefault();
+          });
+
+          // Touch drag
+          sticker.addEventListener('touchstart', function(e) {
+            var t = e.touches[0];
+            var rect = sticker.getBoundingClientRect();
+            _dragOffX = t.clientX - rect.left;
+            _dragOffY = t.clientY - rect.top;
+            _dragId = uid; _dragLayer = LAYER_Z[layer];
+            _dragEl = sticker;
+            _prevX = parseFloat(sticker.style.left);
+            _prevY = parseFloat(sticker.style.top);
+            sticker.style.zIndex = 100;
+            sticker.classList.add('dragging');
+            e.preventDefault();
+          }, { passive: false });
+
+          // Food tap: spawn floating particles
+          if (layer === 'food') {
+            var FOOD_PARTICLES = ['🍖','🐟','🥕','🌿','🫐','🌾','🍗','🐛','🥦','🍠'];
+            var _tapMoved = false;
+            sticker.addEventListener('mousedown', function() { _tapMoved = false; }, true);
+            sticker.addEventListener('mousemove', function() { _tapMoved = true; }, true);
+            sticker.addEventListener('click', function(e) {
+              if (_tapMoved) return;
+              var rect = sticker.getBoundingClientRect();
+              var scRect = scene.getBoundingClientRect();
+              var cx = rect.left - scRect.left + rect.width / 2;
+              var cy = rect.top  - scRect.top  + rect.height / 2;
+              var particle = item.emoji || FOOD_PARTICLES[Math.floor(Math.random() * FOOD_PARTICLES.length)];
+              for (var p = 0; p < 6; p++) {
+                var el = document.createElement('span');
+                el.className = 'food-particle';
+                var angle = (p / 6) * Math.PI * 2;
+                var dist = 45 + Math.random() * 35;
+                el.style.left = (cx - 12) + 'px';
+                el.style.top  = (cy - 12) + 'px';
+                el.style.setProperty('--fx', Math.cos(angle) * dist + 'px');
+                el.style.setProperty('--fy', (Math.sin(angle) * dist - 40) + 'px');
+                el.style.animationDelay = (p * 0.07) + 's';
+                el.textContent = particle;
+                scene.appendChild(el);
+                setTimeout(function(e){ if (e.parentNode) e.parentNode.removeChild(e); }, 1400, el);
+              }
+            });
+          }
+
+          // Fish: continuous swim + all pets: click/tap-to-animate
+          if (layer === 'pet') {
+            if (item.id === 'fishpet') sticker.classList.add('fish-swimming');
+            var PET_ANIM = {
+              'fishpet':'swim',   'turtle':'waddle',  'duck':'waddle',    'hamster':'scurry',
+              'owl':'flutter',    'hedgehog':'roll',   'lamb':'hop',       'bunny':'hop',
+              'ferret':'slither', 'monkey':'swing',    'piggy':'waddle',   'parrot':'flutter',
+              'robo-dog':'robot', 'robo-cat':'march',  'puppy-pet':'gallop','kitty-pet':'prowl',
+              'pony':'gallop',    'alien':'float',     'dino':'stomp',     'chicken':'peck',
+              'snake':'slither',  'lizard':'scurry',   'cow':'stomp',      'goat':'hop',
+              'gator':'stomp',    'frog':'hop',
+               'bear':'stomp',     'cheetah':'gallop', 'tiger':'prowl',    'lion':'stomp',
+               'alien-wave':'float','alien-mint':'float','alien-peace':'float','alien-orange':'float','alien-rainbow':'float','alien-ref':'float',
+               'acc-soccer-ball':'roll',   'acc-basketball':'bounce',  'acc-football':'zoom',
+               'acc-baseball':'zoom',      'acc-tennis':'bounce',      'acc-hockey':'zoom',
+               'acc-golf':'swing',         'acc-dumbbells':'bounce',   'acc-trophy':'bounce',
+               'acc-pet-trophy':'bounce',
+               'race-car':'zoom',       'paw-race-car':'zoom',    'monster-truck':'bounce',
+               'bulldozer':'chug',      'fire-truck':'zoom',      'train-engine':'chug',
+               'paw-plane':'flutter',   'jet-plane':'flutter',    'propeller-plane':'flutter',
+               'rocket-ship':'launch',  'spaceship-acc':'launch', 'ufo':'launch'
+            };
+            function playPetAnim() {
+              var anim = PET_ANIM[item.id];
+              if (!anim || sticker.classList.contains('pet-clicking')) return;
+              sticker.classList.remove('fish-swimming');
+              sticker.classList.add('pet-clicking', 'pa-' + anim);
+              sticker.addEventListener('animationend', function() {
+                sticker.classList.remove('pet-clicking', 'pa-' + anim);
+                if (item.id === 'fishpet') sticker.classList.add('fish-swimming');
+              }, { once: true });
+            }
+            var _petMoved = false, _ptx = 0, _pty = 0;
+            sticker.addEventListener('mousedown', function(){ _petMoved = false; }, true);
+            sticker.addEventListener('mousemove', function(){ _petMoved = true; }, true);
+            sticker.addEventListener('click', function(){ if (!_petMoved) playPetAnim(); });
+            // Touch: touchstart preventDefault blocks click on mobile — use touchend instead
+            sticker.addEventListener('touchstart', function(e){
+              _petMoved = false;
+              _ptx = e.touches[0].clientX; _pty = e.touches[0].clientY;
+            }, { passive:true, capture:true });
+            sticker.addEventListener('touchmove', function(){ _petMoved = true; }, { passive:true, capture:true });
+            sticker.addEventListener('touchend', function(e){
+              if (_petMoved) return;
+              var dx = e.changedTouches[0].clientX - _ptx;
+              var dy = e.changedTouches[0].clientY - _pty;
+              if (Math.sqrt(dx*dx + dy*dy) < 10) playPetAnim();
+            }, { passive:true });
+          }
+
+          // Vehicle tap: animate + sound
+          var VEHICLE_IDS = ['race-car','paw-race-car','monster-truck','bulldozer','fire-truck','train-engine','paw-plane','jet-plane','propeller-plane','rocket-ship','spaceship-acc','ufo'];
+          var VEHICLE_ANIM = {
+            'race-car':'zoom','paw-race-car':'zoom','monster-truck':'bounce','bulldozer':'chug',
+            'fire-truck':'zoom','train-engine':'chug','paw-plane':'flutter','jet-plane':'flutter',
+            'propeller-plane':'flutter','rocket-ship':'launch','spaceship-acc':'launch','ufo':'launch'
+          };
+          var VEHICLE_SND = {
+            'race-car':'rev','paw-race-car':'rev','monster-truck':'roar','bulldozer':'diesel',
+            'fire-truck':'siren','train-engine':'train','paw-plane':'propeller','jet-plane':'jet',
+            'propeller-plane':'propeller','rocket-ship':'blast','spaceship-acc':'blast','ufo':'ufo'
+          };
+          function playVehicleSound(sndType) {
+            try {
+              var ctx = new (window.AudioContext || window.webkitAudioContext)();
+              var now = ctx.currentTime;
+              if (sndType === 'rev') {
+                var o = ctx.createOscillator(), g = ctx.createGain();
+                o.type = 'sawtooth';
+                o.frequency.setValueAtTime(100, now); o.frequency.linearRampToValueAtTime(650, now+0.3); o.frequency.linearRampToValueAtTime(200, now+0.55);
+                g.gain.setValueAtTime(0.3, now); g.gain.linearRampToValueAtTime(0, now+0.6);
+                o.connect(g); g.connect(ctx.destination); o.start(now); o.stop(now+0.6);
+              } else if (sndType === 'roar') {
+                var o = ctx.createOscillator(), g = ctx.createGain();
+                o.type = 'sawtooth'; o.frequency.setValueAtTime(55, now); o.frequency.linearRampToValueAtTime(95, now+0.25);
+                g.gain.setValueAtTime(0.4, now); g.gain.linearRampToValueAtTime(0, now+0.7);
+                o.connect(g); g.connect(ctx.destination); o.start(now); o.stop(now+0.7);
+              } else if (sndType === 'diesel') {
+                for (var i=0;i<5;i++){(function(n){
+                  var o=ctx.createOscillator(),g=ctx.createGain();
+                  o.type='square'; o.frequency.value=75;
+                  var t=now+n*0.13;
+                  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.28,t+0.04); g.gain.linearRampToValueAtTime(0,t+0.11);
+                  o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t+0.14);
+                })(i);}
+              } else if (sndType === 'siren') {
+                var o = ctx.createOscillator(), g = ctx.createGain();
+                o.type = 'sine';
+                o.frequency.setValueAtTime(700,now); o.frequency.linearRampToValueAtTime(1300,now+0.22);
+                o.frequency.linearRampToValueAtTime(700,now+0.44); o.frequency.linearRampToValueAtTime(1300,now+0.66); o.frequency.linearRampToValueAtTime(700,now+0.88);
+                g.gain.setValueAtTime(0.3,now); g.gain.linearRampToValueAtTime(0,now+0.95);
+                o.connect(g); g.connect(ctx.destination); o.start(now); o.stop(now+0.95);
+              } else if (sndType === 'train') {
+                for(var i=0;i<3;i++){(function(n){
+                  var o=ctx.createOscillator(),g=ctx.createGain();
+                  o.type='square'; o.frequency.value=110;
+                  var t=now+n*0.18;
+                  g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.25,t+0.04); g.gain.linearRampToValueAtTime(0,t+0.16);
+                  o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t+0.18);
+                })(i);}
+                var w=ctx.createOscillator(),wg=ctx.createGain();
+                w.type='sine'; w.frequency.value=1100;
+                wg.gain.setValueAtTime(0.28,now+0.6); wg.gain.linearRampToValueAtTime(0,now+0.95);
+                w.connect(wg); wg.connect(ctx.destination); w.start(now+0.6); w.stop(now+0.95);
+              } else if (sndType === 'propeller') {
+                var o=ctx.createOscillator(),g=ctx.createGain();
+                o.type='sawtooth'; o.frequency.setValueAtTime(160,now); o.frequency.linearRampToValueAtTime(220,now+0.4);
+                g.gain.setValueAtTime(0.2,now); g.gain.linearRampToValueAtTime(0,now+0.55);
+                o.connect(g); g.connect(ctx.destination); o.start(now); o.stop(now+0.55);
+              } else if (sndType === 'jet') {
+                var sr=ctx.sampleRate, buf=ctx.createBuffer(1,sr*0.55,sr), d=buf.getChannelData(0);
+                for(var i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+                var ns=ctx.createBufferSource(); ns.buffer=buf;
+                var f=ctx.createBiquadFilter(); f.type='bandpass'; f.Q.value=1.5;
+                f.frequency.setValueAtTime(1800,now); f.frequency.linearRampToValueAtTime(4500,now+0.4);
+                var g=ctx.createGain(); g.gain.setValueAtTime(0.3,now); g.gain.linearRampToValueAtTime(0,now+0.55);
+                ns.connect(f); f.connect(g); g.connect(ctx.destination); ns.start(now); ns.stop(now+0.55);
+              } else if (sndType === 'blast') {
+                var o=ctx.createOscillator(),g=ctx.createGain();
+                o.type='sawtooth'; o.frequency.setValueAtTime(70,now); o.frequency.linearRampToValueAtTime(220,now+0.6);
+                g.gain.setValueAtTime(0,now); g.gain.linearRampToValueAtTime(0.38,now+0.08); g.gain.linearRampToValueAtTime(0,now+0.7);
+                o.connect(g); g.connect(ctx.destination); o.start(now); o.stop(now+0.7);
+              } else if (sndType === 'ufo') {
+                var o=ctx.createOscillator(),lfo=ctx.createOscillator(),lg=ctx.createGain(),g=ctx.createGain();
+                o.type='sine'; o.frequency.value=650;
+                lfo.frequency.value=9; lg.gain.value=220;
+                lfo.connect(lg); lg.connect(o.frequency);
+                g.gain.setValueAtTime(0.25,now); g.gain.linearRampToValueAtTime(0,now+0.9);
+                o.connect(g); g.connect(ctx.destination);
+                lfo.start(now); o.start(now); lfo.stop(now+0.9); o.stop(now+0.9);
+              }
+              setTimeout(function(){ try{ctx.close();}catch(e){} }, 2000);
+            } catch(e) {}
+          }
+          if (layer === 'acc' && VEHICLE_IDS.indexOf(item.id) >= 0) {
+            var _vMoved = false;
+            sticker.addEventListener('mousedown', function(){ _vMoved = false; }, true);
+            sticker.addEventListener('mousemove', function(){ _vMoved = true; }, true);
+            sticker.addEventListener('touchstart', function(){ _vMoved = false; }, { passive:true, capture:true });
+            sticker.addEventListener('touchmove', function(){ _vMoved = true; }, { passive:true, capture:true });
+            sticker.addEventListener('click', function(){
+              if (_vMoved) return;
+              var anim = VEHICLE_ANIM[item.id];
+              if (anim && !sticker.classList.contains('pet-clicking')) {
+                sticker.classList.add('pet-clicking', 'pa-' + anim);
+                sticker.addEventListener('animationend', function(){
+                  sticker.classList.remove('pet-clicking', 'pa-' + anim);
+                }, { once:true });
+              }
+              playVehicleSound(VEHICLE_SND[item.id]);
+            });
+            sticker.addEventListener('touchend', function(e){
+              if (_vMoved) return;
+              var dx = e.changedTouches[0].clientX - (sticker._vtx||0);
+              var dy = e.changedTouches[0].clientY - (sticker._vty||0);
+              if (Math.sqrt(dx*dx+dy*dy) < 10) {
+                var anim = VEHICLE_ANIM[item.id];
+                if (anim && !sticker.classList.contains('pet-clicking')) {
+                  sticker.classList.add('pet-clicking', 'pa-' + anim);
+                  sticker.addEventListener('animationend', function(){
+                    sticker.classList.remove('pet-clicking', 'pa-' + anim);
+                  }, { once:true });
+                }
+                playVehicleSound(VEHICLE_SND[item.id]);
+              }
+            }, { passive:true });
+            sticker.addEventListener('touchstart', function(e){
+              sticker._vtx = e.touches[0].clientX; sticker._vty = e.touches[0].clientY;
+            }, { passive:true });
+          }
+
+          // Toy tap: bounce animation
+          if (layer === 'acc' && item.id.indexOf('toy-') === 0) {
+            var _toyMoved = false;
+            sticker.addEventListener('mousedown', function() { _toyMoved = false; }, true);
+            sticker.addEventListener('mousemove', function() { _toyMoved = true; }, true);
+            sticker.addEventListener('touchstart', function() { _toyMoved = false; }, { passive:true, capture:true });
+            sticker.addEventListener('touchmove', function() { _toyMoved = true; }, { passive:true, capture:true });
+            sticker.addEventListener('click', function() {
+              if (_toyMoved) return;
+              sticker.classList.remove('toy-bouncing');
+              void sticker.offsetWidth; // force reflow to restart animation
+              sticker.classList.add('toy-bouncing');
+              sticker.addEventListener('animationend', function() {
+                sticker.classList.remove('toy-bouncing');
+              }, { once: true });
+            });
+          }
+
+          // Bubble wand tap: spawn rising bubbles
+          if (layer === 'acc' && item.id === 'bubble-wand') {
+            var _bubbleMoved = false;
+            sticker.addEventListener('mousedown', function() { _bubbleMoved = false; }, true);
+            sticker.addEventListener('mousemove', function() { _bubbleMoved = true; }, true);
+            sticker.addEventListener('touchstart', function() { _bubbleMoved = false; }, { passive:true, capture:true });
+            sticker.addEventListener('touchmove', function() { _bubbleMoved = true; }, { passive:true, capture:true });
+            sticker.addEventListener('click', function(e) {
+              if (_bubbleMoved) return;
+              var rect = sticker.getBoundingClientRect();
+              var scRect = scene.getBoundingClientRect();
+              var cx = rect.left - scRect.left + rect.width / 2;
+              var cy = rect.top  - scRect.top  + rect.height / 2;
+              var BUBBLES = ['🫧','🫧','🫧','⭕','🔵','🟣','🟤'];
+              for (var b = 0; b < 8; b++) {
+                var el = document.createElement('span');
+                el.className = 'food-particle';
+                el.style.fontSize = (0.9 + Math.random() * 0.9) + 'rem';
+                var spread = (Math.random() - 0.5) * 80;
+                var rise = 60 + Math.random() * 80;
+                el.style.left = (cx - 10 + spread * 0.3) + 'px';
+                el.style.top  = (cy - 10) + 'px';
+                el.style.setProperty('--fx', spread + 'px');
+                el.style.setProperty('--fy', '-' + rise + 'px');
+                el.style.animationDuration = (1.2 + Math.random() * 0.8) + 's';
+                el.style.animationDelay = (b * 0.09) + 's';
+                el.textContent = BUBBLES[Math.floor(Math.random() * BUBBLES.length)];
+                scene.appendChild(el);
+                setTimeout(function(e){ if (e.parentNode) e.parentNode.removeChild(e); }, 2200, el);
+              }
+            });
+          }
+
+          scene.appendChild(sticker);
+        });
+
+        // Mouse move / up on document (once, not per pet)
+        // Move attached stickers when a home is dragged
+        function moveAttached(homeId, dx, dy) {
+          var attach = loadAttach();
+          Object.keys(attach).forEach(function(childId) {
+            if (attach[childId] !== homeId) return;
+            var el = scene.querySelector('[data-item-id="' + childId + '"]');
+            if (!el) return;
+            el.style.left = (parseFloat(el.style.left) + dx) + '%';
+            el.style.top  = (parseFloat(el.style.top)  + dy) + '%';
+          });
+        }
+
+        // Snap pet/acc/food onto a home if dropped inside it;
+        // also snap accessories onto pets (dress-up)
+
+        // xFrac/yFrac: where the CENTER of the 60px accessory img aligns on the pet.
+        // xFrac=0.5 → horizontal center of acc at horizontal center of pet.
+        // yFrac=0   → center of acc at top edge of pet (head).
+        // yFrac=0.5 → center of acc at mid-pet (body).
+        // yFrac=1   → center of acc at bottom of pet (feet).
+        var ACC_SNAP = {
+          'pet-crown':        [0.5,  -0.05],
+          'bow-headband':     [0.5,  -0.02],
+          'hero-mask':        [0.5,   0.25],
+          'pet-sunglasses':   [0.5,   0.25],
+          'heart-sunglasses': [0.5,   0.25],
+          'superhero-cape':   [0.2,   0.3 ],
+          'butterfly-wings':  [-0.05, 0.2 ],
+          'cozy-sweater':     [0.3,   0.35],
+          'pet-raincoat':     [0.3,   0.3 ],
+          'tutu':             [0.3,   0.55],
+          'bandana':          [0.5,   0.32],
+          'pearl-collar':     [0.5,   0.32],
+          'astronaut-helmet': [0.5,   0.05],
+          'collar-leash':     [0.5,   0.35],
+          'tiny-backpack':    [0.7,   0.25],
+          'treat-pouch':      [0.7,   0.4 ],
+          'purse':            [0.75,  0.35],
+          'grooming-kit':     [0.65,  0.15],
+          'bubble-wand':      [0.75,  0.35],
+          'squeaky-toy':      [0.7,   0.3 ],
+          'robo-charger':     [0.7,   0.25],
+          'rain-boots':       [0.35,  0.75],
+          'roller-skates':    [0.3,   0.78],
+        };
+
+        function trySnap(droppedId, droppedEl, droppedLayer, scRect) {
+          if (droppedLayer === 'home') return;
+          if (droppedLayer === 'food') return; // food stays wherever dropped
+          var dr = droppedEl.getBoundingClientRect();
+          var cx = dr.left + dr.width  / 2;
+          var cy = dr.top  + dr.height / 2;
+          var attach = loadAttach();
+
+          function doSnap(snapX, snapY, parentId) {
+            snapX = Math.max(0, Math.min(88, snapX));
+            snapY = Math.max(0, Math.min(80, snapY));
+            droppedEl.style.left = snapX + '%';
+            droppedEl.style.top  = snapY + '%';
+            attach[droppedId] = parentId;
+            saveAttach(attach);
+            droppedEl.style.transition = 'left 0.25s, top 0.25s';
+            setTimeout(function() { droppedEl.style.transition = ''; }, 300);
+            return { x: snapX, y: snapY };
+          }
+
+          // Snap accessory onto a pet — snap to correct body part
+          if (droppedLayer === 'acc') {
+            var itemId   = droppedId.substring(4); // strip 'acc_'
+            var isToy    = itemId.indexOf('toy-') === 0;
+            var frac     = ACC_SNAP[itemId] || [0.35, 0.3]; // default: upper-body
+            var pets = scene.querySelectorAll('[data-layer="pet"]');
+            for (var j = 0; j < pets.length; j++) {
+              var pr = pets[j].getBoundingClientRect();
+              if (cx >= pr.left && cx <= pr.right && cy >= pr.top && cy <= pr.bottom) {
+                var petId = pets[j].dataset.itemId;
+                if (isToy) {
+                  // toys just stay wherever the child drops them near the pet
+                  var sx = parseFloat(droppedEl.style.left);
+                  var sy = parseFloat(droppedEl.style.top);
+                  return doSnap(sx, sy, petId);
+                }
+                // place acc so its center lands at (frac[0], frac[1]) of the pet rect
+                var accHalf = 30; // half of 60px acc image
+                var snapXpx = (pr.left - scRect.left) + pr.width  * frac[0] - accHalf;
+                var snapYpx = (pr.top  - scRect.top)  + pr.height * frac[1] - accHalf;
+                var snapX   = snapXpx / scRect.width  * 100;
+                var snapY   = snapYpx / scRect.height * 100;
+                return doSnap(snapX, snapY, petId);
+              }
+            }
+          }
+
+          // Snap anything onto a home
+          var homes = scene.querySelectorAll('[data-layer="home"]');
+          for (var i = 0; i < homes.length; i++) {
+            var hr = homes[i].getBoundingClientRect();
+            if (cx >= hr.left && cx <= hr.right && cy >= hr.top && cy <= hr.bottom) {
+              var snapX = (hr.left - scRect.left + hr.width  * 0.28) / scRect.width  * 100;
+              var snapY = (hr.top  - scRect.top  + hr.height * 0.38) / scRect.height * 100;
+              return doSnap(snapX, snapY, homes[i].dataset.itemId);
+            }
+          }
+
+          // Not over any target — detach
+          delete attach[droppedId];
+          saveAttach(attach);
+          return null;
+        }
+
+        var _prevX = 0, _prevY = 0;
+        function onMouseMove(e) {
+          if (!_dragEl) return;
+          var scRect = scene.getBoundingClientRect();
+          var x = ((e.clientX - scRect.left - _dragOffX) / scRect.width  * 100);
+          var y = ((e.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
+          x = Math.max(0, Math.min(88, x));
+          y = Math.max(0, Math.min(80, y));
+          var dx = x - _prevX, dy = y - _prevY;
+          _prevX = x; _prevY = y;
+          _dragEl.style.left = x + '%';
+          _dragEl.style.top  = y + '%';
+          if (_dragEl.dataset.layer === 'home' || _dragEl.dataset.layer === 'pet') moveAttached(_dragId, dx, dy);
+        }
+        function onMouseUp(e) {
+          if (!_dragEl) return;
+          var scRect = scene.getBoundingClientRect();
+          var x = ((e.clientX - scRect.left - _dragOffX) / scRect.width  * 100);
+          var y = ((e.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
+          x = Math.max(0, Math.min(88, x));
+          y = Math.max(0, Math.min(80, y));
+          var snapped = trySnap(_dragId, _dragEl, _dragEl.dataset.layer, scRect);
+          if (snapped) { x = snapped.x; y = snapped.y; }
+          var savedPos = loadPositions();
+          savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
+          // Save positions of attached children when a home or pet is moved
+          if (_dragEl.dataset.layer === 'home' || _dragEl.dataset.layer === 'pet') {
+            var attach = loadAttach();
+            Object.keys(attach).forEach(function(childId) {
+              if (attach[childId] !== _dragId) return;
+              var el = scene.querySelector('[data-item-id="' + childId + '"]');
+              if (el) savedPos[childId] = { x: parseFloat(parseFloat(el.style.left).toFixed(1)), y: parseFloat(parseFloat(el.style.top).toFixed(1)) };
+            });
+          }
+          savePositions(savedPos);
+          _dragEl.style.zIndex = _dragLayer;
+          _dragEl.classList.remove('dragging');
+          _dragEl = null; _dragId = null;
+        }
+        function onTouchMove(e) {
+          if (!_dragEl) return;
+          var t = e.touches[0];
+          var scRect = scene.getBoundingClientRect();
+          var x = ((t.clientX - scRect.left - _dragOffX) / scRect.width  * 100);
+          var y = ((t.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
+          x = Math.max(0, Math.min(88, x));
+          y = Math.max(0, Math.min(80, y));
+          var dx = x - _prevX, dy = y - _prevY;
+          _prevX = x; _prevY = y;
+          _dragEl.style.left = x + '%';
+          _dragEl.style.top  = y + '%';
+          if (_dragEl.dataset.layer === 'home' || _dragEl.dataset.layer === 'pet') moveAttached(_dragId, dx, dy);
+          e.preventDefault();
+        }
+        function onTouchEnd(e) {
+          if (!_dragEl) return;
+          var t = e.changedTouches[0];
+          var scRect = scene.getBoundingClientRect();
+          var x = ((t.clientX - scRect.left - _dragOffX) / scRect.width  * 100);
+          var y = ((t.clientY - scRect.top  - _dragOffY) / scRect.height * 100);
+          x = Math.max(0, Math.min(88, x));
+          y = Math.max(0, Math.min(80, y));
+          var snapped = trySnap(_dragId, _dragEl, _dragEl.dataset.layer, scRect);
+          if (snapped) { x = snapped.x; y = snapped.y; }
+          var savedPos = loadPositions();
+          savedPos[_dragId] = { x: parseFloat(x.toFixed(1)), y: parseFloat(y.toFixed(1)) };
+          if (_dragEl.dataset.layer === 'home' || _dragEl.dataset.layer === 'pet') {
+            var attach = loadAttach();
+            Object.keys(attach).forEach(function(childId) {
+              if (attach[childId] !== _dragId) return;
+              var el = scene.querySelector('[data-item-id="' + childId + '"]');
+              if (el) savedPos[childId] = { x: parseFloat(parseFloat(el.style.left).toFixed(1)), y: parseFloat(parseFloat(el.style.top).toFixed(1)) };
+            });
+          }
+          savePositions(savedPos);
+          _dragEl.style.zIndex = _dragLayer;
+          _dragEl.classList.remove('dragging');
+          _dragEl = null; _dragId = null;
+        }
+
+        // Remove old listeners before re-adding (avoid duplicates)
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup',   onMouseUp);
+        document.removeEventListener('touchmove', onTouchMove);
+        document.removeEventListener('touchend',  onTouchEnd);
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup',   onMouseUp);
+        document.addEventListener('touchmove', onTouchMove, { passive:false });
+        document.addEventListener('touchend',  onTouchEnd);
+
+        // All items now live on the meadow — shelf hidden
+      };
+    })();
+
+    function renderAll() {
+      fillGrid('petsGrid',   PETS,        false);
+      fillGrid('foodGrid',   FOOD,        true);
+      fillGrid('accessGrid', ACCESSORIES, false);
+      fillGrid('bedsGrid',   BEDS,        false);
+      renderOwnedPets();
+      renderCollection();
+      renderSidebar();
+    }
+
+    // ── PET CARE TABS ─────────────────────────────────
+    document.querySelectorAll('#tab-pet-care .pet-care-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#tab-pet-care .pet-care-tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#tab-pet-care .pet-care-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('care-' + btn.dataset.care).classList.add('active');
+      });
+    });
+
+    updateBalance();
+    renderAll();
+
+    // After purchase reload: jump to the right tab and highlight the card
+    (function() {
+      var justBought = localStorage.getItem('fsm_just_bought');
+      if (!justBought) return;
+      localStorage.removeItem('fsm_just_bought');
+      var isPet = PETS.some(function(p){ return p.id === justBought; });
+      var targetTab = isPet ? 'pets' : 'pet-care';
+      var tabBtn = document.querySelector('[data-tab="' + targetTab + '"]');
+      if (tabBtn) tabBtn.click();
+      setTimeout(function() {
+        var cards = document.querySelectorAll('.store-card');
+        for (var i = 0; i < cards.length; i++) {
+          if (cards[i].dataset.id === justBought) {
+            cards[i].scrollIntoView({ behavior:'smooth', block:'center' });
+            cards[i].style.outline = '4px solid gold';
+            cards[i].style.transition = 'outline 1s';
+            setTimeout(function(c){ c.style.outline = ''; }(cards[i]), 2000);
+            break;
+          }
+        }
+      }, 300);
+    })();
+
+  // ── CASH REGISTER ────────────────────────────────
+  let regItem = null, regRepeatable = false, regPaidCents = 0, regTotalCents = 0;
+
+  function getCoins(cents) {
+    const denoms = [
+      { v:2000, name:'$20 Bill',  label:'$20',   cls:'coin-dollar',  bill:true },
+      { v:1000, name:'$10 Bill',  label:'$10',   cls:'coin-dollar',  bill:true },
+      { v:500,  name:'$5 Bill',   label:'$5',    cls:'coin-dollar',  bill:true },
+      { v:100,  name:'Dollar',    label:'$1.00', cls:'coin-dollar'  },
+      { v:25,   name:'Quarter',   label:'25¢',   cls:'coin-quarter' },
+      { v:10,   name:'Dime',      label:'10¢',   cls:'coin-dime'    },
+      { v:5,    name:'Nickel',    label:'5¢',    cls:'coin-nickel'  },
+      { v:1,    name:'Penny',     label:'1¢',    cls:'coin-penny'   },
+    ];
+    const result = [];
+    let rem = cents;
+    for (const d of denoms) {
+      while (rem >= d.v) { result.push(Object.assign({}, d)); rem -= d.v; }
+    }
+    return result;
+  }
+
+  window.openRegister = function(item, repeatable) {
+    regItem = item; regRepeatable = repeatable || false;
+    regPaidCents = 0;
+    regTotalCents = Math.round(item.price * 100);
+
+    document.getElementById('regItemEmoji').textContent = item.emoji || '🛍️';
+    document.getElementById('regItemName').textContent  = item.name;
+    document.getElementById('regItemPrice').textContent = 'Price: $' + item.price.toFixed(2);
+    document.getElementById('regTotal').textContent     = '$' + item.price.toFixed(2);
+    document.getElementById('regPaid').textContent      = '$0.00';
+    document.getElementById('regProgressBar').style.width = '0%';
+
+    // Build hint breakdown
+    const coins = getCoins(regTotalCents);
+    const counts = {};
+    coins.forEach(c => { counts[c.name] = (counts[c.name] || 0) + 1; });
+    const breakdown = document.getElementById('regBreakdown');
+    breakdown.innerHTML = '';
+    Object.entries(counts).forEach(([name, cnt]) => {
+      const chip = document.createElement('span');
+      chip.className = 'hint-chip';
+      chip.textContent = cnt + ' ' + name + (cnt > 1 ? 's' : '');
+      breakdown.appendChild(chip);
+    });
+
+    // Build clickable coins
+    const coinsEl = document.getElementById('regCoins');
+    coinsEl.innerHTML = '';
+    coins.forEach((coin, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'coin-btn ' + coin.cls + (coin.bill ? ' bill' : '');
+      btn.innerHTML = `<span class="coin-value">${coin.label}</span><span class="coin-name">${coin.name}</span>`;
+      btn.dataset.value = coin.v;
+      btn.addEventListener('click', function() {
+        if (this.classList.contains('used')) return;
+        this.classList.add('used');
+        regPaidCents += coin.v;
+        const paidDollars = (regPaidCents / 100).toFixed(2);
+        document.getElementById('regPaid').textContent = '$' + paidDollars;
+        const pct = Math.min(100, Math.round(regPaidCents / regTotalCents * 100));
+        document.getElementById('regProgressBar').style.width = pct + '%';
+        if (regPaidCents >= regTotalCents) {
+          setTimeout(completePayment, 320);
+        }
+      });
+      coinsEl.appendChild(btn);
+    });
+
+    // Show pay flow, hide ding
+    document.getElementById('regPayFlow').style.display = 'block';
+    document.getElementById('regDing').style.display    = 'none';
+    document.getElementById('registerOverlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+
+  function completePayment() {
+    balance = parseFloat((balance - regItem.price).toFixed(2));
+    purchases[regItem.id] = (purchases[regItem.id] || 0) + 1;
+    saveState(); updateBalance();
+
+    // Show ding screen
+    document.getElementById('regPayFlow').style.display = 'none';
+    const ding = document.getElementById('regDing');
+    ding.style.display = 'flex';
+    const dingEmojiEl = document.getElementById('dingEmoji');
+    if (regItem.img) {
+      dingEmojiEl.innerHTML = '<img src="' + regItem.img + '" alt="' + regItem.name + '" style="width:120px;height:120px;object-fit:contain;border-radius:16px;display:block;">';
+    } else {
+      dingEmojiEl.textContent = regItem.emoji || '🎉';
+    }
+    var VEHICLE_IDS_MSG = ['race-car','paw-race-car','monster-truck','bulldozer','fire-truck','train-engine','paw-plane','jet-plane','propeller-plane','rocket-ship','spaceship-acc','ufo'];
+    var isPet     = PETS.some(function(p){ return p.id === regItem.id; });
+    var isVehicle = VEHICLE_IDS_MSG.indexOf(regItem.id) >= 0;
+    var action    = isPet ? 'You adopted ' : isVehicle ? 'You bought a ' : 'You got ';
+    var dingMsg   = isPet ? 'You adopted ' + regItem.name + '!' : isVehicle ? 'You bought a ' + regItem.name + '!' : 'You got ' + regItem.name + '!';
+    document.getElementById('dingItemName').textContent = dingMsg;
+
+    speakText('Ding! You paid! ' + dingMsg + ' Amazing job!');
+    showToast('🎉 ' + dingMsg);
+
+    localStorage.setItem('fsm_just_bought', regItem.id);
+    setTimeout(function() {
+      window.location.reload(true);
+    }, 2200);
+  }
+
+  window.closeRegister = function() {
+    document.getElementById('registerOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  };
+
+  window.overlayClick = function(e) {
+    if (e.target === document.getElementById('registerOverlay')) closeRegister();
+  };
+
+  // ── ENTRANCE NAVIGATION ──────────────────────────
+  window.enterStore = function(tab) {
+    document.getElementById('storeEntrance').style.display = 'none';
+    document.getElementById('storeMain').style.display = 'block';
+    document.querySelectorAll('.store-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    window.scrollTo(0, 0);
+    if (tab === 'collection') { renderCollection(); renderSidebar(); }
+  };
+  window.backToEntrance = function() {
+    document.getElementById('storeMain').style.display = 'none';
+    document.getElementById('storeEntrance').style.display = 'block';
+    window.scrollTo(0, 0);
+  };
+  })();
+  </script>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo footer-logo"><span class="logo-first">FirstStep</span><span class="logo-math">Math</span></div>
+          <p>Making math fun, one step at a time! 🎉</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Learn</h4>
+          <a href="index.html#grades">Pre-K Math</a>
+          <a href="index.html#grades">Kindergarten Math</a>
+          <a href="index.html#grades">1st Grade Math</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Resources</h4>
+          <a href="worksheets.html">Free Worksheets</a>
+          <a href="about.html">About Us</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2024 FirstStepMath. All rights reserved.</p></div>
+    </div>
+  </footer>
+</body>
+</html>

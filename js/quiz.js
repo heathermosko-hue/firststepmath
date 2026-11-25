@@ -737,7 +737,6 @@ function incrementQuestionCount() {
 }
 
 function showEndScreen() {
-  saveMoney(score);
   document.getElementById('feedbackOverlay').classList.remove('show');
   const total = questions.length;
   const pct   = Math.round((score / total) * 100);
@@ -747,11 +746,9 @@ function showEndScreen() {
   else                { stars = '⭐';     title = 'Good Try! Practice Makes Perfect! 💪'; }
   document.getElementById('endStars').textContent = stars;
   document.getElementById('endTitle').textContent  = title;
-  const earned = (score * 0.05).toFixed(2);
-  document.getElementById('endScore').textContent  = `You got ${score} out of ${total} correct! (${pct}%) — Earned $${earned}!`;
+  document.getElementById('endScore').textContent  = `You got ${score} out of ${total} correct! (${pct}%)`;
   document.getElementById('endScreen').style.display = 'flex';
   speakText(title.replace(/[^\w\s!]/g, ''));
-  setTimeout(showStorePrompt, 1800);
 }
 
 function showStorePrompt() {

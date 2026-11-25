@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Program – FirstStepMath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── About page styles ── */
+    .about-hero {
+      background: linear-gradient(135deg, #FF6B9D 0%, #FF8E53 28%, #FFD93D 55%, #6C63FF 100%);
+      color: #fff; padding: 80px 24px 60px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .about-hero::before {
+      content: '⭐ 🔢 ➕ 🌟 🔵 ➕ ⭐ 🔢 🌈 ⭐';
+      position: absolute; top: 10px; left: 0; right: 0;
+      font-size: 1.4rem; letter-spacing: 18px; opacity: 0.25;
+      white-space: nowrap; overflow: hidden;
+    }
+    .about-hero::after {
+      content: '🌟 ➕ 🔢 ⭐ 🔵 🌟 ➕ 🔢 ⭐ 🌈';
+      position: absolute; bottom: 10px; left: 0; right: 0;
+      font-size: 1.4rem; letter-spacing: 18px; opacity: 0.25;
+      white-space: nowrap; overflow: hidden;
+    }
+    .about-hero h1 {
+      font-family: 'Fredoka One', cursive; font-size: 3rem; margin-bottom: 16px;
+      text-shadow: 2px 3px 0 rgba(0,0,0,0.18);
+      position: relative;
+    }
+    .about-hero p { font-size: 1.2rem; opacity: 0.95; max-width: 600px; margin: 0 auto; font-weight: 600; position: relative; }
+
+    .about-section { padding: 64px 24px; }
+    .about-section:nth-child(even) { background: #f8f8ff; }
+    .about-inner { max-width: 880px; margin: 0 auto; }
+    .about-section h2 {
+      font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--purple);
+      margin-bottom: 12px; text-align: center;
+    }
+    .about-section p { font-size: 1.05rem; color: #444; line-height: 1.7; text-align: center; max-width: 680px; margin: 0 auto 16px; }
+
+    /* ── How It Works banner ── */
+    .hiw-banner {
+      background: #fff; border-radius: 24px; padding: 48px 32px;
+      box-shadow: 0 8px 32px rgba(108,99,255,0.10);
+      max-width: 900px; margin: 0 auto;
+    }
+    .hiw-banner h2 {
+      font-family: 'Fredoka One', cursive; font-size: 2.2rem; color: var(--dark);
+      text-align: center; margin-bottom: 36px;
+    }
+    .hiw-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+    @media (max-width: 860px) { .hiw-steps { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .hiw-steps { grid-template-columns: 1fr; } }
+    .hiw-step {
+      text-align: center; background: #f8f8ff; border-radius: 18px; padding: 28px 20px;
+      border: 2px solid #eee;
+    }
+    .hiw-step-icon { font-size: 2.8rem; margin-bottom: 14px; }
+    .hiw-step h3 { font-family: 'Fredoka One', cursive; font-size: 1.35rem; color: var(--dark); margin-bottom: 8px; }
+    .hiw-step p { font-size: 0.95rem; color: #555; line-height: 1.6; margin: 0; }
+
+    /* ── Common Core grid ── */
+    .cc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px; }
+    .cc-card {
+      background: #fff; border-radius: 16px; padding: 20px 16px; text-align: center;
+      border: 2px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .cc-card .cc-grade { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: var(--purple); margin-bottom: 8px; }
+    .cc-card .cc-topics { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+    /* ── Tools grid ── */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 28px; }
+    .tool-card {
+      background: #fff; border-radius: 16px; padding: 20px 12px; text-align: center;
+      border: 2px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .tool-card-icon { font-size: 2rem; margin-bottom: 8px; }
+    .tool-card-name { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--dark); margin-bottom: 4px; }
+    .tool-card-desc { font-size: 0.8rem; color: #777; line-height: 1.4; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 64px 24px; background: #f8f8ff; }
+    .faq-inner { max-width: 780px; margin: 0 auto; }
+    .faq-section h2 { font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--purple); text-align: center; margin-bottom: 36px; }
+    .faq-item { background: #fff; border-radius: 16px; border: 2px solid #eee; margin-bottom: 14px; overflow: hidden; }
+    .faq-question {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      padding: 20px 24px; font-family: 'Nunito', sans-serif; font-size: 1.05rem;
+      font-weight: 800; color: var(--dark); display: flex; justify-content: space-between;
+      align-items: center; gap: 12px;
+    }
+    .faq-question:hover { background: #f8f8ff; }
+    .faq-arrow { font-size: 1.1rem; transition: transform 0.25s; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer-inner { padding: 0 24px 20px; font-size: 0.98rem; color: #555; line-height: 1.7; }
+    .faq-answer-inner a { color: var(--purple); font-weight: 700; }
+
+    /* ── Free badge ── */
+    .free-section {
+      background: linear-gradient(135deg, var(--orange) 0%, #FF8E53 100%);
+      color: #fff; text-align: center; padding: 64px 24px;
+    }
+    .free-section h2 { font-family: 'Fredoka One', cursive; font-size: 2.4rem; margin-bottom: 16px; text-shadow: 1px 2px 0 rgba(0,0,0,0.12); }
+    .free-section p { font-size: 1.15rem; opacity: 0.95; margin-bottom: 32px; font-weight: 600; }
+    .free-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 36px; }
+    .free-badge {
+      background: rgba(255,255,255,0.25); border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 50px; padding: 10px 22px; font-size: 1rem; font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="img/fsm-logo.png" alt="FirstStepMath" class="logo-img">
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="about.html" class="nav-link" style="color:var(--purple);font-weight:800">Our Program</a>
+        <a href="teachers.html" class="nav-link">For Teachers</a>
+        <a href="store.html" class="nav-link nav-link-store">🛒 Toy Store</a>
+        <a href="login.html" class="btn btn-outline">Sign In</a>
+        <a href="index.html#grades" class="btn btn-primary">Get Started Free</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="about-hero">
+    <h1>Our Program</h1>
+    <p>A free, hands-on math practice website built for Pre-K through Grade 1 — aligned to Common Core Math standards, so children practice exactly what they need for their grade level.</p>
+  </div>
+
+  <!-- PROGRAM BANNER -->
+  <div style="background:#fff;text-align:center;padding:0;">
+    <img src="img/our-program-banner.png" alt="Our Program – FirstStepMath overview" style="width:100%;max-width:1200px;height:auto;display:inline-block;">
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="about-section">
+    <div class="about-inner">
+      <div class="hiw-banner">
+        <h2>How It Works</h2>
+        <div class="hiw-steps">
+          <div class="hiw-step">
+            <div class="hiw-step-icon">🎯</div>
+            <h3>Pick a Topic</h3>
+            <p>Choose from counting, shapes, addition, subtraction, place value, measurement, and more.</p>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-step-icon">✏️</div>
+            <h3>Answer Questions</h3>
+            <p>Children solve simple, colorful multiple-choice math questions made for young learners.</p>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-step-icon">💵</div>
+            <h3>Earn Pretend Money</h3>
+            <p>Kids get instant feedback and earn pretend money for every correct answer.</p>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-step-icon">🛒</div>
+            <h3>Spend Rewards</h3>
+            <p>Use pretend money in the Play Store to buy toys, pets, accessories, and other fun prizes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMON CORE -->
+  <section class="about-section">
+    <div class="about-inner">
+      <h2>📚 Aligned to Common Core</h2>
+      <p>Every question is connected to a specific Common Core Math standard, helping children build strong skills step by step.</p>
+      <div class="cc-grid">
+        <div class="cc-card">
+          <div class="cc-grade">🌱 Pre-K</div>
+          <div class="cc-topics">Counting to 10 · Comparing · Patterns · 2D &amp; 3D Shapes · Measurement</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">⭐ Kindergarten</div>
+          <div class="cc-topics">Counting to 20 · Addition &amp; Subtraction · Making 10 · Teen Numbers · Shapes</div>
+        </div>
+        <div class="cc-card">
+          <div class="cc-grade">🚀 Grade 1</div>
+          <div class="cc-topics">Add &amp; Subtract within 20 · Place Value · Tens &amp; Ones · Word Problems · Measurement</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE TOOLS -->
+  <section class="about-section">
+    <div class="about-inner">
+      <h2>🧮 Hands-On Math Toolbox</h2>
+      <p>Every quiz includes an interactive Math Toolbox with the same manipulatives used in classrooms. Children can model their thinking, count, compare, build numbers, and solve problems on screen.</p>
+      <div class="tools-grid">
+        <div class="tool-card"><div class="tool-card-icon">🧱</div><div class="tool-card-name">Base 10 Blocks</div><div class="tool-card-desc">Build ones, tens, and hundreds.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📋</div><div class="tool-card-name">Ten Frame</div><div class="tool-card-desc">Practice counting, making 10, addition, and subtraction.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📏</div><div class="tool-card-name">Number Line / Number Path</div><div class="tool-card-desc">Hop forward, hop backward, count, compare, and solve addition or subtraction problems.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">📊</div><div class="tool-card-name">100 Chart</div><div class="tool-card-desc">Explore number patterns, counting, and skip counting.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🔴</div><div class="tool-card-name">Counters</div><div class="tool-card-desc">Model groups, compare amounts, and solve basic problems.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🔘</div><div class="tool-card-name">Number Bonds</div><div class="tool-card-desc">Break numbers into parts and understand addition and subtraction.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">💰</div><div class="tool-card-name">Play Money</div><div class="tool-card-desc">Practice coins, bills, and simple money skills.</div></div>
+        <div class="tool-card"><div class="tool-card-icon">🕐</div><div class="tool-card-name">Analog Clock</div><div class="tool-card-desc">Learn time using a classroom-style clock.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT WORKS -->
+  <section class="about-section">
+    <div class="about-inner">
+      <h2>💡 Why FirstStepMath Works</h2>
+      <p>FirstStepMath combines Common Core practice, hands-on math tools, instant feedback, and fun rewards. Children don't just guess answers — they can use manipulatives to understand the math behind each question. It makes early math feel like play while helping kids build real confidence.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">Who created FirstStepMath? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          FirstStepMath was created by <strong>Heather Ross</strong>, the author and founder of <a href="https://www.firststepreading.com" target="_blank">FirstStepReading.com</a>. Heather has spent years developing fun, effective learning tools for young children. After building FirstStepReading to help kids learn to read, she created FirstStepMath to give families the same high-quality, free practice for early math skills.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Is FirstStepMath really free? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Yes — 100% free, always. There is no credit card required, no subscription, and no ads. Every grade level, every topic, and every tool is available at no cost.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What is Common Core Math? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Common Core Math is a set of learning standards used in most U.S. states that defines exactly what math skills children should know at each grade level. The standards focus on deep understanding — not just memorizing answers — so kids learn <em>why</em> math works, not just how to get the right answer. FirstStepMath aligns every question to these standards so children practice the right skills for their age.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Why is Common Core alignment important? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          When practice is aligned to Common Core standards, you can be confident that your child is working on exactly what their teacher is teaching in school. It removes guesswork for parents and gives kids targeted practice — not random worksheets, but the specific skills mapped to their grade.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What grades does FirstStepMath cover? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          FirstStepMath covers <strong>Pre-K through Grade 1</strong> — the foundational years for math. Topics include counting, shapes, patterns, addition, subtraction, place value, measurement, money, time, and more.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">How does the Play Store work? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Every correct answer earns your child <strong>5¢ in pretend money</strong>. They can save it up and visit the Play Store to "buy" virtual pets, toys, and accessories. It's a motivational reward system — no real money is ever involved. Everything stays saved in the browser so their balance is always there when they come back.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What are the Math Tools? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          The Math Toolbox is a built-in set of interactive manipulatives available during every quiz. It includes Base 10 Blocks, a Ten Frame, Number Line, 100 Chart, Counters, Number Bonds, Play Money, and an Analog Clock — the same tools teachers use in classrooms. Children can open the toolbox at any time to model a problem before answering.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Does my child need an account? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          Yes — a <strong>FREE account</strong> is needed. Children can then jump right in and answer questions immediately. Creating a free account lets them save their progress and pretend money balance across devices.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What devices does FirstStepMath work on? <span class="faq-arrow">▼</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          FirstStepMath works on any device with a web browser — computers, tablets, Chromebooks, and smartphones. No app download needed. It is designed to be touch-friendly for young learners on tablets.
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FREE -->
+  <div class="free-section">
+    <div class="container">
+      <h2>100% Free — Always</h2>
+      <p>No credit card. No subscription. No ads. Just great math practice for every child.</p>
+      <div class="free-badges">
+        <div class="free-badge">✓ No Credit Card</div>
+        <div class="free-badge">✓ No Subscription</div>
+        <div class="free-badge">✓ No Ads</div>
+        <div class="free-badge">✓ Works on Any Device</div>
+        <div class="free-badge">✓ Common Core Aligned</div>
+      </div>
+      <a href="login.html" class="btn btn-hero" style="background:#fff;color:var(--orange)">Create Free Account →</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo footer-logo">
+            <span class="logo-first">FirstStep</span><span class="logo-math">Math</span>
+          </div>
+          <p>Making math fun, one step at a time! 🎉</p>
+        </div>
+        <div class="footer-links-group">
+          <h4>Learn</h4>
+          <a href="index.html#grades">Pre-K Math</a>
+          <a href="index.html#grades">Kindergarten Math</a>
+          <a href="index.html#grades">1st Grade Math</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="footer-links-group">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 FirstStepMath. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = '0';
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+</body>
+</html>
