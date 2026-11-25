@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Printable worksheet – FirstStepMath</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Nunito,system-ui,sans-serif;background:#fffbf3;color:#1a1a2e;font-size:16px}
+.wrap{max-width:1000px;margin:0 auto;padding:14px 16px 40px}
+h1{font-family:'Fredoka One',cursive;font-size:clamp(22px,5vw,32px);margin:8px 0}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.b{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 24px;border-radius:16px;font:800 18px Nunito,sans-serif;text-decoration:none;cursor:pointer;border:3px solid #ddd;background:#fff;color:#1a1a2e}
+.b.back{background:#4A90E2;border-color:#4A90E2;color:#fff}.b.print{background:#e8f6ee;border-color:#1c9a5b;color:#0f6b3c}.b.open{background:#eaf3ff;border-color:#1f6fd1;color:#164f95}
+iframe{width:100%;height:78vh;min-height:520px;border:2px solid #e3e7ef;border-radius:14px;background:#fff}
+a.home{color:#4A90E2;font-weight:800;text-decoration:none}
+@media(max-width:640px){.b{flex:1 1 45%;padding:0 12px}iframe{height:60vh;min-height:360px}}
+</style></head><body><div class="wrap">
+<a class="home" href="index.html">← FirstStepMath</a> · <a class="home" href="worksheets.html">All worksheets</a>
+<div class="bar"><button class="b back" id="back" type="button">← Back</button></div>
+<h1 id="t">Worksheet</h1>
+<div class="bar"><a class="b open" id="open" href="#" target="_blank" rel="noopener">Open PDF</a><a class="b" id="dl" href="#" download>Download</a><button class="b print" id="pr" type="button">🖨️ Print</button></div>
+<iframe id="f" title="Worksheet PDF"></iframe>
+<p>If you do not see the worksheet above (some phones do not show PDFs here), tap <b>Open PDF</b> or <b>Download</b>.</p>
+<div class="bar"><button class="b back" id="back2" type="button">← Back</button></div>
+</div>
+<script>
+(function(){var q=new URLSearchParams(location.search),f=q.get('f')||'',p=q.get('p')||'worksheets.html';
+if(!/^pdf\/[A-Za-z0-9._-]+\.pdf$/.test(f)){document.getElementById('t').textContent='Worksheet not found';document.getElementById('f').hidden=true;return;}
+if(!/^[A-Za-z0-9._-]+\.html$/.test(p))p='worksheets.html';
+function back(){var r=document.referrer;if(history.length>1&&r&&r.indexOf(location.origin)===0){history.back();}else{location.href=p;}}
+document.getElementById('back').onclick=back;document.getElementById('back2').onclick=back;
+var name=f.replace(/^pdf\//,'').replace(/\.pdf$/,'').replace(/-/g,' ');name=name.charAt(0).toUpperCase()+name.slice(1);
+document.getElementById('t').textContent=name;document.title=name+' – FirstStepMath';
+document.getElementById('open').href=f;document.getElementById('dl').href=f;
+var fr=document.getElementById('f');fr.src=f+'#view=FitH';
+document.getElementById('pr').onclick=function(){try{fr.contentWindow.focus();fr.contentWindow.print();}catch(e){window.open(f,'_blank');}};})();
+</script></body></html>
