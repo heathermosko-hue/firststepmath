@@ -722,6 +722,7 @@ function saveMoney(earned) {
 }
 
 function checkQuestionGate() {
+  return false; // free, unlimited, no login (25 Nov 2026)
   const count = parseInt(localStorage.getItem('fsm_q_count') || '0');
   const loggedIn = localStorage.getItem('fsm_session');
   if (count >= 30 && !loggedIn) {
